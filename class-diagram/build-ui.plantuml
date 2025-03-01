@@ -1,0 +1,23 @@
+@startuml
+
+class BuildingCatalogItem{
+    
+}
+
+class BuilderGridController{
+    +IsOpened:bool
+    +Open()
+    +Close()
+}
+
+class BuilderCell{
+    -isHovered: bool
+    -isForbidden: bool
+    +OnClick()
+    +OnHover()
+    +SetForbiddenState(forbidden:bool)
+}
+
+BuilderGridController "1\n-controller" *-- "*\n-cells" BuilderCell
+
+@enduml
