@@ -1,0 +1,35 @@
+@startuml
+class Map{
+    +ChangeTerrainAt(factory: TerrainFactory, x:int, y:int)
+}
+
+interface Terrain{
+    +CanPlaceRoad():boolean
+}
+
+class Ground{}
+
+abstract class Plant{
+
+}
+
+class Road{
+
+}
+
+class Water{
+
+}
+
+Map "1" *-- "*\n-grid" Terrain
+Terrain <|.. Ground
+Terrain <|.. Plant
+Terrain <|.. Road
+Terrain <|.. Water
+
+
+interface TerrainFactory{
+    +CreateTerrain():Terrain
+}
+
+@enduml

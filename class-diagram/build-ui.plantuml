@@ -1,6 +1,7 @@
 @startuml
-
-class BuildingCatalogItem{
+class BuildingUIController{
+    +OnDemolishClick()
+    +OnClose()
     
 }
 
@@ -19,5 +20,7 @@ class BuilderCell{
 }
 
 BuilderGridController "1\n-controller" *-- "*\n-cells" BuilderCell
+
+BuildingUIController  o-- "1\n-grid" BuilderGridController
 
 @enduml

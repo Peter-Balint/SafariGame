@@ -1,0 +1,10 @@
+@startuml
+
+class Safari{
+    -instance: Safari
+    +GetInstance():Safari
+
+}
+
+Safari "1" *-- "1" Map
+@enduml
