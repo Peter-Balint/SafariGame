@@ -1,6 +1,14 @@
 @startuml
 class Map{
-    +ChangeTerrainAt(factory: TerrainFactory, x:int, y:int)
+    +EntranceCoords: GridPosition
+    +ExitCoords: GridPosition
+    +ChangeTerrainAt(factory: TerrainFactory, position: GridPosition)
+    +TerrainAt(position: GridPosition): Terrain
+}
+
+class GridPosition{
+    +x:int
+    +y:int
 }
 
 interface Terrain{

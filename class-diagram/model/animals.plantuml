@@ -1,0 +1,9 @@
+@startuml
+abstract class Animal{
+    -worldLocation: Vector3
+
+}
+
+Safari "1" *-- "*" Animal
+
+@enduml

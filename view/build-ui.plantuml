@@ -1,0 +1,42 @@
+@startuml
+class BuildingUIController{
+    +OnDemolishClick()
+    +OnClose()
+    +Open()
+}
+
+class BuilderGridController{
+    +IsOpened:bool
+    +Open()
+    +Close()
+}
+
+class BuilderCell{
+    -isHovered: bool
+    -isForbidden: bool
+    +OnClick()
+    +OnHover()
+    +SetForbiddenState(forbidden:bool)
+}
+
+BuilderGridController "1\n-controller" *-- "*\n-cells" BuilderCell
+
+BuildingUIController  o-- "1\n-grid" BuilderGridController
+
+BuildingUIController  o-- "1\n+terrains" TerrainShopItem
+
+class TerrainShopItem{
+    +icon: GameObject
+    +cost:int
+    
+}
+
+TerrainShopItem --|> ScriptableObject
+BuildingUIController --|> MonoBehaviour
+BuilderGridController --|> MonoBehaviour
+BuilderCell --|> MonoBehaviour
+
+
+
+
+@enduml
