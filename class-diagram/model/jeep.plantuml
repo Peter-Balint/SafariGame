@@ -1,0 +1,21 @@
+@startuml
+
+class Jeep{
+ -visitors: int
+ -jeepID: int
+ -worldLocation: Vector3
+ -currentGridPosition: GridPosition
+ -destGridPosition: GridPosition
+ -destination: Destination
+
+ +RevealEntity()
+ +OnRemove()
+}
+
+enum Destination{
+    ENTRANCE
+    EXIT
+}
+
+
+@enduml
