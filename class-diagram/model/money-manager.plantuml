@@ -1,6 +1,18 @@
 @startuml
 
 class MoneyManager{
-    
+  -visitMotivation: float 
+  -ticketPrice: int 
+  -animals:List<Animal>
+  -divesrsityFactor:int
+  -money:int
+  
+  
+/' visitMotivation is derived from 
+ticketprice and divesrsity and overall number of animals '/
+ +CalculateDiversityFactor(): void
+ +CalculateVisitMotivation(): void
+ 
+
 }
 @enduml

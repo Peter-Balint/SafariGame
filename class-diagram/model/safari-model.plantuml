@@ -7,4 +7,6 @@ class Safari{
 }
 
 Safari "1" *-- "1" Map
+Safari  *-- "*\nanimals" Animal
+Safari "1" *-- "1" MoneyManager
 @enduml

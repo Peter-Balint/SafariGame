@@ -1,4 +1,4 @@
-@startuml
+@startuml mapUml
 class Map{
     +FieldChanged: EventHandler<GridPosition>?
     +EntranceCoords: GridPosition
