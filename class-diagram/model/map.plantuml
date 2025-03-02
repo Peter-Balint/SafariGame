@@ -1,4 +1,4 @@
-@startuml
+@startuml mapUml
 class Map{
     +EntranceCoords: GridPosition
     +ExitCoords: GridPosition

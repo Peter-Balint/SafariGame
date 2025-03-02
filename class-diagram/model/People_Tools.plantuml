@@ -1,0 +1,62 @@
+@startuml osztálydiagram
+
+interface IRevealingEntity{
+    <<property>>
+    + Range : int
+    
+    + RevealNearby() : void
+}
+
+interface IKillable{
+    + Death() : Void
+}
+
+class Ranger{
+    - worldLocation : Vector3
+    - salary : int
+    + AddTarget(Predator) : void
+    + OnHunterNearby(Hunter) : void
+}
+
+class Hunter{
+    - worldLocation : Vector3
+    + Hide() : void
+    + Show() : void
+    + OnRangerNearby(Ranger) : void
+    + KillAnimal(Animal) : void
+}
+
+class Camera{
+    - worldLocation : Vector3
+}
+class Drone{
+    - worldLocation : Vector3
+    - route : <Vector3, Vector3>
+    - charge : int
+    - findStation() : Vector3
+}
+class DroneStation{
+    - worldLocation : Vector3
+}
+class AirShip{
+    - worldLocation : Vector3
+    - route : <Vector3, Vector3>
+}
+
+class Tourist{
+    - currentVehicle? : Jeep
+    + Pay() : int
+}
+
+
+IRevealingEntity <|.. Ranger
+IRevealingEntity <|.. Camera
+IRevealingEntity <|.. Drone
+IRevealingEntity <|.. AirShip
+IRevealingEntity <|.. Tourist
+
+IKillable <|.. Hunter
+IKillable <|.. Ranger
+IKillable <|.. Animal
+
+@enduml
