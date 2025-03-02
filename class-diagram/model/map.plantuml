@@ -1,43 +1,73 @@
 @startuml
 class Map{
+    +FieldChanged: EventHandler<GridPosition>?
     +EntranceCoords: GridPosition
     +ExitCoords: GridPosition
-    +ChangeTerrainAt(factory: TerrainFactory, position: GridPosition)
-    +TerrainAt(position: GridPosition): Terrain
+    +ChangeFieldAt(factory: FieldFactory, position: GridPosition)
+    +FieldAt(position: GridPosition): Field
 }
 
 class GridPosition{
-    +x:int
-    +y:int
+    +x: int
+    +y: int
 }
 
-interface Terrain{
-    +CanPlaceRoad():boolean
+interface Field{
+    +CanDemolish(): boolean
+    +CanPlaceHere(field: Ground): boolean
+    +CanPlaceHere(field: Plant): boolean
+    +CanPlaceHere(field: Road): boolean
+    +CanPlaceHere(field: Water): boolean
+
 }
 
-class Ground{}
+class Ground{
+    +CanDemolish(): boolean
+    +CanPlaceHere(field: Ground): boolean
+    +CanPlaceHere(field: Plant): boolean
+    +CanPlaceHere(field: Road): boolean
+    +CanPlaceHere(field: Water): boolean
+
+}
 
 abstract class Plant{
+    +CanDemolish(): boolean
+    +CanPlaceHere(field: Ground): boolean
+    +CanPlaceHere(field: Plant): boolean
+    +CanPlaceHere(field: Road): boolean
+    +CanPlaceHere(field: Water): boolean
 
 }
 
 class Road{
+    +CanDemolish(): boolean
+    +CanPlaceHere(field: Ground): boolean
+    +CanPlaceHere(field: Plant): boolean
+    +CanPlaceHere(field: Road): boolean
+    +CanPlaceHere(field: Water): boolean
 
 }
 
 class Water{
-
+    +CanDemolish(): boolean
+    +CanPlaceHere(field: Ground): boolean
+    +CanPlaceHere(field: Plant): boolean
+    +CanPlaceHere(field: Road): boolean
+    +CanPlaceHere(field: Water): boolean
 }
 
-Map "1" *-- "*\n-grid" Terrain
-Terrain <|.. Ground
-Terrain <|.. Plant
-Terrain <|.. Road
-Terrain <|.. Water
+Map "1" *-- "*\n-grid" Field
+Field <|.. Ground
+Field <|.. Plant
+Field <|.. Road
+Field <|.. Water
 
 
-interface TerrainFactory{
-    +CreateTerrain():Terrain
+interface FieldFactory{
+    +CreateField(): Field
 }
 
+class MapGenerator{
+    +{static} GenerateMap(sizeX: int, sizeY: int):Map
+}
 @enduml

@@ -1,0 +1,18 @@
+@startuml
+class MapDisplay{
+    +fieldPrefabs: GameObject[]
+}
+
+class FieldDisplay{
+    +gridPosition: GridPosition
+}
+
+MonoBehaviour <|-- FieldDisplay
+
+FieldDisplay "1" -- "1\n-field" Field
+
+MonoBehaviour <|-- MapDisplay
+
+MapDisplay "1" -- "1\n-map" Map
+
+@enduml

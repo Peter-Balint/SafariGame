@@ -1,8 +1,8 @@
 @startuml
 class BuildingUIController{
-    +OnDemolishClick()
-    +OnClose()
-    +Open()
+    +OnDemolishClick():void
+    +OnClose():void
+    +Open():void
 }
 
 class BuilderGridController{
@@ -23,20 +23,23 @@ BuilderGridController "1\n-controller" *-- "*\n-cells" BuilderCell
 
 BuildingUIController  o-- "1\n-grid" BuilderGridController
 
-BuildingUIController  o-- "1\n+terrains" TerrainShopItem
+BuildingUIController  o-- "1\n+fields" FieldShopItem
 
-class TerrainShopItem{
+abstract class FieldShopItem{
     +icon: GameObject
-    +cost:int
     
 }
 
-TerrainShopItem --|> ScriptableObject
+class FieldMetadata{
+    +cost:int
+    +refundAmount: int
+}
+
+FieldShopItem --|> ScriptableObject
 BuildingUIController --|> MonoBehaviour
 BuilderGridController --|> MonoBehaviour
 BuilderCell --|> MonoBehaviour
-TerrainShopItem ..|> TerrainFactory
-
-
+FieldShopItem ..|> FieldFactory
+FieldShopItem o-- FieldMetadata
 
 @enduml
