@@ -35,7 +35,7 @@ TerrainShopItem --|> ScriptableObject
 BuildingUIController --|> MonoBehaviour
 BuilderGridController --|> MonoBehaviour
 BuilderCell --|> MonoBehaviour
-
+TerrainShopItem ..|> TerrainFactory
 
 
 
