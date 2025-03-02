@@ -1,0 +1,11 @@
+@startuml
+class MainMenuUIController{
+    +OnStartGameClick()
+    +OnDifficulyEasyClick()
+    +OnDifficultyMediumClick()
+    +OnDifficultyHardClick()
+}
+
+    MonoBehaviour <|-- MainMenuUIController 
+
+@enduml

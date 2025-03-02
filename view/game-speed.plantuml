@@ -3,5 +3,7 @@ class GameSpeedUIController{
     +OnSlowClick()
     +OnMediumClick()
     +OnFastClick()
-}
+    }
+
+    MonoBehaviour <|-- GameSpeedUIController
 @enduml
