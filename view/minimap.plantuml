@@ -1,0 +1,17 @@
+@startuml
+class MinimapUIController{
+    +OnClick(): void
+
+}
+
+class CameraController{
+    +OnGoUp(): void
+    +OnGoDown(): void
+    +OnGoLeft(): void
+    +OnGoRight(): void
+    
+}
+
+MinimapUIController --|> MonoBehaviour
+MinimapUIController -- "-map" Map: displays >
+@enduml

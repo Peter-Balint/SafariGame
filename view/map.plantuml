@@ -13,6 +13,6 @@ FieldDisplay "1" -- "1\n-field" Field
 
 MonoBehaviour <|-- MapDisplay
 
-MapDisplay "1" -- "1\n-map" Map
+MapDisplay "1" -- "1\n-map" Map: displays >
 
 @enduml

@@ -1,0 +1,16 @@
+@startuml
+class JeepCollectionController{
+
+}
+
+class JeepDisplay{
+    +jeepPrefab: GameObject
+}
+
+MonoBehaviour <|-- JeepDisplay
+JeepDisplay -- "-jeep" Jeep: displays >
+
+JeepCollectionController *-- "-displayers" JeepDisplay: manages lifecycle >
+
+JeepCollectionController -- Safari: watches the jeep collection > 
+@enduml

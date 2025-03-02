@@ -1,6 +1,7 @@
 @startuml jeep
 
 class Jeep{
+ +ChangedPosition: EventHandler?
  -visitors: int
  -jeepID: int
  -worldLocation: Vector3

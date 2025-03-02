@@ -1,0 +1,19 @@
+@startuml
+class AnimalDisplay{
+    +animalPrefabs: GameObject[]
+}
+
+AnimalDisplay --|> MonoBehaviour
+AnimalDisplay -- "-animal" Animal: displays >
+
+class AnimalCollectionController{
+
+}
+
+MonoBehaviour <|-- AnimalDisplay
+AnimalDisplay -- "-jeep" Jeep: displays >
+
+AnimalCollectionController *-- "-displayers" AnimalDisplay: manages lifecycle >
+
+AnimalCollectionController -- Safari: watches the animal collection > 
+@enduml

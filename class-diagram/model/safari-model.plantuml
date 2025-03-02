@@ -1,12 +1,17 @@
 @startuml
 
 class Safari{
+    +Victory: EventHandler?
+    +Defeat: EventHandler?
+    +JeepCollectionChanged: EventHandler?
+    +AnimalCollectionChanged: EventHandler?
     -instance: Safari
     +GetInstance():Safari
 
 }
 
 Safari "1" *-- "1" Map
-Safari  *-- "*\nanimals" Animal
+Safari  *-- "*\n-animals" Animal
+Safari  *-- "*\n-jeeps" Jeep
 Safari "1" *-- "1" MoneyManager
 @enduml

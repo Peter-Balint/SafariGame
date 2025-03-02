@@ -61,7 +61,7 @@ Field <|.. Ground
 Field <|.. Plant
 Field <|.. Road
 Field <|.. Water
-Field  o-- "metadata" FieldMetadata
+Field  o-- "+metadata" FieldMetadata
 
 
 interface FieldFactory{
