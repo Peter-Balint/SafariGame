@@ -5,6 +5,13 @@ class BuildingUIController{
     +Open():void
 }
 
+class ShopListingController{
+    -notEnoughMoney: boolean
+    +Selected: UnityEvent
+    +OnClick(): void
+    +SetNotEnoughMoneyState(s: boolean): void
+}
+
 class BuilderGridController{
     +IsOpened:bool
     +Open()
@@ -19,15 +26,17 @@ class BuilderCell{
     +SetForbiddenState(forbidden:bool)
 }
 
-BuilderGridController "1\n-controller" *-- "*\n-cells" BuilderCell
+BuilderGridController "controller" *-- "*\n-cells" BuilderCell : creates >
 
 BuildingUIController  o-- "1\n-grid" BuilderGridController
 
-BuildingUIController  o-- "1\n+fields" FieldShopItem
+BuildingUIController  o-left-- "1\n+shopItems" BuildingShopItem
 
-abstract class FieldShopItem{
+BuildingUIController *-- "*" ShopListingController : creates >
+
+ShopListingController -- "shopItem" BuildingShopItem : displays >
+abstract class BuildingShopItem{
     +icon: GameObject
-    
 }
 
 class FieldMetadata{
@@ -35,11 +44,12 @@ class FieldMetadata{
     +refundAmount: int
 }
 
-FieldShopItem --|> ScriptableObject
+BuildingShopItem --|> ScriptableObject
 BuildingUIController --|> MonoBehaviour
 BuilderGridController --|> MonoBehaviour
+ShopListingController --|> MonoBehaviour
 BuilderCell --|> MonoBehaviour
-FieldShopItem ..|> FieldFactory
-FieldShopItem o-- FieldMetadata
+BuildingShopItem ..|> FieldFactory
+BuildingShopItem o-- FieldMetadata
 
 @enduml

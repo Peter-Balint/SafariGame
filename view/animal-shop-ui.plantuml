@@ -1,0 +1,39 @@
+@startuml
+class AnimalShopUIController{
+    +OnSellClick():void
+    +OnClose():void
+    +Open():void
+}
+
+class AnimalShopListingController{
+    -notEnoughMoney: boolean
+    +Selected: UnityEvent
+    +OnClick(): void
+    +SetNotEnoughMoneyState(s: boolean): void
+}
+
+class GhostAnimalDisplay{
+
+}
+
+abstract class AnimalShopItem{
+    +icon: GameObject
+}
+
+class AnimalMetadata{
+    +cost: int
+    +sellsFor: int
+}
+
+AnimalShopItem --|> ScriptableObject
+AnimalShopUIController --|> MonoBehaviour
+AnimalShopListingController --|> MonoBehaviour
+GhostAnimalDisplay  --|> MonoBehaviour
+AnimalShopUIController  o-- "1\n+shopItems" AnimalShopItem
+
+AnimalShopUIController *-- "*" AnimalShopListingController : creates >
+
+AnimalShopListingController -- "shopItem" AnimalShopItem : displays >
+
+GhostAnimalDisplay -- "-animal" Animal: displays >
+@enduml

@@ -12,7 +12,7 @@ class GridPosition{
     +y: int
 }
 
-interface Field{
+abstract class Field{
     +CanDemolish(): boolean
     +CanPlaceHere(field: Ground): boolean
     +CanPlaceHere(field: Plant): boolean
@@ -61,6 +61,7 @@ Field <|.. Ground
 Field <|.. Plant
 Field <|.. Road
 Field <|.. Water
+Field  o-- "metadata" FieldMetadata
 
 
 interface FieldFactory{
