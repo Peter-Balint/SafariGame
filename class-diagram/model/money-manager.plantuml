@@ -3,7 +3,7 @@
 class MoneyManager{
   -visitMotivation: float 
   -ticketPrice: int 
-  -listOfAnimals:Animal
+  -animals:List<Animal>
   -divesrsityFactor:int
   -money:int
   
