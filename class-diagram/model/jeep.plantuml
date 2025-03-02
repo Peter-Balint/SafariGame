@@ -1,4 +1,4 @@
-@startuml
+@startuml jeep
 
 class Jeep{
  -visitors: int
@@ -9,8 +9,7 @@ class Jeep{
  -nextJoint: GridPosition
  -destination: Destination
 
- +RevealEntity()
- +OnRemove()
+ +OnRemove() : void
 }
 
 enum Destination{

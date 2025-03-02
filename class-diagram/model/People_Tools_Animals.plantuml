@@ -14,16 +14,16 @@ interface IKillable{
 class Ranger{
     - worldLocation : Vector3
     - salary : int
-    + AddTarget(Predator) : void
-    + OnHunterNearby(Hunter) : void
+    + AddTarget(target: Predator) : void
+    + OnHunterNearby(hunter: Hunter) : void
 }
 
 class Hunter{
     - worldLocation : Vector3
     + Hide() : void
     + Show() : void
-    + OnRangerNearby(Ranger) : void
-    + KillAnimal(Animal) : void
+    + OnRangerNearby(ranger: Ranger) : void
+    + KillAnimal(target: Animal) : void
 }
 
 class Camera{
@@ -54,6 +54,47 @@ IRevealingEntity <|.. Camera
 IRevealingEntity <|.. Drone
 IRevealingEntity <|.. AirShip
 IRevealingEntity <|.. Tourist
+
+enum AnimalState{
+    RESTING
+    WANDERING
+    HUNGRY
+    THIRSTY
+}
+
+abstract class Animal{
+    - worldLocation : Vector3
+    - currentState : AnimalState
+    - age : int
+    - hunger : int
+    - thirst : int
+    + FindNextObjective() : Vector3
+}
+
+Animal "1" *-- AnimalState
+
+abstract class Predator extends Animal{
+
+}
+class Predator1 extends Predator{
+    + MateWith(other: Predator1) : Predator1
+}
+class Predator2 extends Predator{
+    + MateWith(other: Predator2) : Predator2
+}
+abstract class Herbivore extends Animal{
+
+}
+class Herbivore1 extends Herbivore{
+    + MateWith(other: Herbivore1) : Herbivore1
+}
+class Herbivore2 extends Herbivore{
+    + MateWith(other: Herbivore2) : Herbivore2
+}
+
+
+
+Safari "1" *-- "*" Animal
 
 IKillable <|.. Hunter
 IKillable <|.. Ranger
