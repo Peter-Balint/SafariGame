@@ -4,8 +4,9 @@ class Jeep{
  -visitors: int
  -jeepID: int
  -worldLocation: Vector3
+  /' for a* representation for the pathfinding '/
  -currentGridPosition: GridPosition
- -destGridPosition: GridPosition
+ -nextJoint: GridPosition
  -destination: Destination
 
  +RevealEntity()
@@ -16,6 +17,5 @@ enum Destination{
     ENTRANCE
     EXIT
 }
-
 
 @enduml
