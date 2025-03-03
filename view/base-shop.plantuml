@@ -1,0 +1,35 @@
+@startuml base_shop
+
+class BaseShopUIController{
+    + OpenAnimalShop() : void
+    + OpenBuildMenu() : void
+}
+
+class BaseShopListingController{
+    -notEnoughMoney: boolean
+    +Selected: UnityEvent
+    +OnClick(): void
+    +SetNotEnoughMoneyState(s: boolean): void
+}
+
+abstract class BaseShopItem{
+    + icon : GameObject
+}
+
+class ItemMetadata{
+    +cost: int
+}
+
+BaseShopItem --|> ScriptableObject
+BaseShopUIController --|> MonoBehaviour
+BaseShopListingController --|> MonoBehaviour
+
+BaseShopUIController  o-- "1\n+shopItems" BaseShopItem
+
+BaseShopUIController *-- "*" BaseShopListingController : creates >
+
+BaseShopListingController -- "shopItem" BaseShopItem : displays >
+
+
+BaseShopItem o-- ItemMetadata
+@enduml
