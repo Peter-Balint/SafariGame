@@ -1,0 +1,17 @@
+@startuml
+class JeepShopUIController{
+    +OnSellClick():void
+    +OnBuyClick():void
+    +OnClose():void
+    +Open():void
+}
+
+class GhostJeepDisplay{
+    +jeepPrefabs: GameObject[]
+}
+
+JeepShopUIController --|> MonoBehaviour
+GhostJeepDisplay --|> MonoBehaviour
+GhostJeepDisplay -- "-jeep" Jeep: displays >
+JeepShopUIController *-- GhostJeepDisplay : displays >
+@enduml 
