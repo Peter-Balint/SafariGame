@@ -1,0 +1,453 @@
+@startuml jeep
+
+class Jeep{
+ +ChangedPosition: EventHandler?
+ -visitors: int
+ -jeepID: int
+ -worldLocation: Vector3
+  /' for a* representation for the pathfinding '/
+ -currentGridPosition: GridPosition
+ -nextJoint: GridPosition
+ -destination: Destination
+
+ +OnRemove() : void
+}
+
+enum Destination{
+    ENTRANCE
+    EXIT
+}
+
+class Map{
+    +FieldChanged: EventHandler<GridPosition>?
+    +EntranceCoords: GridPosition
+    +ExitCoords: GridPosition
+    +ChangeFieldAt(factory: FieldFactory, position: GridPosition)
+    +FieldAt(position: GridPosition): Field
+}
+
+class GridPosition{
+    +x: int
+    +y: int
+}
+
+abstract class Field{
+    +CanDemolish(): boolean
+    +CanPlaceHere(field: Ground): boolean
+    +CanPlaceHere(field: Plant): boolean
+    +CanPlaceHere(field: Road): boolean
+    +CanPlaceHere(field: Water): boolean
+
+}
+
+class Ground{
+    +CanDemolish(): boolean
+    +CanPlaceHere(field: Ground): boolean
+    +CanPlaceHere(field: Plant): boolean
+    +CanPlaceHere(field: Road): boolean
+    +CanPlaceHere(field: Water): boolean
+
+}
+
+abstract class Plant{
+    +CanDemolish(): boolean
+    +CanPlaceHere(field: Ground): boolean
+    +CanPlaceHere(field: Plant): boolean
+    +CanPlaceHere(field: Road): boolean
+    +CanPlaceHere(field: Water): boolean
+
+}
+
+class Road{
+    +CanDemolish(): boolean
+    +CanPlaceHere(field: Ground): boolean
+    +CanPlaceHere(field: Plant): boolean
+    +CanPlaceHere(field: Road): boolean
+    +CanPlaceHere(field: Water): boolean
+
+}
+
+class Water{
+    +CanDemolish(): boolean
+    +CanPlaceHere(field: Ground): boolean
+    +CanPlaceHere(field: Plant): boolean
+    +CanPlaceHere(field: Road): boolean
+    +CanPlaceHere(field: Water): boolean
+}
+
+Map "1" *-- "*\n-grid" Field
+Field <|.. Ground
+Field <|.. Plant
+Field <|.. Road
+Field <|.. Water
+Field  o-- "+metadata" FieldMetadata
+
+
+interface FieldFactory{
+    +CreateField(): Field
+}
+
+class MapGenerator{
+    +{static} GenerateMap(sizeX: int, sizeY: int):Map
+}
+
+
+class MoneyManager{
+  -visitMotivation: float 
+  -ticketPrice: int 
+  -animals:List<Animal>
+  -divesrsityFactor:int
+  -money:int
+  
+  
+/' visitMotivation is derived from 
+ticketprice and divesrsity and overall number of animals '/
+ +CalculateDiversityFactor(): void
+ +CalculateVisitMotivation(): void
+ 
+
+}
+
+
+interface IRevealingEntity{
+    <<property>>
+    + Range : int
+    
+    + RevealNearby() : void
+}
+
+interface IKillable{
+    + Death() : Void
+}
+
+class Ranger{
+    - worldLocation : Vector3
+    - salary : int
+    + AddTarget(target: Predator) : void
+    + OnHunterNearby(hunter: Hunter) : void
+}
+
+class Hunter{
+    - worldLocation : Vector3
+    + Hide() : void
+    + Show() : void
+    + OnRangerNearby(ranger: Ranger) : void
+    + KillAnimal(target: Animal) : void
+}
+
+class Camera{
+    - worldLocation : Vector3
+}
+class Drone{
+    - worldLocation : Vector3
+    - route : <Vector3, Vector3>
+    - charge : int
+    - findStation() : Vector3
+}
+class DroneStation{
+    - worldLocation : Vector3
+}
+class AirShip{
+    - worldLocation : Vector3
+    - route : <Vector3, Vector3>
+}
+
+class Tourist{
+    - currentVehicle? : Jeep
+    + Pay() : int
+}
+
+
+IRevealingEntity <|.. Ranger
+IRevealingEntity <|.. Camera
+IRevealingEntity <|.. Drone
+IRevealingEntity <|.. AirShip
+IRevealingEntity <|.. Tourist
+
+enum AnimalState{
+    RESTING
+    WANDERING
+    HUNGRY
+    THIRSTY
+}
+
+abstract class Animal{
+    - worldLocation : Vector3
+    - currentState : AnimalState
+    - age : int
+    - hunger : int
+    - thirst : int
+    + FindNextObjective() : Vector3
+}
+
+Animal "1" *-- AnimalState
+
+abstract class Predator extends Animal{
+
+}
+class Predator1 extends Predator{
+    + MateWith(other: Predator1) : Predator1
+}
+class Predator2 extends Predator{
+    + MateWith(other: Predator2) : Predator2
+}
+abstract class Herbivore extends Animal{
+
+}
+class Herbivore1 extends Herbivore{
+    + MateWith(other: Herbivore1) : Herbivore1
+}
+class Herbivore2 extends Herbivore{
+    + MateWith(other: Herbivore2) : Herbivore2
+}
+
+
+
+Safari "1" *-- "*" Animal
+
+IKillable <|.. Hunter
+IKillable <|.. Ranger
+IKillable <|.. Animal
+
+class Safari{
+    +Victory: EventHandler?
+    +Defeat: EventHandler?
+    +JeepCollectionChanged: EventHandler?
+    +AnimalCollectionChanged: EventHandler?
+    -instance: Safari
+    +GetInstance():Safari
+
+}
+
+Safari "1" *-- "1" Map
+Safari  *-- "*\n-animals" Animal
+Safari  *-- "*\n-jeeps" Jeep
+Safari "1" *-- "1" MoneyManager
+
+class AnimalShopUIController{
+    +OnSellClick():void
+    +OnClose():void
+    +Open():void
+}
+
+class AnimalShopListingController{
+    -notEnoughMoney: boolean
+    +Selected: UnityEvent
+    +OnClick(): void
+    +SetNotEnoughMoneyState(s: boolean): void
+}
+
+class GhostAnimalDisplay{
+    +animalPrefabs: GameObject[]
+}
+
+abstract class AnimalShopItem{
+    +icon: GameObject
+}
+
+class AnimalMetadata{
+    +cost: int
+    +sellsFor: int
+}
+
+AnimalShopItem --|> ScriptableObject
+AnimalShopUIController --|> MonoBehaviour
+AnimalShopListingController --|> MonoBehaviour
+GhostAnimalDisplay  --|> MonoBehaviour
+AnimalShopUIController  o-- "1\n+shopItems" AnimalShopItem
+
+AnimalShopUIController *-- "*" AnimalShopListingController : creates >
+
+AnimalShopListingController -- "shopItem" AnimalShopItem : displays >
+
+GhostAnimalDisplay -- "-animal" Animal: displays >
+
+AnimalShopItem o-- AnimalMetadata
+
+AnimalShopUIController *-- GhostAnimalDisplay : displays >
+
+class AnimalDisplay{
+    +animalPrefabs: GameObject[]
+}
+
+AnimalDisplay --|> MonoBehaviour
+AnimalDisplay -- "-animal" Animal: displays >
+
+class AnimalCollectionController{
+
+}
+
+MonoBehaviour <|-- AnimalDisplay
+AnimalDisplay -- "-jeep" Jeep: displays >
+
+AnimalCollectionController *-- "-displayers" AnimalDisplay: manages lifecycle >
+
+AnimalCollectionController -- Safari: watches the animal collection > 
+
+
+class SecurityShopUIController{
+    + OpenAnimalShop() : void
+    + OpenBuildMenu() : void
+}
+
+class SecurityShopListingController{
+    -notEnoughMoney: boolean
+    +Selected: UnityEvent
+    +OnClick(): void
+    +SetNotEnoughMoneyState(s: boolean): void
+}
+
+abstract class SecurityShopItem{
+    + icon : GameObject
+}
+
+class SecurityItemMetadata{
+    +cost: int
+}
+
+SecurityShopItem --|> ScriptableObject
+SecurityShopUIController --|> MonoBehaviour
+SecurityShopListingController --|> MonoBehaviour
+
+SecurityShopUIController  o-- "1\n+shopItems" SecurityShopItem
+
+SecurityShopUIController *-- "*" SecurityShopListingController : creates >
+
+SecurityShopListingController -- "shopItem" SecurityShopItem : displays >
+
+
+SecurityShopItem o-- SecurityItemMetadata
+
+class BuildingUIController{
+    +OnDemolishClick():void
+    +OnClose():void
+    +Open():void
+}
+
+class ShopListingController{
+    -notEnoughMoney: boolean
+    +Selected: UnityEvent
+    +OnClick(): void
+    +SetNotEnoughMoneyState(s: boolean): void
+}
+
+class BuilderGridController{
+    +IsOpened:bool
+    +Open()
+    +Close()
+}
+
+class BuilderCell{
+    -isHovered: bool
+    -isForbidden: bool
+    +OnClick()
+    +OnHover()
+    +SetForbiddenState(forbidden:bool)
+}
+
+BuilderGridController "controller" *-- "*\n-cells" BuilderCell : creates >
+
+BuildingUIController  o-- "1\n-grid" BuilderGridController
+
+BuildingUIController  o-left-- "1\n+shopItems" BuildingShopItem
+
+BuildingUIController *-- "*" ShopListingController : creates >
+
+ShopListingController -- "shopItem" BuildingShopItem : displays >
+abstract class BuildingShopItem{
+    +icon: GameObject
+}
+
+class FieldMetadata{
+    +cost:int
+    +refundAmount: int
+}
+
+BuildingShopItem --|> ScriptableObject
+BuildingUIController --|> MonoBehaviour
+BuilderGridController --|> MonoBehaviour
+ShopListingController --|> MonoBehaviour
+BuilderCell --|> MonoBehaviour
+BuildingShopItem ..|> FieldFactory
+BuildingShopItem o-- FieldMetadata
+
+class GameSpeedUIController{
+    +OnSlowClick()
+    +OnMediumClick()
+    +OnFastClick()
+    }
+
+    MonoBehaviour <|-- GameSpeedUIController
+
+class JeepShopUIController{
+    +OnSellClick():void
+    +OnBuyClick():void
+    +OnClose():void
+    +Open():void
+}
+
+class GhostJeepDisplay{
+    +jeepPrefabs: GameObject[]
+}
+
+JeepShopUIController --|> MonoBehaviour
+GhostJeepDisplay --|> MonoBehaviour
+GhostJeepDisplay -- "-jeep" Jeep: displays >
+JeepShopUIController *-- GhostJeepDisplay : displays >
+
+class JeepCollectionController{
+
+}
+
+class JeepDisplay{
+    +jeepPrefab: GameObject
+}
+
+MonoBehaviour <|-- JeepDisplay
+JeepDisplay -- "-jeep" Jeep: displays >
+
+JeepCollectionController *-- "-displayers" JeepDisplay: manages lifecycle >
+
+JeepCollectionController -- Safari: watches the jeep collection > 
+
+class MainMenuUIController{
+    +OnStartGameClick()
+    +OnDifficulyEasyClick()
+    +OnDifficultyMediumClick()
+    +OnDifficultyHardClick()
+}
+
+    MonoBehaviour <|-- MainMenuUIController 
+
+class MapDisplay{
+    +fieldPrefabs: GameObject[]
+}
+
+class FieldDisplay{
+    +gridPosition: GridPosition
+}
+
+MonoBehaviour <|-- FieldDisplay
+
+FieldDisplay "1" -- "1\n-field" Field
+
+MonoBehaviour <|-- MapDisplay
+
+MapDisplay "1" -- "1\n-map" Map: displays >
+
+class MinimapUIController{
+    +OnClick(): void
+
+}
+
+class CameraController{
+    +OnGoUp(): void
+    +OnGoDown(): void
+    +OnGoLeft(): void
+    +OnGoRight(): void
+    
+}
+
+MinimapUIController --|> MonoBehaviour
+MinimapUIController -- "-map" Map: displays >
+@enduml
