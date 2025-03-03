@@ -1,4 +1,4 @@
-@startuml jeep
+@startuml all
 
 namespace Model{
 
@@ -421,7 +421,7 @@ JeepCollectionController *-- "-displayers" JeepDisplay: manages lifecycle >
 
 JeepCollectionController -- Safari: watches the jeep collection > 
 
-class View.UI.MainMenuUIController{
+class View.MainMenuUIController{
     +OnStartGameClick()
     +OnDifficulyEasyClick()
     +OnDifficultyMediumClick()
