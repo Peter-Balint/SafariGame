@@ -1,5 +1,7 @@
 @startuml jeep
 
+namespace Model{
+
 class Jeep{
  +ChangedPosition: EventHandler?
  -visitors: int
@@ -17,6 +19,8 @@ enum Destination{
     ENTRANCE
     EXIT
 }
+
+Jeep "1" *-- Destination
 
 class Map{
     +FieldChanged: EventHandler<GridPosition>?
@@ -223,7 +227,8 @@ Safari "1" *-- "1" Map
 Safari  *-- "*\n-animals" Animal
 Safari  *-- "*\n-jeeps" Jeep
 Safari "1" *-- "1" MoneyManager
-
+}
+namespace View{
 class AnimalShopUIController{
     +OnSellClick():void
     +OnClose():void
@@ -236,11 +241,12 @@ class AnimalShopListingController{
     +OnClick(): void
     +SetNotEnoughMoneyState(s: boolean): void
 }
-
-class GhostAnimalDisplay{
+}
+class View.GhostAnimalDisplay{
     +animalPrefabs: GameObject[]
 }
 
+namespace View{
 abstract class AnimalShopItem{
     +icon: GameObject
 }
@@ -249,6 +255,10 @@ class AnimalMetadata{
     +cost: int
     +sellsFor: int
 }
+}
+
+class Unity.MonoBehaviour{}
+class Unity.ScriptableObject{}
 
 AnimalShopItem --|> ScriptableObject
 AnimalShopUIController --|> MonoBehaviour
@@ -266,13 +276,14 @@ AnimalShopItem o-- AnimalMetadata
 
 AnimalShopUIController *-- GhostAnimalDisplay : displays >
 
-class AnimalDisplay{
+class View.AnimalDisplay{
     +animalPrefabs: GameObject[]
 }
 
 AnimalDisplay --|> MonoBehaviour
 AnimalDisplay -- "-animal" Animal: displays >
 
+namespace View{
 class AnimalCollectionController{
 
 }
@@ -385,8 +396,8 @@ class JeepShopUIController{
     +OnClose():void
     +Open():void
 }
-
-class GhostJeepDisplay{
+}
+class View.GhostJeepDisplay{
     +jeepPrefabs: GameObject[]
 }
 
@@ -395,11 +406,11 @@ GhostJeepDisplay --|> MonoBehaviour
 GhostJeepDisplay -- "-jeep" Jeep: displays >
 JeepShopUIController *-- GhostJeepDisplay : displays >
 
-class JeepCollectionController{
+class View.JeepCollectionController{
 
 }
 
-class JeepDisplay{
+class View.JeepDisplay{
     +jeepPrefab: GameObject
 }
 
@@ -410,7 +421,7 @@ JeepCollectionController *-- "-displayers" JeepDisplay: manages lifecycle >
 
 JeepCollectionController -- Safari: watches the jeep collection > 
 
-class MainMenuUIController{
+class View.UI.MainMenuUIController{
     +OnStartGameClick()
     +OnDifficulyEasyClick()
     +OnDifficultyMediumClick()
@@ -419,6 +430,7 @@ class MainMenuUIController{
 
     MonoBehaviour <|-- MainMenuUIController 
 
+namespace View{
 class MapDisplay{
     +fieldPrefabs: GameObject[]
 }
@@ -426,7 +438,7 @@ class MapDisplay{
 class FieldDisplay{
     +gridPosition: GridPosition
 }
-
+}
 MonoBehaviour <|-- FieldDisplay
 
 FieldDisplay "1" -- "1\n-field" Field
@@ -435,6 +447,7 @@ MonoBehaviour <|-- MapDisplay
 
 MapDisplay "1" -- "1\n-map" Map: displays >
 
+namespace View{
 class MinimapUIController{
     +OnClick(): void
 
@@ -446,6 +459,7 @@ class CameraController{
     +OnGoLeft(): void
     +OnGoRight(): void
     
+}
 }
 
 MinimapUIController --|> MonoBehaviour
