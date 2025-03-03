@@ -1,4 +1,5 @@
 @startuml
+namespace View{
 class JeepShopUIController{
     +OnSellClick():void
     +OnBuyClick():void
@@ -9,9 +10,10 @@ class JeepShopUIController{
 class GhostJeepDisplay{
     +jeepPrefabs: GameObject[]
 }
-
+}
+Class Unity.MonoBehaviour{}
 JeepShopUIController --|> MonoBehaviour
 GhostJeepDisplay --|> MonoBehaviour
-GhostJeepDisplay -- "-jeep" Jeep: displays >
+GhostJeepDisplay -left- "-jeep" Model.Jeep: displays >
 JeepShopUIController *-- GhostJeepDisplay : displays >
 @enduml 

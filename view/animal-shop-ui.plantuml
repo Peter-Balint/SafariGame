@@ -1,4 +1,5 @@
 @startuml
+namespace View{
 class AnimalShopUIController{
     +OnSellClick():void
     +OnClose():void
@@ -24,6 +25,12 @@ class AnimalMetadata{
     +cost: int
     +sellsFor: int
 }
+}
+
+class Unity.ScriptableObject{}
+class Unity.MonoBehaviour{}
+class Model.Animal{}
+
 
 AnimalShopItem --|> ScriptableObject
 AnimalShopUIController --|> MonoBehaviour
@@ -35,7 +42,7 @@ AnimalShopUIController *-- "*" AnimalShopListingController : creates >
 
 AnimalShopListingController -- "shopItem" AnimalShopItem : displays >
 
-GhostAnimalDisplay -- "-animal" Animal: displays >
+GhostAnimalDisplay -right- "-animal" Animal: displays >
 
 AnimalShopItem o-- AnimalMetadata
 

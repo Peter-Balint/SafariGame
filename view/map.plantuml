@@ -1,4 +1,5 @@
 @startuml
+namespace View{
 class MapDisplay{
     +fieldPrefabs: GameObject[]
 }
@@ -6,13 +7,15 @@ class MapDisplay{
 class FieldDisplay{
     +gridPosition: GridPosition
 }
+}
+Class Unity.MonoBehaviour{}
 
 MonoBehaviour <|-- FieldDisplay
 
-FieldDisplay "1" -- "1\n-field" Field
+FieldDisplay "1" -- "1\n-field" Model.Field
 
 MonoBehaviour <|-- MapDisplay
 
-MapDisplay "1" -- "1\n-map" Map: displays >
+MapDisplay "1" -- "1\n-map" Model.Map: displays >
 
 @enduml
