@@ -1,0 +1,35 @@
+@startuml security_shop
+
+class SecurityShopUIController{
+    + OpenAnimalShop() : void
+    + OpenBuildMenu() : void
+}
+
+class SecurityShopListingController{
+    -notEnoughMoney: boolean
+    +Selected: UnityEvent
+    +OnClick(): void
+    +SetNotEnoughMoneyState(s: boolean): void
+}
+
+abstract class SecurityShopItem{
+    + icon : GameObject
+}
+
+class SecurityItemMetadata{
+    +cost: int
+}
+
+SecurityShopItem --|> ScriptableObject
+SecurityShopUIController --|> MonoBehaviour
+SecurityShopListingController --|> MonoBehaviour
+
+SecurityShopUIController  o-- "1\n+shopItems" SecurityShopItem
+
+SecurityShopUIController *-- "*" SecurityShopListingController : creates >
+
+SecurityShopListingController -- "shopItem" SecurityShopItem : displays >
+
+
+SecurityShopItem o-- SecurityItemMetadata
+@enduml
