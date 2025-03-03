@@ -1,11 +1,11 @@
 @startuml
-class MainMenuUIController{
+class View.MainMenuUIController{
     +OnStartGameClick()
     +OnDifficulyEasyClick()
     +OnDifficultyMediumClick()
     +OnDifficultyHardClick()
 }
 
-    MonoBehaviour <|-- MainMenuUIController 
+    Unity.MonoBehaviour <|-- MainMenuUIController 
 
 @enduml

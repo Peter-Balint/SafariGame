@@ -1,17 +1,21 @@
 @startuml
+namespace View{
 class AnimalDisplay{
     +animalPrefabs: GameObject[]
 }
 
-AnimalDisplay --|> MonoBehaviour
-AnimalDisplay -- "-animal" Animal: displays >
+
 
 class AnimalCollectionController{
 
 }
+}
 
-MonoBehaviour <|-- AnimalDisplay
-AnimalDisplay -- "-jeep" Jeep: displays >
+class Model.Safari{}
+Class Model.Animal{}
+Class Unity.MonoBehaviour{}
+AnimalDisplay --|> MonoBehaviour
+AnimalDisplay --- "-animal" Animal: displays >
 
 AnimalCollectionController *-- "-displayers" AnimalDisplay: manages lifecycle >
 

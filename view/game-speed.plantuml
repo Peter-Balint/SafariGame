@@ -1,9 +1,9 @@
 @startuml
-class GameSpeedUIController{
+class View.GameSpeedUIController{
     +OnSlowClick()
     +OnMediumClick()
     +OnFastClick()
     }
 
-    MonoBehaviour <|-- GameSpeedUIController
+    Unity.MonoBehaviour <|-- GameSpeedUIController
 @enduml

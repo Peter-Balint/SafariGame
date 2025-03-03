@@ -1,5 +1,5 @@
 @startuml security_shop
-
+namespace View{
 class SecurityShopUIController{
     + OpenAnimalShop() : void
     + OpenBuildMenu() : void
@@ -19,6 +19,9 @@ abstract class SecurityShopItem{
 class SecurityItemMetadata{
     +cost: int
 }
+}
+Class Unity.MonoBehaviour{}
+Class Unity.ScriptableObject{}
 
 SecurityShopItem --|> ScriptableObject
 SecurityShopUIController --|> MonoBehaviour

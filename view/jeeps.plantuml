@@ -1,4 +1,5 @@
 @startuml
+namespace View{
 class JeepCollectionController{
 
 }
@@ -6,11 +7,11 @@ class JeepCollectionController{
 class JeepDisplay{
     +jeepPrefab: GameObject
 }
-
-MonoBehaviour <|-- JeepDisplay
-JeepDisplay -- "-jeep" Jeep: displays >
+}
+Unity.MonoBehaviour <|-- JeepDisplay
+JeepDisplay -- "-jeep" Model.Jeep: displays >
 
 JeepCollectionController *-- "-displayers" JeepDisplay: manages lifecycle >
 
-JeepCollectionController -- Safari: watches the jeep collection > 
+JeepCollectionController -- Model.Safari: watches the jeep collection > 
 @enduml

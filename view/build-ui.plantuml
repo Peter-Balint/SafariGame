@@ -1,4 +1,5 @@
 @startuml
+namespace View{
 class BuildingUIController{
     +OnDemolishClick():void
     +OnClose():void
@@ -25,7 +26,15 @@ class BuilderCell{
     +OnHover()
     +SetForbiddenState(forbidden:bool)
 }
+abstract class BuildingShopItem{
+    +icon: GameObject
+}
 
+class FieldMetadata{
+    +cost:int
+    +refundAmount: int
+}
+}
 BuilderGridController "controller" *-- "*\n-cells" BuilderCell : creates >
 
 BuildingUIController  o-- "1\n-grid" BuilderGridController
@@ -35,21 +44,20 @@ BuildingUIController  o-left-- "1\n+shopItems" BuildingShopItem
 BuildingUIController *-- "*" ShopListingController : creates >
 
 ShopListingController -- "shopItem" BuildingShopItem : displays >
-abstract class BuildingShopItem{
-    +icon: GameObject
-}
 
-class FieldMetadata{
-    +cost:int
-    +refundAmount: int
-}
+
+
+
+Class Unity.ScriptableObject{}
+Class Unity.MonoBehaviour{}
+Class Model.FieldFactory{}
 
 BuildingShopItem --|> ScriptableObject
 BuildingUIController --|> MonoBehaviour
 BuilderGridController --|> MonoBehaviour
 ShopListingController --|> MonoBehaviour
 BuilderCell --|> MonoBehaviour
-BuildingShopItem ..|> FieldFactory
+BuildingShopItem .up.|> FieldFactory
 BuildingShopItem o-- FieldMetadata
 
 @enduml
