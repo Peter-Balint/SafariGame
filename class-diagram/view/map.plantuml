@@ -18,4 +18,7 @@ MonoBehaviour <|-- MapDisplay
 
 MapDisplay "1" -- "1\n-map" Model.Map: displays >
 
+MapDisplay *-- "-displayers" FieldDisplay: manages lifecycle >
+
+
 @enduml
