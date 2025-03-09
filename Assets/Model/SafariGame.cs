@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Safari.Model
 {
-    public class Safari
+    public class SafariGame
     {
-        private static Safari? instance;
+        private static SafariGame? instance;
 
         public static bool IsGameStarted => instance != null;
 
-        public static Safari Instance
+        public static SafariGame Instance
         {
             get
             {
@@ -27,14 +27,14 @@ namespace Safari.Model
 
         public Map Map { get; }
 
-        public Safari(Map map)
+        public SafariGame(Map map)
         {
             Map = map;
         }
 
         public static void StartGame()
         {
-            instance = new Safari(MapGenerator.GenerateMap(50, 50));
+            instance = new SafariGame(MapGenerator.GenerateMap(50, 50));
         }
     }
 }
