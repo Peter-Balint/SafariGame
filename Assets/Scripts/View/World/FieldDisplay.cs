@@ -9,23 +9,49 @@ namespace Safari.View.World
 {
     public class FieldDisplay : MonoBehaviour
     {
-        public Field Field { get; private set; }
+        public Field? Field { get; private set; }
 
         public GridPosition Position { get; private set; }
 
         private GameObject? displayed;
 
+        [SerializeField]
+        private FieldPrefabMapping mappings;
+
         public void Init(Field field, GridPosition position)
         {
-            Field = field;
             Position = position;
             Trace.Assert(displayed == null);
+            DisplayField(field);
+        }
 
+        public void DisplayField(Field field)
+        {
+            try
+            {
+
+                Field = field;
+                if (displayed != null)
+                {
+                    Destroy(displayed);
+                }
+                var prefab = mappings.GetPrefab(field);
+                if (prefab == null)
+                {
+                    return;
+                }
+                displayed = Instantiate(prefab, transform, false);
+            }
+            catch (Exception e)
+            {
+                UnityEngine.Debug.LogError(e.Message);
+                throw;
+            }
         }
 
         void Start()
         {
-        
+
         }
 
         void Update()
