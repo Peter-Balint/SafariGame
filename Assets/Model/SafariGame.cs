@@ -38,18 +38,6 @@ namespace Safari.Model
         public static void StartGame()
         {
             instance = new SafariGame(MapGenerator.GenerateMap(20, 20));
-            var t= new System.Timers.Timer(4000) { Enabled = true, AutoReset=false};
-            t.Elapsed += (_, __) =>
-            {
-                for (global::System.Int32 i = 0; i < 5; i++)
-                {
-                    for (global::System.Int32 j = 0; j < 5; j++)
-                    {
-                        instance.Map.ChangeFieldAt(new GridPosition(i +10, j + 10), new Water());
-                    }
-                }
-                ;
-            };
         }
     }
 }
