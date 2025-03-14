@@ -3,7 +3,9 @@ class Map{
     +FieldChanged: EventHandler<GridPosition>?
     +EntranceCoords: GridPosition
     +ExitCoords: GridPosition
-    +ChangeFieldAt(factory: FieldFactory, position: GridPosition)
+    +SizeX: int
+    +SizeY: int
+    +ChangeFieldAt(position: GridPosition, field: Field)
     +FieldAt(position: GridPosition): Field
 }
 
@@ -27,6 +29,18 @@ class Ground{
     +CanPlaceHere(field: Plant): boolean
     +CanPlaceHere(field: Road): boolean
     +CanPlaceHere(field: Water): boolean
+    +CanPlaceHere(field: Gate): boolean
+
+
+}
+
+class Gate{
+    +CanDemolish(): boolean
+    +CanPlaceHere(field: Ground): boolean
+    +CanPlaceHere(field: Plant): boolean
+    +CanPlaceHere(field: Road): boolean
+    +CanPlaceHere(field: Water): boolean
+    +CanPlaceHere(field: Gate): boolean
 
 }
 
@@ -36,6 +50,7 @@ abstract class Plant{
     +CanPlaceHere(field: Plant): boolean
     +CanPlaceHere(field: Road): boolean
     +CanPlaceHere(field: Water): boolean
+    +CanPlaceHere(field: Gate): boolean
 
 }
 
@@ -45,6 +60,7 @@ class Road{
     +CanPlaceHere(field: Plant): boolean
     +CanPlaceHere(field: Road): boolean
     +CanPlaceHere(field: Water): boolean
+    +CanPlaceHere(field: Gate): boolean
 
 }
 
@@ -54,10 +70,13 @@ class Water{
     +CanPlaceHere(field: Plant): boolean
     +CanPlaceHere(field: Road): boolean
     +CanPlaceHere(field: Water): boolean
+    +CanPlaceHere(field: Gate): boolean
+
 }
 
 Map "1" *-- "*\n-grid" Field
 Field <|.. Ground
+Field <|.. Gate
 Field <|.. Plant
 Field <|.. Road
 Field <|.. Water
