@@ -1,0 +1,17 @@
+{
+    "name": "View",
+    "rootNamespace": "Safari.View",
+    "references": [
+        "GUID:7a94b13bb389ce448ad1cc17a82779c9",
+        "GUID:9ce4ad15ac08588428a17fd10e9615e0"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
