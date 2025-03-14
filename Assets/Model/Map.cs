@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ namespace Safari.Model
 
         public int SizeX => grid.GetLength(1);
 
-        public int SizeY => grid.GetLength(0);
+        public int SizeZ => grid.GetLength(0);
 
         private Field[,] grid;
 
@@ -26,13 +27,13 @@ namespace Safari.Model
 
         public void ChangeFieldAt(GridPosition position, Field newField)
         {
-            grid[position.Y, position.X] = newField;
+            grid[position.Z, position.X] = newField;
             FieldChanged?.Invoke(this, position);
         }
 
         public Field FieldAt(GridPosition position)
         {
-            return grid[position.Y, position.X];
+            return grid[position.Z, position.X];
         }
     }
 }

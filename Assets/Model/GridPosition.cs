@@ -10,12 +10,12 @@ namespace Safari.Model
     {
         public int X;
 
-        public int Y;
+        public int Z;
 
-        public GridPosition(int x, int y)
+        public GridPosition(int x, int z)
         {
             X = x;
-            Y = y;
+            Z = z;
         }
     }
 }
