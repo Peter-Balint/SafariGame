@@ -28,7 +28,8 @@ namespace Safari.View.World.Map
         void Start()
         {
             SafariGame.Instance.Map.FieldChanged += Map_FieldChanged;
-            BuildMap();
+            var displayerDict = BuildMap();
+            MapInitialized?.Invoke(new MapInitializedEventArgs(displayerDict));
         }
 
         private async void Map_FieldChanged(object sender, GridPosition e)
