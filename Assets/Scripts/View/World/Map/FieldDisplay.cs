@@ -5,7 +5,7 @@ using System.Collections;
 using Safari.Model;
 using System.Diagnostics;
 
-namespace Safari.View.World
+namespace Safari.View.World.Map
 {
     public class FieldDisplay : MonoBehaviour
     {
@@ -27,26 +27,17 @@ namespace Safari.View.World
 
         public void DisplayField(Field field)
         {
-            try
+            Field = field;
+            if (displayed != null)
             {
-
-                Field = field;
-                if (displayed != null)
-                {
-                    Destroy(displayed);
-                }
-                var prefab = mappings.GetPrefab(field);
-                if (prefab == null)
-                {
-                    return;
-                }
-                displayed = Instantiate(prefab, transform, false);
+                Destroy(displayed);
             }
-            catch (Exception e)
+            var prefab = mappings.GetPrefab(field);
+            if (prefab == null)
             {
-                UnityEngine.Debug.LogError(e.Message);
-                throw;
+                return;
             }
+            displayed = Instantiate(prefab, transform, false);
         }
 
         void Start()

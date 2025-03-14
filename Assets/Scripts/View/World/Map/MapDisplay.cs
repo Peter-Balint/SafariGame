@@ -2,12 +2,26 @@
 using UnityEngine;
 using Safari.Model;
 using System;
+using UnityEngine.Events;
+using System.Collections.Generic;
 
-namespace Safari.View.World
+namespace Safari.View.World.Map
 {
     public class MapDisplay : MonoBehaviour
     {
+        public class MapInitializedEventArgs : EventArgs
+        {
+            public Dictionary<Vector3, FieldDisplay> Displayers;
+
+            public MapInitializedEventArgs(Dictionary<Vector3, FieldDisplay> displayers)
+            {
+                Displayers = displayers;
+            }
+        }
+
         public FieldDisplay FieldDisplayPrefab;
+
+        public UnityEvent<MapInitializedEventArgs> MapInitialized;
 
         private FieldDisplay[,]? displayers;
 
@@ -41,11 +55,13 @@ namespace Safari.View.World
             displayers = null;
         }
 
-        private void BuildMap()
+        private Dictionary<Vector3, FieldDisplay> BuildMap()
         {
             displayers = new FieldDisplay[SafariGame.Instance.Map.SizeZ, SafariGame.Instance.Map.SizeX];
             int sizeX = SafariGame.Instance.Map.SizeX;
             int sizeZ = SafariGame.Instance.Map.SizeZ;
+
+            Dictionary<Vector3, FieldDisplay> displayerMap = new Dictionary<Vector3, FieldDisplay>();
 
             Vector3 center = new Vector3(
                 (float)Math.Floor((sizeX - 1) / 2.0f),
@@ -70,6 +86,7 @@ namespace Safari.View.World
                     display.Init(SafariGame.Instance.Map.FieldAt(position), position);
                 }
             }
+            return displayerMap;
         }
     }
 

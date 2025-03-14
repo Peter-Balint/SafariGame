@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 
-namespace Safari.View.World
+namespace Safari.View.World.Map
 {
     [CreateAssetMenu(fileName = "FieldPrefabMapping", menuName = "Configurations/FieldPrefabMapping")]
     public class FieldPrefabMapping : ScriptableObject
