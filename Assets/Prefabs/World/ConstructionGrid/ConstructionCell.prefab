@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2876006355369440376}
   - component: {fileID: 5164627222892339426}
   - component: {fileID: 7154087447927072964}
+  - component: {fileID: 2061724431206246162}
   m_Layer: 0
   m_Name: Content
   m_TagString: Untagged
@@ -109,6 +110,25 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2061724431206246162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5627396094056629889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56fa71a6ebfaf94418e2c5f6a9ced8ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Default: {fileID: 2100000, guid: a0f529d420a937e44a8a1348c0747cd3, type: 2}
+  Hover: {fileID: 2100000, guid: ce567f1d996156b41a096460af940b3f, type: 2}
+  Forbidden: {fileID: 2100000, guid: 46866937eb9c5e1429169e0dd235ff1f, type: 2}
+  ForbiddenHover: {fileID: 2100000, guid: 206010c5db2b30f438c33491ef73940f, type: 2}
+  Click:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7864170896953172325
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,9 +138,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6547541418106265948}
-  - component: {fileID: 6907845912881973866}
   m_Layer: 0
-  m_Name: BuilderCell
+  m_Name: ConstructionCell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -142,22 +161,3 @@ Transform:
   - {fileID: 1878077409900395563}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6907845912881973866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7864170896953172325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56fa71a6ebfaf94418e2c5f6a9ced8ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Default: {fileID: 2100000, guid: a0f529d420a937e44a8a1348c0747cd3, type: 2}
-  Hover: {fileID: 2100000, guid: ce567f1d996156b41a096460af940b3f, type: 2}
-  Forbidden: {fileID: 2100000, guid: 46866937eb9c5e1429169e0dd235ff1f, type: 2}
-  ForbiddenHover: {fileID: 2100000, guid: 206010c5db2b30f438c33491ef73940f, type: 2}
-  Click:
-    m_PersistentCalls:
-      m_Calls: []

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6565643681408975327}
   - component: {fileID: 4749017221349475636}
   m_Layer: 0
-  m_Name: BuilderGridController
+  m_Name: ConstructionGridController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72cdadfe31456934b9d073839f2f8814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuilderCellPrefab: {fileID: 6907845912881973866, guid: 5d636075c3ce5dc4dbce74abdad8edfe, type: 3}
+  ConstructionCellPrefab: {fileID: 7864170896953172325, guid: 5d636075c3ce5dc4dbce74abdad8edfe, type: 3}
   Click:
     m_PersistentCalls:
       m_Calls: []
