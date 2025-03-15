@@ -25,14 +25,14 @@ namespace Safari.View.World.Map
 
         private FieldDisplay[,]? displayers;
 
-        void Start()
+        private void Start()
         {
-            SafariGame.Instance.Map.FieldChanged += Map_FieldChanged;
+            SafariGame.Instance.Map.FieldChanged += OnFieldChanged;
             var displayerDict = BuildMap();
             MapInitialized?.Invoke(new MapInitializedEventArgs(displayerDict));
         }
 
-        private async void Map_FieldChanged(object sender, GridPosition e)
+        private async void OnFieldChanged(object sender, GridPosition e)
         {
             if (displayers == null)
             {
@@ -44,15 +44,10 @@ namespace Safari.View.World.Map
             displayers[e.Z, e.X].DisplayField(SafariGame.Instance.Map.FieldAt(e));
         }
 
-        void Update()
-        {
-
-        }
-
         private void OnDestroy()
         {
             // !!!Always unsubscribe from events after object in Unity is deleted
-            SafariGame.Instance.Map.FieldChanged -= Map_FieldChanged;
+            SafariGame.Instance.Map.FieldChanged -= OnFieldChanged;
             displayers = null;
         }
 
@@ -85,6 +80,7 @@ namespace Safari.View.World.Map
                     GridPosition position = new GridPosition(x, z);
                     displayers[position.Z, position.X] = display;
                     display.Init(SafariGame.Instance.Map.FieldAt(position), position);
+                    displayerMap.Add(display.transform.position, display);
                 }
             }
             return displayerMap;
