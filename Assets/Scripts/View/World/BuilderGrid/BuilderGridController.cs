@@ -2,6 +2,7 @@
 using Safari.Model;
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using static Safari.View.World.Map.MapDisplay;
 
 namespace Safari.View.World.BuilderGrid
@@ -10,7 +11,10 @@ namespace Safari.View.World.BuilderGrid
     {
         public BuilderCell BuilderCellPrefab;
 
+        public UnityEvent<GridPosition> Click;
+
         private BuilderCell[,]? cells;
+
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -30,16 +34,39 @@ namespace Safari.View.World.BuilderGrid
             {
                 throw new InvalidOperationException("BuilderGridController received OnMapInitialized event more than once");
             }
+
             cells = new BuilderCell[SafariGame.Instance.Map.SizeZ, SafariGame.Instance.Map.SizeX];
             foreach (var pair in args.Displayers)
             {
                 var worldPos = pair.Key;
                 var fieldDislay = pair.Value;
-                cells[fieldDislay.Position.Z, fieldDislay.Position.X] = Instantiate(BuilderCellPrefab,
-                            worldPos,
-                            Quaternion.identity,
-                            new InstantiateParameters() { parent = transform, worldSpace = false });
+                BuilderCell cell = Instantiate(BuilderCellPrefab,
+                                               worldPos,
+                                               Quaternion.identity,
+                                               new InstantiateParameters()
+                                               {
+                                                   parent = transform,
+                                                   worldSpace = true,
+
+                                               });
+                cells[fieldDislay.Position.Z, fieldDislay.Position.X] = cell;
+                cell.Click.AddListener(() => OnCellClick(fieldDislay.Position));
             }
+        }
+
+        public void Open()
+        {
+            enabled = true;
+        }
+
+        public void Close()
+        {
+            enabled = false;
+        }
+
+        private void OnCellClick(GridPosition position)
+        {
+            Click?.Invoke(position);
         }
     }
 }
