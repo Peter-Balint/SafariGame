@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Safari.View.UI
+namespace Safari.View.UI.Construction
 {
     public class ConstructionUIController : MonoBehaviour
     {
