@@ -14,15 +14,17 @@ namespace Safari.Model
 
         public static bool IsGameStarted => instance != null;
 
+        public static GameDifficulty Difficulty;
+
         public static SafariGame Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    StartGame();
+                    StartGame(GameDifficulty.Easy);
                     return instance!;
-                    //throw new InvalidOperationException("Cannot access Safari.Instance. No game is running currently.");
+                    // throw new InvalidOperationException("Cannot access Safari.Instance. No game is running currently.");
                 }
                 return instance;
             }
@@ -30,14 +32,15 @@ namespace Safari.Model
 
         public Map Map { get; }
 
-        public SafariGame(Map map)
+        public SafariGame(Map map, GameDifficulty gameDifficulty)
         {
             Map = map;
+            Difficulty = gameDifficulty;
         }
 
-        public static void StartGame()
+        public static void StartGame(GameDifficulty gameDifficulty)
         {
-            instance = new SafariGame(MapGenerator.GenerateMap(20, 20));
+            instance = new SafariGame(MapGenerator.GenerateMap(20, 20), gameDifficulty);
         }
     }
 }
