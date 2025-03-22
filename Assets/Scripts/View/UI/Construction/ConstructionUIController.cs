@@ -1,4 +1,6 @@
-﻿using System;
+﻿#nullable enable
+using Safari.View.World.ConstructionGrid;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +18,11 @@ namespace Safari.View.UI.Construction
         public BuildingShopItem[] ShopItems;
 
         public float ShopItemPadding;
+
+        private ShopListingController? activeListing;
+
+        [SerializeField]
+        private ConstructionGridController gridController;
 
         public void Open()
         {
@@ -42,13 +49,16 @@ namespace Safari.View.UI.Construction
             for (int i = 0; i < ShopItems.Length; i++)
             {
                 BuildingShopItem item = ShopItems[i];
+
                 var listing = Instantiate(ShopListingPrefab);
                 listing.Init(item);
+
                 RectTransform listingTransform = listing.GetComponent<RectTransform>();
                 listingTransform.SetParent(ScrollViewContent, false);
-                Vector3 pos = new Vector3(1,0,0) * (i * (listingWidth + 2 * ShopItemPadding) + ShopItemPadding);
+                Vector3 pos = new Vector3(1, 0, 0) * (i * (listingWidth + 2 * ShopItemPadding) + ShopItemPadding);
                 listingTransform.SetLocalPositionAndRotation(pos, Quaternion.identity);
 
+                listing.Clicked.AddListener(() => OnShopListingClick(listing));
             }
         }
 
@@ -56,6 +66,24 @@ namespace Safari.View.UI.Construction
         {
             float scrollViewWidth = ShopItems.Length * (listingWidth + 2 * ShopItemPadding);
             ScrollViewContent.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, scrollViewWidth);
+        }
+
+        private void OnShopListingClick(ShopListingController listing)
+        {
+            if (activeListing != null)
+            {
+                activeListing.Selected = false;
+            }
+
+            if (listing == activeListing)
+            {
+                activeListing = null;
+            }
+            else
+            {
+                activeListing = listing;
+                listing.Selected = true;
+            }
         }
     }
 }
