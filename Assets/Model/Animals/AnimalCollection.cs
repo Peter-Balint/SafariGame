@@ -30,6 +30,12 @@ namespace Safari.Model.Assets.Model.Animals
             Added?.Invoke(this, animal);
         }
 
+        internal void RemoveAnimal(Animal animal)
+        {
+            animals.Remove(animal);
+            Removed?.Invoke(this, animal);
+        }
+
         private void OnAnimalDied(object sender, EventArgs e)
         {
             if (sender is Animal animal)
@@ -38,11 +44,6 @@ namespace Safari.Model.Assets.Model.Animals
             }
         }
 
-        internal void RemoveAnimal(Animal animal)
-        {
-            animals.Remove(animal);
-            Removed?.Invoke(this, animal);
-        }
 
     }
 }
