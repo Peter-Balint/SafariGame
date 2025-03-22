@@ -14,6 +14,7 @@ namespace Safari.Model
         protected int thirst;
 
         protected bool isAdult;
+        protected Gender gender;
 
         //for easy setting from the editor, arbitrary numbers for now
         public const int lifeSpan = 50000;
@@ -95,5 +96,9 @@ namespace Safari.Model
         //wandering should aim for a relatively random position
         //hungry and thirst should look for the closest food/water source
         Resting, Wandering, Hungry, Thirsty
+    }
+    public enum Gender
+    {
+        Female, Male
     }
 }
