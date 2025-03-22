@@ -13,7 +13,9 @@ namespace Safari.Model
         protected int hunger;
         protected int thirst;
 
-        //for easy setting from the editor
+        protected bool isAdult;
+
+        //for easy setting from the editor, arbitrary numbers for now
         public const int lifeSpan = 50000;
         public const int hungerLimit = 1000;
         public const int thirstLimit = 800;
@@ -23,7 +25,7 @@ namespace Safari.Model
         //animals should move in a group: an easy solution would be to designate a leader
         //the animals with that leader have a bias to move towards them while in wandering state
         //if leader is null this animal has no leader / is a leader
-        public Animal? leader;
+        public Animal? leader; //could be put in a child class to make sure it is of the same type
 
         public event EventHandler? AnimalDied;
         public event EventHandler? AnimalStateChanged;
@@ -42,17 +44,21 @@ namespace Safari.Model
             hunger++;
             thirst++;
 
+            if(!isAdult && age > lifeSpan / 2)
+            {
+                isAdult = true;
+            }
             if(age >= lifeSpan)
             {
                 AnimalDied?.Invoke(this, EventArgs.Empty);
                 return;
             }
-            if (hunger >= hungerLimit && (state == AnimalState.Wandering || state == AnimalState.Resting))
+            if (hunger >= hungerLimit && state == AnimalState.Resting)
             {
                 state = AnimalState.Hungry;
                 AnimalStateChanged?.Invoke(this, EventArgs.Empty);
             }
-            if(thirst >= thirstLimit && (state == AnimalState.Wandering || state == AnimalState.Resting))
+            if(thirst >= thirstLimit && state == AnimalState.Resting)
             {
                 state = AnimalState.Thirsty;
                 AnimalStateChanged?.Invoke(this, EventArgs.Empty); //if pathfinding goes to the view this event is needed
@@ -76,7 +82,7 @@ namespace Safari.Model
                     }
                 case AnimalState.Wandering:
                     {
-
+                        state = AnimalState.Resting;
                         break;
                     }
             }
