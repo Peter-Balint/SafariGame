@@ -24,7 +24,7 @@ namespace Safari.Model
                 {
                     StartGame(GameDifficulty.Easy);
                     return instance!;
-                   // throw new InvalidOperationException("Cannot access Safari.Instance. No game is running currently.");
+                    // throw new InvalidOperationException("Cannot access Safari.Instance. No game is running currently.");
                 }
                 return instance;
             }
