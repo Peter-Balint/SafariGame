@@ -43,12 +43,12 @@ namespace Safari.View.World.ConstructionGrid
 
         public void Open()
         {
-            enabled = true;
+            gameObject.SetActive(true);
         }
 
         public void Close()
         {
-            enabled = false;
+            gameObject.SetActive(false);
         }
 
         private void OnCellClick(GridPosition position)

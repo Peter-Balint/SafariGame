@@ -565,6 +565,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ee97a75bcd38f594ea3356d317b50cba, type: 2}
   - {fileID: 11400000, guid: 93bed17e7f696cf42b390d95c4111b6d, type: 2}
   ShopItemPadding: 50
+  gridController: {fileID: 0}
 --- !u!1 &5589268231543298379
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,7 +750,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.000015258789, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &7716433387106591233

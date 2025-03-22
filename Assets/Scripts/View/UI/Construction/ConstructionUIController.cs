@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using Safari.Model;
 using Safari.View.World.ConstructionGrid;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,8 @@ namespace Safari.View.UI.Construction
         public float ShopItemPadding;
 
         private ShopListingController? activeListing;
+
+        private bool inBuildingMode = false;
 
         [SerializeField]
         private ConstructionGridController gridController;
@@ -78,12 +81,37 @@ namespace Safari.View.UI.Construction
             if (listing == activeListing)
             {
                 activeListing = null;
+                StopBuilding();
             }
             else
             {
                 activeListing = listing;
                 listing.Selected = true;
+                StartBuilding();
             }
+        }
+
+        private void StartBuilding()
+        {
+            if (inBuildingMode)
+            {
+                return;
+            }
+            inBuildingMode = true;
+            gridController.Open();
+            gridController.Click.AddListener(OnGridClick);
+        }
+
+        private void StopBuilding()
+        {
+            inBuildingMode = false;
+            gridController.Close();
+            gridController.Click.RemoveListener(OnGridClick);
+        }
+
+        private void OnGridClick(GridPosition position)
+        {
+
         }
     }
 }
