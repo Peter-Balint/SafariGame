@@ -36,6 +36,8 @@ namespace Safari.View.UI.Construction
         public void Close()
         {
             gameObject.SetActive(false);
+            activeListing = null;
+            StopBuilding();
 
         }
 
