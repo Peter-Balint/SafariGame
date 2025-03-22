@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Safari.Model.Assets.Model.Animals
+namespace Safari.Model.Animals
 {
     public class AnimalCollection
     {
@@ -26,7 +26,7 @@ namespace Safari.Model.Assets.Model.Animals
         internal void AddAnimal(Animal animal)
         {
             animals.Add(animal);
-            animal.AnimalDied += OnAnimalDied;
+            animal.Died += OnAnimalDied;
             Added?.Invoke(this, animal);
         }
 

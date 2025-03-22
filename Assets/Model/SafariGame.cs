@@ -1,5 +1,5 @@
 ﻿#nullable enable
-using Safari.Model.Assets.Model.Animals;
+using Safari.Model.Animals;
 using Safari.Model.Construction;
 using System;
 using System.Collections.Generic;
