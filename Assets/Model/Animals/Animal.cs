@@ -4,7 +4,7 @@ using System.Resources;
 using UnityEngine;
 #nullable enable
 
-namespace Safari.Model
+namespace Safari.Model.Animals
 {
     public abstract class Animal
     {
@@ -16,7 +16,7 @@ namespace Safari.Model
         protected bool isAdult;
         protected Gender gender;
 
-        //for easy setting from the editor, arbitrary numbers for now
+        //for setting from the editor, arbitrary numbers for now
         public const int lifeSpan = 50000;
         public const int hungerLimit = 1000;
         public const int thirstLimit = 800;
@@ -26,20 +26,20 @@ namespace Safari.Model
         //animals should move in a group: an easy solution would be to designate a leader
         //the animals with that leader have a bias to move towards them while in wandering state
         //if leader is null this animal has no leader / is a leader
-        public Animal? leader; //could be put in a child class to make sure it is of the same type
+        //public Animal? leader; //could be put in a child class to make sure it is of the same type
 
-        public event EventHandler? AnimalDied;
-        public event EventHandler? AnimalStateChanged;
+        public event EventHandler? Died;
+        public event EventHandler? StateChanged;
 
-        public Animal(Animal? leader)
+        /*public Animal(Animal? leader)
         {
             this.leader = leader;
             age = 0;
             hunger = 0;
             thirst = 0;
-        }
+        }*/
 
-        public void ModelUpdate() //should be called from the view's update function?
+        public void ModelUpdate() //should be called from the view's update function
         {
             age++;
             hunger++;
@@ -51,18 +51,18 @@ namespace Safari.Model
             }
             if(age >= lifeSpan)
             {
-                AnimalDied?.Invoke(this, EventArgs.Empty);
+                Died?.Invoke(this, EventArgs.Empty);
                 return;
             }
             if (hunger >= hungerLimit && state == AnimalState.Resting)
             {
                 state = AnimalState.Hungry;
-                AnimalStateChanged?.Invoke(this, EventArgs.Empty);
+                StateChanged?.Invoke(this, EventArgs.Empty);
             }
             if(thirst >= thirstLimit && state == AnimalState.Resting)
             {
                 state = AnimalState.Thirsty;
-                AnimalStateChanged?.Invoke(this, EventArgs.Empty); //if pathfinding goes to the view this event is needed
+                StateChanged?.Invoke(this, EventArgs.Empty); //if pathfinding goes to the view this event is needed
                                                                     //so it can figure out the next target
             }
         }
@@ -78,7 +78,7 @@ namespace Safari.Model
                 case AnimalState.Thirsty:
                     {
                         state = AnimalState.Wandering;
-                        AnimalStateChanged?.Invoke(this, EventArgs.Empty);
+                        StateChanged?.Invoke(this, EventArgs.Empty);
                         break;
                     }
                 case AnimalState.Wandering:
