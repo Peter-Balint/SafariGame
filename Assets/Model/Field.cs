@@ -10,13 +10,13 @@ namespace Safari.Model
     {
         public abstract bool CanDemolish { get; }
 
-        public abstract bool CanPlaceHere(Field field);
-
         public BuildingMetadata Metadata { get; }
 
         protected Field(BuildingMetadata metadata)
         {
             Metadata = metadata;
         }
+
+        public abstract bool CanPlaceHere(Field field);
     }
 }
