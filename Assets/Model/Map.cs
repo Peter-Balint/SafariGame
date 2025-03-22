@@ -25,7 +25,7 @@ namespace Safari.Model
             ExitCoords = exitCoords;
         }
 
-        public void ChangeFieldAt(GridPosition position, Field newField)
+        internal void ChangeFieldAt(GridPosition position, Field newField)
         {
             grid[position.Z, position.X] = newField;
             FieldChanged?.Invoke(this, position);

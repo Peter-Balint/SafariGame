@@ -8,6 +8,8 @@ namespace Safari.Model
 {
     public class Bush : Plant
     {
-
+        public Bush(BuildingMetadata metadata) : base(metadata)
+        {
+        }
     }
 }

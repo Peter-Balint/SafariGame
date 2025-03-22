@@ -14,7 +14,7 @@ namespace Safari.View.UI.Construction
     {
         public override Field CreateField()
         {
-            return new Bush();
+            return new Bush(Metadata);
         }
     }
 }

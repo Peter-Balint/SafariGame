@@ -4,11 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Safari.View.UI.Construction
+namespace Safari.Model
 {
     [Serializable]
     public class BuildingMetadata
     {
+        public static BuildingMetadata Default()
+        {
+            return new BuildingMetadata();
+        }
+
         public int Price;
 
         public int Value;

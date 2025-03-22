@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Safari.Model
 {
-    public class Tree: Plant
+    public class Tree : Plant
     {
+        public Tree(BuildingMetadata metadata) : base(metadata)
+        {
+        }
     }
 }

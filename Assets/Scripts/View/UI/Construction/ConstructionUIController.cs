@@ -111,7 +111,11 @@ namespace Safari.View.UI.Construction
 
         private void OnGridClick(GridPosition position)
         {
-
+            if (activeListing?.ShopItem == null)
+            {
+                return;
+            }
+            SafariGame.Instance.Construction.BuildAt(activeListing.ShopItem.CreateField(), position);
         }
     }
 }

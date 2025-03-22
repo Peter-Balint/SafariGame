@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using Safari.Model.Construction;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,9 +31,12 @@ namespace Safari.Model
 
         public Map Map { get; }
 
+        public ConstructionManager Construction { get; private set; }
+
         public SafariGame(Map map)
         {
             Map = map;
+            Construction = new ConstructionManager(map);
         }
 
         public static void StartGame()

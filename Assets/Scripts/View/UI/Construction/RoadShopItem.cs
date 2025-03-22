@@ -13,7 +13,7 @@ namespace Safari.View.UI.Construction
     {
         public override Field CreateField()
         {
-            return new Road();
+            return new Road(Metadata);
         }
     }
 }
