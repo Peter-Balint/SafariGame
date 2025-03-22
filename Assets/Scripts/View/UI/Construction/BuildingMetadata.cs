@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Safari.View.UI.Construction
 {
+    [Serializable]
     public class BuildingMetadata
     {
         public int Price;
