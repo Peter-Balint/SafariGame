@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 namespace Safari.View.World.ConstructionGrid
 {
@@ -34,6 +35,11 @@ namespace Safari.View.World.ConstructionGrid
 
         public void OnMouseDown()
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
+
             if (enabled)
             {
                 Click?.Invoke();
@@ -42,12 +48,22 @@ namespace Safari.View.World.ConstructionGrid
 
         public void OnMouseEnter()
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
+
             isHovered = true;
             ChangeMaterial();
         }
 
         public void OnMouseExit()
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
+
             isHovered = false;
             ChangeMaterial();
         }
