@@ -11,29 +11,20 @@ namespace Safari.Model
     {
         public override bool CanDemolish => true;
 
-        public override bool CanPlaceHere(Ground field)
+        public Ground() : base(BuildingMetadata.Default())
         {
-            return false;
         }
 
-        public override bool CanPlaceHere(Plant field)
+        public override bool CanPlaceHere(Field field)
         {
-            return true;
+            return field switch
+            {
+                Plant => true,
+                Road => true,
+                Water => true,
+                _ => false,
+            };
         }
 
-        public override bool CanPlaceHere(Road field)
-        {
-            return true;
-        }
-
-        public override bool CanPlaceHere(Water field)
-        {
-            return true;
-        }
-
-        public override bool CanPlaceHere(Gate field)
-        {
-            return false;
-        }
     }
 }
