@@ -24,8 +24,6 @@ namespace Safari.View.World.Map
 
         public UnityEvent<MapInitializedEventArgs> MapInitialized;
 
-        public UnityEvent MapChanged;
-
         private FieldDisplay[,]? displayers;
 
         private void Start()
@@ -45,7 +43,6 @@ namespace Safari.View.World.Map
             // jumps back to the Unity thread
             await Awaiters.NextFrame;
             displayers[e.Z, e.X].DisplayField(SafariGame.Instance.Map.FieldAt(e));
-            MapChanged?.Invoke();
         }
 
         private void OnDestroy()

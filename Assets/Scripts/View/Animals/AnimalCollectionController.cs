@@ -3,6 +3,8 @@ using Safari.Model.Animals;
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using Safari.View.World.Map;
+using Safari.Model.Map;
 
 namespace Safari.View.Animals
 {
@@ -12,6 +14,8 @@ namespace Safari.View.Animals
         private AnimalCollection animalCollection;
 
         public AnimalDisplay AnimalDisplayPrefab;
+
+        private Dictionary<GridPosition, Vector3> gridPositionMapping;
 
         public void Start()
         {
@@ -27,6 +31,15 @@ namespace Safari.View.Animals
             }
         }
 
+        public void InjectGridPositionMappingData(MapDisplay.MapInitializedEventArgs args)
+        {
+            gridPositionMapping = new Dictionary<GridPosition, Vector3>();
+            foreach (var item in args.Displayers)
+            {
+                gridPositionMapping.Add(item.Value.Position, item.Key);
+            }
+        }
+
         private void OnAnimalAdded(object sender, Animal animal)
         {
             AnimalDisplay display = Instantiate(AnimalDisplayPrefab, animal.Position,
@@ -36,7 +49,7 @@ namespace Safari.View.Animals
                     parent = transform,
                     worldSpace = false
                 });
-            display.Init(animal, animal.Position);
+            display.Init(animal, animal.Position, gridPositionMapping);
             displayers.Add(display);
         }
 

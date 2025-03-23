@@ -1,4 +1,5 @@
-﻿using Safari.Model.Movement;
+﻿using Safari.Model.Map;
+using Safari.Model.Movement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,10 @@ namespace Safari.View.Animals
             this.agent = agent;
 
             behavior.CommandStarted += MoveAgent;
+        private Dictionary<GridPosition, Vector3> gridPositionMapping;
+        public void Init(MovementBehavior behavior, Dictionary<GridPosition, Vector3> mapping)
+        {
+            gridPositionMapping = mapping;
         }
 
         private void MoveAgent(object sender, MovementCommand movementCommand)

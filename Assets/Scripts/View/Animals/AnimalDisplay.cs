@@ -1,4 +1,6 @@
 using Safari.Model.Animals;
+using Safari.Model.Map;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
@@ -19,10 +21,12 @@ namespace Safari.View.Animals
         [SerializeField]
         AnimalPrefabMapping mapping;
 
+        private Dictionary<GridPosition, Vector3> gridPositionMapping;
 
-        public void Init(Animal animal, Vector3Int position)
+        public void Init(Animal animal, Vector3Int position, Dictionary<GridPosition, Vector3> gridPosMapping)
         {
             Position = position;
+            gridPositionMapping = gridPosMapping;
             Trace.Assert(displayed == null);
             DisplayAnimal(animal);
         }
@@ -43,6 +47,7 @@ namespace Safari.View.Animals
             animalMovement.Init(animal.Movement, navMeshAgent);
 
             
+            animalMovement.Init(animal.Movement, gridPositionMapping);
         }
         
 
