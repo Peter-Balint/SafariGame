@@ -13,15 +13,6 @@ namespace Safari.View.Animals
 
         public AnimalDisplay AnimalDisplayPrefab;
 
-        /*public AnimalCollectionController(AnimalCollection animalCollection)
-        {
-            this.animalCollection = animalCollection;
-            displayers = new List<AnimalDisplay>();
-
-            animalCollection.Added += OnAnimalAdded;
-            animalCollection.Removed += OnAnimalRemoved;
-        }*/
-
         public void Start()
         {
             animalCollection = SafariGame.Instance.Animals;
@@ -38,7 +29,6 @@ namespace Safari.View.Animals
 
         private void OnAnimalAdded(object sender, Animal animal)
         {
-            //AnimalDisplay display = new AnimalDisplay();
             AnimalDisplay display = Instantiate(AnimalDisplayPrefab, animal.Position,
                 Quaternion.identity,
                 new InstantiateParameters()
