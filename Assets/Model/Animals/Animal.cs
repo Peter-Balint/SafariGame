@@ -9,6 +9,8 @@ namespace Safari.Model.Animals
 {
     public abstract class Animal
     {
+        public MovementBehavior Movement { get;  }
+
         protected AnimalState state = AnimalState.Wandering;
 
         protected int age;
@@ -40,6 +42,11 @@ namespace Safari.Model.Animals
             hunger = 0;
             thirst = 0;
         }*/
+
+        protected Animal()
+        {
+            Movement = new MovementBehavior();
+        }
 
         public void ModelUpdate() //should be called from the view's update function
         {
