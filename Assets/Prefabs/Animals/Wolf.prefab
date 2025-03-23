@@ -1062,6 +1062,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 468919363483496718}
+  - component: {fileID: -5213127564635155828}
   m_Layer: 0
   m_Name: Wolf
   m_TagString: Untagged
@@ -1085,6 +1086,18 @@ Transform:
   - {fileID: 8358899474313945092}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5213127564635155828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8746254400259720641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa876a6c760f64347b511ac3735d2c4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8782196822256951860
 GameObject:
   m_ObjectHideFlags: 0
