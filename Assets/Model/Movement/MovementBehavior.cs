@@ -10,6 +10,8 @@ namespace Safari.Model.Movement
 {
     public class MovementBehavior
     {
+        public event EventHandler<MovementCommand>? CommandStarted;
+
         public MovementCommand? CurrentCommand;
 
         public GridPosition Location { get; private set; }
@@ -18,6 +20,7 @@ namespace Safari.Model.Movement
         {
             CurrentCommand?.Cancel();
             CurrentCommand = new MovementCommand(target);
+            CommandStarted?.Invoke(this, CurrentCommand);
             CurrentCommand.Cancelled += OnCommandCancelled; 
         }
 
