@@ -2,6 +2,7 @@ using Safari.Model.Animals;
 using System.Diagnostics;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using UnityEngine.AI;
 
 #nullable enable
 
@@ -38,7 +39,10 @@ namespace Safari.View.Animals
             displayed = Instantiate(prefab, transform, false);
 
             var animalMovement = displayed.GetComponent<AnimalMovement>();
-            animalMovement.Init(animal.Movement);
+            var navMeshAgent = this.GetComponent<NavMeshAgent>();
+            animalMovement.Init(animal.Movement, navMeshAgent);
+
+            
         }
         
 
@@ -47,9 +51,9 @@ namespace Safari.View.Animals
         
         }
 
-        void Update()
+        public void Update()
         {
-        
+            AnimalModel?.ModelUpdate();
         }
     }
 }
