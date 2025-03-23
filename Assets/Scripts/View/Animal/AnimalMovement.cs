@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Safari.View.Animal
+namespace Safari.View.Animals
 {
     public class AnimalMovement : MonoBehaviour
     {
