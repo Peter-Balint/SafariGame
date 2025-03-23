@@ -10,5 +10,9 @@ namespace Safari.View.Animals
 {
     public class AnimalMovement : MonoBehaviour
     {
+        public void Init(MovementBehavior behavior)
+        {
+
+        }
     }
 }

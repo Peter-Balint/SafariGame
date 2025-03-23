@@ -12,6 +12,7 @@ namespace Safari.Model.Animals
         public MovementBehavior Movement { get;  }
 
         protected AnimalState state = AnimalState.Wandering;
+
         protected int age;
         protected int hunger;
         protected int thirst;
