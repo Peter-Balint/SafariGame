@@ -21,6 +21,13 @@ namespace Safari.Model
                     grid[y, x] = new Ground();
                 }
             }
+            for (int i = 0; i < 5; i++)
+            {
+                for (global::System.Int32 j = 0; j < 5; j++)
+                {
+                    grid[j +2 , i+2] = new Water(BuildingMetadata.Default());
+                }
+            }
             grid[0, 1] = new Gate();
             grid[sizeY - 1, sizeX - 2] = new Gate();
             return new Map(grid, new GridPosition(1, 0), new GridPosition(sizeX - 2, sizeY - 1));

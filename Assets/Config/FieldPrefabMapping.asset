@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mappings:
   - FieldTypeName: Ground
-    Prefab: {fileID: 1686021177304871604, guid: ebee340de387f334f9ac44e044abd8fb, type: 3}
+    Prefab: {fileID: 4382731622514113100, guid: 236fd0e3adb5afe4396edf1b3b6efeff, type: 3}
   - FieldTypeName: Road
     Prefab: {fileID: 6124842896356792964, guid: cac99cd957d32bd40ae7cf2bf382175a, type: 3}
   - FieldTypeName: Gate
-    Prefab: {fileID: 8783306491908617939, guid: f02116c209ecd9e488fc4d2cd8996133, type: 3}
+    Prefab: {fileID: 3257113715147129449, guid: c10ab8e3a6bfd3f489d8ac212a8554b8, type: 3}
   - FieldTypeName: Water
-    Prefab: {fileID: 7405846476849542632, guid: c6308cb7062fac34e8e50600086b12a1, type: 3}
+    Prefab: {fileID: 3257113715147129449, guid: 392383371a9d6b14dbbc3aa72f13ed04, type: 3}
   - FieldTypeName: Tree
     Prefab: {fileID: 9171194672965809048, guid: ecbba4bf3119475499cd96abdada9947, type: 3}
   - FieldTypeName: Bush
