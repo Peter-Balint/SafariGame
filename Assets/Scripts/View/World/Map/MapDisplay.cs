@@ -30,7 +30,6 @@ namespace Safari.View.World.Map
         {
             SafariGame.Instance.Map.FieldChanged += OnFieldChanged;
             var displayerDict = BuildMap();
-            MapInitialized?.Invoke(new MapInitializedEventArgs(displayerDict));
         }
 
         private async void OnFieldChanged(object sender, GridPosition e)
