@@ -5,7 +5,7 @@ using UnityEngine;
 
 #nullable enable
 
-namespace Safari.View
+namespace Safari.View.Animals
 {
     public class AnimalDisplay : MonoBehaviour
     {

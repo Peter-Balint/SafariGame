@@ -6,7 +6,7 @@ using UnityEngine;
 
 #nullable enable
 
-namespace Safari.View
+namespace Safari.View.Animals
 {
     [CreateAssetMenu(fileName = "AnimalPrefabMapping", menuName = "Configurations/AnimalPrefabMapping")]
     public class AnimalPrefabMapping : ScriptableObject

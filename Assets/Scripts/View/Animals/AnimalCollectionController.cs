@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-namespace Safari.View
+namespace Safari.View.Animals
 {
     public class AnimalCollectionController : MonoBehaviour
     {
