@@ -1,5 +1,6 @@
 #nullable enable
 using Safari.Model;
+using Safari.Model.Map;
 using System;
 using UnityEngine;
 using UnityEngine.Events;

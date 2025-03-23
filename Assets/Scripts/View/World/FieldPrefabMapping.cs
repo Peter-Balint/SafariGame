@@ -5,6 +5,7 @@ using Safari.Model;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using Safari.Model.Map;
 
 namespace Safari.View.World
 {
@@ -56,7 +57,7 @@ namespace Safari.View.World
 
         private Type GetTypeByName(string typeName)
         {
-            return typeof(SafariGame).Assembly.GetType("Safari.Model." + typeName);
+            return typeof(SafariGame).Assembly.GetType("Safari.Model.Map." + typeName);
         }
     }
 }

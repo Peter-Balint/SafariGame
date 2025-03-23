@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Safari.Model
+namespace Safari.Model.Map
 {
-    public class Water : Field
+    public class Gate : Field
     {
-        public override bool CanDemolish => true;
+        public override bool CanDemolish => false;
 
-        public Water(BuildingMetadata metadata) : base(metadata)
+        public Gate() : base(BuildingMetadata.Default())
         {
         }
 
@@ -18,5 +18,6 @@ namespace Safari.Model
         {
             return false;
         }
+
     }
 }
