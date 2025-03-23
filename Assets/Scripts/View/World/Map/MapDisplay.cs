@@ -22,7 +22,7 @@ namespace Safari.View.World.Map
 
         public FieldDisplay FieldDisplayPrefab;
 
-        public UnityEvent MapChanged;
+        public UnityEvent<MapInitializedEventArgs> MapInitialized;
 
         private FieldDisplay[,]? displayers;
 
@@ -30,6 +30,7 @@ namespace Safari.View.World.Map
         {
             SafariGame.Instance.Map.FieldChanged += OnFieldChanged;
             var displayerDict = BuildMap();
+            MapInitialized?.Invoke(new MapInitializedEventArgs(displayerDict));
         }
 
         private async void OnFieldChanged(object sender, GridPosition e)
@@ -42,7 +43,6 @@ namespace Safari.View.World.Map
             // jumps back to the Unity thread
             await Awaiters.NextFrame;
             displayers[e.Z, e.X].DisplayField(SafariGame.Instance.Map.FieldAt(e));
-            MapChanged?.Invoke();
         }
 
         private void OnDestroy()

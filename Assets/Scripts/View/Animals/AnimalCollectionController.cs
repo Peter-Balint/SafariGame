@@ -3,6 +3,7 @@ using Safari.Model.Animals;
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using Safari.View.World.Map;
 
 namespace Safari.View.Animals
 {
@@ -25,6 +26,11 @@ namespace Safari.View.Animals
             {
                 OnAnimalAdded(null, animal);
             }
+        }
+
+        public void InjectGridPositionMappingData(MapDisplay.MapInitializedEventArgs args)
+        {
+            
         }
 
         private void OnAnimalAdded(object sender, Animal animal)
