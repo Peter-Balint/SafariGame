@@ -12,7 +12,7 @@ namespace Safari.Model.Movement
     {
         public MovementCommand? CurrentCommand;
 
-        public GridPosition Location { get; private set }
+        public GridPosition Location { get; private set; }
 
         public void MoveToGrid(GridPosition target)
         {
