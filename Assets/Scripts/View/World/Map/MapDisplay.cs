@@ -22,8 +22,6 @@ namespace Safari.View.World.Map
 
         public FieldDisplay FieldDisplayPrefab;
 
-        public UnityEvent<MapInitializedEventArgs> MapInitialized;
-
         public UnityEvent MapChanged;
 
         private FieldDisplay[,]? displayers;

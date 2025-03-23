@@ -12,7 +12,7 @@ namespace Safari.Model.Movement
     {
         public event EventHandler<MovementCommand>? CommandStarted;
 
-        public MovementCommand? CurrentCommand;
+        public MovementCommand? CurrentCommand { get; private set; }
 
         public GridPosition Location { get; private set; }
 
