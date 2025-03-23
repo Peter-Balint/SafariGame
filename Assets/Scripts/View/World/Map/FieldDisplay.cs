@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using Safari.Model;
 using System.Diagnostics;
+using Safari.Model.Map;
 
 namespace Safari.View.World.Map
 {

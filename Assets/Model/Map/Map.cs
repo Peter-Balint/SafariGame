@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-namespace Safari.Model
+namespace Safari.Model.Map
 {
     public class Map
     {

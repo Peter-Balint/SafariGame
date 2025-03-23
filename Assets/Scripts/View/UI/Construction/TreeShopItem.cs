@@ -1,4 +1,5 @@
 ﻿using Safari.Model;
+using Safari.Model.Map;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace Safari.View.UI.Construction
     {
         public override Field CreateField()
         {
-            return new Model.Tree(Metadata);
+            return new Model.Map.Tree(Metadata);
         }
     }
 }
