@@ -1,4 +1,6 @@
 using Safari.Model.Animals;
+using System.Diagnostics;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 #nullable enable
@@ -7,7 +9,7 @@ namespace Safari.View
 {
     public class AnimalDisplay : MonoBehaviour
     {
-        private Animal? animalModel;
+        public Animal? AnimalModel;
 
         private GameObject? displayed;
 
@@ -16,6 +18,25 @@ namespace Safari.View
         [SerializeField]
         AnimalPrefabMapping mapping;
 
+
+        public void Init(Animal animal, Vector3Int position)
+        {
+            Position = position;
+            Trace.Assert(displayed == null);
+            DisplayAnimal(animal);
+        }
+
+        public void DisplayAnimal(Animal animal)
+        {
+            AnimalModel = animal;
+            if (displayed != null)
+            {
+                Destroy(displayed);
+            }
+            var prefab = mapping.GetPrefab(AnimalModel);
+            if(prefab ==  null) { return; }
+            displayed = Instantiate(prefab, transform, false);
+        }
         
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
