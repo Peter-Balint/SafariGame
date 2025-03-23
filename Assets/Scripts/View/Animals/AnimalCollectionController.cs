@@ -22,13 +22,6 @@ namespace Safari.View.Animals
             animalCollection = SafariGame.Instance.Animals;
             displayers = new List<AnimalDisplay>();
 
-            animalCollection.Added += OnAnimalAdded;
-            animalCollection.Removed += OnAnimalRemoved;
-
-            foreach (Animal animal in animalCollection.Animals) 
-            {
-                OnAnimalAdded(null, animal);
-            }
         }
 
         public void InjectGridPositionMappingData(MapDisplay.MapInitializedEventArgs args)
@@ -37,6 +30,17 @@ namespace Safari.View.Animals
             foreach (var item in args.Displayers)
             {
                 gridPositionMapping.Add(item.Value.Position, item.Key);
+            }
+        }
+
+        public void Init()
+        {
+            animalCollection.Added += OnAnimalAdded;
+            animalCollection.Removed += OnAnimalRemoved;
+
+            foreach (Animal animal in animalCollection.Animals)
+            {
+                OnAnimalAdded(null, animal);
             }
         }
 

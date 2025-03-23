@@ -595,9 +595,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1352212288}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6aa2c138e1e90454ebdc2f013124f8c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 7093414809545cc4bb4dc83858cc693b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NavMeshBuilt:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2116212420}
+        m_TargetAssemblyTypeName: Safari.View.Animals.AnimalCollectionController,
+          View
+        m_MethodName: Init
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   navMesh: {fileID: 1352212289}
 --- !u!1 &1417495040
 GameObject:
@@ -1035,7 +1051,7 @@ PrefabInstance:
     - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
       propertyPath: MapChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1352212291}
+      objectReference: {fileID: 0}
     - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
       propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
@@ -1082,7 +1098,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
       propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: RebuildNavMesh
+      value: BuildNavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
       propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -1098,7 +1114,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
       propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: Safari.View.World.NavMeshRebuilder, View
+      value: Safari.View.World.NavMeshBuilder, View
       objectReference: {fileID: 0}
     - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
       propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
