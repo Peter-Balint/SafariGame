@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using Safari.Model.Map;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,9 @@ namespace Safari.Model.Construction
 {
     public class ConstructionManager
     {
-        private Map map;
+        private Map.Map map;
 
-        public ConstructionManager(Map map)
+        public ConstructionManager(Map.Map map)
         {
             this.map = map;
         }

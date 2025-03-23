@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Safari.Model
+namespace Safari.Model.Map
 {
     public class Ground : Field
     {

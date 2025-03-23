@@ -2,6 +2,7 @@
 using UnityEngine;
 using Safari.Model;
 using System;
+using Safari.Model.Map;
 
 namespace Safari.View.World
 {
