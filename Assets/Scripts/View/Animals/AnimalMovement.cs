@@ -1,5 +1,6 @@
 ﻿using Safari.Model.Map;
 using Safari.Model.Movement;
+using Safari.View.World.Map;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,24 @@ namespace Safari.View.Animals
             //movementCommand.Cancelled += StopAgent;
             var target = gridPositionMapping[movementCommand.TargetCell];
             agent.SetDestination(target);
+        }
+
+        private void OnDestroy()
+        {
+            if (behavior == null)
+            {
+                return;
+            }
+            behavior.CommandStarted -= MoveAgent;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.CompareTag("Ground"))
+            {
+                var fieldDisplay = other.gameObject.GetComponent<FieldDisplay>();
+                behavior.ReportLocation(fieldDisplay.Position);
+            }
         }
 
         /*private void StopAgent(object sender, EventArgs e)

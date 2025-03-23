@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Safari.View.Animals;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace Safari.View.World.Map
         {
             if (other.gameObject.CompareTag("Animal"))
             {
-                //var animal = other.gameObject.GetComponent<Animal>();
+                //var animal = other.gameObject.GetComponentInParent<AnimalDisplay>();
                 //animal.Movement.ReportLocation(new GridPosition(transform.position));
             }
         }

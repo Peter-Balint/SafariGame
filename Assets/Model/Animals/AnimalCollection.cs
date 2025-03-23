@@ -22,6 +22,8 @@ namespace Safari.Model.Animals
         {
             animals = new List<Animal>();
             animals.Add(new Wolf(null));
+            animals.Add(new Camel(null));
+
         }
 
         internal void AddAnimal(Animal animal)
