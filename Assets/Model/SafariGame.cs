@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using Safari.Model.Animals;
 using Safari.Model.Construction;
+using Safari.Model.Map;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,13 +33,13 @@ namespace Safari.Model
             }
         }
 
-        public Map Map { get; }
+        public Map.Map Map { get; }
 
         public ConstructionManager Construction { get;  }
 
         public AnimalCollection Animals { get;  }
 
-        public SafariGame(Map map, GameDifficulty gameDifficulty)
+        public SafariGame(Map.Map map, GameDifficulty gameDifficulty)
         {
             Map = map;
             Difficulty = gameDifficulty;

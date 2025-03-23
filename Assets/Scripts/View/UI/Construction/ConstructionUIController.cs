@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using Safari.Model;
+using Safari.Model.Map;
 using Safari.View.World.ConstructionGrid;
 using System;
 using System.Collections.Generic;

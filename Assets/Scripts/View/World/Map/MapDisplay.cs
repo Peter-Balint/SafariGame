@@ -4,6 +4,7 @@ using Safari.Model;
 using System;
 using UnityEngine.Events;
 using System.Collections.Generic;
+using Safari.Model.Map;
 
 namespace Safari.View.World.Map
 {

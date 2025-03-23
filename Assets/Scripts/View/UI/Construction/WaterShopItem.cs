@@ -1,4 +1,5 @@
 ﻿using Safari.Model;
+using Safari.Model.Map;
 using Safari.View.UI.Construction;
 using System;
 using System.Collections.Generic;
