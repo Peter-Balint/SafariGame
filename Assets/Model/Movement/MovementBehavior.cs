@@ -8,6 +8,6 @@ namespace Safari.Model.Movement
 {
     public class MovementBehavior
     {
-
+        
     }
 }

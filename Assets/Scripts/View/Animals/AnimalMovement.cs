@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Safari.Model.Movement;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,5 +10,9 @@ namespace Safari.View.Animals
 {
     public class AnimalMovement : MonoBehaviour
     {
+        public void Init(MovementBehavior behavior)
+        {
+
+        }
     }
 }

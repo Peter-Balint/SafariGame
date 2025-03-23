@@ -1,4 +1,5 @@
 
+using Safari.Model.Movement;
 using System;
 using System.Resources;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace Safari.Model.Animals
     public abstract class Animal
     {
         protected AnimalState state = AnimalState.Wandering;
+
         protected int age;
         protected int hunger;
         protected int thirst;
