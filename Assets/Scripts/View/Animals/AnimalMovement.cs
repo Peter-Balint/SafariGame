@@ -14,22 +14,22 @@ namespace Safari.View.Animals
     {
         private MovementBehavior behavior;
         private NavMeshAgent agent;
-        public void Init(MovementBehavior behavior, NavMeshAgent agent)
+        private Dictionary<GridPosition, Vector3> gridPositionMapping;
+        public void Init(MovementBehavior behavior, NavMeshAgent agent, Dictionary<GridPosition, Vector3> mapping)
         {
             this.behavior = behavior;
             this.agent = agent;
 
             behavior.CommandStarted += MoveAgent;
-        private Dictionary<GridPosition, Vector3> gridPositionMapping;
-        public void Init(MovementBehavior behavior, Dictionary<GridPosition, Vector3> mapping)
-        {
             gridPositionMapping = mapping;
         }
+        
 
         private void MoveAgent(object sender, MovementCommand movementCommand)
         {
             //movementCommand.Cancelled += StopAgent;
-            //agent.SetDestination()
+            var target = gridPositionMapping[movementCommand.TargetCell];
+            agent.SetDestination(target);
         }
 
         /*private void StopAgent(object sender, EventArgs e)

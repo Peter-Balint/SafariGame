@@ -44,10 +44,7 @@ namespace Safari.View.Animals
 
             var animalMovement = displayed.GetComponent<AnimalMovement>();
             var navMeshAgent = this.GetComponent<NavMeshAgent>();
-            animalMovement.Init(animal.Movement, navMeshAgent);
-
-            
-            animalMovement.Init(animal.Movement, gridPositionMapping);
+            animalMovement.Init(animal.Movement, navMeshAgent, gridPositionMapping);
         }
         
 
