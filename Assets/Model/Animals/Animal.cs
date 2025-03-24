@@ -1,15 +1,18 @@
 
+#nullable enable
+using Safari.Model.Map;
 using Safari.Model.Movement;
+using Safari.Model.Pathfinding;
 using System;
 using System.Resources;
+using UnityEditor;
 using UnityEngine;
-#nullable enable
 
 namespace Safari.Model.Animals
 {
     public abstract class Animal
     {
-        public MovementBehavior Movement { get;  }
+        public MovementBehavior Movement { get; }
 
         protected AnimalState state = AnimalState.Wandering;
 
@@ -23,7 +26,7 @@ namespace Safari.Model.Animals
         //for setting from the editor, arbitrary numbers for now
         public const int lifeSpan = 50000;
         public const int hungerLimit = 1000;
-        public const int thirstLimit = 800;
+        public const int thirstLimit = 100;
 
         public Vector3Int Position { get; set; } //could check here in the setter for out of bounds target?
 
@@ -35,14 +38,15 @@ namespace Safari.Model.Animals
         public event EventHandler? Died;
         public event EventHandler? StateChanged;
 
+        private PathfindingHelper pathfinding;
 
-
-        protected Animal()
+        protected Animal(PathfindingHelper pathfinding)
         {
             Movement = new MovementBehavior();
             age = 0;
             hunger = 0;
             thirst = 0;
+            this.pathfinding = pathfinding;
         }
 
 
@@ -52,11 +56,11 @@ namespace Safari.Model.Animals
             hunger++;
             thirst++;
 
-            if(!isAdult && age > lifeSpan / 2)
+            if (!isAdult && age > lifeSpan / 2)
             {
                 isAdult = true;
             }
-            if(age >= lifeSpan)
+            if (age >= lifeSpan)
             {
                 Died?.Invoke(this, EventArgs.Empty);
                 return;
@@ -66,16 +70,30 @@ namespace Safari.Model.Animals
                 state = AnimalState.Hungry;
                 StateChanged?.Invoke(this, EventArgs.Empty);
             }
-            if(thirst >= thirstLimit && state == AnimalState.Resting)
+            if (thirst >= thirstLimit && (state == AnimalState.Resting || state == AnimalState.Wandering))
             {
                 state = AnimalState.Thirsty;
-                StateChanged?.Invoke(this, EventArgs.Empty); //if pathfinding goes to the view this event is needed
-                                                             //so it can figure out the next target
+                StateChanged?.Invoke(this, EventArgs.Empty); 
+                                                             
+                Debug.Log($"{GetType().Name} is thirsty");
+                GridPosition? drinkingPlace = pathfinding.FindClosestDrinkingPlace(Movement.Location);
+                
+                if (drinkingPlace is GridPosition pos)
+                {
+                    Debug.Log($"{GetType().Name} found a drinking place at {pos.X} {pos.Z}");
+
+                    Movement.MoveToGrid(pos);
+                }
+                else
+                {
+                    Debug.Log($"{GetType().Name} couldn't find a drinking place");
+
+                }
             }
         }
         public void TargetReached()
         {
-            switch (state) 
+            switch (state)
             {
                 case AnimalState.Hungry:
                     {
