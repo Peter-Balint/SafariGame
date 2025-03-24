@@ -1,4 +1,5 @@
 #nullable enable
+using Safari.Model.Pathfinding;
 using UnityEngine;
 
 namespace Safari.Model.Animals
@@ -7,7 +8,7 @@ namespace Safari.Model.Animals
     {
         public Sheep? Leader;
 
-        public Sheep(Sheep? leader) : base()
+        public Sheep(PathfindingHelper pathfinding, Sheep? leader) : base(pathfinding)
         {
             Leader = leader;
         }

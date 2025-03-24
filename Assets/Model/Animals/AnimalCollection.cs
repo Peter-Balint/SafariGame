@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using Safari.Model.Pathfinding;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,12 +19,14 @@ namespace Safari.Model.Animals
 
         public ReadOnlyCollection<Animal> Animals => animals.AsReadOnly();
 
-        public AnimalCollection()
+        private PathfindingHelper pathfinding;
+
+        public AnimalCollection(PathfindingHelper pathfinding)
         {
             animals = new List<Animal>();
-            animals.Add(new Wolf(null));
-            animals.Add(new Camel(null));
-
+            animals.Add(new Wolf(pathfinding, null));
+            animals.Add(new Camel(pathfinding, null));
+            this.pathfinding = pathfinding;
         }
 
         internal void AddAnimal(Animal animal)

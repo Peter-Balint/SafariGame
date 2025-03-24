@@ -2,6 +2,7 @@
 using Safari.Model.Animals;
 using Safari.Model.Construction;
 using Safari.Model.Map;
+using Safari.Model.Pathfinding;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,13 +40,15 @@ namespace Safari.Model
 
         public AnimalCollection Animals { get;  }
 
+        private PathfindingHelper pathfinding;
+
         public SafariGame(Map.Map map, GameDifficulty gameDifficulty)
         {
             Map = map;
             Difficulty = gameDifficulty;
             Construction = new ConstructionManager(map);
-            Animals = new AnimalCollection();
-
+            pathfinding = new PathfindingHelper(map);
+            Animals = new AnimalCollection(pathfinding);
         }
 
         public static void StartGame(GameDifficulty gameDifficulty)
