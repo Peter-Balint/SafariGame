@@ -10,9 +10,6 @@ namespace Safari.Model.Animals
         public Camel(Camel? leader) : base()
         {
             Leader = leader;
-            age = 0;
-            hunger = 0;
-            thirst = 0;
         }
     }
 }

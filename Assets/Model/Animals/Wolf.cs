@@ -12,9 +12,6 @@ namespace Safari.Model.Animals
         public Wolf(Wolf? leader) : base()
         {
             Leader = leader;
-            age = 0;
-            hunger = 0;
-            thirst = 0;
         }
     }
 }
