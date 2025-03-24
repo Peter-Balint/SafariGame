@@ -76,13 +76,13 @@ namespace Safari.Model.Animals
                 StateChanged?.Invoke(this, EventArgs.Empty); 
                                                              
                 Debug.Log($"{GetType().Name} is thirsty");
-                GridPosition? drinkingPlace = pathfinding.FindClosestDrinkingPlace(Movement.Location);
+                MovementCommand? command = pathfinding.FindClosestDrinkingPlace(Movement.Location);
                 
-                if (drinkingPlace is GridPosition pos)
+                if (command is MovementCommand c)
                 {
-                    Debug.Log($"{GetType().Name} found a drinking place at {pos.X} {pos.Z}");
+                    Debug.Log($"{GetType().Name} found a drinking place at {c.TargetCell.X} {c.TargetCell.Z}");
 
-                    Movement.MoveToGrid(pos);
+                    Movement.ExecuteMovement(c);
                 }
                 else
                 {

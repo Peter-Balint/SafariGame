@@ -16,10 +16,10 @@ namespace Safari.Model.Movement
 
         public GridPosition Location { get; private set; }
 
-        public void MoveToGrid(GridPosition target)
+        public void ExecuteMovement(MovementCommand command)
         {
             CurrentCommand?.Cancel();
-            CurrentCommand = new MovementCommand(target);
+            CurrentCommand = command;
             CommandStarted?.Invoke(this, CurrentCommand);
             CurrentCommand.Cancelled += OnCommandCancelled; 
         }

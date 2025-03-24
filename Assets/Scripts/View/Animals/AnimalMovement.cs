@@ -13,9 +13,12 @@ namespace Safari.View.Animals
 {
     public class AnimalMovement : MonoBehaviour
     {
+        public float cellSize = 30f;
+
         private MovementBehavior behavior;
         private NavMeshAgent agent;
         private Dictionary<GridPosition, Vector3> gridPositionMapping;
+        
         public void Init(MovementBehavior behavior, NavMeshAgent agent, Dictionary<GridPosition, Vector3> mapping)
         {
             this.behavior = behavior;
@@ -29,6 +32,7 @@ namespace Safari.View.Animals
         private void MoveAgent(object sender, MovementCommand movementCommand)
         {
             var target = gridPositionMapping[movementCommand.TargetCell];
+            target += new Vector3(movementCommand.TargetOffset.DeltaX, 0, movementCommand.TargetOffset.DeltaZ) * 15;
             agent.SetDestination(target);
         }
 

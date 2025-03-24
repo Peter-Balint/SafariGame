@@ -1,5 +1,7 @@
-﻿using Mono.Cecil;
+﻿#nullable enable
+using Mono.Cecil;
 using Safari.Model.Map;
+using Safari.Model.Movement;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,6 +9,7 @@ using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Safari.Model.Movement.MovementCommand;
 
 namespace Safari.Model.Pathfinding
 {
@@ -19,7 +22,7 @@ namespace Safari.Model.Pathfinding
             this.map = map;
         }
 
-        public GridPosition? FindClosestDrinkingPlace(GridPosition location)
+        public MovementCommand? FindClosestDrinkingPlace(GridPosition location)
         {
             Queue<GridPosition> q = new Queue<GridPosition>();
             q.Enqueue(location);
@@ -28,11 +31,11 @@ namespace Safari.Model.Pathfinding
                 GridPosition currentVertex = q.Dequeue();
                 foreach (var neighbor in WalkableAdjacentCells(currentVertex))
                 {
-                    if (IsDrinkingPlace(neighbor))
+                    if (IsDrinkingPlace(neighbor.Item1))
                     {
-                        return neighbor;
+                        return new MovementCommand(neighbor.Item1, neighbor.Item2);
                     }
-                    q.Enqueue(neighbor);
+                    q.Enqueue(neighbor.Item1);
                 }
             }
             return null;
@@ -40,12 +43,12 @@ namespace Safari.Model.Pathfinding
 
         private bool IsDrinkingPlace(GridPosition pos)
         {
-            return AdjacentCells(pos).Any(cell => (map.FieldAt(cell) is Water));
+            return AdjacentCells(pos).Any(t => (map.FieldAt(t.Item1) is Water));
         }
 
-        private List<GridPosition> AdjacentCells(GridPosition pos)
+        private List<Tuple<GridPosition, Offset>> AdjacentCells(GridPosition pos)
         {
-            List<GridPosition> adjacent = new List<GridPosition>();
+            List<Tuple<GridPosition, Offset>> adjacent = new List<Tuple<GridPosition, Offset>>();
             for (int x = -1; x <= 1; x++)
             {
                 for (int z = -1; z <= 1; z++)
@@ -53,19 +56,19 @@ namespace Safari.Model.Pathfinding
                     GridPosition adjacentCell = new GridPosition(pos.X + x, pos.Z + z);
                     if (map.IsValidPosition(adjacentCell))
                     {
-                        adjacent.Add(adjacentCell);
+                        adjacent.Add(new Tuple<GridPosition, Offset>(adjacentCell, new Offset(x, z)));
                     }
                 }
             }
             return adjacent;
         }
 
-        private List<GridPosition> WalkableAdjacentCells(GridPosition pos)
+        private List<Tuple<GridPosition, Offset>> WalkableAdjacentCells(GridPosition pos)
         {
             Trace.Assert(map.IsValidPosition(pos), "Invalid position");
             Trace.Assert(IsWalkable(pos), "Cell not walkable");
 
-            return AdjacentCells(pos).Where(IsWalkable).ToList();
+            return AdjacentCells(pos).Where(t => IsWalkable(t.Item1)).ToList();
         }
 
         private bool IsWalkable(GridPosition pos)
