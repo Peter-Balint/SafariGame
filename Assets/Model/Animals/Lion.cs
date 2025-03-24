@@ -7,7 +7,7 @@ namespace Safari.Model.Animals
     {
         public Lion? Leader;
 
-        public Lion(Lion? leader)
+        public Lion(Lion? leader) : base()
         {
             Leader = leader;
             age = 0;

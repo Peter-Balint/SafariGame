@@ -1,5 +1,7 @@
 #nullable enable
+using Safari.Model.Movement;
 using UnityEngine;
+
 
 namespace Safari.Model.Animals
 {
@@ -7,7 +9,7 @@ namespace Safari.Model.Animals
     {
         public Wolf? Leader;
 
-        public Wolf(Wolf? leader)
+        public Wolf(Wolf? leader) : base()
         {
             Leader = leader;
             age = 0;

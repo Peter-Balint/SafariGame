@@ -28,7 +28,6 @@ namespace Safari.View.Animals
 
         private void MoveAgent(object sender, MovementCommand movementCommand)
         {
-            //movementCommand.Cancelled += StopAgent;
             var target = gridPositionMapping[movementCommand.TargetCell];
             agent.SetDestination(target);
         }
@@ -50,10 +49,5 @@ namespace Safari.View.Animals
                 behavior.ReportLocation(fieldDisplay.Position);
             }
         }
-
-        /*private void StopAgent(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }*/
     }
 }

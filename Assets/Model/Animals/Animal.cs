@@ -35,20 +35,18 @@ namespace Safari.Model.Animals
         public event EventHandler? Died;
         public event EventHandler? StateChanged;
 
-        /*public Animal(Animal? leader)
-        {
-            this.leader = leader;
-            age = 0;
-            hunger = 0;
-            thirst = 0;
-        }*/
+
 
         protected Animal()
         {
             Movement = new MovementBehavior();
+            age = 0;
+            hunger = 0;
+            thirst = 0;
         }
 
-        public void ModelUpdate() //should be called from the view's update function
+
+        public void ModelUpdate()
         {
             age++;
             hunger++;
@@ -72,7 +70,7 @@ namespace Safari.Model.Animals
             {
                 state = AnimalState.Thirsty;
                 StateChanged?.Invoke(this, EventArgs.Empty); //if pathfinding goes to the view this event is needed
-                                                                    //so it can figure out the next target
+                                                             //so it can figure out the next target
             }
         }
         public void TargetReached()
