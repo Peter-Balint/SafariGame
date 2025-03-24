@@ -11,9 +11,6 @@ namespace Safari.Model.Animals
         public Lion(PathfindingHelper pathfinding, Lion? leader) : base(pathfinding)
         {
             Leader = leader;
-            age = 0;
-            hunger = 0;
-            thirst = 0;
         }
     }
 }

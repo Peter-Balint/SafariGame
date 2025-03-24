@@ -7,8 +7,17 @@ class MapDisplay{
 class FieldDisplay{
     +gridPosition: GridPosition
 }
+
+class FieldPrefabMapping{
+    - mappingDictionary : Dictionary<Type, GameObject>
+}
+class FieldPrefabPair{
+    + FieldTypeName : string
+    + Prefab : GameObject
+}
 }
 Class Unity.MonoBehaviour{}
+Class Unity.ScriptableObject{}
 
 MonoBehaviour <|-- FieldDisplay
 
@@ -20,5 +29,8 @@ MapDisplay "1" -- "1\n-map" Model.Map: displays >
 
 MapDisplay *-- "-displayers" FieldDisplay: manages lifecycle >
 
+FieldPrefabMapping --|> ScriptableObject
+
+FieldPrefabMapping *-- "-mappings" FieldPrefabPair
 
 @enduml
