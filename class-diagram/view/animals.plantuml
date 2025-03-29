@@ -4,20 +4,40 @@ class AnimalDisplay{
     +animalPrefabs: GameObject[]
 }
 
-
-
 class AnimalCollectionController{
 
 }
+
+class AnimalMovement{
+    - agent : NavMeshAgent
 }
 
-class Model.Safari{}
+class AnimalPrefabMapping{
+    - mappingDictionary : Dictionary<Type, GameObject>
+}
+class AnimalPrefabPair{
+    + AnimalTypeName : string
+    + Prefab : GameObject
+}
+}
+
+class Model.AnimalCollection{}
 Class Model.Animal{}
+Class Model.MovementBehavior{}
 Class Unity.MonoBehaviour{}
+Class Unity.ScriptableObject{}
 AnimalDisplay --|> MonoBehaviour
 AnimalDisplay --- "-animal" Animal: displays >
+AnimalDisplay *-- AnimalMovement
+AnimalDisplay *-- "-mapping" AnimalPrefabMapping
+
+AnimalMovement *-- MovementBehavior
+AnimalMovement --|> MonoBehaviour
+
+AnimalPrefabMapping --|> ScriptableObject
+AnimalPrefabMapping *-- AnimalPrefabPair
 
 AnimalCollectionController *-- "-displayers" AnimalDisplay: manages lifecycle >
 
-AnimalCollectionController -- Safari: watches the animal collection > 
+AnimalCollectionController *--"-animalCollection" AnimalCollection: watches the animal collection > 
 @enduml

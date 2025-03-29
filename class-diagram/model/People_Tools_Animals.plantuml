@@ -55,6 +55,11 @@ IRevealingEntity <|.. Drone
 IRevealingEntity <|.. AirShip
 IRevealingEntity <|.. Tourist
 
+IKillable <|.. Hunter
+IKillable <|.. Ranger
+IKillable <|.. Animal
+@enduml
+@startuml
 enum AnimalState{
     RESTING
     WANDERING
@@ -63,41 +68,50 @@ enum AnimalState{
 }
 
 abstract class Animal{
-    - worldLocation : Vector3
-    - currentState : AnimalState
-    - age : int
-    - hunger : int
-    - thirst : int
-    + FindNextObjective() : Vector3
+    # worldLocation : Vector3
+    # age : int
+    # hunger : int
+    # thirst : int
 }
 
-Animal "1" *-- AnimalState
+Animal "1" *-- "-currentState" AnimalState
 
 abstract class Predator extends Animal{
 
 }
-class Predator1 extends Predator{
-    + MateWith(other: Predator1) : Predator1
+class Lion extends Predator{
+    
 }
-class Predator2 extends Predator{
-    + MateWith(other: Predator2) : Predator2
+class Wolf extends Predator{
+    
 }
 abstract class Herbivore extends Animal{
 
 }
-class Herbivore1 extends Herbivore{
-    + MateWith(other: Herbivore1) : Herbivore1
+class Camel extends Herbivore{
+    
 }
-class Herbivore2 extends Herbivore{
-    + MateWith(other: Herbivore2) : Herbivore2
+class Sheep extends Herbivore{
+    
 }
 
 
 
 Safari "1" *-- "*" Animal
 
-IKillable <|.. Hunter
-IKillable <|.. Ranger
-IKillable <|.. Animal
+Class MovementBehavior{
+
+}
+Class MovementCommand{
+
+}
+Class AnimalCollection{
+
+}
+
+Animal *-- "+Movement" MovementBehavior
+AnimalCollection  *-- "-animals*" Animal
+
+MovementBehavior *-- "-currentCommand" MovementCommand
 
 @enduml
