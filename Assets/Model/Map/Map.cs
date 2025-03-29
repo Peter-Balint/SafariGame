@@ -39,6 +39,11 @@ namespace Safari.Model.Map
         {
             return grid[position.Z, position.X];
         }
+
+        public bool IsValidPosition(GridPosition position)
+        {
+            return position.X >= 0 && position.Z >= 0 && position.X < grid.GetLength(1) && position.Z < grid.GetLength(0);
+        }
     }
 }
 
