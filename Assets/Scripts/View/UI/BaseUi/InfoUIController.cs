@@ -21,6 +21,7 @@ namespace Safari.View
             animals = SafariGame.Instance.Animals;
             animals.Added += (sender,animal) => OnAnimalCountChanged(1);
             animals.Removed += (sender, animal) => OnAnimalCountChanged(-1);
+            animals.TestSpawn();
         }
 
         void Update()
@@ -31,9 +32,8 @@ namespace Safari.View
         private void OnAnimalCountChanged(int change) 
         {
             int textI = int.Parse(counterTextList[1].text);
-            textI++;
+            textI += change;
             counterTextList[1].text = textI.ToString();
-            Debug.Log(counterTextList[1].text);
         }
     }
 }
