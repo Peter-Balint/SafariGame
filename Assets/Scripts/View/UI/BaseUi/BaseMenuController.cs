@@ -17,10 +17,14 @@ namespace Safari.View
         {
         
         }
-
-        public void OnConstructionMenuClicked()
+        public void Open()
+        {
+            gameObject.SetActive(true);
+        }
+        public void OpenConstructionMenu()
         {
             ConstructionMenu.SetActive(true);
+            gameObject.SetActive(false);
         }
     }
 }
