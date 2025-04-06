@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Safari.View
 {
-    public class BaseMenuController : MonoBehaviour
+    public class IngameMenuController : MonoBehaviour
     {
         [SerializeField]
         private GameObject ConstructionMenu;

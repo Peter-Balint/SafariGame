@@ -1267,7 +1267,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4277419284417870763, guid: 6436ff80aa34174469735b8b7c328147, type: 3}
       propertyPath: m_Name
-      value: BaseMenu
+      value: Ingame Menu
       objectReference: {fileID: 0}
     - target: {fileID: 4448363885625315559, guid: 6436ff80aa34174469735b8b7c328147, type: 3}
       propertyPath: ConstructionMenu
