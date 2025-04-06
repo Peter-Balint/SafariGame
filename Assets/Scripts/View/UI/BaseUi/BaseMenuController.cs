@@ -6,6 +6,8 @@ namespace Safari.View
     {
         [SerializeField]
         private GameObject ConstructionMenu;
+        [SerializeField]
+        private GameObject AnimalShop;
         
         void Start()
         {
@@ -24,6 +26,11 @@ namespace Safari.View
         public void OpenConstructionMenu()
         {
             ConstructionMenu.SetActive(true);
+            gameObject.SetActive(false);
+        }
+        public void OpenAnimalShop()
+        {
+            AnimalShop.SetActive(true);
             gameObject.SetActive(false);
         }
     }
