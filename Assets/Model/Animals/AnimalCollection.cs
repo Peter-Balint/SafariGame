@@ -24,9 +24,13 @@ namespace Safari.Model.Animals
         public AnimalCollection(PathfindingHelper pathfinding)
         {
             animals = new List<Animal>();
-            animals.Add(new Wolf(pathfinding, null));
-            animals.Add(new Camel(pathfinding, null));
+            
             this.pathfinding = pathfinding;
+        }
+        public void TestSpawn()
+        {
+            AddAnimal(new Wolf(pathfinding, null));
+            AddAnimal(new Camel(pathfinding, null));
         }
 
         internal void AddAnimal(Animal animal)
