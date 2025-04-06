@@ -62,6 +62,7 @@ namespace Safari.Model.Movement
         public void Cancel()
         {
             Cancelled?.Invoke(this, EventArgs.Empty);
+            Cancelled = null;
         }
     }
 }

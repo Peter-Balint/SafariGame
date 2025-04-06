@@ -55,7 +55,7 @@ namespace Safari.View.Animals
 
         public void Update()
         {
-            AnimalModel?.ModelUpdate();
+            AnimalModel?.ModelUpdate(Time.deltaTime);
         }
     }
 }

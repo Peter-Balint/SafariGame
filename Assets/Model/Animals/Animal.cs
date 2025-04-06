@@ -14,21 +14,26 @@ namespace Safari.Model.Animals
     {
         public MovementBehavior Movement { get; }
 
-        protected AnimalState state = AnimalState.Wandering;
+        public PathfindingHelper Pathfinding { get; }
+
+        public State.State State { get; private set; }
+
+        public Vector3Int Position { get; set; }
+
+        //for setting from the editor, arbitrary numbers for now
+        public Tuple<float, float> RestingInterval { get; private set; }
+
+        public int ThirstLimit { get; private set; } = 100;
 
         protected int age;
         protected int hunger;
-        protected int thirst;
-
         protected bool isAdult;
         protected Gender gender;
 
         //for setting from the editor, arbitrary numbers for now
         public const int lifeSpan = 50000;
-        public const int hungerLimit = 1000;
         public const int thirstLimit = 100;
 
-        public Vector3Int Position { get; set; } //could check here in the setter for out of bounds target?
 
         //animals should move in a group: an easy solution would be to designate a leader
         //the animals with that leader have a bias to move towards them while in wandering state
@@ -38,23 +43,32 @@ namespace Safari.Model.Animals
         public event EventHandler? Died;
         public event EventHandler? StateChanged;
 
-        private PathfindingHelper pathfinding;
 
         protected Animal(PathfindingHelper pathfinding)
         {
             Movement = new MovementBehavior();
             age = 0;
             hunger = 0;
-            thirst = 0;
-            this.pathfinding = pathfinding;
+            ThirstLimit = 100;
+            RestingInterval = new Tuple<float, float>(2 * 60, 4 * 60);
+            State = new State.Resting(this, 0);
+            State.OnEnter();
+            Pathfinding = pathfinding;
         }
 
-
-        public void ModelUpdate()
+        internal void SetState(State.State state)
         {
-            age++;
+            State.OnExit();
+            State = state;
+            State.OnEnter();
+            StateChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void ModelUpdate(float deltaTime)
+        {
+            State.Update(deltaTime);
+            /*age++;
             hunger++;
-            thirst++;
 
             if (!isAdult && age > lifeSpan / 2)
             {
@@ -89,29 +103,29 @@ namespace Safari.Model.Animals
                     Debug.Log($"{GetType().Name} couldn't find a drinking place");
 
                 }
-            }
+            }*/
         }
         public void TargetReached()
         {
-            switch (state)
-            {
-                case AnimalState.Hungry:
-                    {
-                        state = AnimalState.Resting;
-                        break;
-                    }
-                case AnimalState.Thirsty:
-                    {
-                        state = AnimalState.Wandering;
-                        StateChanged?.Invoke(this, EventArgs.Empty);
-                        break;
-                    }
-                case AnimalState.Wandering:
-                    {
-                        state = AnimalState.Resting;
-                        break;
-                    }
-            }
+            /* switch (state)
+             {
+                 case AnimalState.Hungry:
+                     {
+                         state = AnimalState.Resting;
+                         break;
+                     }
+                 case AnimalState.Thirsty:
+                     {
+                         state = AnimalState.Wandering;
+                         StateChanged?.Invoke(this, EventArgs.Empty);
+                         break;
+                     }
+                 case AnimalState.Wandering:
+                     {
+                         state = AnimalState.Resting;
+                         break;
+                     }
+             }*/
         }
     }
 
