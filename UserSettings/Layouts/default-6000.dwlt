@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 772.8
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Scene
   m_RootView: {fileID: 3}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -421,7 +421,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: d6e8ffffe8e8fffffae8ffff0ce9ffff1ee9ffff1afbffff20fbffffbaa60000eca60000
+      m_ExpandedIDs: bc81ffffc681ffffce81ffff5082ffff5a82ffff6282ffff3eabffff50abffffa6acffffb8acffffcaacffffdcacffffeeacffff00adffff12adffff24adffff36adffff0eaeffff20aeffff32aeffff44aeffff56aeffff68aeffff7aaeffff8caeffff9eaeffff76afffff88afffff9aafffffacafffffbeafffffd0afffffe2affffff4afffff06b0ffffe8b0fffffab0ffff0cb1ffff1eb1ffff30b1ffff42b1ffff54b1ffff66b1ffff78b1ffff5ab2ffff6cb2ffff7eb2ffff90b2ffffa2b2ffffb4b2ffffc6b2ffffd8b2ffffeab2ffffccb3ffffdeb3fffff0b3ffff02b4ffff14b4ffff26b4ffff38b4ffff4ab4ffff5cb4ffff3eb5ffff50b5ffff62b5ffff74b5ffff86b5ffff98b5ffffaab5ffffbcb5ffffceb5ffffb0b6ffffc2b6ffffd4b6ffffe6b6fffff8b6ffff0ab7ffff1cb7ffff2eb7ffff40b7ffff18b8ffff2ab8ffff3cb8ffff4eb8ffff60b8ffff72b8ffff84b8ffff96b8ffffa8b8ffffaafaffff1efbffff20fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -941,9 +941,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: -65.443695, y: 37.843906, z: -14.888855}
+    m_Target: {x: -158.74675, y: 33.421314, z: -72.946495}
     speed: 2
-    m_Value: {x: -65.443695, y: 37.843906, z: -14.888855}
+    m_Value: {x: -158.74675, y: 33.421314, z: -72.946495}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -993,9 +993,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: -0, y: 0, z: -0, w: -1}
   m_Size:
-    m_Target: 86.41241
+    m_Target: 47.060867
     speed: 2
-    m_Value: 86.41241
+    m_Value: 47.060867
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1076,7 +1076,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/View/UI/BaseUi
+    - Assets
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1086,16 +1086,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/View/UI/BaseUi
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\peter\Documents\sulis\szem4\Szofttech\project\trinity2d
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 425.2}
-    m_SelectedIDs: 1caf0000
-    m_LastClickedID: 44828
-    m_ExpandedIDs: 0000000060ae000062ae000064ae000066ae000068ae00006aae00006cae00006eae0000
+    scrollPos: {x: 0, y: 79}
+    m_SelectedIDs: 18af0000
+    m_LastClickedID: 44824
+    m_ExpandedIDs: 0000000018af00001aaf00001caf00001eaf000020af000022af000024af000026af000028af00002aaf00002caf00002eaf000030af000032af0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1124,7 +1124,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000060ae000062ae000064ae000066ae000068ae00006aae00006cae00006eae0000
+    m_ExpandedIDs: 0000000018af00001aaf00001caf00001eaf000020af000022af000024af000026af000028af00002aaf00002caf00002eaf000030af000032af0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1152,7 +1152,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000c0a7000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0

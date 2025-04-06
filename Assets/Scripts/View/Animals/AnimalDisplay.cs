@@ -40,7 +40,9 @@ namespace Safari.View.Animals
             }
             var prefab = mapping.GetPrefab(AnimalModel);
             if(prefab ==  null) { return; }
+            
             displayed = Instantiate(prefab, transform, false);
+            
 
             var animalMovement = displayed.GetComponent<AnimalMovement>();
             var navMeshAgent = this.GetComponent<NavMeshAgent>();

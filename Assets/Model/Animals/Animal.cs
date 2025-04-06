@@ -28,7 +28,7 @@ namespace Safari.Model.Animals
         public const int hungerLimit = 1000;
         public const int thirstLimit = 100;
 
-        public Vector3Int Position { get; set; } //could check here in the setter for out of bounds target?
+        public Vector3Int Position { get; set; }//could check here in the setter for out of bounds target?
 
         //animals should move in a group: an easy solution would be to designate a leader
         //the animals with that leader have a bias to move towards them while in wandering state

@@ -29,8 +29,12 @@ namespace Safari.Model.Animals
         }
         public void TestSpawn()
         {
-            AddAnimal(new Wolf(pathfinding, null));
-            AddAnimal(new Camel(pathfinding, null));
+            Wolf wolf = new Wolf(pathfinding,null);
+            wolf.Position = new UnityEngine.Vector3Int(0,0,100);
+            Camel camel = new Camel(pathfinding, null);
+            camel.Position = new UnityEngine.Vector3Int(10,0,100);
+            AddAnimal(wolf);
+            AddAnimal(camel);
         }
 
         internal void AddAnimal(Animal animal)
