@@ -16,8 +16,8 @@ namespace CamMovement
 		}
 		public void MoveCamera(Vector3 inputVector)
 		{
-			var movementVector = Quaternion.Euler(0, 30, 0) * inputVector;
-			gameCamera.transform.position += movementVector * Time.deltaTime * cameraMovementSpeed;
+			inputVector.Normalize();
+			gameCamera.transform.position += inputVector * Time.deltaTime * cameraMovementSpeed;
 		}
 	}
 }
