@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using Safari.Model.Animals.Movement;
 using Safari.Model.Map;
 using Safari.Model.Movement;
 using Safari.View.World.Map;
@@ -21,24 +22,56 @@ namespace Safari.View.Animals
         private Dictionary<GridPosition, Vector3> gridPositionMapping;
 
         private MovementCommand? currentlyExecuting;
-        
+
         public void Init(MovementBehavior behavior, NavMeshAgent agent, Dictionary<GridPosition, Vector3> mapping)
         {
             this.behavior = behavior;
             this.agent = agent;
 
-            behavior.CommandStarted += MoveAgent;
+            behavior.CommandStarted += OnCommandStarted; ;
             gridPositionMapping = mapping;
+            if (behavior.CurrentCommand != null && behavior.CurrentCommand != currentlyExecuting)
+            {
+                MoveAgent(behavior.CurrentCommand);
+            }
         }
-        
 
-        private void MoveAgent(object sender, MovementCommand movementCommand)
+        private void OnCommandStarted(object sender, MovementCommand e)
+        {
+            MoveAgent(e);
+        }
+
+        private void MoveAgent(MovementCommand movementCommand)
         {
             movementCommand.Cancelled += OnMovementCancelled;
             currentlyExecuting = movementCommand;
-            var target = gridPositionMapping[movementCommand.TargetCell];
-            target += new Vector3(movementCommand.TargetOffset.DeltaX, 0, movementCommand.TargetOffset.DeltaZ) * 15;
-            agent.SetDestination(target);
+            switch (movementCommand)
+            {
+                case GridMovementCommand gm:
+                    var target = gridPositionMapping[gm.TargetCell];
+                    target += new Vector3(gm.TargetOffset.DeltaX, 0, gm.TargetOffset.DeltaZ) * 15;
+                    agent.SetDestination(target);
+                    break;
+
+                case WanderingMovementCommand wanderingMovementCommand:
+                    Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * 10000;
+                    randomDirection += transform.position;
+
+                    NavMeshHit hit;
+                    if (NavMesh.SamplePosition(randomDirection, out hit, 10000, NavMesh.AllAreas))
+                    {
+                        Debug.DrawRay(Vector3.up * 100, hit.position, Color.red, 120, true);
+                        Debug.Log($"Wandering to {hit.position}");
+
+                        agent.SetDestination(new Vector3(hit.position.x, transform.position.y, hit.position.z));
+                    }
+                    else
+                    {
+                        Debug.Log("Could not find valid position on NavMesh");
+                    }
+                    break;
+
+            }
         }
 
         private void OnMovementCancelled(object sender, EventArgs e)
@@ -55,7 +88,7 @@ namespace Safari.View.Animals
             {
                 return;
             }
-            behavior.CommandStarted -= MoveAgent;
+            behavior.CommandStarted -= OnCommandStarted;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -64,6 +97,15 @@ namespace Safari.View.Animals
             {
                 var fieldDisplay = other.gameObject.GetComponent<FieldDisplay>();
                 behavior.ReportLocation(fieldDisplay.Position);
+            }
+        }
+
+        private void Update()
+        {
+            if (currentlyExecuting != null && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance && (!agent.hasPath || agent.velocity.sqrMagnitude == 0f))
+            {
+                agent.ResetPath();
+                currentlyExecuting.ReportFinished();
             }
         }
     }

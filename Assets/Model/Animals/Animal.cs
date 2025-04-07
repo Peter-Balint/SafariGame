@@ -50,7 +50,7 @@ namespace Safari.Model.Animals
             age = 0;
             hunger = 0;
             ThirstLimit = 100;
-            RestingInterval = new Tuple<float, float>(2 * 60, 4 * 60);
+            RestingInterval = new Tuple<float, float>(0.05f * 60, 0.1f * 60);
             State = new State.Resting(this, 0);
             State.OnEnter();
             Pathfinding = pathfinding;

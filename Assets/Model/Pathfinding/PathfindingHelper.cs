@@ -9,7 +9,7 @@ using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Safari.Model.Movement.MovementCommand;
+using static Safari.Model.Movement.GridMovementCommand;
 
 namespace Safari.Model.Pathfinding
 {
@@ -22,7 +22,7 @@ namespace Safari.Model.Pathfinding
             this.map = map;
         }
 
-        public MovementCommand? FindClosestDrinkingPlace(GridPosition location)
+        public GridMovementCommand? FindClosestDrinkingPlace(GridPosition location)
         {
             Queue<GridPosition> q = new Queue<GridPosition>();
             q.Enqueue(location);
@@ -33,7 +33,7 @@ namespace Safari.Model.Pathfinding
                 {
                     if (IsDrinkingPlace(neighbor.Item1))
                     {
-                        return new MovementCommand(neighbor.Item1, neighbor.Item2);
+                        return new GridMovementCommand(neighbor.Item1, neighbor.Item2);
                     }
                     q.Enqueue(neighbor.Item1);
                 }
