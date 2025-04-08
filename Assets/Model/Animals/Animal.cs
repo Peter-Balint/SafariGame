@@ -32,7 +32,6 @@ namespace Safari.Model.Animals
 
         //for setting from the editor, arbitrary numbers for now
         public const int lifeSpan = 50000;
-        public const int thirstLimit = 100;
 
 
         //animals should move in a group: an easy solution would be to designate a leader
@@ -49,7 +48,7 @@ namespace Safari.Model.Animals
             Movement = new MovementBehavior();
             age = 0;
             hunger = 0;
-            ThirstLimit = 100;
+            ThirstLimit = 1000;
             RestingInterval = new Tuple<float, float>(0.05f * 60, 0.1f * 60);
             State = new State.Resting(this, 0);
             State.OnEnter();

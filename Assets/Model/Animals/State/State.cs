@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Safari.Model.Animals.State
 {
@@ -36,6 +37,15 @@ namespace Safari.Model.Animals.State
         protected void TransitionTo(State newState)
         {
             owner.SetState(newState);
+        }
+
+        protected void AllowSearchingWater()
+        {
+            if (thirst > owner.ThirstLimit)
+            {
+                Debug.Log($"{owner.GetType().Name} is thirsty");
+                TransitionTo(new SearchingWater(owner, thirst));
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Safari.Model.Animals.State
 {
@@ -15,6 +16,7 @@ namespace Safari.Model.Animals.State
 
         public override void OnEnter()
         {
+            Debug.Log("Wandering started");
             base.OnEnter();
             WanderingMovementCommand command = new WanderingMovementCommand();
             command.Finished += OnWanderingFinished;
@@ -23,7 +25,14 @@ namespace Safari.Model.Animals.State
 
         private void OnWanderingFinished(object sender, EventArgs e)
         {
+            Debug.Log("Wandering finished");
             TransitionTo(new Wandering(owner, thirst));
+        }
+
+        public override void Update(float deltaTime)
+        {
+            base.Update(deltaTime);
+            AllowSearchingWater();
         }
     }
 }

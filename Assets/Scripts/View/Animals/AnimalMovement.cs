@@ -28,7 +28,7 @@ namespace Safari.View.Animals
             this.behavior = behavior;
             this.agent = agent;
 
-            behavior.CommandStarted += OnCommandStarted; ;
+            behavior.CommandStarted += OnCommandStarted;
             gridPositionMapping = mapping;
             if (behavior.CurrentCommand != null && behavior.CurrentCommand != currentlyExecuting)
             {
@@ -45,6 +45,7 @@ namespace Safari.View.Animals
         {
             movementCommand.Cancelled += OnMovementCancelled;
             currentlyExecuting = movementCommand;
+            agent.ResetPath();
             switch (movementCommand)
             {
                 case GridMovementCommand gm:
@@ -60,7 +61,6 @@ namespace Safari.View.Animals
                     NavMeshHit hit;
                     if (NavMesh.SamplePosition(randomDirection, out hit, 10000, NavMesh.AllAreas))
                     {
-                        Debug.DrawRay(Vector3.up * 100, hit.position, Color.red, 120, true);
                         Debug.Log($"Wandering to {hit.position}");
 
                         agent.SetDestination(new Vector3(hit.position.x, transform.position.y, hit.position.z));

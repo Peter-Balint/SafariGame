@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Safari.Model.Animals.State
 {
-    public class Resting : Animals.State.State
+    public class Resting : State
     {
         private float restingSince = 0;
 
@@ -23,10 +24,8 @@ namespace Safari.Model.Animals.State
 
             owner.Movement.AbortMovement();
 
-            Random r = new Random();
-            restingDuration = (float)r.NextDouble()
-                              * (owner.RestingInterval.Item2 - owner.RestingInterval.Item1)
-                              + owner.RestingInterval.Item1;
+            restingDuration = UnityEngine.Random.Range(owner.RestingInterval.Item1, owner.RestingInterval.Item2);
+            Debug.Log($"Resting for {restingDuration} seconds");
         }
 
         public override void Update(float deltaTime)
@@ -37,10 +36,7 @@ namespace Safari.Model.Animals.State
             {
                 TransitionTo(new Wandering(owner, thirst));
             }
-            if (thirst > owner.ThirstLimit)
-            {
-                
-            }
+            AllowSearchingWater();
         }
     }
 }

@@ -3,7 +3,7 @@ using System;
 
 namespace Safari.Model.Movement
 {
-    public class MovementCommand
+    public abstract class MovementCommand
     {
         public event EventHandler? Cancelled;
 
