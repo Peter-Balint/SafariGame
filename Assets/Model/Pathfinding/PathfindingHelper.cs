@@ -26,11 +26,19 @@ namespace Safari.Model.Pathfinding
         {
             Queue<GridPosition> q = new Queue<GridPosition>();
             q.Enqueue(location);
+
+            HashSet<GridPosition> visited = new HashSet<GridPosition>();
+
             while (q.Count > 0)
             {
                 GridPosition currentVertex = q.Dequeue();
                 foreach (var neighbor in WalkableAdjacentCells(currentVertex))
                 {
+                    if (visited.Contains(neighbor.Item1))
+                    {
+                        continue;
+                    }
+                    visited.Add(neighbor.Item1);
                     if (IsDrinkingPlace(neighbor.Item1))
                     {
                         return new GridMovementCommand(neighbor.Item1, neighbor.Item2);
