@@ -2,6 +2,7 @@
 using Safari.Model.Animals.Movement;
 using Safari.Model.Map;
 using Safari.Model.Movement;
+using Safari.View.Utils;
 using Safari.View.World.Map;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SocialPlatforms;
 
 namespace Safari.View.Animals
 {
@@ -55,15 +57,11 @@ namespace Safari.View.Animals
                     break;
 
                 case WanderingMovementCommand wanderingMovementCommand:
-                    Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * 10000;
-                    randomDirection += transform.position;
 
-                    NavMeshHit hit;
-                    if (NavMesh.SamplePosition(randomDirection, out hit, 10000, NavMesh.AllAreas))
+                    if (NavMeshUtils.RandomPointOnNavMesh(out Vector3 point))
                     {
-                        Debug.Log($"Wandering to {hit.position}");
-
-                        agent.SetDestination(new Vector3(hit.position.x, transform.position.y, hit.position.z));
+                        Debug.Log($"Wandering to {point}");
+                        agent.SetDestination(point);
                     }
                     else
                     {
@@ -73,7 +71,7 @@ namespace Safari.View.Animals
 
             }
         }
-
+        
         private void OnMovementCancelled(object sender, EventArgs e)
         {
             if (sender == currentlyExecuting)
