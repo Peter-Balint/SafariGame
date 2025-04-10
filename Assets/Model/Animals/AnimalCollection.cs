@@ -20,6 +20,7 @@ namespace Safari.Model.Animals
         public ReadOnlyCollection<Animal> Animals => animals.AsReadOnly();
 
         private PathfindingHelper pathfinding;
+        public PathfindingHelper Pathfinding {  get { return pathfinding; } }
 
         public AnimalCollection(PathfindingHelper pathfinding)
         {
@@ -30,21 +31,21 @@ namespace Safari.Model.Animals
         public void TestSpawn()
         {
             Wolf wolf = new Wolf(pathfinding,null);
-            wolf.Position = new UnityEngine.Vector3Int(0,0,100);
+            wolf.Position = new UnityEngine.Vector3(0,0,100);
             Camel camel = new Camel(pathfinding, null);
-            camel.Position = new UnityEngine.Vector3Int(10,0,100);
+            camel.Position = new UnityEngine.Vector3(10,0,100);
             AddAnimal(wolf);
             AddAnimal(camel);
         }
 
-        internal void AddAnimal(Animal animal)
+        public void AddAnimal(Animal animal)
         {
             animals.Add(animal);
             animal.Died += OnAnimalDied;
             Added?.Invoke(this, animal);
         }
 
-        internal void RemoveAnimal(Animal animal)
+        public void RemoveAnimal(Animal animal)
         {
             animals.Remove(animal);
             Removed?.Invoke(this, animal);

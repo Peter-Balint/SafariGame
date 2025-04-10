@@ -12,6 +12,7 @@ namespace Safari.Model.Animals
 {
     public abstract class Animal
     {
+        protected AnimalMetadata metaData;
         public MovementBehavior Movement { get; }
 
         protected AnimalState state = AnimalState.Wandering;
@@ -28,7 +29,7 @@ namespace Safari.Model.Animals
         public const int hungerLimit = 1000;
         public const int thirstLimit = 100;
 
-        public Vector3Int Position { get; set; }//could check here in the setter for out of bounds target?
+        public Vector3 Position { get; set; }//could check here in the setter for out of bounds target?
 
         //animals should move in a group: an easy solution would be to designate a leader
         //the animals with that leader have a bias to move towards them while in wandering state
@@ -48,7 +49,15 @@ namespace Safari.Model.Animals
             thirst = 0;
             this.pathfinding = pathfinding;
         }
-
+        protected Animal(PathfindingHelper pathfinding, AnimalMetadata metadata)
+        {
+            Movement = new MovementBehavior();
+            age = 0;
+            hunger = 0;
+            thirst = 0;
+            this.pathfinding = pathfinding;
+            this.metaData = metadata;
+        }
 
         public void ModelUpdate()
         {

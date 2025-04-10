@@ -12,10 +12,12 @@ namespace Safari.View.Animals
     {
         private List<AnimalDisplay> displayers;
         private AnimalCollection animalCollection;
+        public AnimalCollection AnimalCollection { get { return animalCollection; } }
 
         public AnimalDisplay AnimalDisplayPrefab;
 
         private Dictionary<GridPosition, Vector3> gridPositionMapping;
+        public Dictionary<GridPosition, Vector3> GridPositionMapping { get { return gridPositionMapping; } }
 
         public void Start()
         {

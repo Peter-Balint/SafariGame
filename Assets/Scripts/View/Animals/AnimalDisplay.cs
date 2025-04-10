@@ -16,14 +16,14 @@ namespace Safari.View.Animals
 
         private GameObject? displayed;
 
-        public Vector3Int Position;
+        public Vector3 Position;
 
         [SerializeField]
         AnimalPrefabMapping mapping;
 
         private Dictionary<GridPosition, Vector3> gridPositionMapping;
 
-        public void Init(Animal animal, Vector3Int position, Dictionary<GridPosition, Vector3> gridPosMapping)
+        public void Init(Animal animal, Vector3 position, Dictionary<GridPosition, Vector3> gridPosMapping)
         {
             Position = position;
             gridPositionMapping = gridPosMapping;
