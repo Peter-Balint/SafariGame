@@ -112,7 +112,7 @@ namespace Safari.View.UI.Animals
                 return;
             }
             Field field = SafariGame.Instance.Map.FieldAt(position);
-            if(!(field is Ground))
+            if(!(field is Ground || field is Road))
             {
                 return;
             }
