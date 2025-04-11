@@ -1,9 +1,9 @@
 using Safari.Model.Animals;
 using Safari.Model.Map;
-using Safari.Model.Pathfinding;
+using Safari.View.Animals;
 using UnityEngine;
 
-namespace Safari.View.Animals
+namespace Safari.View.UI.Animals
 {
     //[CreateAssetMenu(fileName = "AnimalShopItem", menuName = "Scriptable Objects/AnimalShopItem")]
     public abstract class AnimalShopItem : ScriptableObject
@@ -13,6 +13,7 @@ namespace Safari.View.Animals
         public AnimalMetadata Metadata;
 
         public AnimalCollectionController CollectionController;
+
         public abstract Animal CreateAnimal(GridPosition position);
     }
 }

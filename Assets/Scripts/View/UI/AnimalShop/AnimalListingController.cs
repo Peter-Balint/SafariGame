@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace Safari.View.Animals
+namespace Safari.View.UI.Animals
 {
     public class AnimalListingController : MonoBehaviour
     {

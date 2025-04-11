@@ -1,14 +1,17 @@
 using Safari.Model.Map;
 using Safari.Model.Animals;
 using Safari.View.World.ConstructionGrid;
+using Safari.View.Animals;
 using System;
 using UnityEngine;
+using Safari.Model;
 
-namespace Safari.View.Animals
+namespace Safari.View.UI.Animals
 {
     public class AnimalShopController : MonoBehaviour
     {
-        public AnimalCollectionController AnimalCollectionController;
+        //public AnimalCollectionController AnimalCollectionController;
+        private AnimalCollection animalCollection;
 
         public AnimalListingController ListingPrefab;
 
@@ -35,6 +38,8 @@ namespace Safari.View.Animals
 
         void Start()
         {
+            animalCollection = SafariGame.Instance.Animals;
+
             float listingWidth = ListingPrefab.GetComponent<RectTransform>().rect.width;
             SetScrollViewWidth(listingWidth);
 
@@ -105,6 +110,7 @@ namespace Safari.View.Animals
                 return;
             }
             Animal animal = activeListing.ShopItem.CreateAnimal(position);
+            animalCollection.AddAnimal(animal);
         }
 
     }
