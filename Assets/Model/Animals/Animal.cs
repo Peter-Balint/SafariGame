@@ -1,5 +1,6 @@
 
 #nullable enable
+using Safari.Model.Animals.State;
 using Safari.Model.Map;
 using Safari.Model.Movement;
 using Safari.Model.Pathfinding;
@@ -22,6 +23,8 @@ namespace Safari.Model.Animals
 
         //for setting from the editor, arbitrary numbers for now
         public Tuple<float, float> RestingInterval { get; private set; }
+
+        public int CriticalThirstLimit { get; private set; }
 
         public int ThirstLimit { get; private set; } = 100;
 
@@ -48,6 +51,7 @@ namespace Safari.Model.Animals
             Movement = new MovementBehavior();
             age = 0;
             hunger = 0;
+            CriticalThirstLimit = 500;
             ThirstLimit = 1000;
             RestingInterval = new Tuple<float, float>(0.05f * 60, 0.1f * 60);
             State = new State.Resting(this, 0);
@@ -61,6 +65,10 @@ namespace Safari.Model.Animals
             State = state;
             State.OnEnter();
             StateChanged?.Invoke(this, EventArgs.Empty);
+            if (State is Dead)
+            {
+                Died?.Invoke(this, EventArgs.Empty);
+            }
         }
 
         public void ModelUpdate(float deltaTime)
