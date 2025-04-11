@@ -8,10 +8,10 @@ namespace Safari.View.UI.Animals
     [CreateAssetMenu(fileName = "WolfShopItem", menuName = "Configurations/WolfShopItem")]
     public class WolfShopItem : AnimalShopItem
     {
-        public override Animal CreateAnimal(GridPosition gridPosition)
+        public override Animal CreateAnimal(GridPosition gridPosition, AnimalCollectionController collectionController)
         {
-            Wolf wolf = new Wolf(CollectionController.AnimalCollection.Pathfinding, Metadata, null);
-            wolf.Position = CollectionController.GridPositionMapping[gridPosition];
+            Wolf wolf = new Wolf(collectionController.AnimalCollection.Pathfinding, Metadata, null);
+            wolf.Position = collectionController.GridPositionMapping[gridPosition];
             return wolf;
         }
     }

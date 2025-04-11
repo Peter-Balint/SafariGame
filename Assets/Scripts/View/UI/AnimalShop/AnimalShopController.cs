@@ -10,7 +10,9 @@ namespace Safari.View.UI.Animals
 {
     public class AnimalShopController : MonoBehaviour
     {
-        //public AnimalCollectionController AnimalCollectionController;
+
+        [SerializeField]
+        private AnimalCollectionController animalCollectionController;
         private AnimalCollection animalCollection;
 
         public AnimalListingController ListingPrefab;
@@ -109,7 +111,12 @@ namespace Safari.View.UI.Animals
             {
                 return;
             }
-            Animal animal = activeListing.ShopItem.CreateAnimal(position);
+            Field field = SafariGame.Instance.Map.FieldAt(position);
+            if(!(field is Ground))
+            {
+                return;
+            }
+            Animal animal = activeListing.ShopItem.CreateAnimal(position,animalCollectionController);
             animalCollection.AddAnimal(animal);
         }
 

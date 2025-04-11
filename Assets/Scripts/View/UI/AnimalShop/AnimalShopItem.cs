@@ -12,8 +12,6 @@ namespace Safari.View.UI.Animals
 
         public AnimalMetadata Metadata;
 
-        public AnimalCollectionController CollectionController;
-
-        public abstract Animal CreateAnimal(GridPosition position);
+        public abstract Animal CreateAnimal(GridPosition position, AnimalCollectionController collectionController);
     }
 }

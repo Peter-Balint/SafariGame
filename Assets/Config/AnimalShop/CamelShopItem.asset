@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95757f76b9b427e409b27dbc774bf10d, type: 3}
-  m_Name: WolfShopItem
+  m_Script: {fileID: 11500000, guid: 4cf34024ff901694b86eedff67ca30b7, type: 3}
+  m_Name: CamelShopItem
   m_EditorClassIdentifier: 
-  Icon: {fileID: 21300000, guid: 4a749a9a91e940d4bb083a5d13970e89, type: 3}
+  Icon: {fileID: 21300000, guid: 27b0c9bb4a59cec41ac57c1e1a16ea6a, type: 3}
   Metadata:
     Price: 15
     Value: 10
