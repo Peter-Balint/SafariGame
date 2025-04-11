@@ -26,6 +26,7 @@ namespace Safari.Model.Animals
             animals = new List<Animal>();
             
             this.pathfinding = pathfinding;
+            TestSpawn();
         }
         public void TestSpawn()
         {
