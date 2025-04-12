@@ -37,7 +37,7 @@ namespace Safari.Model.Animals.State
         private void OnFoundWater(object sender, EventArgs e)
         {
             Debug.Log($"{owner.GetType().Name} reached the drinking place");
-            TransitionTo(new Drinking(owner, 0, hunger));
+            TransitionTo(new Drinking(owner, thirst, hunger));
         }
     }
 }
