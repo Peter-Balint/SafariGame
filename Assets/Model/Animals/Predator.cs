@@ -12,7 +12,7 @@ namespace Safari.Model.Animals
 
         public override State.State HandleFoodFinding()
         {
-            return new Wandering(this, State.Thirst, State.Hunger);
+            return new Dead(this, State.Thirst, State.Hunger);
         }
     }
 }

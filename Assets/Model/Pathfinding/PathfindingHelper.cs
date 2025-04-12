@@ -97,7 +97,7 @@ namespace Safari.Model.Pathfinding
 
         private bool IsWalkable(GridPosition pos)
         {
-            return map.FieldAt(pos) is Road || map.FieldAt(pos) is Ground;
+            return map.FieldAt(pos) is Road || map.FieldAt(pos) is Ground || map.FieldAt(pos) is Grass;
         }
     }
 }
