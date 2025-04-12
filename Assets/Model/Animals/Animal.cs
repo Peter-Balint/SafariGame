@@ -24,15 +24,15 @@ namespace Safari.Model.Animals
         //for setting from the editor, arbitrary numbers for now
         public Tuple<float, float> RestingInterval { get; private set; }
 
+        public int ThirstLimit { get; private set; }
+
+        public int CriticalThirstLimit { get; private set; }
+
         public int DrinkingRate { get; private set; }
 
         public int HungerLimit { get; private set; }
 
         public int CriticalHungerLimit { get; private set; }
-
-        public int ThirstLimit { get; private set; }
-
-        public int CriticalThirstLimit { get; private set; }
 
         protected int age;
         protected bool isAdult;
@@ -55,11 +55,11 @@ namespace Safari.Model.Animals
         {
             Movement = new MovementBehavior();
             age = 0;
-            HungerLimit = 2000;
-            CriticalHungerLimit = 5000;
             ThirstLimit = 1000;
             CriticalThirstLimit = 2000;
-            DrinkingRate = 50;
+            DrinkingRate = 250;
+            HungerLimit = 3000;
+            CriticalHungerLimit = 5000;
             RestingInterval = new Tuple<float, float>(0.05f * 60, 0.1f * 60);
             State = new State.Resting(this, 0, 0);
             State.OnEnter();

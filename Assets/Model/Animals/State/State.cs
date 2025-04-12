@@ -30,6 +30,11 @@ namespace Safari.Model.Animals.State
                 Debug.Log($"{owner.GetType().Name} died of dehydration");
                 TransitionTo(new Dead(owner, thirst, hunger));
             }
+            if (hunger > owner.CriticalHungerLimit)
+            {
+                Debug.Log($"{owner.GetType().Name} has starved to death");
+                TransitionTo(new Dead(owner, thirst, hunger));
+            }
         }
 
         protected State(Animal owner, float thirst, float hunger)
@@ -37,10 +42,7 @@ namespace Safari.Model.Animals.State
             this.owner = owner;
             this.thirst = thirst;
             this.hunger = hunger;
-            if (hunger > owner.CriticalHungerLimit)
-            {
-                Debug.Log($"{owner.GetType().Name} has starved to death");
-            }
+            
         }
 
         public virtual void OnEnter()
