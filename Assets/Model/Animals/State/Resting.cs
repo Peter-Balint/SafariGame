@@ -14,7 +14,7 @@ namespace Safari.Model.Animals.State
 
         private float restingDuration;
 
-        public Resting(Animal owner, int thirst, float hunger) : base(owner, thirst, hunger)
+        public Resting(Animal owner, float thirst, float hunger) : base(owner, thirst, hunger)
         {
         }
 

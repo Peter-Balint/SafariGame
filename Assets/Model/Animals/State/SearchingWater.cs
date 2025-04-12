@@ -11,7 +11,7 @@ namespace Safari.Model.Animals.State
 {
     public class SearchingWater : State
     {
-        public SearchingWater(Animal owner, int thirst, float hunger) : base(owner, thirst, hunger)
+        public SearchingWater(Animal owner, float thirst, float hunger) : base(owner, thirst, hunger)
         {
         }
 
@@ -37,7 +37,7 @@ namespace Safari.Model.Animals.State
         private void OnFoundWater(object sender, EventArgs e)
         {
             Debug.Log($"{owner.GetType().Name} reached the drinking place");
-            TransitionTo(new Wandering(owner, 0,hunger));
+            TransitionTo(new Drinking(owner, 0, hunger));
         }
     }
 }
