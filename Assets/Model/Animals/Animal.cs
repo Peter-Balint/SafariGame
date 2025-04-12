@@ -55,10 +55,10 @@ namespace Safari.Model.Animals
         {
             Movement = new MovementBehavior();
             age = 0;
-            HungerLimit = 3000;
+            HungerLimit = 2000;
             CriticalHungerLimit = 5000;
             ThirstLimit = 1000;
-            CriticalThirstLimit = 500;
+            CriticalThirstLimit = 2000;
             DrinkingRate = 50;
             RestingInterval = new Tuple<float, float>(0.05f * 60, 0.1f * 60);
             State = new State.Resting(this, 0, 0);

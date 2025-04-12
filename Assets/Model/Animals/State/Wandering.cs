@@ -33,6 +33,7 @@ namespace Safari.Model.Animals.State
         {
             base.Update(deltaTime);
             AllowSearchingWater();
+            AllowSearchingFood();
         }
     }
 }

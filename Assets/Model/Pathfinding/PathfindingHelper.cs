@@ -24,8 +24,29 @@ namespace Safari.Model.Pathfinding
 
         public GridMovementCommand? FindClosestDrinkingPlace(GridPosition location)
         {
+            return BFS(location, t => IsDrinkingPlace(t.Item1));
+        }
+
+        public GridMovementCommand? FindClosestFeedingSite(GridPosition location)
+        {
+            return BFS(location, t => IsFeedingSite(t.Item1));
+
+        }
+
+        public bool IsDrinkingPlace(GridPosition pos)
+        {
+            return AdjacentCells(pos).Any(t => (map.FieldAt(t.Item1) is Water));
+        }
+
+        public bool IsFeedingSite(GridPosition pos)
+        {
+            return map.FieldAt(pos) is Grass;
+        }
+
+        private GridMovementCommand? BFS(GridPosition start, Func<Tuple<GridPosition, Offset>, bool> predicate)
+        {
             Queue<GridPosition> q = new Queue<GridPosition>();
-            q.Enqueue(location);
+            q.Enqueue(start);
 
             HashSet<GridPosition> visited = new HashSet<GridPosition>();
 
@@ -39,7 +60,7 @@ namespace Safari.Model.Pathfinding
                         continue;
                     }
                     visited.Add(neighbor.Item1);
-                    if (IsDrinkingPlace(neighbor.Item1))
+                    if (predicate(neighbor))
                     {
                         return new GridMovementCommand(neighbor.Item1, neighbor.Item2);
                     }
@@ -47,11 +68,6 @@ namespace Safari.Model.Pathfinding
                 }
             }
             return null;
-        }
-
-        public bool IsDrinkingPlace(GridPosition pos)
-        {
-            return AdjacentCells(pos).Any(t => (map.FieldAt(t.Item1) is Water));
         }
 
         private List<Tuple<GridPosition, Offset>> AdjacentCells(GridPosition pos)
