@@ -24,7 +24,7 @@ namespace Safari.Model.Animals.State
             if (thirst > owner.CriticalThirstLimit)
             {
                 Debug.Log($"{owner.GetType().Name} died of dehydration");
-                TransitionTo(new Dead(owner, thirst));
+                TransitionTo(new Dead(owner, thirst, hunger));
             }
         }
 
