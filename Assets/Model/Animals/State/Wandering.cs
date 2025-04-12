@@ -10,7 +10,7 @@ namespace Safari.Model.Animals.State
 {
     public class Wandering : Animals.State.State
     {
-        public Wandering(Animal owner, int thirst) : base(owner, thirst)
+        public Wandering(Animal owner, float thirst) : base(owner, thirst)
         {
         }
 

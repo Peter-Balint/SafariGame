@@ -9,7 +9,7 @@ namespace Safari.Model.Animals.State
 {
     public abstract class State
     {
-        protected int thirst;
+        protected float thirst;
 
         protected Animal owner;
 
@@ -19,7 +19,7 @@ namespace Safari.Model.Animals.State
             thirst++;
         }
 
-        protected State(Animal owner, int thirst)
+        protected State(Animal owner, float thirst)
         {
             this.owner = owner;
             this.thirst = thirst;

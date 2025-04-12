@@ -49,7 +49,7 @@ namespace Safari.Model.Pathfinding
             return null;
         }
 
-        private bool IsDrinkingPlace(GridPosition pos)
+        public bool IsDrinkingPlace(GridPosition pos)
         {
             return AdjacentCells(pos).Any(t => (map.FieldAt(t.Item1) is Water));
         }
