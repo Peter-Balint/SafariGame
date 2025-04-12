@@ -2,7 +2,7 @@
 {
     public class Dead : State
     {
-        public Dead(Animal owner, int thirst) : base(owner, thirst)
+        public Dead(Animal owner, float thirst, float hunger) : base(owner, thirst, hunger)
         {
         }
     }
