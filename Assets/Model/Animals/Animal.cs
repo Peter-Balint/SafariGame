@@ -51,7 +51,7 @@ namespace Safari.Model.Animals
             age = 0;
             hunger = 0;
             ThirstLimit = 1000;
-            DrinkingRate = 50;
+            DrinkingRate = 250;
             RestingInterval = new Tuple<float, float>(0.05f * 60, 0.1f * 60);
             State = new State.Resting(this, 0);
             State.OnEnter();
