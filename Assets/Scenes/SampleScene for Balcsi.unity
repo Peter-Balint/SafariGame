@@ -940,6 +940,10 @@ PrefabInstance:
       value: AnimalShop
       objectReference: {fileID: 0}
     - target: {fileID: 1423284794035636495, guid: 215e7a378070738449cbbe676a60b896, type: 3}
+      propertyPath: ListingPrefab
+      value: 
+      objectReference: {fileID: 6123169695910841095, guid: 743fbf841f43d084e80c33909a6431d4, type: 3}
+    - target: {fileID: 1423284794035636495, guid: 215e7a378070738449cbbe676a60b896, type: 3}
       propertyPath: gridController
       value: 
       objectReference: {fileID: 1114615894}
