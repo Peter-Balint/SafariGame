@@ -15,10 +15,17 @@ namespace Safari.Model.Animals.State
 
         protected Animal owner;
 
+        private bool transitioned = false;
+
         public virtual void Update(float deltaTime)
         {
             thirst++;
             hunger++;
+            if (thirst > owner.CriticalThirstLimit)
+            {
+                Debug.Log($"{owner.GetType().Name} died of dehydration");
+                TransitionTo(new Dead(owner, thirst));
+            }
         }
 
         protected State(Animal owner, int thirst, float hunger)
@@ -43,7 +50,12 @@ namespace Safari.Model.Animals.State
 
         protected void TransitionTo(State newState)
         {
+            if (transitioned)
+            {
+                return;
+            }
             owner.SetState(newState);
+            transitioned = true;
         }
 
         protected void AllowSearchingWater()
