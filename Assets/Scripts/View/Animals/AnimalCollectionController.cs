@@ -64,7 +64,7 @@ namespace Safari.View.Animals
                 if(display.AnimalModel == animal)
                 {
                     displayers.Remove(display);
-                    Destroy(display);
+                    Destroy(display.gameObject);
                     return;
                 }
             }
