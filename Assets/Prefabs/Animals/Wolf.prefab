@@ -1100,6 +1100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa876a6c760f64347b511ac3735d2c4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cellSize: 30
 --- !u!65 &-693222469266901137
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1107,7 +1108,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8746254400259720641}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: fa3ddb69c78ac6c409e58b34f115a9ac, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1129,7 +1130,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8746254400259720641}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 20
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
