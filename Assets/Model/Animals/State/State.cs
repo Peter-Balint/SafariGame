@@ -9,27 +9,36 @@ namespace Safari.Model.Animals.State
 {
     public abstract class State
     {
-        protected int thirst;
+        protected float thirst;
 
         protected float hunger;
 
         protected Animal owner;
 
+        private bool transitioned = false;
+
         public virtual void Update(float deltaTime)
         {
             thirst++;
             hunger++;
+            if (thirst > owner.CriticalThirstLimit)
+            {
+                Debug.Log($"{owner.GetType().Name} died of dehydration");
+                TransitionTo(new Dead(owner, thirst, hunger));
+            }
+            if (hunger > owner.CriticalHungerLimit)
+            {
+                Debug.Log($"{owner.GetType().Name} has starved to death");
+                TransitionTo(new Dead(owner, thirst, hunger));
+            }
         }
 
-        protected State(Animal owner, int thirst, float hunger)
+        protected State(Animal owner, float thirst, float hunger)
         {
             this.owner = owner;
             this.thirst = thirst;
             this.hunger = hunger;
-            if (hunger > owner.CriticalHungerLimit)
-            {
-                Debug.Log($"{owner.GetType().Name} has starved to death");
-            }
+            
         }
 
         public virtual void OnEnter()
@@ -43,7 +52,12 @@ namespace Safari.Model.Animals.State
 
         protected void TransitionTo(State newState)
         {
+            if (transitioned)
+            {
+                return;
+            }
             owner.SetState(newState);
+            transitioned = true;
         }
 
         protected void AllowSearchingWater()
