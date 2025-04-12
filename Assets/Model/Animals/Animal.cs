@@ -55,7 +55,7 @@ namespace Safari.Model.Animals
             CriticalHungerLimit = 5000;
             ThirstLimit = 1000;
             RestingInterval = new Tuple<float, float>(0.05f * 60, 0.1f * 60);
-            State = new State.Resting(this, 0);
+            State = new State.Resting(this, 0, 0);
             State.OnEnter();
             Pathfinding = pathfinding;
         }

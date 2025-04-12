@@ -51,7 +51,7 @@ namespace Safari.Model.Animals.State
             if (thirst > owner.ThirstLimit)
             {
                 Debug.Log($"{owner.GetType().Name} is thirsty");
-                TransitionTo(new SearchingWater(owner, thirst));
+                TransitionTo(new SearchingWater(owner, thirst, hunger));
             }
         }
 

@@ -10,7 +10,7 @@ namespace Safari.Model.Animals.State
 {
     public class Wandering : Animals.State.State
     {
-        public Wandering(Animal owner, int thirst) : base(owner, thirst)
+        public Wandering(Animal owner, int thirst, float hunger) : base(owner, thirst, hunger)
         {
         }
 
@@ -26,7 +26,7 @@ namespace Safari.Model.Animals.State
         private void OnWanderingFinished(object sender, EventArgs e)
         {
             Debug.Log("Wandering finished");
-            TransitionTo(new Wandering(owner, thirst));
+            TransitionTo(new Wandering(owner, thirst, hunger));
         }
 
         public override void Update(float deltaTime)

@@ -14,7 +14,7 @@ namespace Safari.Model.Animals.State
 
         private float restingDuration;
 
-        public Resting(Animal owner, int thirst) : base(owner, thirst)
+        public Resting(Animal owner, int thirst, float hunger) : base(owner, thirst, hunger)
         {
         }
 
@@ -34,7 +34,7 @@ namespace Safari.Model.Animals.State
             restingSince += deltaTime;
             if (restingSince > restingDuration)
             {
-                TransitionTo(new Wandering(owner, thirst));
+                TransitionTo(new Wandering(owner, thirst, hunger));
             }
             AllowSearchingWater();
         }
