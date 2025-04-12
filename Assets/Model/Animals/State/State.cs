@@ -11,18 +11,25 @@ namespace Safari.Model.Animals.State
     {
         protected int thirst;
 
-        protected Animal owner;
+        protected float hunger;
 
+        protected Animal owner;
 
         public virtual void Update(float deltaTime)
         {
             thirst++;
+            hunger++;
         }
 
-        protected State(Animal owner, int thirst)
+        protected State(Animal owner, int thirst, float hunger)
         {
             this.owner = owner;
             this.thirst = thirst;
+            this.hunger = hunger;
+            if (hunger > owner.CriticalHungerLimit)
+            {
+                Debug.Log($"{owner.GetType().Name} has starved to death");
+            }
         }
 
         public virtual void OnEnter()
@@ -45,6 +52,15 @@ namespace Safari.Model.Animals.State
             {
                 Debug.Log($"{owner.GetType().Name} is thirsty");
                 TransitionTo(new SearchingWater(owner, thirst));
+            }
+        }
+
+        protected void AllowSearchingFood()
+        {
+            if (hunger > owner.HungerLimit)
+            {
+                Debug.Log($"{owner.GetType().Name} is hungry");
+                TransitionTo(owner.HandleFoodFinding());
             }
         }
     }
