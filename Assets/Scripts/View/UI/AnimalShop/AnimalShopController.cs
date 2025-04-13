@@ -14,8 +14,6 @@ namespace Safari.View.UI.Animals
         [SerializeField]
         private AnimalCollectionController animalCollectionController;
 
-        private AnimalCreationManager creationManager;
-
         public AnimalListingController ListingPrefab;
 
         public RectTransform ScrollViewContent;
@@ -58,8 +56,6 @@ namespace Safari.View.UI.Animals
 
                 listing.Clicked.AddListener(() => OnShopListingClick(listing));
             }
-
-            creationManager = new AnimalCreationManager(animalCollectionController.GridPositionMapping);
         }
 
 
@@ -90,7 +86,7 @@ namespace Safari.View.UI.Animals
 
         private void StartCreation()
         {
-            if(inCreationMode)
+            if (inCreationMode)
             {
                 return;
             }
@@ -112,7 +108,8 @@ namespace Safari.View.UI.Animals
             {
                 return;
             }
-            creationManager.TryCreatingAnimal(position, activeListing.ShopItem);
+            var worldPos = animalCollectionController.GridPositionMapping[position];
+            SafariGame.Instance.AnimalCreationManager.TryCreatingAnimal(position, worldPos, activeListing.ShopItem);
         }
 
     }
