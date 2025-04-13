@@ -32,11 +32,12 @@ namespace Safari.Model.Animals.State
         {
             base.Update(deltaTime);
             restingSince += deltaTime;
+            AllowSearchingWater();
+            AllowSearchingFood();
             if (restingSince > restingDuration)
             {
                 TransitionTo(new Wandering(owner, thirst, hunger));
             }
-            AllowSearchingWater();
         }
     }
 }
