@@ -36,7 +36,7 @@ namespace Safari.Model.Animals.State
         private void OnFoundFeedingSite(object sender, EventArgs e)
         {
             Debug.Log($"{owner.GetType().Name} reached the feeding site");
-            
+            TransitionTo(new Eating(owner, thirst, hunger));
         }
     }
 }
