@@ -8,6 +8,8 @@ namespace Safari.Model.Animals
     {
         public Herbivore(PathfindingHelper pathfinding) : base(pathfinding) { }
 
+        public Herbivore(PathfindingHelper pathfinding, AnimalMetadata metadata) : base(pathfinding, metadata) { }
+
         public override State.State HandleFoodFinding()
         {
             return new SearchingFeedingSite(this, State.Thirst, State.Hunger);

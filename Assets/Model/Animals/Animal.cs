@@ -19,9 +19,8 @@ namespace Safari.Model.Animals
 
         public State.State State { get; private set; }
 
-        public Vector3Int Position { get; set; }
+        public Vector3 Position { get; set; }
 
-        //for setting from the editor, arbitrary numbers for now
         public Tuple<float, float> RestingInterval { get; private set; }
 
         public int ThirstLimit { get; private set; }
@@ -36,13 +35,14 @@ namespace Safari.Model.Animals
 
         public int EatingRate { get; private set; }
 
+        protected AnimalMetadata metadata;
+
         protected int age;
         protected bool isAdult;
         protected Gender gender;
 
         //for setting from the editor, arbitrary numbers for now
         public const int lifeSpan = 50000;
-
 
         //animals should move in a group: an easy solution would be to designate a leader
         //the animals with that leader have a bias to move towards them while in wandering state
@@ -67,6 +67,24 @@ namespace Safari.Model.Animals
             State = new State.Resting(this, 0, 0);
             State.OnEnter();
             Pathfinding = pathfinding;
+            metadata = new AnimalMetadata();
+        }
+
+        protected Animal(PathfindingHelper pathfinding, AnimalMetadata metadata)
+        {
+            Movement = new MovementBehavior();
+            age = 0;
+            ThirstLimit = 1000;
+            CriticalThirstLimit = 2000;
+            DrinkingRate = 250;
+            HungerLimit = 3000;
+            CriticalHungerLimit = 5000;
+            EatingRate = 400;
+            RestingInterval = new Tuple<float, float>(0.05f * 60, 0.1f * 60);
+            State = new State.Resting(this, 0, 0);
+            State.OnEnter();
+            Pathfinding = pathfinding;
+            this.metadata = metadata;
         }
 
         internal void SetState(State.State state)
@@ -101,26 +119,7 @@ namespace Safari.Model.Animals
                 state = AnimalState.Hungry;
                 StateChanged?.Invoke(this, EventArgs.Empty);
             }
-            if (thirst >= thirstLimit && (state == AnimalState.Resting || state == AnimalState.Wandering))
-            {
-                state = AnimalState.Thirsty;
-                StateChanged?.Invoke(this, EventArgs.Empty); 
-                                                             
-                Debug.Log($"{GetType().Name} is thirsty");
-                MovementCommand? command = pathfinding.FindClosestDrinkingPlace(Movement.Location);
-                
-                if (command is MovementCommand c)
-                {
-                    Debug.Log($"{GetType().Name} found a drinking place at {c.TargetCell.X} {c.TargetCell.Z}");
-
-                    Movement.ExecuteMovement(c);
-                }
-                else
-                {
-                    Debug.Log($"{GetType().Name} couldn't find a drinking place");
-
-                }
-            }*/
+          */
         }
         public void TargetReached()
         {
