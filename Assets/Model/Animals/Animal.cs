@@ -33,6 +33,8 @@ namespace Safari.Model.Animals
 
         public int CriticalHungerLimit { get; private set; }
 
+        public int EatingRate { get; private set; }
+
         protected AnimalMetadata metadata;
 
         protected int age;
@@ -60,6 +62,7 @@ namespace Safari.Model.Animals
             DrinkingRate = 250;
             HungerLimit = 3000;
             CriticalHungerLimit = 5000;
+            EatingRate = 400;
             RestingInterval = new Tuple<float, float>(0.05f * 60, 0.1f * 60);
             State = new State.Resting(this, 0, 0);
             State.OnEnter();
@@ -76,6 +79,7 @@ namespace Safari.Model.Animals
             DrinkingRate = 250;
             HungerLimit = 3000;
             CriticalHungerLimit = 5000;
+            EatingRate = 400;
             RestingInterval = new Tuple<float, float>(0.05f * 60, 0.1f * 60);
             State = new State.Resting(this, 0, 0);
             State.OnEnter();

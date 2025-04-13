@@ -564,6 +564,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 383ba6ec8df7e7043b8be75c8bc8e5a2, type: 2}
   - {fileID: 11400000, guid: ee97a75bcd38f594ea3356d317b50cba, type: 2}
   - {fileID: 11400000, guid: 93bed17e7f696cf42b390d95c4111b6d, type: 2}
+  - {fileID: 11400000, guid: 311c163eba1ebe5439c04a29facea824, type: 2}
   ShopItemPadding: 50
   gridController: {fileID: 0}
 --- !u!1 &5589268231543298379
