@@ -14,5 +14,9 @@ namespace Safari.Model.Animals
         {
             Leader = leader;
         }
+        public Wolf(PathfindingHelper pathfinding, AnimalMetadata metadata, Wolf? leader) : base(pathfinding, metadata)
+        {
+            Leader = leader;
+        }
     }
 }

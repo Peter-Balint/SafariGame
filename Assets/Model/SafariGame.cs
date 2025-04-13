@@ -38,6 +38,8 @@ namespace Safari.Model
 
         public ConstructionManager Construction { get;  }
 
+        public AnimalCreationManager AnimalCreationManager { get; }
+
         public AnimalCollection Animals { get;  }
 
         private PathfindingHelper pathfinding;
@@ -49,6 +51,7 @@ namespace Safari.Model
             Construction = new ConstructionManager(map);
             pathfinding = new PathfindingHelper(map);
             Animals = new AnimalCollection(pathfinding);
+            AnimalCreationManager = new AnimalCreationManager(Animals, pathfinding, Map);
         }
 
         public static void StartGame(GameDifficulty gameDifficulty)
