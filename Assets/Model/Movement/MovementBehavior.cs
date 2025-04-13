@@ -29,6 +29,12 @@ namespace Safari.Model.Movement
             Location = location;
         }
 
+        public void AbortMovement()
+        {
+            CurrentCommand?.Cancel();
+            CurrentCommand = null;
+        }
+
         private void OnCommandCancelled(object sender, EventArgs e)
         {
             if (sender == CurrentCommand)

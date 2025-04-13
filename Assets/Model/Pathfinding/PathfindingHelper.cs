@@ -9,7 +9,7 @@ using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Safari.Model.Movement.MovementCommand;
+using static Safari.Model.Movement.GridMovementCommand;
 
 namespace Safari.Model.Pathfinding
 {
@@ -22,18 +22,26 @@ namespace Safari.Model.Pathfinding
             this.map = map;
         }
 
-        public MovementCommand? FindClosestDrinkingPlace(GridPosition location)
+        public GridMovementCommand? FindClosestDrinkingPlace(GridPosition location)
         {
             Queue<GridPosition> q = new Queue<GridPosition>();
             q.Enqueue(location);
+
+            HashSet<GridPosition> visited = new HashSet<GridPosition>();
+
             while (q.Count > 0)
             {
                 GridPosition currentVertex = q.Dequeue();
                 foreach (var neighbor in WalkableAdjacentCells(currentVertex))
                 {
+                    if (visited.Contains(neighbor.Item1))
+                    {
+                        continue;
+                    }
+                    visited.Add(neighbor.Item1);
                     if (IsDrinkingPlace(neighbor.Item1))
                     {
-                        return new MovementCommand(neighbor.Item1, neighbor.Item2);
+                        return new GridMovementCommand(neighbor.Item1, neighbor.Item2);
                     }
                     q.Enqueue(neighbor.Item1);
                 }
@@ -41,7 +49,7 @@ namespace Safari.Model.Pathfinding
             return null;
         }
 
-        private bool IsDrinkingPlace(GridPosition pos)
+        public bool IsDrinkingPlace(GridPosition pos)
         {
             return AdjacentCells(pos).Any(t => (map.FieldAt(t.Item1) is Water));
         }
