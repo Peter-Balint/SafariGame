@@ -13,7 +13,8 @@ namespace Safari.View.UI.Animals
 
         [SerializeField]
         private AnimalCollectionController animalCollectionController;
-        private AnimalCollection animalCollection;
+
+        private AnimalCreationManager creationManager;
 
         public AnimalListingController ListingPrefab;
 
@@ -40,8 +41,6 @@ namespace Safari.View.UI.Animals
 
         void Start()
         {
-            animalCollection = SafariGame.Instance.Animals;
-
             float listingWidth = ListingPrefab.GetComponent<RectTransform>().rect.width;
             SetScrollViewWidth(listingWidth);
 
@@ -59,6 +58,8 @@ namespace Safari.View.UI.Animals
 
                 listing.Clicked.AddListener(() => OnShopListingClick(listing));
             }
+
+            creationManager = new AnimalCreationManager(animalCollectionController.GridPositionMapping);
         }
 
 
@@ -111,13 +112,7 @@ namespace Safari.View.UI.Animals
             {
                 return;
             }
-            Field field = SafariGame.Instance.Map.FieldAt(position);
-            if(!(field is Ground || field is Road))
-            {
-                return;
-            }
-            Animal animal = activeListing.ShopItem.CreateAnimal(position,animalCollectionController);
-            animalCollection.AddAnimal(animal);
+            creationManager.TryCreatingAnimal(position, activeListing.ShopItem);
         }
 
     }

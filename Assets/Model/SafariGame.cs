@@ -40,7 +40,7 @@ namespace Safari.Model
 
         public AnimalCollection Animals { get;  }
 
-        private PathfindingHelper pathfinding;
+        public PathfindingHelper pathfinding { get; }
 
         public SafariGame(Map.Map map, GameDifficulty gameDifficulty)
         {
