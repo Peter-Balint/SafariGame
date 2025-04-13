@@ -25,3 +25,5 @@ MonoBehaviour:
     Prefab: {fileID: 9171194672965809048, guid: ecbba4bf3119475499cd96abdada9947, type: 3}
   - FieldTypeName: Bush
     Prefab: {fileID: 6416436759581583982, guid: 8bfd4158c127e4546848430713233093, type: 3}
+  - FieldTypeName: Grass
+    Prefab: {fileID: 4382731622514113100, guid: 4ef8babf96717a84a9c89389d0823574, type: 3}

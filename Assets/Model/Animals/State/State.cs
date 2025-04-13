@@ -9,6 +9,10 @@ namespace Safari.Model.Animals.State
 {
     public abstract class State
     {
+        public float Thirst => thirst;
+
+        public float Hunger => hunger;
+
         protected float thirst;
 
         protected float hunger;
