@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Safari.View
+namespace Safari.View.UI
 {
     public class IngameMenuController : MonoBehaviour
     {

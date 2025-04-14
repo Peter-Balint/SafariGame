@@ -517,6 +517,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 305cbe138552de349876d05e5bffe345, type: 3}
+--- !u!114 &963743204 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2976032378370281558, guid: 17e57ef0773bbd64d9847100c17c89aa, type: 3}
+  m_PrefabInstance: {fileID: 4401395391024741485}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &995210794 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3177232016284936980, guid: 17e57ef0773bbd64d9847100c17c89aa, type: 3}
@@ -787,6 +798,28 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5226974522980769084, guid: 6d8624d5748dab942a8798f6171b64ea, type: 3}
   m_PrefabInstance: {fileID: 3396053661166043637}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1725789599 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5926635128607656277, guid: 17e57ef0773bbd64d9847100c17c89aa, type: 3}
+  m_PrefabInstance: {fileID: 4401395391024741485}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1925408125 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6037213057051075, guid: 17e57ef0773bbd64d9847100c17c89aa, type: 3}
+  m_PrefabInstance: {fileID: 4401395391024741485}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2091315626
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1294,6 +1327,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5970661894801293552, guid: 17e57ef0773bbd64d9847100c17c89aa, type: 3}
+      propertyPath: MoneyCounter
+      value: 
+      objectReference: {fileID: 1925408125}
+    - target: {fileID: 5970661894801293552, guid: 17e57ef0773bbd64d9847100c17c89aa, type: 3}
+      propertyPath: AnimalCounter
+      value: 
+      objectReference: {fileID: 1725789599}
+    - target: {fileID: 5970661894801293552, guid: 17e57ef0773bbd64d9847100c17c89aa, type: 3}
+      propertyPath: HappinessCounter
+      value: 
+      objectReference: {fileID: 963743204}
+    - target: {fileID: 5970661894801293552, guid: 17e57ef0773bbd64d9847100c17c89aa, type: 3}
+      propertyPath: HappinessCountert
+      value: 
+      objectReference: {fileID: 963743204}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
