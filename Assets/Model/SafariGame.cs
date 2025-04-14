@@ -42,11 +42,14 @@ namespace Safari.Model
 
         private PathfindingHelper pathfinding;
 
+        public MoneyManager MoneyManager { get; }
+
         public SafariGame(Map.Map map, GameDifficulty gameDifficulty)
         {
             Map = map;
             Difficulty = gameDifficulty;
-            Construction = new ConstructionManager(map);
+            MoneyManager = new MoneyManager();
+            Construction = new ConstructionManager(map, MoneyManager);
             pathfinding = new PathfindingHelper(map);
             Animals = new AnimalCollection(pathfinding);
         }

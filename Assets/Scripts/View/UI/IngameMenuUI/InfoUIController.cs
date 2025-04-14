@@ -12,6 +12,8 @@ namespace Safari.View
     public class InfoUIController : MonoBehaviour
     {
         private AnimalCollection animals;
+        private MoneyManager moneyManager;
+        
 
         public List<TMP_Text> counterTextList;
 
@@ -19,15 +21,18 @@ namespace Safari.View
         void Start()
         {
             animals = SafariGame.Instance.Animals;
+
             animals.Added += (sender,animal) => OnAnimalCountChanged(1);
             animals.Removed += (sender, animal) => OnAnimalCountChanged(-1);
             animals.TestSpawn();
+
+            moneyManager = SafariGame.Instance.MoneyManager;
         }
 
         void Update()
         {
-        
-        }
+            counterTextList[0].text  = moneyManager.ReadBalance().ToString();
+		}
 
         private void OnAnimalCountChanged(int change) 
         {

@@ -10,6 +10,7 @@ namespace Safari.Model.Map
     {
         public Bush(BuildingMetadata metadata) : base(metadata)
         {
+            
         }
     }
 }
