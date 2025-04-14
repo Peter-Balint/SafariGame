@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using Safari.Model;
 
 
-namespace Safari.View
+namespace Safari.View.UI
 {
     public class InfoUIController : MonoBehaviour
     {
