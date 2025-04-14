@@ -1,30 +1,38 @@
+using System;
+using System.Collections.Generic;
 using TMPro;
 using Safari.Model.Animals;
 using UnityEngine;
+using UnityEngine.UI;
 using Safari.Model;
 
 
-namespace Safari.View.UI
+namespace Safari.View
 {
     public class InfoUIController : MonoBehaviour
     {
-        private AnimalCollection animalCollection;
+        private AnimalCollection animals;
 
-        public TMP_Text AnimalCounter;
-        public TMP_Text MoneyCounter;
-        public TMP_Text HappinessCounter;
+        public List<TMP_Text> counterTextList;
 
         
         void Start()
         {
-            animalCollection = SafariGame.Instance.Animals;
+            animals = SafariGame.Instance.Animals;
+            animals.Added += (sender,animal) => OnAnimalCountChanged(1);
+            animals.Removed += (sender, animal) => OnAnimalCountChanged(-1);
         }
 
         void Update()
         {
-            AnimalCounter.text = animalCollection.Animals.Count.ToString();
-
+        
         }
 
+        private void OnAnimalCountChanged(int change) 
+        {
+            int textI = int.Parse(counterTextList[1].text);
+            textI += change;
+            counterTextList[1].text = textI.ToString();
+        }
     }
 }
