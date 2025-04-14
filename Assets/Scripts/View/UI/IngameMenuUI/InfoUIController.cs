@@ -7,32 +7,25 @@ using UnityEngine.UI;
 using Safari.Model;
 
 
-namespace Safari.View
+namespace Safari.View.UI
 {
     public class InfoUIController : MonoBehaviour
     {
-        private AnimalCollection animals;
+        private AnimalCollection animalCollection;
 
-        public List<TMP_Text> counterTextList;
-
+        public TMP_Text AnimalCounter;
+        public TMP_Text MoneyCounter;
+        public TMP_Text HappinessCounter;
         
         void Start()
         {
-            animals = SafariGame.Instance.Animals;
-            animals.Added += (sender,animal) => OnAnimalCountChanged(1);
-            animals.Removed += (sender, animal) => OnAnimalCountChanged(-1);
+            animalCollection = SafariGame.Instance.Animals;
         }
 
         void Update()
         {
-        
+            AnimalCounter.text = animalCollection.Animals.Count.ToString();
         }
 
-        private void OnAnimalCountChanged(int change) 
-        {
-            int textI = int.Parse(counterTextList[1].text);
-            textI += change;
-            counterTextList[1].text = textI.ToString();
-        }
     }
 }
