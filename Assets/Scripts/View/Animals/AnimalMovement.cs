@@ -19,7 +19,7 @@ namespace Safari.View.Animals
     public class AnimalMovement : MonoBehaviour
     {
         public float cellSize = 30f;
-        public float defaultSpeed = 15;
+        public const float defaultSpeed = 10;
 
         private MovementBehavior behavior;
         private NavMeshAgent agent;
@@ -110,7 +110,7 @@ namespace Safari.View.Animals
                 agent.ResetPath();
                 currentlyExecuting.ReportFinished();
             }
-            agent.speed = defaultSpeed * gameSpeedManager.CurrentSpeedToFloat();
+            agent.speed = defaultSpeed * gameSpeedManager.CurrentSpeedToNum();
         }
     }
 }

@@ -11,21 +11,21 @@ namespace Safari.Model.GameSpeed
             CurrentSpeed = GameSpeed.Slow;
         }
 
-        public float CurrentSpeedToFloat()
+        public int CurrentSpeedToNum() //the actual meaning behind the enum
         {
             switch (CurrentSpeed)
             {
                 case GameSpeed.Slow:
                     {
-                        return 0.5f;
+                        return 1;
                     }
                 case GameSpeed.Medium:
                     {
-                        return 1;
+                        return 3;
                     }
                 case GameSpeed.Fast:
                     {
-                        return 5;
+                        return 10;
                     }
             }
             throw new System.Exception("Invalid game speed");
