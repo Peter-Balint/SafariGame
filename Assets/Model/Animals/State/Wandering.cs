@@ -29,9 +29,9 @@ namespace Safari.Model.Animals.State
             TransitionTo(new Wandering(owner, thirst, hunger));
         }
 
-        public override void Update(float deltaTime)
+        public override void Update(float deltaTime, int speedFactor)
         {
-            base.Update(deltaTime);
+            base.Update(deltaTime, speedFactor);
             AllowSearchingWater();
             AllowSearchingFood();
         }
