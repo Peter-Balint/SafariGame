@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using Safari.Model.Animals.Movement;
+using Safari.Model.GameSpeed;
 using Safari.Model.Map;
 using Safari.Model.Movement;
 using Safari.View.Utils;
@@ -18,17 +19,21 @@ namespace Safari.View.Animals
     public class AnimalMovement : MonoBehaviour
     {
         public float cellSize = 30f;
+        public const float defaultSpeed = 10;
 
         private MovementBehavior behavior;
         private NavMeshAgent agent;
         private Dictionary<GridPosition, Vector3> gridPositionMapping;
 
+        private GameSpeedManager gameSpeedManager;
+
         private MovementCommand? currentlyExecuting;
 
-        public void Init(MovementBehavior behavior, NavMeshAgent agent, Dictionary<GridPosition, Vector3> mapping)
+        public void Init(MovementBehavior behavior, NavMeshAgent agent, Dictionary<GridPosition, Vector3> mapping, GameSpeedManager gameSpeedManager)
         {
             this.behavior = behavior;
             this.agent = agent;
+            this.gameSpeedManager = gameSpeedManager;
 
             behavior.CommandStarted += OnCommandStarted;
             gridPositionMapping = mapping;
@@ -105,6 +110,7 @@ namespace Safari.View.Animals
                 agent.ResetPath();
                 currentlyExecuting.ReportFinished();
             }
+            agent.speed = defaultSpeed * gameSpeedManager.CurrentSpeedToNum();
         }
     }
 }

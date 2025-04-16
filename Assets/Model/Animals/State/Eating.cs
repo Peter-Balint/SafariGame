@@ -13,9 +13,9 @@ namespace Safari.Model.Animals.State
         {
         }
 
-        public override void Update(float deltaTime)
+        public override void Update(float deltaTime, int speedFactor)
         {
-            base.Update(deltaTime);
+            base.Update(deltaTime, speedFactor);
 
             if (!owner.Pathfinding.IsFeedingSite(owner.Movement.Location))
             {
@@ -31,7 +31,7 @@ namespace Safari.Model.Animals.State
                 return;
             }
 
-            hunger -= deltaTime * owner.EatingRate;
+            hunger -= deltaTime * owner.EatingRate * speedFactor;
 
             if (hunger <= 0)
             {

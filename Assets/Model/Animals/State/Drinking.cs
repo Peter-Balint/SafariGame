@@ -11,9 +11,9 @@ namespace Safari.Model.Animals.State
         {
         }
 
-        public override void Update(float deltaTime)
+        public override void Update(float deltaTime, int speedFactor)
         {
-            base.Update(deltaTime);
+            base.Update(deltaTime, speedFactor);
 
             if (!owner.Pathfinding.IsDrinkingPlace(owner.Movement.Location))
             {
@@ -29,7 +29,7 @@ namespace Safari.Model.Animals.State
                 return;
             }
 
-            thirst -= deltaTime * owner.DrinkingRate;
+            thirst -= deltaTime * owner.DrinkingRate * speedFactor;
 
             if (thirst <= 0)
             {

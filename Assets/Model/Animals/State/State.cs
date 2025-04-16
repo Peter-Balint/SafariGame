@@ -21,10 +21,10 @@ namespace Safari.Model.Animals.State
 
         private bool transitioned = false;
 
-        public virtual void Update(float deltaTime)
+        public virtual void Update(float deltaTime, int speedFactor)
         {
-            thirst++;
-            hunger++;
+            thirst += speedFactor;
+            hunger += speedFactor;
             if (thirst > owner.CriticalThirstLimit)
             {
                 Debug.Log($"{owner.GetType().Name} died of dehydration");
