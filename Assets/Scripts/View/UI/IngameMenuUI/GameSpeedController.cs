@@ -15,8 +15,6 @@ namespace Safari.View.UI
 
         public TMP_Text Clock;
 
-        private DateTime time;
-
         private GameSpeedManager manager;
 
         void Start()
@@ -26,15 +24,15 @@ namespace Safari.View.UI
             MediumButton.onClick.AddListener(() => manager.CurrentSpeed = GameSpeed.Medium);
             FastButton.onClick.AddListener(() => manager.CurrentSpeed = GameSpeed.Fast);
 
-            time = DateTime.Now;
-            Clock.text = time.ToString("MM/dd/yyyy HH:mm");
+            Clock.text = manager.Time.ToString("MM/dd/yyyy HH:mm");
+
+            manager.DayPassed += ((sender, args) => Debug.Log("a day has passed"));
         }
 
         void Update()
         {
-            float delta = Time.deltaTime;
-            time = time.AddMinutes(manager.CurrentSpeedToNum() * delta * 5);
-            Clock.text = time.ToString("MM/dd/yyyy HH:mm");
+            manager.AddTime(Time.deltaTime);
+            Clock.text = manager.Time.ToString("MM/dd/yyyy HH:mm");
         }
 
         
