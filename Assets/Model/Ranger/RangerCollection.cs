@@ -1,0 +1,43 @@
+using Safari.Model.Animals;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.tvOS;
+
+namespace Safari.Model.Rangers
+{
+    public class RangerCollection
+    {
+        private List<Ranger> rangers;
+
+        public event EventHandler<Ranger>? Added;
+        public event EventHandler<Ranger>? Removed;
+
+        public RangerCollection()
+        {
+            rangers = new List<Ranger>();
+        }
+
+        public void Add(Ranger ranger)
+        {
+            rangers.Add(ranger);
+            ranger.Died += OnRangerDied;
+            Added?.Invoke(this, ranger);
+        }
+
+        public void RemoveRanger(Ranger ranger)
+        {
+            rangers.Remove(ranger);
+            Removed?.Invoke(this, ranger);
+        }
+
+        private void OnRangerDied(object sender, EventArgs e)
+        {
+            if (sender is Ranger ranger)
+            {
+                RemoveRanger(ranger);
+            }
+        }
+
+    }
+}

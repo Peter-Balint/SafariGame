@@ -21,8 +21,6 @@ namespace Safari.View.Animals
         [SerializeField]
         AnimalPrefabMapping mapping;
 
-        private float a = 0;
-
         private Dictionary<GridPosition, Vector3> gridPositionMapping;
 
         public void Init(Animal animal, Vector3 position, Dictionary<GridPosition, Vector3> gridPosMapping)
