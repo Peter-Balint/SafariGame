@@ -25,7 +25,7 @@ namespace Safari.Model.Rangers
             Added?.Invoke(this, ranger);
         }
 
-        public void RemoveRanger(Ranger ranger)
+        public void Remove(Ranger ranger)
         {
             rangers.Remove(ranger);
             Removed?.Invoke(this, ranger);
@@ -35,7 +35,7 @@ namespace Safari.Model.Rangers
         {
             if (sender is Ranger ranger)
             {
-                RemoveRanger(ranger);
+                Remove(ranger);
             }
         }
 

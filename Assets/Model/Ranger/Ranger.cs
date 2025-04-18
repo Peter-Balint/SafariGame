@@ -5,8 +5,13 @@ namespace Safari.Model.Rangers
 {
     public class Ranger
     {
+        public Vector3 Position {  get; set; }
+
         public event EventHandler? Died;
 
-        public Ranger() { }
+        public Ranger() 
+        { 
+            Position = Vector3.zero;
+        }
     }
 }

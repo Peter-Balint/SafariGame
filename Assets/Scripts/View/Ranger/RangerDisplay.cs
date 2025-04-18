@@ -10,7 +10,7 @@ namespace Safari.View.Rangers
 {
     public class RangerDisplay : MonoBehaviour
     {
-        private Ranger? ranger;
+        public Ranger? Ranger;
 
         public GameObject RangerPrefab;
         private GameObject? displayed;
@@ -26,9 +26,11 @@ namespace Safari.View.Rangers
 
         private void DisplayRanger(Ranger ranger)
         {
-            this.ranger = ranger;
-            if(RangerPrefab == null) { return; }
+            this.Ranger = ranger;
+
+            if (RangerPrefab == null) { return; }
             displayed = Instantiate(RangerPrefab, transform, false);
+            if(displayed == null) { UnityEngine.Debug.Log("Displayed is null"); }
         }
 
         void Start()
