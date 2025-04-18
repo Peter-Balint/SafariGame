@@ -21,8 +21,8 @@ namespace Safari.View.Animals
         public float cellSize = 30f;
         public const float defaultSpeed = 10;
 
-        private MovementBehavior behavior;
-        private NavMeshAgent agent;
+        protected MovementBehavior behavior;
+        protected NavMeshAgent agent;
         private Dictionary<GridPosition, Vector3> gridPositionMapping;
 
         private GameSpeedManager gameSpeedManager;
@@ -43,17 +43,9 @@ namespace Safari.View.Animals
             }
         }
 
-        private void OnCommandStarted(object sender, MovementCommand e)
+        protected virtual void HandleMovement(MovementCommand command)
         {
-            MoveAgent(e);
-        }
-
-        private void MoveAgent(MovementCommand movementCommand)
-        {
-            movementCommand.Cancelled += OnMovementCancelled;
-            currentlyExecuting = movementCommand;
-            agent.ResetPath();
-            switch (movementCommand)
+            switch (command)
             {
                 case GridMovementCommand gm:
                     var target = gridPositionMapping[gm.TargetCell];
@@ -75,6 +67,19 @@ namespace Safari.View.Animals
                     break;
 
             }
+        }
+
+        private void OnCommandStarted(object sender, MovementCommand e)
+        {
+            MoveAgent(e);
+        }
+
+        private void MoveAgent(MovementCommand movementCommand)
+        {
+            movementCommand.Cancelled += OnMovementCancelled;
+            currentlyExecuting = movementCommand;
+            agent.ResetPath();
+            HandleMovement(movementCommand);
         }
         
         private void OnMovementCancelled(object sender, EventArgs e)
