@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-using static Codice.Client.Common.WebApi.WebApiEndpoints;
+using UnityEngine.AI;
 
 namespace Safari.View.Animals
 {
@@ -16,25 +16,60 @@ namespace Safari.View.Animals
 
         protected override void HandleMovement(MovementCommand command)
         {
-            if (command is FollowPreyMovementCommand)
+            if (command is FollowPreyMovementCommand fc)
             {
                 target = FindClosestPrey();
+                if (target == null)
+                {
+                    fc.ReportPreyNotFound();
+                }
                 return;
             }
             base.HandleMovement(command);
         }
 
-        private void Update()
+        protected override void OnCurrentMovementCancelled(object sender, EventArgs e)
         {
-            if (target != null)
+            if (sender is FollowPreyMovementCommand)
             {
-                agent.SetDestination(target.position);
+                target = null;
             }
+            base.OnCurrentMovementCancelled(sender, e);
+
         }
 
-        private Transform FindClosestPrey()
+        protected override void Update()
         {
+            if (target != null && currentlyExecuting is FollowPreyMovementCommand command)
+            {
+                agent.SetDestination(target.position);
+                if (command.FinishDistance != null && !agent.pathPending && agent.remainingDistance < command.FinishDistance)
+                {
+                    command.ReportFinished();
+                }
+            }
+            base.Update();
+        }
 
+        private Transform? FindClosestPrey()
+        {
+            GameObject[] targets = GameObject.FindGameObjectsWithTag("Prey");
+            Transform closest = null;
+            float minDist = Mathf.Infinity;
+            Vector3 currentPos = transform.position;
+
+            foreach (GameObject target in targets)
+            {
+                float dist = Vector3.Distance(currentPos, target.transform.position);
+
+                if (dist < minDist)
+                {
+                    minDist = dist;
+                    closest = target.transform;
+                }
+            }
+
+            return closest;
         }
     }
 }

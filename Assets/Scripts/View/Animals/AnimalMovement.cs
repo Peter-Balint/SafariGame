@@ -23,11 +23,11 @@ namespace Safari.View.Animals
 
         protected MovementBehavior behavior;
         protected NavMeshAgent agent;
+        protected MovementCommand? currentlyExecuting;
+
         private Dictionary<GridPosition, Vector3> gridPositionMapping;
 
         private GameSpeedManager gameSpeedManager;
-
-        private MovementCommand? currentlyExecuting;
 
         public void Init(MovementBehavior behavior, NavMeshAgent agent, Dictionary<GridPosition, Vector3> mapping, GameSpeedManager gameSpeedManager)
         {
@@ -57,7 +57,6 @@ namespace Safari.View.Animals
 
                     if (NavMeshUtils.RandomPointOnNavMesh(out Vector3 point))
                     {
-                        Debug.Log($"Wandering to {point}");
                         agent.SetDestination(point);
                     }
                     else
@@ -66,6 +65,19 @@ namespace Safari.View.Animals
                     }
                     break;
 
+            }
+        }
+
+        protected virtual void OnCurrentMovementCancelled(object sender, EventArgs e)
+        {
+            agent.ResetPath();
+        }
+
+        private void OnMovementCancelled(object sender, EventArgs e)
+        {
+            if (sender == currentlyExecuting)
+            {
+                OnCurrentMovementCancelled(sender, e);
             }
         }
 
@@ -82,13 +94,6 @@ namespace Safari.View.Animals
             HandleMovement(movementCommand);
         }
         
-        private void OnMovementCancelled(object sender, EventArgs e)
-        {
-            if (sender == currentlyExecuting)
-            {
-                agent.ResetPath();
-            }
-        }
 
         private void OnDestroy()
         {
@@ -108,7 +113,7 @@ namespace Safari.View.Animals
             }
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             if (currentlyExecuting != null && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance && (!agent.hasPath || agent.velocity.sqrMagnitude == 0f))
             {
