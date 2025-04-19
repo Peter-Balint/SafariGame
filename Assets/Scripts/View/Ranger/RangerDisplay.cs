@@ -2,9 +2,7 @@ using UnityEngine;
 using Safari.Model.Rangers;
 using Safari.Model.Map;
 using System.Collections.Generic;
-using Safari.Model.Animals;
 using System.Diagnostics;
-using UnityEngine.UIElements;
 
 namespace Safari.View.Rangers
 {
@@ -30,7 +28,6 @@ namespace Safari.View.Rangers
 
             if (RangerPrefab == null) { return; }
             displayed = Instantiate(RangerPrefab, transform, false);
-            if(displayed == null) { UnityEngine.Debug.Log("Displayed is null"); }
         }
 
         void Start()

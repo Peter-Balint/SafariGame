@@ -10,7 +10,7 @@ namespace Safari.Model.Rangers
         public event EventHandler? Died;
 
         public Ranger() 
-        { 
+        {
             Position = Vector3.zero;
         }
     }

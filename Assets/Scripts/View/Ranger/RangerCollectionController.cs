@@ -4,9 +4,7 @@ using Safari.Model.Rangers;
 using Safari.Model.Map;
 using Safari.Model;
 using Safari.View.World.Map;
-using System;
-using Safari.Model.Animals;
-using Safari.View.Animals;
+
 
 namespace Safari.View.Rangers
 {
@@ -28,7 +26,7 @@ namespace Safari.View.Rangers
             displayers = new List<RangerDisplay>();
 
             rangerCollection.Added += OnRangerAdded;
-            rangerCollection.Added += OnRangerRemoved;
+            rangerCollection.Removed += OnRangerRemoved;
         }
 
         public void InjectGridPositionMappingData(MapDisplay.MapInitializedEventArgs args)
@@ -40,7 +38,7 @@ namespace Safari.View.Rangers
             }
         }
 
-        public void OnRangerBuy() //might do a separate manager for buying
+        public void OnRangerBuy() 
         {
             rangerCollection.Add(new Ranger());
         }
