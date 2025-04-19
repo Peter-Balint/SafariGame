@@ -17,12 +17,11 @@ namespace Safari.View.Animals
 
         private GameObject? displayed;
 
-        public Vector3 Position;
+        //public Vector3 Position;
+        //position is unused here?
 
         [SerializeField]
         AnimalPrefabMapping mapping;
-
-        private float a = 0;
 
         private Dictionary<GridPosition, Vector3> gridPositionMapping;
 
@@ -30,7 +29,7 @@ namespace Safari.View.Animals
 
         public void Init(Animal animal, Vector3 position, Dictionary<GridPosition, Vector3> gridPosMapping, GameSpeedManager gameSpeedManager)
         {
-            Position = position;
+            //Position = position;
             gridPositionMapping = gridPosMapping;
             Trace.Assert(displayed == null);
             DisplayAnimal(animal, gameSpeedManager);
