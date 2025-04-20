@@ -60,13 +60,13 @@ namespace Safari.Model.Animals
         {
             Movement = new MovementBehavior();
             age = 0;
-            ThirstLimit = 1000;
-            CriticalThirstLimit = 2000;
-            DrinkingRate = 250;
-            HungerLimit = 3000;
-            CriticalHungerLimit = 5000;
-            EatingRate = 400;
-            RestingInterval = new Tuple<float, float>(0.05f * 60, 0.1f * 60);
+            ThirstLimit = 10000;
+            CriticalThirstLimit = 20000;
+            DrinkingRate = 2500;
+            HungerLimit = 30000;
+            CriticalHungerLimit = 50000;
+            EatingRate = 4000;
+            RestingInterval = new Tuple<float, float>(0.05f * 600, 0.1f * 600);
             State = new State.Resting(this, 0, 0);
             State.OnEnter();
             Pathfinding = pathfinding;
@@ -77,13 +77,13 @@ namespace Safari.Model.Animals
         {
             Movement = new MovementBehavior();
             age = 0;
-            ThirstLimit = 1000;
-            CriticalThirstLimit = 2000;
-            DrinkingRate = 250;
-            HungerLimit = 3000;
-            CriticalHungerLimit = 5000;
-            EatingRate = 400;
-            RestingInterval = new Tuple<float, float>(0.05f * 60, 0.1f * 60);
+            ThirstLimit = 10000;
+            CriticalThirstLimit = 20000;
+            DrinkingRate = 2500;
+            HungerLimit = 30000;
+            CriticalHungerLimit = 50000;
+            EatingRate = 4000;
+            RestingInterval = new Tuple<float, float>(0.05f * 600, 0.1f * 600);
             State = new State.Resting(this, 0, 0);
             State.OnEnter();
             Pathfinding = pathfinding;
@@ -102,49 +102,12 @@ namespace Safari.Model.Animals
             }
         }
 
-        public void ModelUpdate(float deltaTime)
+        public void ModelUpdate(float deltaTime, int speedFactor)
         {
-            State.Update(deltaTime);
-            /*age++;
-            hunger++;
-
-            if (!isAdult && age > lifeSpan / 2)
-            {
-                isAdult = true;
-            }
-            if (age >= lifeSpan)
-            {
-                Died?.Invoke(this, EventArgs.Empty);
-                return;
-            }
-            if (hunger >= hungerLimit && state == AnimalState.Resting)
-            {
-                state = AnimalState.Hungry;
-                StateChanged?.Invoke(this, EventArgs.Empty);
-            }
-          */
+            State.Update(deltaTime, speedFactor);
         }
         public void TargetReached()
         {
-            /* switch (state)
-             {
-                 case AnimalState.Hungry:
-                     {
-                         state = AnimalState.Resting;
-                         break;
-                     }
-                 case AnimalState.Thirsty:
-                     {
-                         state = AnimalState.Wandering;
-                         StateChanged?.Invoke(this, EventArgs.Empty);
-                         break;
-                     }
-                 case AnimalState.Wandering:
-                     {
-                         state = AnimalState.Resting;
-                         break;
-                     }
-             }*/
         }
 
         public abstract State.State HandleFoodFinding();

@@ -28,10 +28,10 @@ namespace Safari.Model.Animals.State
             Debug.Log($"Resting for {restingDuration} seconds");
         }
 
-        public override void Update(float deltaTime)
+        public override void Update(float deltaTime, int speedFactor)
         {
-            base.Update(deltaTime);
-            restingSince += deltaTime;
+            base.Update(deltaTime, speedFactor);
+            restingSince += deltaTime * speedFactor;
             AllowSearchingWater();
             AllowSearchingFood();
             if (restingSince > restingDuration)

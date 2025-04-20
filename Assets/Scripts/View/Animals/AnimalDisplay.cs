@@ -1,4 +1,5 @@
 using Safari.Model.Animals;
+using Safari.Model.GameSpeed;
 using Safari.Model.Map;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,24 +17,25 @@ namespace Safari.View.Animals
 
         private GameObject? displayed;
 
-        public Vector3 Position;
+        //public Vector3 Position;
+        //position is unused here?
 
         [SerializeField]
         AnimalPrefabMapping mapping;
 
-        private float a = 0;
-
         private Dictionary<GridPosition, Vector3> gridPositionMapping;
 
-        public void Init(Animal animal, Vector3 position, Dictionary<GridPosition, Vector3> gridPosMapping)
+        private GameSpeedManager gameSpeedManager;
+
+        public void Init(Animal animal, Vector3 position, Dictionary<GridPosition, Vector3> gridPosMapping, GameSpeedManager gameSpeedManager)
         {
-            Position = position;
+            //Position = position;
             gridPositionMapping = gridPosMapping;
             Trace.Assert(displayed == null);
-            DisplayAnimal(animal);
+            DisplayAnimal(animal, gameSpeedManager);
         }
 
-        public void DisplayAnimal(Animal animal)
+        public void DisplayAnimal(Animal animal, GameSpeedManager gameSpeedManager)
         {
             AnimalModel = animal;
             if (displayed != null)
@@ -45,10 +47,11 @@ namespace Safari.View.Animals
             
             displayed = Instantiate(prefab, transform, false);
             
+            this.gameSpeedManager = gameSpeedManager;
 
             var animalMovement = displayed.GetComponent<AnimalMovement>();
             var navMeshAgent = this.GetComponent<NavMeshAgent>();
-            animalMovement.Init(animal.Movement, navMeshAgent, gridPositionMapping);
+            animalMovement.Init(animal.Movement, navMeshAgent, gridPositionMapping, gameSpeedManager);
         }
         
 
@@ -59,7 +62,7 @@ namespace Safari.View.Animals
 
         public void Update()
         {
-            AnimalModel?.ModelUpdate(Time.deltaTime);
+            AnimalModel?.ModelUpdate(Time.deltaTime, gameSpeedManager.CurrentSpeedToNum());
         }
     }
 }

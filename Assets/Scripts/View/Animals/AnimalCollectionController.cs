@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System;
 using Safari.View.World.Map;
 using Safari.Model.Map;
+using Safari.Model.GameSpeed;
 
 namespace Safari.View.Animals
 {
@@ -19,9 +20,12 @@ namespace Safari.View.Animals
         private Dictionary<GridPosition, Vector3> gridPositionMapping;
         public Dictionary<GridPosition, Vector3> GridPositionMapping { get { return gridPositionMapping; } }
 
+        private GameSpeedManager gameSpeedManager;
+
         public void Start()
         {
             animalCollection = SafariGame.Instance.Animals;
+            gameSpeedManager = SafariGame.Instance.GameSpeedManager;
             displayers = new List<AnimalDisplay>();
 
         }
@@ -55,7 +59,7 @@ namespace Safari.View.Animals
                     parent = transform,
                     worldSpace = false
                 });
-            display.Init(animal, animal.Position, gridPositionMapping);
+            display.Init(animal, animal.Position, gridPositionMapping, gameSpeedManager);
             displayers.Add(display);
         }
 

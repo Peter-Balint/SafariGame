@@ -3,6 +3,8 @@ using Safari.Model.Animals;
 using Safari.Model.Construction;
 using Safari.Model.Map;
 using Safari.Model.Pathfinding;
+using Safari.Model.Rangers;
+using Safari.Model.GameSpeed;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +46,11 @@ namespace Safari.Model
 
         public AnimalCollection Animals { get;  }
 
+        public RangerCollection Rangers{ get; }
+
         private PathfindingHelper pathfinding;
+
+        public GameSpeedManager GameSpeedManager { get; }
 
         public SafariGame(Map.Map map, GameDifficulty gameDifficulty)
         {
@@ -55,6 +61,8 @@ namespace Safari.Model
             pathfinding = new PathfindingHelper(map);
             Animals = new AnimalCollection(pathfinding);
             AnimalCreationManager = new AnimalCreationManager(Animals, pathfinding, Map, MoneyManager);
+            GameSpeedManager = new GameSpeedManager();
+            Rangers = new RangerCollection();
         }
 
         public static void StartGame(GameDifficulty gameDifficulty)

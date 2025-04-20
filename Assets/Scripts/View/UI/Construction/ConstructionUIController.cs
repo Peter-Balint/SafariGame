@@ -37,7 +37,12 @@ namespace Safari.View.UI.Construction
         public void Close()
         {
             gameObject.SetActive(false);
-            activeListing = null;
+            if(activeListing != null)
+            {
+                activeListing.Selected = false;
+                activeListing = null;
+            }
+            
             StopBuilding();
 
         }
