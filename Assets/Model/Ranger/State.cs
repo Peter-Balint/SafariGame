@@ -19,7 +19,6 @@ namespace Safari.Model.Rangers
 
         public virtual void OnEnter()
         {
-
         }
 
         public virtual void OnExit()
@@ -34,6 +33,10 @@ namespace Safari.Model.Rangers
             }
             owner.SetState(newState);
             transitioned = true;
+        }
+
+        public virtual void Update()
+        {
         }
     }
 }

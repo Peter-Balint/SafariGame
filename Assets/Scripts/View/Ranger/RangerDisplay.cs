@@ -8,6 +8,7 @@ using Safari.Model.Animals;
 using Safari.Model.GameSpeed;
 using UnityEngine.AI;
 using System.Runtime.CompilerServices;
+using System;
 
 namespace Safari.View.Rangers
 {
@@ -21,6 +22,8 @@ namespace Safari.View.Rangers
         private GameSpeedManager gameSpeedManager;
 
         private Dictionary<GridPosition, Vector3> gridPositionMapping;
+
+        public event EventHandler OnCLick;
 
         public void Init(Ranger ranger, Dictionary<GridPosition, Vector3> gridPosMapping, GameSpeedManager gameSpeedManager)
         {
@@ -40,17 +43,20 @@ namespace Safari.View.Rangers
             var rangerMovement = displayed.GetComponent<RangerMovement>();
             var navMeshAgent = this.GetComponent<NavMeshAgent>();
             rangerMovement.Init(ranger.Movement, navMeshAgent, gridPositionMapping, gameSpeedManager);
+
+            rangerMovement.OnClick += ((sender, args) => OnCLick?.Invoke(this, args));
         }
 
 
-        private void OnTriggerEnter(Collider other) //move to rangerMovement later, also place the collider onto the ranger prefab
+        /*private void OnTriggerEnter(Collider other) //move to rangerMovement later, also place the collider onto the ranger prefab
         {
             if (other.gameObject.CompareTag("Animal"))
             {
                 UnityEngine.Debug.Log(other.gameObject.GetComponent<AnimalMovement>().behavior.Owner);
             }
            
-        }
+        }*/
+
 
         void Start()
         {

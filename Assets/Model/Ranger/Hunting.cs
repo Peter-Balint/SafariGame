@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Safari.Model.Animals;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,15 @@ namespace Safari.Model.Rangers
 {
     public class Hunting : State
     {
-        public Hunting(Ranger owner) : base(owner) { }
+        Predator target;
+        public Hunting(Ranger owner, Predator target) : base(owner) 
+        {
+            this.target = target;
+        }
+
+        public override void Update()
+        {
+
+        }
     }
 }

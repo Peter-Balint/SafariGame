@@ -24,6 +24,8 @@ namespace Safari.View.Rangers
 
         private MovementCommand? currentlyExecuting;
 
+        public event EventHandler OnClick;
+
         public void Init(MovementBehavior behavior, NavMeshAgent agent, Dictionary<GridPosition, Vector3> mapping, GameSpeedManager gameSpeedManager)
         {
             this.behavior = behavior;
@@ -96,6 +98,12 @@ namespace Safari.View.Rangers
                 var fieldDisplay = other.gameObject.GetComponent<FieldDisplay>();
                 behavior.ReportLocation(fieldDisplay.Position);
             }
+        }
+
+        private void OnMouseDown()
+        {
+            Debug.Log("Broke through the barrier");
+            OnClick?.Invoke(this, EventArgs.Empty);
         }
 
         private void Update()

@@ -12,6 +12,8 @@ namespace Safari.View.Animals
     public class AnimalCollectionController : MonoBehaviour
     {
         private List<AnimalDisplay> displayers;
+        public List<AnimalDisplay> Displayers { get { return displayers; } }
+
         private AnimalCollection animalCollection;
         public AnimalCollection AnimalCollection { get { return animalCollection; } }
 
