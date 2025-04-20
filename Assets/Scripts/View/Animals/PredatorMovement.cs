@@ -38,7 +38,7 @@ namespace Safari.View.Animals
 
         }
 
-        protected override void Update()
+        protected override void HandleMovementFinished()
         {
             if (target != null && currentlyExecuting is FollowPreyMovementCommand command)
             {
@@ -48,7 +48,10 @@ namespace Safari.View.Animals
                     command.ReportFinished();
                 }
             }
-            base.Update();
+            else
+            {
+                base.HandleMovementFinished();
+            }
         }
 
         private Transform? FindClosestPrey()

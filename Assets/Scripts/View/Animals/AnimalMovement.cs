@@ -115,12 +115,17 @@ namespace Safari.View.Animals
 
         protected virtual void Update()
         {
+            HandleMovementFinished();
+            agent.speed = defaultSpeed * gameSpeedManager.CurrentSpeedToNum();
+        }
+
+        protected virtual void HandleMovementFinished()
+        {
             if (currentlyExecuting != null && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance && (!agent.hasPath || agent.velocity.sqrMagnitude == 0f))
             {
                 agent.ResetPath();
                 currentlyExecuting.ReportFinished();
             }
-            agent.speed = defaultSpeed * gameSpeedManager.CurrentSpeedToNum();
         }
     }
 }

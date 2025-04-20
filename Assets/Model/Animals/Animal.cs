@@ -60,7 +60,7 @@ namespace Safari.Model.Animals
             ThirstLimit = 10000;
             CriticalThirstLimit = 20000;
             DrinkingRate = 2500;
-            HungerLimit = 30000;
+            HungerLimit = 3000;
             CriticalHungerLimit = 50000;
             EatingRate = 4000;
             RestingInterval = new Tuple<float, float>(0.05f * 600, 0.1f * 600);
