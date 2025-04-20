@@ -1,4 +1,3 @@
-﻿#nullable enable
 using Safari.Model.Animals.Movement;
 using Safari.Model.GameSpeed;
 using Safari.Model.Map;
@@ -7,16 +6,12 @@ using Safari.View.Utils;
 using Safari.View.World.Map;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.SocialPlatforms;
 
-namespace Safari.View.Animals
+namespace Safari.View.Rangers
 {
-    public class AnimalMovement : MonoBehaviour
+    public class RangerMovement : MonoBehaviour
     {
         public float cellSize = 30f;
         public const float defaultSpeed = 10;
@@ -76,7 +71,7 @@ namespace Safari.View.Animals
 
             }
         }
-        
+
         private void OnMovementCancelled(object sender, EventArgs e)
         {
             if (sender == currentlyExecuting)

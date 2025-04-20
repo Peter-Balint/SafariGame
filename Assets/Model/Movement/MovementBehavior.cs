@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using Safari.Model.Animals;
 using Safari.Model.Map;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,13 @@ namespace Safari.Model.Movement
         public MovementCommand? CurrentCommand { get; private set; }
 
         public GridPosition Location { get; private set; }
+
+        public IMoving Owner { get; private set; }
+
+        public MovementBehavior(IMoving entity) 
+        {
+            Owner = entity;
+        }
 
         public void ExecuteMovement(MovementCommand command)
         {

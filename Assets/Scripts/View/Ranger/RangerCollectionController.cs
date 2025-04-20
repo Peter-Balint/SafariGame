@@ -4,6 +4,7 @@ using Safari.Model.Rangers;
 using Safari.Model.Map;
 using Safari.Model;
 using Safari.View.World.Map;
+using Safari.Model.GameSpeed;
 
 
 namespace Safari.View.Rangers
@@ -19,14 +20,22 @@ namespace Safari.View.Rangers
         private Dictionary<GridPosition, Vector3> gridPositionMapping;
         public Dictionary<GridPosition, Vector3> GridPositionMapping { get { return gridPositionMapping; } }
 
+        private GameSpeedManager gameSpeedManager;
+
+        [SerializeField]
+        private int rangerSalary;
 
         void Start()
         {
             rangerCollection = SafariGame.Instance.Rangers;
+            gameSpeedManager = SafariGame.Instance.GameSpeedManager;
+
             displayers = new List<RangerDisplay>();
 
             rangerCollection.Added += OnRangerAdded;
             rangerCollection.Removed += OnRangerRemoved;
+
+            gameSpeedManager.DayPassed += (sender,args) => {  }; //when moneymanager is made
         }
 
         public void InjectGridPositionMappingData(MapDisplay.MapInitializedEventArgs args)
@@ -52,7 +61,7 @@ namespace Safari.View.Rangers
                     parent = transform,
                     worldSpace = false
                 });
-            display.Init(ranger, gridPositionMapping);
+            display.Init(ranger, gridPositionMapping, gameSpeedManager);
             displayers.Add(display);
         }
         private void OnRangerRemoved(object sender, Ranger ranger)

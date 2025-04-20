@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RangerDisplayPrefab: {fileID: 3607496244235131250, guid: 2ba035054fd262e449a360de1c808dd1, type: 3}
+  rangerSalary: 5

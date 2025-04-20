@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: -351494891055116845}
   m_Layer: 0
   m_Name: Lion
-  m_TagString: Untagged
+  m_TagString: Animal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -387,7 +387,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5089681828925618224}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: fa3ddb69c78ac6c409e58b34f115a9ac, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
