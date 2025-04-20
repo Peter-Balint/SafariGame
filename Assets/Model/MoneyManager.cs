@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Safari.Model
@@ -5,10 +6,12 @@ namespace Safari.Model
     public class MoneyManager
     {
         int CurrentBalance;
+        int TicketPrice;
        
         public MoneyManager()
         {
             CurrentBalance = 100;
+            TicketPrice = 10;
         } 
      
 
@@ -29,5 +32,20 @@ namespace Safari.Model
         {
             return CurrentBalance;
         }
-    }
+		public int ReadTicketPrice()
+		{
+			return TicketPrice;
+		}
+
+		public void RaiseTicketPrice()
+        {
+            TicketPrice++;
+        }
+
+		public void LowerTicketPrice()
+		{
+            if(TicketPrice < 2 ) return;
+			TicketPrice--;
+		}
+	}
 }
