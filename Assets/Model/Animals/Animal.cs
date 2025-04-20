@@ -35,6 +35,9 @@ namespace Safari.Model.Animals
 
         public int EatingRate { get; private set; }
 
+        public AnimalMetadata AnimalMetadata { get { return metadata; } }
+
+
         protected AnimalMetadata metadata;
 
         protected int age;
