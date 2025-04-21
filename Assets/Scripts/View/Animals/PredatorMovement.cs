@@ -1,4 +1,5 @@
-﻿using Safari.Model.Animals;
+﻿#nullable enable
+using Safari.Model.Animals;
 using Safari.Model.Animals.Movement;
 using Safari.Model.Movement;
 using System;
@@ -10,29 +11,20 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering;
-using static PlasticPipe.PlasticProtocol.Messages.NegotiationCommand;
 
 namespace Safari.View.Animals
 {
     [RequireComponent(typeof(Rigidbody))]
     public class PredatorMovement : AnimalMovement
     {
-        private Transform? target;
-
         private Rigidbody rb;
-
-        private Transform? prevTarget;
 
         protected override void HandleMovement(MovementCommand command)
         {
             if (command is FollowPreyMovementCommand fc)
             {
-                if (!fc.SearchPrey)
-                {
-                    target = target ?? prevTarget;
-                    return;
-                }
-                target = FindClosestPrey();
+                var target = FindClosestPrey();
+                fc.Extra = target;
                 if (target == null)
                 {
                     fc.ReportPreyNotFound();
@@ -40,20 +32,6 @@ namespace Safari.View.Animals
                 return;
             }
             base.HandleMovement(command);
-        }
-
-        protected override void OnCurrentMovementCancelled(object sender, EventArgs e)
-        {
-            if (sender is FollowPreyMovementCommand)
-            {
-                if (target != null)
-                {
-                    prevTarget = target;
-                }
-                target = null;
-            }
-            base.OnCurrentMovementCancelled(sender, e);
-
         }
 
         protected override void CheckMovementFinished()
@@ -66,49 +44,41 @@ namespace Safari.View.Animals
                 base.CheckMovementFinished();
                 return;
             }
-
-            if (target == null)
+            if (command.Extra is not Transform target)
             {
                 return;
             }
 
-            float stoppingDistance = command.FinishDistance ?? agent.stoppingDistance;
-
-            if (!agent.pathPending
-                && agent.hasPath
-                && agent.remainingDistance < stoppingDistance)
+            if (!agent.pathPending && agent.hasPath)
             {
-                Trace.Assert(target.parent.TryGetComponent<AnimalDisplay>(out var animalDisplay), "Chased prey is malformed: parent doesn't have AnimalDisplay");
-                Trace.Assert(animalDisplay.AnimalModel is IPrey, "Chased prey doesn't implement IPrey interface");
+                if (agent.remainingDistance < command.FinishedRadius)
+                {
+                    command.ReportFinished();
+                }
+                else if (agent.remainingDistance < command.StalkingFinishedRadius)
+                {
+                    Trace.Assert(target.parent.TryGetComponent<AnimalDisplay>(out var animalDisplay), "Chased prey is malformed: parent doesn't have AnimalDisplay");
+                    Trace.Assert(animalDisplay.AnimalModel is IPrey, "Chased prey doesn't implement IPrey interface");
 
-                command.ReportPreyApproached(new PreyApproached(animalDisplay.AnimalModel as IPrey,
-                                                                new Chaser(getPosition, getVelocity)));
+                    command.ReportPreyApproached(new PreyApproached(animalDisplay.AnimalModel as IPrey,
+                                                                    new Chaser(getPosition, getVelocity)));
+                }
             }
         }
 
         protected override void Update()
         {
             base.Update();
-            if (target != null)
+            if (currentlyExecuting is FollowPreyMovementCommand && currentlyExecuting.Extra is Transform target)
             {
                 agent.SetDestination(target.position);
             }
         }
 
-        protected override void OnMovementFinished(object sender, MovementFinishedEventArgs e)
-        {
-            base.OnMovementFinished(sender, e);
-            if (target != null)
-            {
-                prevTarget = target;
-            }
-            target = null;
-        }
-
         private Transform? FindClosestPrey()
         {
             GameObject[] targets = GameObject.FindGameObjectsWithTag("Prey");
-            Transform closest = null;
+            Transform? closest = null;
             float minDist = Mathf.Infinity;
             Vector3 currentPos = transform.position;
 

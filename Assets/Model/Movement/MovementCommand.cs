@@ -7,7 +7,9 @@ namespace Safari.Model.Movement
     {
         public event EventHandler? Cancelled;
 
-        public event EventHandler<MovementFinishedEventArgs>? Finished;
+        public event EventHandler? Finished;
+
+        public object? Extra { get; set; }
 
         public void Cancel()
         {
@@ -18,23 +20,7 @@ namespace Safari.Model.Movement
 
         public void ReportFinished()
         {
-            Finished?.Invoke(this, MovementFinishedEventArgs.Success);
-            Cancelled = null;
-            Finished = null;
-        }
-
-
-        public void ReportFinished(Success success)
-        {
-            Finished?.Invoke(this, new MovementFinishedEventArgs(success));
-            Cancelled = null;
-            Finished = null;
-        }
-
-
-        public void ReportFailed(Failed failed)
-        {
-            Finished?.Invoke(this, new MovementFinishedEventArgs(failed));
+            Finished?.Invoke(this, EventArgs.Empty);
             Cancelled = null;
             Finished = null;
         }

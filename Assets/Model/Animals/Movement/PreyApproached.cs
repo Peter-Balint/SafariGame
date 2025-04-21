@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Safari.Model.Animals.Movement
 {
-    public class PreyApproached: Success
+    public class PreyApproached : StalkingResult
     {
         public IPrey Prey { get; private set; }
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Safari.Model.Animals.Movement
 {
-    public class PreyNotFound : Failed
+    public class PreyNotFound : StalkingResult
     {
     }
 }

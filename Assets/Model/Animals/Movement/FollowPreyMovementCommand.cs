@@ -1,4 +1,5 @@
-﻿using Safari.Model.Movement;
+﻿#nullable enable
+using Safari.Model.Movement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,36 +8,42 @@ using System.Threading.Tasks;
 
 namespace Safari.Model.Animals.Movement
 {
-    public class FollowPreyMovementCommand : MovementCommand
+    public partial class FollowPreyMovementCommand : MovementCommand
     {
-        public static FollowPreyMovementCommand SearchAndStalk(float finishDistance)
+        public event EventHandler<StalkingFinishedEventArgs>? StalkingFinished;
+
+        public float StalkingFinishedRadius { get; private set; }
+
+        public float FinishedRadius { get; private set; }
+
+        private bool stalkingFinished;
+
+        public FollowPreyMovementCommand(float stalkingFinishedRadius, float finishedRadius)
         {
-            return new FollowPreyMovementCommand(finishDistance, true);
-        }
-
-        public static FollowPreyMovementCommand Chase(float finishDistance)
-        {
-            return new FollowPreyMovementCommand(finishDistance, false);
-        }
-
-        public float? FinishDistance { get; private set; }
-
-        public bool SearchPrey { get; private set; }
-
-        protected FollowPreyMovementCommand(float? finishDistance, bool searchPrey)
-        {
-            FinishDistance = finishDistance;
-            SearchPrey = searchPrey;
+            StalkingFinishedRadius = stalkingFinishedRadius;
+            FinishedRadius = finishedRadius;
         }
 
         public void ReportPreyNotFound()
         {
-            ReportFailed(new PreyNotFound());
+            OnStalkingFinished(new StalkingFinishedEventArgs(new PreyNotFound()));
+            ReportFinished();
         }
 
-        public void ReportPreyApproached(PreyApproached success)
+        public void ReportPreyApproached(PreyApproached result)
         {
-            ReportFinished(success);
+
+            OnStalkingFinished(new StalkingFinishedEventArgs(result));
+        }
+
+        private void OnStalkingFinished(StalkingFinishedEventArgs e)
+        {
+            if (stalkingFinished)
+            {
+                return;
+            }
+            stalkingFinished = true;
+            StalkingFinished?.Invoke(this, e);
         }
     }
 }

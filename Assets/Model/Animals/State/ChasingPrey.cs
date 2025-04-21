@@ -10,35 +10,30 @@ namespace Safari.Model.Animals.State
 {
     public class ChasingPrey : State
     {
-        public const float KillRange = 1.8f;
+        private FollowPreyMovementCommand command;
 
-        public ChasingPrey(Animal owner, float thirst, float hunger) : base(owner, thirst, hunger)
+        private IPrey prey;
+
+        public ChasingPrey(Animal owner, float thirst, float hunger, FollowPreyMovementCommand command, IPrey prey) : base(owner, thirst, hunger)
         {
+            this.command = command;
+            this.prey = prey;
         }
 
         public override void OnEnter()
         {
             base.OnEnter();
-            var command = FollowPreyMovementCommand.Chase(KillRange);
-            command.Finished += OnChasingFinished; 
-            owner.Movement.ExecuteMovement(command);
+            command.Finished += OnChasingFinished;
             UnityEngine.Debug.Log($"{owner.GetType().Name} is chasing the prey");
         }
 
-        private void OnChasingFinished(object sender, Model.Movement.MovementFinishedEventArgs e)
+        private void OnChasingFinished(object sender, EventArgs e)
         {
-            switch (e.Result)
-            {
-                case PreyApproached a:
-                    owner.Movement.AbortMovement();
-                    a.Prey.Kill();
-                    Debug.Log($"{owner.GetType().Name} killed {a.Prey.GetType().Name}");
-                    TransitionTo(new PredatorEating(owner, thirst, hunger));
-                    break;
-
-                default:
-                    break;
-            }
+            owner.Movement.AbortMovement();
+            (sender as FollowPreyMovementCommand).Extra = null;
+            prey.Kill();
+            Debug.Log($"{owner.GetType().Name} killed {prey.GetType().Name}");
+            TransitionTo(new PredatorEating(owner, thirst, hunger));
         }
     }
 }
