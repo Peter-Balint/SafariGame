@@ -29,6 +29,7 @@ namespace Safari.View.Animals
 
         private GameSpeedManager gameSpeedManager;
 
+
         public void Init(MovementBehavior behavior, NavMeshAgent agent, Dictionary<GridPosition, Vector3> mapping, GameSpeedManager gameSpeedManager)
         {
             this.behavior = behavior;
@@ -115,11 +116,11 @@ namespace Safari.View.Animals
 
         protected virtual void Update()
         {
-            HandleMovementFinished();
+            CheckMovementFinished();
             agent.speed = defaultSpeed * gameSpeedManager.CurrentSpeedToNum();
         }
 
-        protected virtual void HandleMovementFinished()
+        protected virtual void CheckMovementFinished()
         {
             if (currentlyExecuting != null && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance && (!agent.hasPath || agent.velocity.sqrMagnitude == 0f))
             {

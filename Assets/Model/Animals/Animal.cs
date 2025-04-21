@@ -99,6 +99,12 @@ namespace Safari.Model.Animals
             }
         }
 
+        internal void InterruptState(State.State newState)
+        {
+            State.OnInterrupted();
+            SetState(newState);
+        }
+
         public void ModelUpdate(float deltaTime, int speedFactor)
         {
             State.Update(deltaTime, speedFactor);

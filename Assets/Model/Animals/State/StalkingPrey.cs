@@ -11,7 +11,7 @@ namespace Safari.Model.Animals.State
 {
     public class StalkingPrey : State
     {
-        private const float HuntingRange = 30;
+        private const float HuntingRange = 120;
         
         public StalkingPrey(Animal owner, float thirst, float hunger) : base(owner, thirst, hunger)
         {
@@ -21,7 +21,7 @@ namespace Safari.Model.Animals.State
         {
             base.OnEnter();
 
-            var command = new FollowPreyMovementCommand(HuntingRange);
+            var command = FollowPreyMovementCommand.SearchAndStalk(HuntingRange);
             command.Finished += OnStalkingFinished;
             owner.Movement.ExecuteMovement(command);
             UnityEngine.Debug.Log($"{owner.GetType().Name} is stalking the prey");
@@ -33,8 +33,9 @@ namespace Safari.Model.Animals.State
 
             switch (e.Result)
             {
-                case Success:
-                    //TransitionTo(new StalkingPrey(owner, thirst, hunger));
+                case PreyApproached a:
+                    a.Prey.OnChased(a.Chaser);
+                    TransitionTo(new ChasingPrey(owner, thirst, hunger));
                     break;
 
                 case PreyNotFound:

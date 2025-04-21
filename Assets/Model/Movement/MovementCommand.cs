@@ -23,6 +23,15 @@ namespace Safari.Model.Movement
             Finished = null;
         }
 
+
+        public void ReportFinished(Success success)
+        {
+            Finished?.Invoke(this, new MovementFinishedEventArgs(success));
+            Cancelled = null;
+            Finished = null;
+        }
+
+
         public void ReportFailed(Failed failed)
         {
             Finished?.Invoke(this, new MovementFinishedEventArgs(failed));

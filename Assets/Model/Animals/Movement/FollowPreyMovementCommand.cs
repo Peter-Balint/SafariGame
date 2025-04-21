@@ -9,21 +9,34 @@ namespace Safari.Model.Animals.Movement
 {
     public class FollowPreyMovementCommand : MovementCommand
     {
-        public float? FinishDistance { get; private set; }
-
-        public FollowPreyMovementCommand(float? finishDistance)
+        public static FollowPreyMovementCommand SearchAndStalk(float finishDistance)
         {
-            FinishDistance = finishDistance;
+            return new FollowPreyMovementCommand(finishDistance, true);
         }
 
-        public FollowPreyMovementCommand()
+        public static FollowPreyMovementCommand Chase(float finishDistance)
         {
-            FinishDistance = null;
+            return new FollowPreyMovementCommand(finishDistance, false);
+        }
+
+        public float? FinishDistance { get; private set; }
+
+        public bool SearchPrey { get; private set; }
+
+        protected FollowPreyMovementCommand(float? finishDistance, bool searchPrey)
+        {
+            FinishDistance = finishDistance;
+            SearchPrey = searchPrey;
         }
 
         public void ReportPreyNotFound()
         {
             ReportFailed(new PreyNotFound());
+        }
+
+        public void ReportPreyApproached(PreyApproached success)
+        {
+            ReportFinished(success);
         }
     }
 }

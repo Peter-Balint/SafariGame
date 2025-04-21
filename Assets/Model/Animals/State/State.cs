@@ -54,6 +54,10 @@ namespace Safari.Model.Animals.State
         {
         }
 
+        public virtual void OnInterrupted()
+        {
+        }
+
         protected void TransitionTo(State newState)
         {
             if (transitioned)
