@@ -54,7 +54,7 @@ namespace Safari.View.Rangers
             {
                 case GridMovementCommand gm:
                     var target = gridPositionMapping[gm.TargetCell];
-                    target += new Vector3(gm.TargetOffset.DeltaX, 0, gm.TargetOffset.DeltaZ) * 15;
+                    //target += new Vector3(gm.TargetOffset.DeltaX, 0, gm.TargetOffset.DeltaZ) * 15;
                     agent.SetDestination(target);
                     break;
 

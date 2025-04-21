@@ -48,15 +48,6 @@ namespace Safari.View.Rangers
         }
 
 
-        /*private void OnTriggerEnter(Collider other) //move to rangerMovement later, also place the collider onto the ranger prefab
-        {
-            if (other.gameObject.CompareTag("Animal"))
-            {
-                UnityEngine.Debug.Log(other.gameObject.GetComponent<AnimalMovement>().behavior.Owner);
-            }
-           
-        }*/
-
 
         void Start()
         {

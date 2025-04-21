@@ -1,23 +1,23 @@
 ﻿using Safari.Model.Animals;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Safari.Model.Map;
+using Safari.Model.Movement;
 
 namespace Safari.Model.Rangers
 {
     public class Hunting : State
     {
-        Predator target;
-        public Hunting(Ranger owner, Predator target) : base(owner) 
+        public Hunting(Ranger owner) : base(owner) 
         {
-            this.target = target;
         }
 
-        public override void Update()
+        public override void Update(GridPosition target)
         {
-
+            Field targetField = map.FieldAt(target);
+            if (!(targetField is Water) && map.IsValidPosition(target)) 
+            {
+                GridMovementCommand movementCommand = new GridMovementCommand(target);
+                owner.Movement.ExecuteMovement(movementCommand);
+            }
         }
     }
 }

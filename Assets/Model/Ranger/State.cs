@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Safari.Model.Map;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,11 +11,14 @@ namespace Safari.Model.Rangers
     {
         protected Ranger owner;
 
+        protected Map.Map map;
+
         private bool transitioned = false;
 
         protected State(Ranger owner)
         {
             this.owner = owner;
+            map = SafariGame.Instance.Map;
         }
 
         public virtual void OnEnter()
@@ -36,6 +40,9 @@ namespace Safari.Model.Rangers
         }
 
         public virtual void Update()
+        {
+        }
+        public virtual void Update(GridPosition target)
         {
         }
     }

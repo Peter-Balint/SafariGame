@@ -1,5 +1,7 @@
-using NUnit.Framework;
 using Safari.Model.Animals;
+using Safari.Model.Map;
+using Safari.Model.Movement;
+using Safari.Model.Rangers;
 using Safari.View.Animals;
 using System;
 using System.Collections.Generic;
@@ -12,17 +14,21 @@ namespace Safari.View.Rangers
         public RangerCollectionController RangerCollectionController;
         public AnimalCollectionController AnimalCollectionController;
         
-        private RangerDisplay rangerDisplay;
+        private RangerDisplay currentRangerDisplay;
+
+
+        private Dictionary<RangerDisplay, AnimalDisplay> huntMapping;
 
         void Start()
         {
             RangerCollectionController.OnRangerClicked += Open;
+            huntMapping = new Dictionary<RangerDisplay, AnimalDisplay>();
             gameObject.SetActive(false);
         }
         public void Open(object sender, RangerDisplay rangerDisplay)
         {
             gameObject.SetActive(true);
-            this.rangerDisplay = rangerDisplay;
+            this.currentRangerDisplay = rangerDisplay;
         }
         public void Close()
         {
@@ -44,13 +50,13 @@ namespace Safari.View.Rangers
             AnimalDisplay target = null;
             List<AnimalDisplay> animals = AnimalCollectionController.Displayers;
 
-            foreach (AnimalDisplay animal in animals)
+            foreach (AnimalDisplay animalDisplay in animals)
             {
-                if (animal.AnimalModel is PredatorType)
+                if (animalDisplay.AnimalModel is PredatorType)
                 {
                     if(target == null)
                     {
-                        target = animal;
+                        target = animalDisplay;
                     }
                     else
                     {
@@ -59,7 +65,7 @@ namespace Safari.View.Rangers
                         double newDistanceSquare = (targetPosition - thisPosition).sqrMagnitude;
                         if(newDistanceSquare > distance * distance)
                         {
-                            target = animal;
+                            target = animalDisplay;
                             distance = Math.Sqrt(newDistanceSquare);
                         }
                     }
@@ -68,14 +74,32 @@ namespace Safari.View.Rangers
 
             if (target != null)
             {
+                currentRangerDisplay.Ranger.SetState(new Hunting(currentRangerDisplay.Ranger));
+                if(!target.AnimalModel.Movement.HasSubscribers) { target.AnimalModel.Movement.GridPositionChanged += OnTargetMoved; }
+                currentRangerDisplay?.Ranger.ModelUpdate(target.AnimalModel.Movement.Location);
 
+                huntMapping[currentRangerDisplay] = target;
             }
 
+            gameObject.SetActive(false);
+        }
+
+        private void OnTargetMoved(object sender, GridPosition gridPosition)
+        {
+            if(sender is MovementBehavior behavior)
+            {
+                foreach((RangerDisplay rangerDisplay,AnimalDisplay animalDisplay) in huntMapping)
+                {
+                    if(animalDisplay.AnimalModel == behavior.Owner)
+                    {
+                        rangerDisplay?.Ranger.ModelUpdate(animalDisplay.AnimalModel.Movement.Location);
+                    }
+                }
+            }// for some reason two rangers going after the same animal freezes both of them
         }
 
         void Update()
         {
-        
         }
     }
 }

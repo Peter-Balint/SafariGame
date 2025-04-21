@@ -1,3 +1,4 @@
+using Safari.Model.Map;
 using Safari.Model.Movement;
 using System;
 using UnityEngine;
@@ -31,6 +32,15 @@ namespace Safari.Model.Rangers
             {
                 Died?.Invoke(this, EventArgs.Empty);
             }
+        }
+
+        public void ModelUpdate()
+        {
+
+        }
+        public void ModelUpdate(GridPosition target)
+        {
+            state.Update(target);
         }
     }
 }

@@ -13,6 +13,10 @@ namespace Safari.Model.Movement
     {
         public event EventHandler<MovementCommand>? CommandStarted;
 
+        public event EventHandler<GridPosition>? GridPositionChanged;
+
+        public bool HasSubscribers { get { return !(GridPositionChanged == null); } }
+
         public MovementCommand? CurrentCommand { get; private set; }
 
         public GridPosition Location { get; private set; }
@@ -35,6 +39,7 @@ namespace Safari.Model.Movement
         public void ReportLocation(GridPosition location)
         {
             Location = location;
+            GridPositionChanged?.Invoke(this, Location);
         }
 
         public void AbortMovement()
