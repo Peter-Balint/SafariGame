@@ -33,7 +33,7 @@ namespace Safari.Model.Animals.State
                     owner.Movement.AbortMovement();
                     a.Prey.Kill();
                     Debug.Log($"{owner.GetType().Name} killed {a.Prey.GetType().Name}");
-                    //TransitionTo(new Eating(owner, thirst, hunger));
+                    TransitionTo(new PredatorEating(owner, thirst, hunger));
                     break;
 
                 default:

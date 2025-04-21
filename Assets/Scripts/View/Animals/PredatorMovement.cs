@@ -46,7 +46,10 @@ namespace Safari.View.Animals
         {
             if (sender is FollowPreyMovementCommand)
             {
-                prevTarget = target;
+                if (target != null)
+                {
+                    prevTarget = target;
+                }
                 target = null;
             }
             base.OnCurrentMovementCancelled(sender, e);
@@ -90,6 +93,16 @@ namespace Safari.View.Animals
             {
                 agent.SetDestination(target.position);
             }
+        }
+
+        protected override void OnMovementFinished(object sender, MovementFinishedEventArgs e)
+        {
+            base.OnMovementFinished(sender, e);
+            if (target != null)
+            {
+                prevTarget = target;
+            }
+            target = null;
         }
 
         private Transform? FindClosestPrey()
