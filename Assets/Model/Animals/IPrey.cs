@@ -5,5 +5,6 @@
         void OnChased(Chaser chaser);
 
         void Kill();
+        void OnEscaped();
     }
 }

@@ -35,5 +35,14 @@ namespace Safari.Model.Animals.State
             Debug.Log($"{owner.GetType().Name} killed {prey.GetType().Name}");
             TransitionTo(new PredatorEating(owner, thirst, hunger));
         }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+            command.Finished -= OnChasingFinished;
+            command.Cancel();
+            prey.OnEscaped();
+
+        }
     }
 }

@@ -21,8 +21,15 @@ namespace Safari.Model.Animals.State
 
         private bool transitioned = false;
 
+        private Queue<Action> actionQueue = new Queue<Action>();
+
         public virtual void Update(float deltaTime, int speedFactor)
         {
+            while (actionQueue.Count > 0)
+            {
+                var action = actionQueue.Dequeue();
+                action();
+            }
             thirst += speedFactor;
             hunger += speedFactor;
             if (thirst > owner.CriticalThirstLimit)
@@ -42,7 +49,7 @@ namespace Safari.Model.Animals.State
             this.owner = owner;
             this.thirst = thirst;
             this.hunger = hunger;
-            
+
         }
 
         public virtual void OnEnter()
@@ -68,6 +75,11 @@ namespace Safari.Model.Animals.State
             transitioned = true;
         }
 
+        protected void TransitionToNextUpdate(State state)
+        {
+            NextUpdate(() => TransitionTo(state));
+        }
+
         protected void AllowSearchingWater()
         {
             if (thirst > owner.ThirstLimit)
@@ -84,6 +96,11 @@ namespace Safari.Model.Animals.State
                 Debug.Log($"{owner.GetType().Name} is hungry");
                 TransitionTo(owner.HandleFoodFinding());
             }
+        }
+
+        protected virtual void NextUpdate(Action action)
+        {
+            actionQueue.Enqueue(action);
         }
     }
 }

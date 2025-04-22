@@ -1,4 +1,5 @@
-﻿using Safari.Model.Animals.Movement;
+﻿#nullable enable
+using Safari.Model.Animals.Movement;
 using Safari.Model.Movement;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static PlasticPipe.PlasticProtocol.Messages.NegotiationCommand;
 
 namespace Safari.Model.Animals.State
 {
@@ -15,34 +17,28 @@ namespace Safari.Model.Animals.State
 
         private const float KillRange = 1.8f;
 
-        private int counter = 0;
+        private FollowPreyMovementCommand? command;
+
+        private IPrey? prey;
 
         public StalkingPrey(Animal owner, float thirst, float hunger) : base(owner, thirst, hunger)
         {
-            counter = 0;
         }
 
-        public StalkingPrey(Animal owner, float thirst, float hunger, int counter) : base(owner, thirst, hunger)
-        {
-            this.counter = counter;
-        }
 
         public override void OnEnter()
         {
             base.OnEnter();
-            if (counter == 0)
-            {
-                var command = new FollowPreyMovementCommand(HuntingRange, KillRange);
-                command.StalkingFinished += OnStalkingFinished;
-                owner.Movement.ExecuteMovement(command);
-                UnityEngine.Debug.Log($"{owner.GetType().Name} is searching for, and will stalk a prey");
+            UnityEngine.Debug.Log($"{owner.GetType().Name} is searching for, and will stalk a prey");
+            command = new FollowPreyMovementCommand(HuntingRange, KillRange);
+            command.StalkingFinished += OnStalkingFinished;
+            owner.Movement.ExecuteMovement(command);
 
-            }
         }
 
         private void OnStalkingFinished(object sender, StalkingFinishedEventArgs e)
         {
-            FollowPreyMovementCommand command = sender as FollowPreyMovementCommand;
+            FollowPreyMovementCommand command = (FollowPreyMovementCommand)sender;
             command.StalkingFinished -= OnStalkingFinished;
             switch (e.Result)
             {
@@ -59,19 +55,29 @@ namespace Safari.Model.Animals.State
 
                 case PreyNotFound:
                     UnityEngine.Debug.Log($"{owner.GetType().Name} couldn't find a prey");
-                    if (counter == 0)
-                    {
-                        TransitionTo(new StalkingPrey(owner, thirst, hunger, 40));
-                    }
-                    else
-                    {
-                        TransitionTo(new StalkingPrey(owner, thirst, hunger, counter - 1));
-                    }
+                    // IMPORTANT: if prey not found, this event gets raised right after the ExecuteMovement call
+                    // Trying to search for a prey again re-triggers this command, sequentially, leaving no chance
+                    // for Unity to get the control back
+                    // Also throws a stack overflow because re-searching for a prey is basically an infinite cycle
+                    // So we wait till next update 
+                    TransitionToNextUpdate(new StalkingPrey(owner, thirst, hunger));
                     break;
 
                 default:
                     break;
             }
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+            if (command != null)
+            {
+                command.StalkingFinished -= OnStalkingFinished;
+                command.Cancel();
+            }
+            prey?.OnEscaped();
+
         }
     }
 }

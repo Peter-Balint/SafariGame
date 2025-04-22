@@ -26,5 +26,10 @@ namespace Safari.Model.Animals
             // interrupt the current state and start fleeing
             InterruptState(new Fleeing(this, State.Thirst, State.Hunger, chaser));
         }
+
+        public void OnEscaped()
+        {
+            
+        }
     }
 }
