@@ -56,11 +56,11 @@ namespace Safari.Model
         {
             Map = map;
             Difficulty = gameDifficulty;
-            MoneyManager = new MoneyManager();
-            Construction = new ConstructionManager(map, MoneyManager);
             pathfinding = new PathfindingHelper(map);
             Animals = new AnimalCollection(pathfinding);
+            MoneyManager = new MoneyManager(Animals);
             AnimalCreationManager = new AnimalCreationManager(Animals, pathfinding, Map, MoneyManager);
+            Construction = new ConstructionManager(map, MoneyManager);
             GameSpeedManager = new GameSpeedManager();
             Rangers = new RangerCollection();
         }

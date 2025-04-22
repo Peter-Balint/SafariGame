@@ -1,6 +1,7 @@
 using Safari.Model;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Diagnostics;
 
 namespace Safari.View.UI
 {
@@ -26,8 +27,11 @@ namespace Safari.View.UI
         
         void Update()
         {
-        
-        }
+			if (Input.GetKeyDown(KeyCode.T))
+			{
+				MoneyManager.CalculateVisitDesire();
+			}
+		}
         public void Open()
         {
             gameObject.SetActive(true);
