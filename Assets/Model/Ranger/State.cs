@@ -1,9 +1,6 @@
 ﻿using Safari.Model.Map;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Safari.Model.Rangers
 {
@@ -44,6 +41,7 @@ namespace Safari.Model.Rangers
         }
         public virtual void Update(GridPosition target)
         {
+            throw new NotImplementedException("called from wrong state");
         }
     }
 }

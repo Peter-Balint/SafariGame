@@ -16,6 +16,10 @@ namespace Safari.View.Rangers
         
         private RangerDisplay currentRangerDisplay;
 
+        List<RangerDisplay> removeRangerList;
+        List<AnimalDisplay> removeAnimalList;
+
+        CanvasRenderer canvasRenderer;
 
         private Dictionary<RangerDisplay, AnimalDisplay> huntMapping;
 
@@ -23,16 +27,19 @@ namespace Safari.View.Rangers
         {
             RangerCollectionController.OnRangerClicked += Open;
             huntMapping = new Dictionary<RangerDisplay, AnimalDisplay>();
-            gameObject.SetActive(false);
+            removeRangerList = new List<RangerDisplay>();
+            removeAnimalList = new List<AnimalDisplay>();
+
+            gameObject.transform.localScale = Vector3.zero;      
         }
         public void Open(object sender, RangerDisplay rangerDisplay)
         {
-            gameObject.SetActive(true);
+            gameObject.transform.localScale = Vector3.one;
             this.currentRangerDisplay = rangerDisplay;
         }
         public void Close()
         {
-            gameObject.SetActive(false);
+            gameObject.transform.localScale = Vector3.zero;
         }
 
         public void HuntWolf()
@@ -46,9 +53,12 @@ namespace Safari.View.Rangers
 
         public void HuntPredator<PredatorType>()
         {
-            double distance = 0;
+            double distanceSquare = 0;
             AnimalDisplay target = null;
             List<AnimalDisplay> animals = AnimalCollectionController.Displayers;
+
+            Vector3 thisPosition = currentRangerDisplay.transform.position;
+            Vector3 targetPosition;
 
             foreach (AnimalDisplay animalDisplay in animals)
             {
@@ -57,16 +67,17 @@ namespace Safari.View.Rangers
                     if(target == null)
                     {
                         target = animalDisplay;
+                        targetPosition = animalDisplay.transform.position;
+                        distanceSquare = (targetPosition - thisPosition).sqrMagnitude;
                     }
                     else
                     {
-                        Vector3 thisPosition = gameObject.transform.position;
-                        Vector3 targetPosition = target.transform.position;
+                        targetPosition = animalDisplay.transform.position;
                         double newDistanceSquare = (targetPosition - thisPosition).sqrMagnitude;
-                        if(newDistanceSquare > distance * distance)
+                        if(newDistanceSquare < distanceSquare)
                         {
                             target = animalDisplay;
-                            distance = Math.Sqrt(newDistanceSquare);
+                            distanceSquare = newDistanceSquare;
                         }
                     }
                 }
@@ -75,31 +86,90 @@ namespace Safari.View.Rangers
             if (target != null)
             {
                 currentRangerDisplay.Ranger.SetState(new Hunting(currentRangerDisplay.Ranger));
-                if(!target.AnimalModel.Movement.HasSubscribers) { target.AnimalModel.Movement.GridPositionChanged += OnTargetMoved; }
+
+                if (!huntMapping.ContainsValue(target)) 
+                {
+                    target.AnimalModel.Movement.GridPositionChanged += OnTargetMoved;
+                    target.AnimalModel.Died += OnTargetDied;
+                }
+
                 currentRangerDisplay?.Ranger.ModelUpdate(target.AnimalModel.Movement.Location);
 
                 huntMapping[currentRangerDisplay] = target;
             }
 
-            gameObject.SetActive(false);
+            gameObject.transform.localScale = Vector3.zero;
         }
 
         private void OnTargetMoved(object sender, GridPosition gridPosition)
         {
-            if(sender is MovementBehavior behavior)
+
+            if (sender is MovementBehavior behavior)
             {
-                foreach((RangerDisplay rangerDisplay,AnimalDisplay animalDisplay) in huntMapping)
+                foreach ((RangerDisplay rangerDisplay, AnimalDisplay animalDisplay) in huntMapping)
                 {
-                    if(animalDisplay.AnimalModel == behavior.Owner)
+                    if (animalDisplay.AnimalModel == behavior.Owner)
                     {
-                        rangerDisplay?.Ranger.ModelUpdate(animalDisplay.AnimalModel.Movement.Location);
+                        GridPosition targetGrid = animalDisplay.AnimalModel.Movement.Location;
+                        rangerDisplay?.Ranger.ModelUpdate(targetGrid);  
                     }
                 }
-            }// for some reason two rangers going after the same animal freezes both of them
+            }
+        }
+        private void OnTargetDied(object sender, EventArgs e)
+        {
+            List<RangerDisplay> list = new List<RangerDisplay>();
+            if(sender is Animal animal)
+            {
+                foreach ((RangerDisplay rangerDisplay, AnimalDisplay animalDisplay) in huntMapping)
+                {
+                    if (animalDisplay.AnimalModel == animal)
+                    {
+                        list.Add(rangerDisplay);
+                    }
+                }
+                foreach (RangerDisplay rangerDisplay in list)
+                {
+                    huntMapping.Remove(rangerDisplay);
+                }
+            }
         }
 
         void Update()
         {
+            Vector3 rangerVector;
+            Vector3 targetVector;
+            removeRangerList.Clear();
+            removeAnimalList.Clear();
+
+            foreach ((RangerDisplay rangerDisplay, AnimalDisplay animalDisplay) in huntMapping)
+            {
+                rangerVector = rangerDisplay.transform.position;
+                targetVector = animalDisplay.transform.position;
+                if (rangerDisplay.Ranger.CheckInShootingDistance(rangerVector, targetVector))
+                {
+                    if (!removeAnimalList.Contains(animalDisplay))
+                    {
+                        removeAnimalList.Add(animalDisplay);
+                    }
+                }
+            }
+            foreach((RangerDisplay rangerDisplay, AnimalDisplay animalDisplay) in huntMapping)
+            {
+                if (removeAnimalList.Contains(animalDisplay))
+                {
+                    removeRangerList.Add(rangerDisplay);
+                }
+            }
+
+            foreach (RangerDisplay rangerDisplay in removeRangerList)
+            {
+                rangerDisplay.Ranger.SetState(new Wandering(rangerDisplay.Ranger));
+            }
+            for (int i = 0; i < removeAnimalList.Count; i++)
+            {
+                removeAnimalList[i].AnimalModel.Kill();
+            }
         }
     }
 }

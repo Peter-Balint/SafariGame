@@ -15,7 +15,6 @@ namespace Safari.Model.Movement
 
         public event EventHandler<GridPosition>? GridPositionChanged;
 
-        public bool HasSubscribers { get { return !(GridPositionChanged == null); } }
 
         public MovementCommand? CurrentCommand { get; private set; }
 
