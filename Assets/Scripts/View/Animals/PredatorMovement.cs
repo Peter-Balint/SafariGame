@@ -63,6 +63,10 @@ namespace Safari.View.Animals
                     command.ReportPreyApproached(new PreyApproached(animalDisplay.AnimalModel as IPrey,
                                                                     new Chaser(getPosition, getVelocity)));
                 }
+                else if (command.CanEscape && agent.remainingDistance > command.EscapeRadius)
+                {
+                    command.ReportPreyEscaped();
+                }
             }
         }
 

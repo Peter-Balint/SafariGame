@@ -64,7 +64,7 @@ namespace Safari.Model.Animals
             CriticalHungerLimit = 50000;
             EatingRate = 8000;
             RestingInterval = new Tuple<float, float>(0.05f * 600, 0.1f * 600);
-            State = new State.Resting(this, 0, 0);
+            State = new State.Wandering(this, 0, 0);
             State.OnEnter();
             Pathfinding = pathfinding;
             metadata = new AnimalMetadata();
@@ -81,7 +81,7 @@ namespace Safari.Model.Animals
             CriticalHungerLimit = 50000;
             EatingRate = 4000;
             RestingInterval = new Tuple<float, float>(0.05f * 600, 0.1f * 600);
-            State = new State.Resting(this, 0, 0);
+            State = new State.Wandering(this, 0, 0);
             State.OnEnter();
             Pathfinding = pathfinding;
             this.metadata = metadata;

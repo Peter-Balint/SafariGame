@@ -29,7 +29,7 @@ namespace Safari.Model.Animals
 
         public void OnEscaped()
         {
-            
+            InterruptState(new Resting(this, State.Thirst, State.Hunger));
         }
     }
 }

@@ -77,6 +77,7 @@ namespace Safari.View.Animals
         {
             if (sender == currentlyExecuting)
             {
+                currentlyExecuting = null;
                 OnCurrentMovementCancelled(sender, e);
             }
         }
@@ -89,9 +90,19 @@ namespace Safari.View.Animals
         private void MoveAgent(MovementCommand movementCommand)
         {
             movementCommand.Cancelled += OnMovementCancelled;
+            movementCommand.Finished += OnMovementFinished;
             currentlyExecuting = movementCommand;
             agent.ResetPath();
             HandleMovement(movementCommand);
+        }
+
+        private void OnMovementFinished(object sender, EventArgs e)
+        {
+            if (sender == currentlyExecuting)
+            {
+                currentlyExecuting = null;
+                agent.ResetPath();
+            }
         }
 
         private void OnDestroy()

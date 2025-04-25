@@ -22,7 +22,6 @@ namespace Safari.View.Animals
         public float predictionTime = 1.5f;
         public int maxAttempts = 60;
 
-        private Chaser? chaser;
         private Vector3 currentEscapeTarget = Vector3.zero;
         private bool firstCalc = false;
 
@@ -31,7 +30,7 @@ namespace Safari.View.Animals
             if (command is FleeMovementCommand fc)
             {
                 Debug.Log("FleeMovementCommand");
-                chaser = fc.Chaser;
+                currentEscapeTarget = Vector3.zero;
                 firstCalc = true;
                 return;
             }
@@ -41,10 +40,13 @@ namespace Safari.View.Animals
         protected override void Update()
         {
             base.Update();
-            if (chaser == null)
+            agent.speed = 60;
+            if (currentlyExecuting is not FleeMovementCommand c || c.Chaser == null)
             {
                 return;
             }
+
+            var chaser = c.Chaser;
 
             float distToThreat = Vector3.Distance(transform.position, chaser.GetPosition());
             float distToTarget = Vector3.Distance(transform.position, currentEscapeTarget);
@@ -66,8 +68,12 @@ namespace Safari.View.Animals
 
         protected override void CheckMovementFinished()
         {
-           
+            if (currentlyExecuting is not FleeMovementCommand)
+            {
+                base.CheckMovementFinished();
+            }
         }
+       
 
         private Vector3 FindSmartEscapePoint(Chaser chaser)
         {

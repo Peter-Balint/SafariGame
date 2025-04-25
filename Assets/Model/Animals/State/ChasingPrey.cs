@@ -24,7 +24,17 @@ namespace Safari.Model.Animals.State
         {
             base.OnEnter();
             command.Finished += OnChasingFinished;
+            command.PreyEscaped += OnPreyEscaped;
+            command.CanEscape = true;
             UnityEngine.Debug.Log($"{owner.GetType().Name} is chasing the prey");
+        }
+
+        private void OnPreyEscaped(object sender, EventArgs e)
+        {
+            command.Finished -= OnChasingFinished;
+            command.ReportFinished();
+            prey.OnEscaped();
+            TransitionTo(new FailedHunting(this.owner, thirst, hunger));
         }
 
         private void OnChasingFinished(object sender, EventArgs e)

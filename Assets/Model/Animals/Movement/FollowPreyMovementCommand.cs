@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine.Scripting;
 
 namespace Safari.Model.Animals.Movement
 {
@@ -12,16 +13,25 @@ namespace Safari.Model.Animals.Movement
     {
         public event EventHandler<StalkingFinishedEventArgs>? StalkingFinished;
 
+        public event EventHandler? PreyEscaped;
+
         public float StalkingFinishedRadius { get; private set; }
 
         public float FinishedRadius { get; private set; }
 
+        public float EscapeRadius { get; private set; }
+
+        public bool CanEscape { get; set; }
+
         private bool stalkingFinished;
 
-        public FollowPreyMovementCommand(float stalkingFinishedRadius, float finishedRadius)
+        private bool preyEscaped;
+
+        public FollowPreyMovementCommand(float stalkingFinishedRadius, float finishedRadius, float escapeRadius)
         {
             StalkingFinishedRadius = stalkingFinishedRadius;
             FinishedRadius = finishedRadius;
+            EscapeRadius = escapeRadius;
         }
 
         public void ReportPreyNotFound()
@@ -44,6 +54,16 @@ namespace Safari.Model.Animals.Movement
             }
             stalkingFinished = true;
             StalkingFinished?.Invoke(this, e);
+        }
+
+        public void ReportPreyEscaped()
+        {
+            if (preyEscaped)
+            {
+                return;
+            }
+            preyEscaped = true;
+            PreyEscaped?.Invoke(this, EventArgs.Empty);
         }
     }
 }

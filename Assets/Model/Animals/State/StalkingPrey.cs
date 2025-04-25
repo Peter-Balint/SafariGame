@@ -17,6 +17,8 @@ namespace Safari.Model.Animals.State
 
         private const float KillRange = 1.8f;
 
+        private const float EscapeRange = 130;
+
         private FollowPreyMovementCommand? command;
 
         private IPrey? prey;
@@ -30,7 +32,7 @@ namespace Safari.Model.Animals.State
         {
             base.OnEnter();
             UnityEngine.Debug.Log($"{owner.GetType().Name} is searching for, and will stalk a prey");
-            command = new FollowPreyMovementCommand(HuntingRange, KillRange);
+            command = new FollowPreyMovementCommand(HuntingRange, KillRange, EscapeRange);
             command.StalkingFinished += OnStalkingFinished;
             owner.Movement.ExecuteMovement(command);
 
@@ -74,10 +76,7 @@ namespace Safari.Model.Animals.State
             if (command != null)
             {
                 command.StalkingFinished -= OnStalkingFinished;
-                command.Cancel();
             }
-            prey?.OnEscaped();
-
         }
     }
 }
