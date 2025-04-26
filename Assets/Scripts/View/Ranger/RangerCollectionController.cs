@@ -4,6 +4,8 @@ using Safari.Model.Rangers;
 using Safari.Model.Map;
 using Safari.Model;
 using Safari.View.World.Map;
+using Safari.Model.GameSpeed;
+using System;
 
 
 namespace Safari.View.Rangers
@@ -19,14 +21,25 @@ namespace Safari.View.Rangers
         private Dictionary<GridPosition, Vector3> gridPositionMapping;
         public Dictionary<GridPosition, Vector3> GridPositionMapping { get { return gridPositionMapping; } }
 
+        private GameSpeedManager gameSpeedManager;
+
+        [SerializeField]
+        private int rangerSalary;
+
+        public event EventHandler<RangerDisplay> OnRangerClicked;
 
         void Start()
         {
             rangerCollection = SafariGame.Instance.Rangers;
+            gameSpeedManager = SafariGame.Instance.GameSpeedManager;
+
             displayers = new List<RangerDisplay>();
 
             rangerCollection.Added += OnRangerAdded;
             rangerCollection.Removed += OnRangerRemoved;
+
+            gameSpeedManager.DayPassed += (sender,args) => {  };    //when moneymanager is made
+                                                                    //change to month also, misread the task
         }
 
         public void InjectGridPositionMappingData(MapDisplay.MapInitializedEventArgs args)
@@ -52,7 +65,8 @@ namespace Safari.View.Rangers
                     parent = transform,
                     worldSpace = false
                 });
-            display.Init(ranger, gridPositionMapping);
+            display.Init(ranger, gridPositionMapping, gameSpeedManager);
+            display.OnCLick += HandleRangerClicked;
             displayers.Add(display);
         }
         private void OnRangerRemoved(object sender, Ranger ranger)
@@ -61,10 +75,19 @@ namespace Safari.View.Rangers
             {
                 if (display.Ranger == ranger)
                 {
+                    display.OnCLick -= HandleRangerClicked;
                     displayers.Remove(display);
                     Destroy(display.gameObject);
                     return;
                 }
+            }
+        }
+
+        private void HandleRangerClicked(object sender, EventArgs e)
+        {
+            if(sender is RangerDisplay rangerDisplay)
+            {
+                OnRangerClicked?.Invoke(this, rangerDisplay);
             }
         }
     }

@@ -48,7 +48,7 @@ namespace Safari.Model.GameSpeed
         }
         public void AddTime(float delta)
         {
-            double minutesInFrame = CurrentSpeedToNum() * delta * 5;
+            double minutesInFrame = CurrentSpeedToNum() * delta * 10;
 
             Time = Time.AddMinutes(minutesInFrame);
             minutesToday += minutesInFrame;

@@ -1,4 +1,3 @@
-﻿#nullable enable
 using Safari.Model.Animals.Movement;
 using Safari.Model.GameSpeed;
 using Safari.Model.Map;
@@ -7,16 +6,12 @@ using Safari.View.Utils;
 using Safari.View.World.Map;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.SocialPlatforms;
 
-namespace Safari.View.Animals
+namespace Safari.View.Rangers
 {
-    public class AnimalMovement : MonoBehaviour
+    public class RangerMovement : MonoBehaviour
     {
         public float cellSize = 30f;
         public const float defaultSpeed = 10;
@@ -28,6 +23,8 @@ namespace Safari.View.Animals
         private GameSpeedManager gameSpeedManager;
 
         private MovementCommand? currentlyExecuting;
+
+        public event EventHandler OnClick;
 
         public void Init(MovementBehavior behavior, NavMeshAgent agent, Dictionary<GridPosition, Vector3> mapping, GameSpeedManager gameSpeedManager)
         {
@@ -57,7 +54,7 @@ namespace Safari.View.Animals
             {
                 case GridMovementCommand gm:
                     var target = gridPositionMapping[gm.TargetCell];
-                    target += new Vector3(gm.TargetOffset.DeltaX, 0, gm.TargetOffset.DeltaZ) * 15;
+                    //target += new Vector3(gm.TargetOffset.DeltaX, 0, gm.TargetOffset.DeltaZ) * 15;
                     agent.SetDestination(target);
                     break;
 
@@ -76,7 +73,7 @@ namespace Safari.View.Animals
 
             }
         }
-        
+
         private void OnMovementCancelled(object sender, EventArgs e)
         {
             if (sender == currentlyExecuting)
@@ -101,6 +98,12 @@ namespace Safari.View.Animals
                 var fieldDisplay = other.gameObject.GetComponent<FieldDisplay>();
                 behavior.ReportLocation(fieldDisplay.Position);
             }
+        }
+
+        private void OnMouseDown()
+        {
+            Debug.Log("Broke through the barrier");
+            OnClick?.Invoke(this, EventArgs.Empty);
         }
 
         private void Update()

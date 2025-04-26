@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Safari.Model.Animals
 {
-    public abstract class Animal
+    public abstract class Animal : IMoving
     {
         public MovementBehavior Movement { get; }
 
@@ -58,7 +58,7 @@ namespace Safari.Model.Animals
 
         protected Animal(PathfindingHelper pathfinding)
         {
-            Movement = new MovementBehavior();
+            Movement = new MovementBehavior(this);
             age = 0;
             ThirstLimit = 10000;
             CriticalThirstLimit = 20000;
@@ -75,7 +75,7 @@ namespace Safari.Model.Animals
 
         protected Animal(PathfindingHelper pathfinding, AnimalMetadata metadata)
         {
-            Movement = new MovementBehavior();
+            Movement = new MovementBehavior(this);
             age = 0;
             ThirstLimit = 10000;
             CriticalThirstLimit = 20000;
@@ -111,6 +111,11 @@ namespace Safari.Model.Animals
         }
 
         public abstract State.State HandleFoodFinding();
+
+        public void Kill()
+        {
+            SetState(new Dead(this,0,0));
+        }
     }
 
     public enum AnimalState
