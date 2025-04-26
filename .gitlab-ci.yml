@@ -80,33 +80,11 @@ test-editmode:
     paths:
       - $UNITY_DIR/Builds/
 
-build-StandaloneLinux64:
-  <<: *build
-  variables:
-    BUILD_TARGET: StandaloneLinux64
-
-build-StandaloneOSX:
-  <<: *build
-  image: $IMAGE:$UNITY_VERSION-mac-mono-$IMAGE_VERSION
-  variables:
-    BUILD_TARGET: StandaloneOSX
-
 build-StandaloneWindows64:
   <<: *build
   image: $IMAGE:$UNITY_VERSION-windows-mono-$IMAGE_VERSION
   variables:
     BUILD_TARGET: StandaloneWindows64
-
-build-WebGL:
-  <<: *build
-  image: $IMAGE:$UNITY_VERSION-webgl-$IMAGE_VERSION
-  variables:
-    BUILD_TARGET: WebGL
-  rules:
-    # run only on default branch, as WebGL builds requires more time
-    - if: "$UNITY_LICENSE && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH"
-      when: always
-    - when: never
 
 pages:
   image: alpine:latest
