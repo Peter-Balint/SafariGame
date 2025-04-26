@@ -1,4 +1,7 @@
+using Safari.Model;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Diagnostics;
 
 namespace Safari.View.UI
 {
@@ -8,17 +11,27 @@ namespace Safari.View.UI
         private GameObject ConstructionMenu;
         [SerializeField]
         private GameObject AnimalShop;
+
+        private MoneyManager MoneyManager;
+
         
-        void Start()
+		public TMP_Text TicketPriceText;
+
+
+		void Start()
         {
-        
-        }
+            MoneyManager = SafariGame.Instance.MoneyManager;
+			TicketPriceText.text = MoneyManager.ReadTicketPrice().ToString() + '$';
+		}
 
         
         void Update()
         {
-        
-        }
+			if (Input.GetKeyDown(KeyCode.T))
+			{
+				MoneyManager.CalculateVisitDesire();
+			}
+		}
         public void Open()
         {
             gameObject.SetActive(true);
@@ -33,5 +46,20 @@ namespace Safari.View.UI
             AnimalShop.SetActive(true);
             gameObject.SetActive(false);
         }
-    }
+
+        public void OnTicketPriceUp()
+        {
+            MoneyManager.RaiseTicketPrice();
+            Debug.Log(MoneyManager.ReadTicketPrice());
+            TicketPriceText.text = MoneyManager.ReadTicketPrice().ToString()+'$';
+            
+        }
+		public void OnTicketPriceDown()
+		{
+			MoneyManager.LowerTicketPrice();
+			Debug.Log(MoneyManager.ReadTicketPrice());
+			TicketPriceText.text = MoneyManager.ReadTicketPrice().ToString() + '$';
+
+		}
+	}
 }

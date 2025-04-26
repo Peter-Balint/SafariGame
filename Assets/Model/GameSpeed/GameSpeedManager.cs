@@ -1,3 +1,4 @@
+using Safari.Model.Rangers;
 using System;
 using UnityEngine;
 
@@ -9,16 +10,22 @@ namespace Safari.Model.GameSpeed
         public DateTime Time { get; set; }
 
         private const int minutesInDay = 24 * 60;
-        private double minutesToday;
+        public double minutesToday;
+     
 
         public event EventHandler DayPassed;
 
-        public GameSpeedManager() 
+
+
+
+		public GameSpeedManager() 
         {
             CurrentSpeed = GameSpeed.Slow;
             Time = DateTime.Now;
             minutesToday = Time.Minute + Time.Hour*60;
-        }
+            
+       
+		}
 
         public int CurrentSpeedToNum() //the actual meaning behind the enum
         {
@@ -51,8 +58,17 @@ namespace Safari.Model.GameSpeed
                 DayPassed?.Invoke(this, new EventArgs());
                 minutesToday -= minutesInDay;
             }
+
+       
+
+            
         }
-    }
+
+
+	}
 
     public enum GameSpeed { Slow, Medium, Fast } //might rename later
+
+
+
 }
