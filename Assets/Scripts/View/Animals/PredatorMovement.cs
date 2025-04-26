@@ -64,8 +64,8 @@ namespace Safari.View.Animals
                 }
                 else if (agent.remainingDistance < command.StalkingFinishedRadius && !command.IsStalkingFinished)
                 {
-                        command.ReportPreyApproached(new PreyApproached(animal as IPrey,
-                                                                        new Chaser(getPosition, getVelocity)));
+                    command.ReportPreyApproached(new PreyApproached(animal as IPrey,
+                                                                    new Chaser(getPosition, getVelocity)));
                 }
                 else if (command.CanEscape && agent.remainingDistance > command.EscapeRadius)
                 {
