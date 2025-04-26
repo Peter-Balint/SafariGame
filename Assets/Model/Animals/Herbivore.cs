@@ -16,11 +16,6 @@ namespace Safari.Model.Animals
             return new SearchingFeedingSite(this, State.Thirst, State.Hunger);
         }
 
-        public void Kill()
-        {
-            InterruptState(new Dead(this, State.Thirst, State.Hunger));
-        }
-
         public void OnChased(Chaser chaser)
         {
             // interrupt the current state and start fleeing

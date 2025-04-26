@@ -21,6 +21,8 @@ namespace Safari.Model.Animals.Movement
 
         public float EscapeRadius { get; private set; }
 
+        public bool IsStalkingFinished => stalkingFinished;
+
         public IPrey? Prey { get; private set; }
 
         public bool CanEscape { get; set; }

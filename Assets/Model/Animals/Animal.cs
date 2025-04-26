@@ -113,7 +113,13 @@ namespace Safari.Model.Animals
         {
         }
 
+        public void Kill()
+        {
+            InterruptState(new Dead(this, State.Thirst, State.Hunger));
+        }
+
         public abstract State.State HandleFoodFinding();
+
     }
 
     public enum AnimalState

@@ -20,7 +20,7 @@ namespace Safari.Model.Animals.State
             this.prey = prey;
         }
 
-        public async override void OnEnter()
+        public override void OnEnter()
         {
             base.OnEnter();
             command.Finished += OnChasingFinished;
@@ -51,7 +51,6 @@ namespace Safari.Model.Animals.State
             base.OnExit();
             command.Finished -= OnChasingFinished;
             command.ReportFinished();
-
         }
     }
 }

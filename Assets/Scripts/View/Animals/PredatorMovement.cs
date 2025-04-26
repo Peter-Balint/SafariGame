@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using Safari.Model.Animals;
 using Safari.Model.Animals.Movement;
+using Safari.Model.Animals.State;
 using Safari.Model.Movement;
 using System;
 using System.Collections.Generic;
@@ -24,11 +25,15 @@ namespace Safari.View.Animals
             if (command is FollowPreyMovementCommand fc)
             {
                 var target = FindClosestPrey();
-                fc.Extra = target;
                 if (target == null)
                 {
+                    fc.Extra = null;
                     fc.ReportPreyNotFound();
+                    return;
                 }
+                Trace.Assert(target.parent.TryGetComponent<AnimalDisplay>(out var animalDisplay), "Target prey is malformed: parent doesn't have AnimalDisplay");
+                Trace.Assert(animalDisplay.AnimalModel is IPrey, "Target prey doesn't implement IPrey interface");
+                fc.Extra = new Tuple<Transform, Animal>(target, animalDisplay.AnimalModel!);
                 return;
             }
             base.HandleMovement(command);
@@ -44,10 +49,12 @@ namespace Safari.View.Animals
                 base.CheckMovementFinished();
                 return;
             }
-            if (command.Extra is not Transform target)
+            if (command.Extra is not Tuple<Transform, Animal> extra)
             {
                 return;
             }
+            var target = extra.Item1;
+            var animal = extra.Item2;
 
             if (!agent.pathPending && agent.hasPath)
             {
@@ -55,13 +62,10 @@ namespace Safari.View.Animals
                 {
                     command.ReportFinished();
                 }
-                else if (agent.remainingDistance < command.StalkingFinishedRadius)
+                else if (agent.remainingDistance < command.StalkingFinishedRadius && !command.IsStalkingFinished)
                 {
-                    Trace.Assert(target.parent.TryGetComponent<AnimalDisplay>(out var animalDisplay), "Chased prey is malformed: parent doesn't have AnimalDisplay");
-                    Trace.Assert(animalDisplay.AnimalModel is IPrey, "Chased prey doesn't implement IPrey interface");
-
-                    command.ReportPreyApproached(new PreyApproached(animalDisplay.AnimalModel as IPrey,
-                                                                    new Chaser(getPosition, getVelocity)));
+                        command.ReportPreyApproached(new PreyApproached(animal as IPrey,
+                                                                        new Chaser(getPosition, getVelocity)));
                 }
                 else if (command.CanEscape && agent.remainingDistance > command.EscapeRadius)
                 {
@@ -73,9 +77,9 @@ namespace Safari.View.Animals
         protected override void Update()
         {
             base.Update();
-            if (currentlyExecuting is FollowPreyMovementCommand && currentlyExecuting.Extra is Transform target)
+            if (currentlyExecuting is FollowPreyMovementCommand && currentlyExecuting.Extra is Tuple<Transform, Animal> extra && extra.Item1 != null)
             {
-                agent.SetDestination(target.position);
+                agent.SetDestination(extra.Item1.position);
             }
         }
 

@@ -15,10 +15,12 @@ namespace Safari.Model.Animals.State
             this.chaser = chaser;
         }
 
-        public override void OnEnter()
+        public override async void OnEnter()
         {
             base.OnEnter();
             owner.Movement.ExecuteMovement(new Movement.FleeMovementCommand(chaser));
+            await Task.Delay(1000);
+            TransitionTo(new Dead(owner, thirst, hunger));
         }
     }
 }
