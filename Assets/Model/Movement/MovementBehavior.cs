@@ -21,7 +21,8 @@ namespace Safari.Model.Movement
             CurrentCommand?.Cancel();
             CurrentCommand = command;
             CommandStarted?.Invoke(this, CurrentCommand);
-            CurrentCommand.Cancelled += OnCommandCancelled; 
+            CurrentCommand.Cancelled += OnCommandCancelled;
+            CurrentCommand.Finished += OnCommandFinished;
         }
 
         public void ReportLocation(GridPosition location)
@@ -36,6 +37,14 @@ namespace Safari.Model.Movement
         }
 
         private void OnCommandCancelled(object sender, EventArgs e)
+        {
+            if (sender == CurrentCommand)
+            {
+                CurrentCommand = null;
+            }
+        }
+
+        private void OnCommandFinished(object sender, EventArgs e)
         {
             if (sender == CurrentCommand)
             {

@@ -29,7 +29,6 @@ namespace Safari.View.Animals
         {
             if (command is FleeMovementCommand fc)
             {
-                Debug.Log("FleeMovementCommand");
                 currentEscapeTarget = Vector3.zero;
                 firstCalc = true;
                 return;
@@ -40,7 +39,6 @@ namespace Safari.View.Animals
         protected override void Update()
         {
             base.Update();
-            agent.speed = 60;
             if (currentlyExecuting is not FleeMovementCommand c || c.Chaser == null)
             {
                 return;

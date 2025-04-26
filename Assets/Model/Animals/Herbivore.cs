@@ -29,6 +29,7 @@ namespace Safari.Model.Animals
 
         public void OnEscaped()
         {
+            Debug.Log($"{GetType().Name} escaped from the predator");
             InterruptState(new Resting(this, State.Thirst, State.Hunger));
         }
     }

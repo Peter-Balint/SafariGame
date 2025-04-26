@@ -21,6 +21,8 @@ namespace Safari.Model.Animals.Movement
 
         public float EscapeRadius { get; private set; }
 
+        public IPrey? Prey { get; private set; }
+
         public bool CanEscape { get; set; }
 
         private bool stalkingFinished;
@@ -42,7 +44,7 @@ namespace Safari.Model.Animals.Movement
 
         public void ReportPreyApproached(PreyApproached result)
         {
-
+            Prey = result.Prey;
             OnStalkingFinished(new StalkingFinishedEventArgs(result));
         }
 
@@ -64,6 +66,12 @@ namespace Safari.Model.Animals.Movement
             }
             preyEscaped = true;
             PreyEscaped?.Invoke(this, EventArgs.Empty);
+        }
+
+        public override void Cancel()
+        {
+            base.Cancel();
+            Prey?.OnEscaped();
         }
     }
 }

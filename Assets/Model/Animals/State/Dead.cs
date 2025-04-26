@@ -2,9 +2,14 @@
 {
     public class Dead : State
     {
-        HANDLE MOVEMENT CANCELLATION PROPERLY
         public Dead(Animal owner, float thirst, float hunger) : base(owner, thirst, hunger)
         {
+        }
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
+            owner.Movement.AbortMovement();
         }
     }
 }
