@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c997e484319674db205795659e6637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 0, y: 0, z: 0}
   mapping: {fileID: 11400000, guid: 2887ad17276c45f48b0b9d4d65e76fa1, type: 2}
 --- !u!195 &-5813636773278145548
 NavMeshAgent:
