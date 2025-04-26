@@ -1027,6 +1027,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ConstructionMenu: {fileID: 0}
+  AnimalShop: {fileID: 0}
+  TicketPriceText: {fileID: 2524679790018973901}
 --- !u!1 &4513836611841260327
 GameObject:
   m_ObjectHideFlags: 0
