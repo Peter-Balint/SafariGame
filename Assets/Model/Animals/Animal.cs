@@ -63,11 +63,11 @@ namespace Safari.Model.Animals
             ThirstLimit = 10000;
             CriticalThirstLimit = 20000;
             DrinkingRate = 2500;
-            HungerLimit = 30000;
+            HungerLimit = 3000;
             CriticalHungerLimit = 50000;
-            EatingRate = 4000;
+            EatingRate = 8000;
             RestingInterval = new Tuple<float, float>(0.05f * 600, 0.1f * 600);
-            State = new State.Resting(this, 0, 0);
+            State = new State.Wandering(this, 0, 0);
             State.OnEnter();
             Pathfinding = pathfinding;
             metadata = new AnimalMetadata();
@@ -80,11 +80,11 @@ namespace Safari.Model.Animals
             ThirstLimit = 10000;
             CriticalThirstLimit = 20000;
             DrinkingRate = 2500;
-            HungerLimit = 30000;
+            HungerLimit = 3000;
             CriticalHungerLimit = 50000;
             EatingRate = 4000;
             RestingInterval = new Tuple<float, float>(0.05f * 600, 0.1f * 600);
-            State = new State.Resting(this, 0, 0);
+            State = new State.Wandering(this, 0, 0);
             State.OnEnter();
             Pathfinding = pathfinding;
             this.metadata = metadata;
@@ -102,6 +102,12 @@ namespace Safari.Model.Animals
             }
         }
 
+        internal void InterruptState(State.State newState)
+        {
+            State.OnInterrupted();
+            SetState(newState);
+        }
+
         public void ModelUpdate(float deltaTime, int speedFactor)
         {
             State.Update(deltaTime, speedFactor);
@@ -110,12 +116,12 @@ namespace Safari.Model.Animals
         {
         }
 
-        public abstract State.State HandleFoodFinding();
-
         public void Kill()
         {
-            SetState(new Dead(this,0,0));
+            InterruptState(new Dead(this, State.Thirst, State.Hunger));
         }
+
+        public abstract State.State HandleFoodFinding();
     }
 
     public enum AnimalState
