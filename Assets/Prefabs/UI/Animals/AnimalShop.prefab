@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animalCollectionController: {fileID: 0}
-  ListingPrefab: {fileID: 4064323709536137040, guid: 162c6e46d649cc246ba8bebd672153a2, type: 3}
+  ListingPrefab: {fileID: 6123169695910841095, guid: 743fbf841f43d084e80c33909a6431d4, type: 3}
   ScrollViewContent: {fileID: 1559490761219600636}
   ShopItems:
   - {fileID: 11400000, guid: 47bb7b3b276ef1047a09bcd0b4068235, type: 2}

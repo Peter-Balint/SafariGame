@@ -22,12 +22,13 @@ namespace Safari.View.Animals
         public const float defaultSpeed = 10;
 
         public MovementBehavior behavior { get; private set; }
-        private NavMeshAgent agent;
+        
+        protected NavMeshAgent agent;
+        protected MovementCommand? currentlyExecuting;
+
         private Dictionary<GridPosition, Vector3> gridPositionMapping;
 
         private GameSpeedManager gameSpeedManager;
-
-        private MovementCommand? currentlyExecuting;
 
         public void Init(MovementBehavior behavior, NavMeshAgent agent, Dictionary<GridPosition, Vector3> mapping, GameSpeedManager gameSpeedManager)
         {
@@ -43,17 +44,9 @@ namespace Safari.View.Animals
             }
         }
 
-        private void OnCommandStarted(object sender, MovementCommand e)
+        protected virtual void HandleMovement(MovementCommand command)
         {
-            MoveAgent(e);
-        }
-
-        private void MoveAgent(MovementCommand movementCommand)
-        {
-            movementCommand.Cancelled += OnMovementCancelled;
-            currentlyExecuting = movementCommand;
-            agent.ResetPath();
-            switch (movementCommand)
+            switch (command)
             {
                 case GridMovementCommand gm:
                     var target = gridPositionMapping[gm.TargetCell];
@@ -65,7 +58,6 @@ namespace Safari.View.Animals
 
                     if (NavMeshUtils.RandomPointOnNavMesh(out Vector3 point))
                     {
-                        Debug.Log($"Wandering to {point}");
                         agent.SetDestination(point);
                     }
                     else
@@ -76,11 +68,40 @@ namespace Safari.View.Animals
 
             }
         }
-        
+
+        protected virtual void OnCurrentMovementCancelled(object sender, EventArgs e)
+        {
+            agent.ResetPath();
+        }
+
         private void OnMovementCancelled(object sender, EventArgs e)
         {
             if (sender == currentlyExecuting)
             {
+                currentlyExecuting = null;
+                OnCurrentMovementCancelled(sender, e);
+            }
+        }
+
+        private void OnCommandStarted(object sender, MovementCommand e)
+        {
+            MoveAgent(e);
+        }
+
+        private void MoveAgent(MovementCommand movementCommand)
+        {
+            movementCommand.Cancelled += OnMovementCancelled;
+            movementCommand.Finished += OnMovementFinished;
+            currentlyExecuting = movementCommand;
+            agent.ResetPath();
+            HandleMovement(movementCommand);
+        }
+
+        private void OnMovementFinished(object sender, EventArgs e)
+        {
+            if (sender == currentlyExecuting)
+            {
+                currentlyExecuting = null;
                 agent.ResetPath();
             }
         }
@@ -103,14 +124,19 @@ namespace Safari.View.Animals
             }
         }
 
-        private void Update()
+        protected virtual void Update()
+        {
+            CheckMovementFinished();
+            agent.speed = defaultSpeed * gameSpeedManager.CurrentSpeedToNum();
+        }
+
+        protected virtual void CheckMovementFinished()
         {
             if (currentlyExecuting != null && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance && (!agent.hasPath || agent.velocity.sqrMagnitude == 0f))
             {
                 agent.ResetPath();
                 currentlyExecuting.ReportFinished();
             }
-            agent.speed = defaultSpeed * gameSpeedManager.CurrentSpeedToNum();
         }
     }
 }
