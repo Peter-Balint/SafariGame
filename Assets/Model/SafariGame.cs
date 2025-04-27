@@ -3,6 +3,7 @@ using Safari.Model.Animals;
 using Safari.Model.Construction;
 using Safari.Model.Map;
 using Safari.Model.Pathfinding;
+using Safari.Model.Rangers;
 using Safari.Model.GameSpeed;
 using System;
 using System.Collections.Generic;
@@ -39,10 +40,13 @@ namespace Safari.Model
 
         public ConstructionManager Construction { get;  }
 
+        public MoneyManager MoneyManager { get; }
+
         public AnimalCreationManager AnimalCreationManager { get; }
 
         public AnimalCollection Animals { get;  }
 
+        public RangerCollection Rangers{ get; }
 
         private PathfindingHelper pathfinding;
 
@@ -52,11 +56,13 @@ namespace Safari.Model
         {
             Map = map;
             Difficulty = gameDifficulty;
-            Construction = new ConstructionManager(map);
             pathfinding = new PathfindingHelper(map);
             Animals = new AnimalCollection(pathfinding);
-            AnimalCreationManager = new AnimalCreationManager(Animals, pathfinding, Map);
+            MoneyManager = new MoneyManager(Animals);
+            AnimalCreationManager = new AnimalCreationManager(Animals, pathfinding, Map, MoneyManager);
+            Construction = new ConstructionManager(map, MoneyManager);
             GameSpeedManager = new GameSpeedManager();
+            Rangers = new RangerCollection();
         }
 
         public static void StartGame(GameDifficulty gameDifficulty)

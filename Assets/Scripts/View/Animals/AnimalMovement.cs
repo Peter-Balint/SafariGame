@@ -21,7 +21,8 @@ namespace Safari.View.Animals
         public float cellSize = 30f;
         public const float defaultSpeed = 10;
 
-        protected MovementBehavior behavior;
+        public MovementBehavior behavior { get; private set; }
+        
         protected NavMeshAgent agent;
         protected MovementCommand? currentlyExecuting;
 
