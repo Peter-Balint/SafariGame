@@ -43,7 +43,11 @@ namespace Safari.Model.Pathfinding
             return map.FieldAt(pos) is Grass;
         }
 
-        private GridMovementCommand? BFS(GridPosition start, Func<Tuple<GridPosition, Offset>, bool> predicate)
+		public void FindEnterence()
+		{
+            
+		}
+		private GridMovementCommand? BFS(GridPosition start, Func<Tuple<GridPosition, Offset>, bool> predicate)
         {
             Queue<GridPosition> q = new Queue<GridPosition>();
             q.Enqueue(start);
@@ -99,5 +103,7 @@ namespace Safari.Model.Pathfinding
         {
             return map.FieldAt(pos) is Road || map.FieldAt(pos) is Ground || map.FieldAt(pos) is Grass;
         }
+
+    
     }
 }

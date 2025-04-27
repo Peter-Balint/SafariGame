@@ -15,8 +15,10 @@ namespace Safari.Model.Map
         public int SizeX => grid.GetLength(1);
 
         public int SizeZ => grid.GetLength(0);
+        public Field[,] Fields => grid;
 
-        private Field[,] grid;
+
+		private Field[,] grid;
 
         public Map(Field[,] grid, GridPosition entranceCoords, GridPosition exitCoords)
         {

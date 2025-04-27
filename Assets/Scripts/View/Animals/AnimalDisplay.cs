@@ -1,4 +1,4 @@
-using Safari.Model.Animals;
+    using Safari.Model.Animals;
 using Safari.Model.GameSpeed;
 using Safari.Model.Map;
 using System.Collections.Generic;
