@@ -59,16 +59,6 @@ get-activation-file:
     expire_in: 2 weeks
   coverage: /<Linecoverage>(.*?)</Linecoverage>/
 
-test-playmode:
-  <<: *test
-  variables:
-    TEST_PLATFORM: playmode
-
-test-editmode:
-  <<: *test
-  variables:
-    TEST_PLATFORM: editmode
-
 .build: &build
   stage: build_and_test
   <<: *unity_before_script
