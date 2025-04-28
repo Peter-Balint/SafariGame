@@ -28,8 +28,8 @@ namespace Safari.Model.Map
                     grid[j +2 , i+2] = new Water(BuildingMetadata.Default());
                 }
             }
-            grid[0, 1] = new Gate();
-            grid[sizeY - 1, sizeX - 2] = new Gate();
+            grid[0, 1] = new Entrance();
+            grid[sizeY - 1, sizeX - 2] = new Exit();
             return new Map(grid, new GridPosition(1, 0), new GridPosition(sizeX - 2, sizeY - 1));
         }
     }
