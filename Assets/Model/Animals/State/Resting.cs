@@ -27,6 +27,13 @@ namespace Safari.Model.Animals.State
         {
             base.OnEnter();
 
+            if (owner.Group?.Animals?.Count > 1)
+            {
+                Debug.Log("Reuniting");
+                TransitionTo(new Reuniting(owner, thirst, hunger, (t, h) => new Resting(owner, t, h)));
+                return;
+            }
+
             owner.Movement.AbortMovement();
             if (restingDuration < 0)
             {
