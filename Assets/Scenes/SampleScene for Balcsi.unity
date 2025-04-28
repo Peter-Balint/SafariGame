@@ -567,6 +567,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3177232016284936980, guid: 17e57ef0773bbd64d9847100c17c89aa, type: 3}
   m_PrefabInstance: {fileID: 4401395391024741485}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1106734327 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
+  m_PrefabInstance: {fileID: 8999925120013584443}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f6990c3f9dcee742aa4161717b39b00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1114615894 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4749017221349475636, guid: 0985996580351e14589f358f24ddb4cf, type: 3}
@@ -756,6 +767,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1476911486
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5296952458658094144, guid: 05be8037c37223c4e9ce6b84b660cc26, type: 3}
+      propertyPath: m_Name
+      value: JeepCollectionController
+      objectReference: {fileID: 0}
+    - target: {fileID: 6607489502769537227, guid: 05be8037c37223c4e9ce6b84b660cc26, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 315.5411
+      objectReference: {fileID: 0}
+    - target: {fileID: 6607489502769537227, guid: 05be8037c37223c4e9ce6b84b660cc26, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 812.17975
+      objectReference: {fileID: 0}
+    - target: {fileID: 6607489502769537227, guid: 05be8037c37223c4e9ce6b84b660cc26, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -603.6064
+      objectReference: {fileID: 0}
+    - target: {fileID: 6607489502769537227, guid: 05be8037c37223c4e9ce6b84b660cc26, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6607489502769537227, guid: 05be8037c37223c4e9ce6b84b660cc26, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6607489502769537227, guid: 05be8037c37223c4e9ce6b84b660cc26, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6607489502769537227, guid: 05be8037c37223c4e9ce6b84b660cc26, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6607489502769537227, guid: 05be8037c37223c4e9ce6b84b660cc26, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6607489502769537227, guid: 05be8037c37223c4e9ce6b84b660cc26, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6607489502769537227, guid: 05be8037c37223c4e9ce6b84b660cc26, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7901420357667994615, guid: 05be8037c37223c4e9ce6b84b660cc26, type: 3}
+      propertyPath: mapDisplayPrefab
+      value: 
+      objectReference: {fileID: 1106734327}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 05be8037c37223c4e9ce6b84b660cc26, type: 3}
 --- !u!1001 &1492896011
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1785,6 +1857,34 @@ PrefabInstance:
       propertyPath: ConstructionMenu
       value: 
       objectReference: {fileID: 1597260189}
+    - target: {fileID: 6399670068849751780, guid: 6436ff80aa34174469735b8b7c328147, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6399670068849751780, guid: 6436ff80aa34174469735b8b7c328147, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6399670068849751780, guid: 6436ff80aa34174469735b8b7c328147, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6399670068849751780, guid: 6436ff80aa34174469735b8b7c328147, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6399670068849751780, guid: 6436ff80aa34174469735b8b7c328147, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnJeepBuy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6399670068849751780, guid: 6436ff80aa34174469735b8b7c328147, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Safari.View.JeepCollectionController, View
+      objectReference: {fileID: 0}
+    - target: {fileID: 6399670068849751780, guid: 6436ff80aa34174469735b8b7c328147, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6482965580910879396, guid: 6436ff80aa34174469735b8b7c328147, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -1840,7 +1940,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
       propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
       propertyPath: MapChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -1883,6 +1983,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 765875413}
     - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
+      propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.data[4].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
       propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -1899,6 +2003,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
+      propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.data[4].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
       propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnMapInitialized
       objectReference: {fileID: 0}
@@ -1912,6 +2020,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
       propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: InjectGridPositionMappingData
+      objectReference: {fileID: 0}
+    - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
+      propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
       value: InjectGridPositionMappingData
       objectReference: {fileID: 0}
     - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
@@ -1935,6 +2047,10 @@ PrefabInstance:
       value: Safari.View.Rangers.RangerCollectionController, View
       objectReference: {fileID: 0}
     - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
+      propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
+      value: Safari.View.Rangers.RangerCollectionController, View
+      objectReference: {fileID: 0}
+    - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
       propertyPath: MapChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
@@ -1952,6 +2068,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
       propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
+      propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8580134897230846579, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
@@ -2015,3 +2135,4 @@ SceneRoots:
   - {fileID: 1352212290}
   - {fileID: 2116212419}
   - {fileID: 8380858044857541966}
+  - {fileID: 1476911486}

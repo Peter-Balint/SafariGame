@@ -19,8 +19,9 @@ namespace Safari.View.World.Map
                 Displayers = displayers;
             }
         }
+		public Dictionary<Vector3, FieldDisplay> DisplayerDict { get; private set; }
 
-        public FieldDisplay FieldDisplayPrefab;
+		public FieldDisplay FieldDisplayPrefab;
 
         public UnityEvent<MapInitializedEventArgs> MapInitialized;
 
@@ -29,7 +30,8 @@ namespace Safari.View.World.Map
         private void Start()
         {
             SafariGame.Instance.Map.FieldChanged += OnFieldChanged;
-            var displayerDict = BuildMap();
+            var displayerDict = DisplayerDict = BuildMap();
+            
             MapInitialized?.Invoke(new MapInitializedEventArgs(displayerDict));
         }
 

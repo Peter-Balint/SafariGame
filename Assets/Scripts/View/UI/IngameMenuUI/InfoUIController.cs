@@ -30,6 +30,7 @@ namespace Safari.View.UI
         {
             AnimalCounter.text = animalCollection.Animals.Count.ToString();
 			MoneyCounter.text = moneyManager.ReadBalance().ToString();
+            HappinessCounter.text = ((int)(moneyManager.ReadVisitDesire()*100))+" %".ToString();
 
 		}
 
