@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Safari.Model.Movement
 {
@@ -15,6 +16,7 @@ namespace Safari.Model.Movement
 
         public event EventHandler<GridPosition>? GridPositionChanged;
 
+        public Vector3 WordPos { get; private set; }
 
         public MovementCommand? CurrentCommand { get; private set; }
 
@@ -22,9 +24,10 @@ namespace Safari.Model.Movement
 
         public IMoving Owner { get; private set; }
 
-        public MovementBehavior(IMoving entity) 
+        public MovementBehavior(IMoving entity, Vector3 wordPos)
         {
             Owner = entity;
+            WordPos = wordPos;
         }
 
         public void ExecuteMovement(MovementCommand command)
@@ -39,6 +42,11 @@ namespace Safari.Model.Movement
         {
             Location = location;
             GridPositionChanged?.Invoke(this, Location);
+        }
+
+        public void ReportWordPos(Vector3 wordPos)
+        {
+            WordPos = wordPos;
         }
 
         public void AbortMovement()

@@ -6,9 +6,9 @@ namespace Safari.Model.Animals
 {
     public abstract class Herbivore : Animal
     {
-        public Herbivore(PathfindingHelper pathfinding) : base(pathfinding) { }
+        public Herbivore(PathfindingHelper pathfinding, Group group, Vector3 wordPos) : base(pathfinding, group, wordPos) { }
 
-        public Herbivore(PathfindingHelper pathfinding, AnimalMetadata metadata) : base(pathfinding, metadata) { }
+        public Herbivore(PathfindingHelper pathfinding, AnimalMetadata metadata, Group group, Vector3 wordPos) : base(pathfinding, metadata, group, wordPos) { }
 
         public override State.State HandleFoodFinding()
         {

@@ -54,14 +54,14 @@ namespace Safari.View.Animals
 
         private void OnAnimalAdded(object sender, Animal animal)
         {
-            AnimalDisplay display = Instantiate(AnimalDisplayPrefab, animal.Position,
+            AnimalDisplay display = Instantiate(AnimalDisplayPrefab, animal.Movement.WordPos,
                 Quaternion.identity,
                 new InstantiateParameters()
                 {
                     parent = transform,
                     worldSpace = false
                 });
-            display.Init(animal, animal.Position, gridPositionMapping, gameSpeedManager);
+            display.Init(animal, animal.Movement.WordPos, gridPositionMapping, gameSpeedManager);
             displayers.Add(display);
         }
 

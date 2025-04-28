@@ -19,8 +19,6 @@ namespace Safari.Model.Animals
 
         public State.State State { get; private set; }
 
-        public Vector3 Position { get; set; }
-
         public Tuple<float, float> RestingInterval { get; private set; }
 
         public int ThirstLimit { get; private set; }
@@ -37,6 +35,7 @@ namespace Safari.Model.Animals
 
         public AnimalMetadata AnimalMetadata { get { return metadata; } }
 
+        public Group Group { get; set; }
 
         protected AnimalMetadata metadata;
 
@@ -56,9 +55,9 @@ namespace Safari.Model.Animals
         public event EventHandler? StateChanged;
 
 
-        protected Animal(PathfindingHelper pathfinding)
+        protected Animal(PathfindingHelper pathfinding, Group group, Vector3 wordPos)
         {
-            Movement = new MovementBehavior(this);
+            Movement = new MovementBehavior(this, wordPos);
             age = 0;
             ThirstLimit = 10000;
             CriticalThirstLimit = 20000;
@@ -71,11 +70,13 @@ namespace Safari.Model.Animals
             State.OnEnter();
             Pathfinding = pathfinding;
             metadata = new AnimalMetadata();
+            Group = group;
+            group?.AddAnimal(this);
         }
 
-        protected Animal(PathfindingHelper pathfinding, AnimalMetadata metadata)
+        protected Animal(PathfindingHelper pathfinding, AnimalMetadata metadata, Group group, Vector3 wordPos)
         {
-            Movement = new MovementBehavior(this);
+            Movement = new MovementBehavior(this, wordPos);
             age = 0;
             ThirstLimit = 10000;
             CriticalThirstLimit = 20000;
@@ -88,6 +89,9 @@ namespace Safari.Model.Animals
             State.OnEnter();
             Pathfinding = pathfinding;
             this.metadata = metadata;
+            Group = group;
+            group?.AddAnimal(this);
+
         }
 
         internal void SetState(State.State state)
@@ -106,16 +110,18 @@ namespace Safari.Model.Animals
         {
             State.Update(deltaTime, speedFactor);
         }
+
         public void TargetReached()
         {
         }
 
-        public abstract State.State HandleFoodFinding();
-
         public void Kill()
         {
-            SetState(new Dead(this,0,0));
+            SetState(new Dead(this, 0, 0));
         }
+
+        public abstract State.State HandleFoodFinding();
+
     }
 
     public enum AnimalState
