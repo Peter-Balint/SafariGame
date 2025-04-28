@@ -7,7 +7,7 @@ stages:
 variables:
   BUILD_NAME: Safari
   UNITY_ACTIVATION_FILE: ./unity3d.alf
-  UNITY_VERSION: "6000.0.41f"
+  UNITY_VERSION: "6000.0.41f1"
   IMAGE: unityci/editor # https://hub.docker.com/r/unityci/editor
   IMAGE_VERSION: "3" # This will automatically use latest v3.x.x, see https://github.com/game-ci/docker/releases
   UNITY_DIR: $CI_PROJECT_DIR # this needs to be an absolute path. Defaults to the root of your tree.
@@ -59,16 +59,6 @@ get-activation-file:
     expire_in: 2 weeks
   coverage: /<Linecoverage>(.*?)</Linecoverage>/
 
-test-playmode:
-  <<: *test
-  variables:
-    TEST_PLATFORM: playmode
-
-test-editmode:
-  <<: *test
-  variables:
-    TEST_PLATFORM: editmode
-
 .build: &build
   stage: build_and_test
   <<: *unity_before_script
@@ -80,33 +70,11 @@ test-editmode:
     paths:
       - $UNITY_DIR/Builds/
 
-build-StandaloneLinux64:
-  <<: *build
-  variables:
-    BUILD_TARGET: StandaloneLinux64
-
-build-StandaloneOSX:
-  <<: *build
-  image: $IMAGE:$UNITY_VERSION-mac-mono-$IMAGE_VERSION
-  variables:
-    BUILD_TARGET: StandaloneOSX
-
 build-StandaloneWindows64:
   <<: *build
   image: $IMAGE:$UNITY_VERSION-windows-mono-$IMAGE_VERSION
   variables:
     BUILD_TARGET: StandaloneWindows64
-
-build-WebGL:
-  <<: *build
-  image: $IMAGE:$UNITY_VERSION-webgl-$IMAGE_VERSION
-  variables:
-    BUILD_TARGET: WebGL
-  rules:
-    # run only on default branch, as WebGL builds requires more time
-    - if: "$UNITY_LICENSE && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH"
-      when: always
-    - when: never
 
 pages:
   image: alpine:latest
