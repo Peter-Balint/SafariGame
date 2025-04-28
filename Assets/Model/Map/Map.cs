@@ -8,9 +8,9 @@ namespace Safari.Model.Map
     {
         public event EventHandler<GridPosition>? FieldChanged;
 
-        public GridPosition EntranceCoords { get; }
+        public GridPosition EntranceCoords { get; set; }
 
-        public GridPosition ExitCoords { get; }
+        public GridPosition ExitCoords { get; set; }
 
         public int SizeX => grid.GetLength(1);
 

@@ -19,6 +19,12 @@ namespace Safari.Model.Jeep
 
 		}
 
+		public Jeep(Vector3 vec3)
+		{
+			Movement = new MovementBehavior(this);
+			Position = vec3;
+		}
+
 
 
 

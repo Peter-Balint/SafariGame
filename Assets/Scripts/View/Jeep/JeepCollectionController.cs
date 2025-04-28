@@ -8,6 +8,7 @@ using Safari.View.Rangers;
 using Safari.View.World.Map;
 using System.Collections.Generic;
 using UnityEngine;
+using static Safari.View.World.Map.MapDisplay;
 
 namespace Safari.View
 {
@@ -23,20 +24,42 @@ namespace Safari.View
 		private Dictionary<GridPosition, Vector3> gridPositionMapping;
 		public Dictionary<GridPosition, Vector3> GridPositionMapping { get { return gridPositionMapping; } }
 
+		
+		public MapDisplay mapDisplayPrefab;
+		
+		Map map;
+
 		void Start()
         {
-            displayers = new List<JeepDisplay>();
+			map = SafariGame.Instance.Map;
+			
+			displayers = new List<JeepDisplay>();
 			jeepCollection = SafariGame.Instance.Jeeps;
 			jeepCollection.Added += OnJeepAdded;
 			
 
 		}
 
+	
 		public void OnJeepBuy()
 		{
-			jeepCollection.Add(new Jeep());
-			
+		
+			Vector3 entranceWorldPos = Vector3.zero;
+			foreach (var kvp in mapDisplayPrefab.DisplayerDict)
+			{
+				if (kvp.Value.Position.X == map.EntranceCoords.X &&
+					kvp.Value.Position.Z == map.EntranceCoords.Z)
+				{
+					entranceWorldPos = kvp.Key;
+					
+					break;
+				}
+			}
+			Debug.Log(entranceWorldPos);
+	
+			jeepCollection.Add(new Jeep(entranceWorldPos));
 			Debug.Log("Jeep Bought");
+			
 		}
 
         private void OnJeepAdded(object sender, Jeep jeep)
@@ -53,6 +76,7 @@ namespace Safari.View
 			displayers.Add(display);
 		}
 
+
 		public void InjectGridPositionMappingData(MapDisplay.MapInitializedEventArgs args)
 		{
 			gridPositionMapping = new Dictionary<GridPosition, Vector3>();
@@ -61,17 +85,6 @@ namespace Safari.View
 				gridPositionMapping.Add(item.Value.Position, item.Key);
 			}
 		}
-
-
-
-
-
-
-
-
-
-
-
 
 
 		// Update is called once per frame
