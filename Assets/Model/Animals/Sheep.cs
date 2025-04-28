@@ -6,15 +6,11 @@ namespace Safari.Model.Animals
 {
     public class Sheep : Herbivore
     {
-        public Sheep? Leader;
-
-        public Sheep(PathfindingHelper pathfinding, Sheep? leader) : base(pathfinding)
+        public Sheep(PathfindingHelper pathfinding, Group group, Vector3 wordPos) : base(pathfinding, group, wordPos)
         {
-            Leader = leader;
         }
-        public Sheep(PathfindingHelper pathfinding, AnimalMetadata metadata, Sheep? leader) : base(pathfinding, metadata)
+        public Sheep(PathfindingHelper pathfinding, AnimalMetadata metadata, Group group, Vector3 wordPos) : base(pathfinding, metadata, group, wordPos)
         {
-            Leader = leader;
         }
     }
 }
