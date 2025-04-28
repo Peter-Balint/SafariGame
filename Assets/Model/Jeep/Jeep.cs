@@ -14,14 +14,14 @@ namespace Safari.Model.Jeep
 
 		public Jeep()
 		{
-			Movement = new MovementBehavior(this);
+			Movement = new MovementBehavior(this, Position);
 			Position = new Vector3(8,0,137); // it should be enterance tile
 
 		}
 
 		public Jeep(Vector3 vec3)
 		{
-			Movement = new MovementBehavior(this);
+			Movement = new MovementBehavior(this, Position);
 			Position = vec3;
 		}
 
