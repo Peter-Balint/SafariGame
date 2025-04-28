@@ -9,5 +9,17 @@ namespace Safari.Model.Animals.Movement
 {
     public class WanderingMovementCommand : MovementCommand
     {
+        public WanderingMovementCommand? Followed { get; private set; }
+
+        public WanderingMovementCommand(WanderingMovementCommand? followed) : base()
+        {
+            Followed = followed;
+        }
+
+        public WanderingMovementCommand(): base()
+        {
+            
+        }
+
     }
 }

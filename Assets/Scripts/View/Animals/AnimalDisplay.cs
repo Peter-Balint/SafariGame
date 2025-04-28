@@ -63,6 +63,7 @@ namespace Safari.View.Animals
         public void Update()
         {
             AnimalModel?.ModelUpdate(Time.deltaTime, gameSpeedManager.CurrentSpeedToNum());
+            AnimalModel?.Movement.ReportWordPos(transform.position);
         }
     }
 }
