@@ -9,14 +9,16 @@ namespace Safari.Model.Movement
 
         public event EventHandler? Finished;
 
-        public void Cancel()
+        public object? Extra { get; set; }
+
+        public virtual void Cancel()
         {
             Cancelled?.Invoke(this, EventArgs.Empty);
             Cancelled = null;
             Finished = null;
         }
 
-        public void ReportFinished()
+        public virtual void ReportFinished()
         {
             Finished?.Invoke(this, EventArgs.Empty);
             Cancelled = null;

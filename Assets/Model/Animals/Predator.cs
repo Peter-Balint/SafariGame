@@ -1,4 +1,5 @@
-﻿using Safari.Model.Animals.State;
+﻿using Safari.Model.Animals.Movement;
+using Safari.Model.Animals.State;
 using Safari.Model.Movement;
 using Safari.Model.Pathfinding;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace Safari.Model.Animals
 
         public override State.State HandleFoodFinding()
         {
-            return new Dead(this, State.Thirst, State.Hunger);
+            return new StalkingPrey(this, State.Thirst, State.Hunger);
         }
     }
 }
