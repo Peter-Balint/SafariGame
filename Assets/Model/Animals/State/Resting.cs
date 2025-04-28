@@ -12,10 +12,15 @@ namespace Safari.Model.Animals.State
     {
         private float restingSince = 0;
 
-        private float restingDuration;
+        private float restingDuration = -1;
 
         public Resting(Animal owner, float thirst, float hunger) : base(owner, thirst, hunger)
         {
+        }
+
+        public Resting(Animal owner, float thirst, float hunger, float duration) : base(owner, thirst, hunger)
+        {
+            restingDuration = duration;
         }
 
         public override void OnEnter()
@@ -23,8 +28,10 @@ namespace Safari.Model.Animals.State
             base.OnEnter();
 
             owner.Movement.AbortMovement();
-
-            restingDuration = UnityEngine.Random.Range(owner.RestingInterval.Item1, owner.RestingInterval.Item2);
+            if (restingDuration < 0)
+            {
+                restingDuration = UnityEngine.Random.Range(owner.RestingInterval.Item1, owner.RestingInterval.Item2);
+            }
             Debug.Log($"Resting for {restingDuration} seconds");
         }
 
