@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Safari.Model.Jeep;
 
 namespace Safari.Model
 {
@@ -47,8 +48,9 @@ namespace Safari.Model
         public AnimalCollection Animals { get;  }
 
         public RangerCollection Rangers{ get; }
+        public JeepCollection Jeeps{ get; }
 
-        private PathfindingHelper pathfinding;
+		private PathfindingHelper pathfinding;
 
         public GameSpeedManager GameSpeedManager { get; }
 
@@ -63,7 +65,8 @@ namespace Safari.Model
             Construction = new ConstructionManager(map, MoneyManager);
             GameSpeedManager = new GameSpeedManager();
             Rangers = new RangerCollection();
-        }
+            Jeeps = new JeepCollection();
+		}
 
         public static void StartGame(GameDifficulty gameDifficulty)
         {
