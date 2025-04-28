@@ -169,10 +169,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1583aa648a1b1a34da1c5fbd85bb788a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  counterTextList:
-  - {fileID: 6037213057051075}
-  - {fileID: 5926635128607656277}
-  - {fileID: 2976032378370281558}
+  AnimalCounter: {fileID: 5926635128607656277}
+  MoneyCounter: {fileID: 6037213057051075}
+  HappinessCounter: {fileID: 2976032378370281558}
 --- !u!1 &1262962305644106772
 GameObject:
   m_ObjectHideFlags: 0
