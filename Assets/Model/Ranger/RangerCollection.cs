@@ -8,6 +8,7 @@ namespace Safari.Model.Rangers
     public class RangerCollection
     {
         private List<Ranger> rangers;
+        public List<Ranger> Rangers { get { return rangers; } }
 
         public event EventHandler<Ranger>? Added;
         public event EventHandler<Ranger>? Removed;
