@@ -8,15 +8,11 @@ namespace Safari.Model.Animals
 {
     public class Wolf : Predator
     {
-        public Wolf? Leader;
-
-        public Wolf(PathfindingHelper pathfinding,Wolf? leader) : base(pathfinding)
+        public Wolf(PathfindingHelper pathfinding, Group group, Vector3 wordPos) : base(pathfinding, group,wordPos)
         {
-            Leader = leader;
         }
-        public Wolf(PathfindingHelper pathfinding, AnimalMetadata metadata, Wolf? leader) : base(pathfinding, metadata)
+        public Wolf(PathfindingHelper pathfinding, AnimalMetadata metadata, Group group, Vector3 wordPos) : base(pathfinding, metadata, group, wordPos)
         {
-            Leader = leader;
         }
     }
 }

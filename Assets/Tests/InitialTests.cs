@@ -21,7 +21,7 @@ public class InitialTests
     public void AddingAnimalToCollectionTest()
     {
         bool addedEventCalled = false;
-        Animal animal = new Wolf(null, null);
+        Animal animal = new Wolf(null, new Group(), Vector3.zero);
         AnimalCollection collection = new AnimalCollection(null);
         collection.Added += ((sender, args) => addedEventCalled = true);
 

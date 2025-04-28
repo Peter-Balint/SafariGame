@@ -11,8 +11,7 @@ namespace Safari.View.UI.Animals
     {
         public override Animal CreateAnimal(Vector3 Position, PathfindingHelper pathfinding)
         {
-            Wolf wolf = new Wolf(pathfinding,Metadata,null);
-            wolf.Position = Position;
+            Wolf wolf = new Wolf(pathfinding,Metadata,null, Position);
             return wolf;
         }
     }
