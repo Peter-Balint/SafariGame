@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 5296952458658094144}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 315.5411, y: 812.17975, z: -603.6064}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JeepDisplayPrefab: {fileID: 84268627180137938, guid: 5a851540aab7d374e97d7fd4ee92fb50, type: 3}
+  mapDisplayPrefab: {fileID: 0}
