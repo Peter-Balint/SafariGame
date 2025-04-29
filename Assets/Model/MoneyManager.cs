@@ -104,7 +104,7 @@ namespace Safari.Model
 
 
 
-			double predatorCount = wolfCount + lionCount;
+            double predatorCount = wolfCount + lionCount;
             double herbivoreCount = camelCount + sheepCount;
 
             double lionRatio = lionCount / predatorCount;
@@ -165,7 +165,7 @@ namespace Safari.Model
 
 
 
-			/* NOTES about this function::
+            /* NOTES about this function::
 			 * 
 			 *   This function may need to be modified multiple times for the right gameplay-balance
 			 * ----------------------------
@@ -184,6 +184,6 @@ namespace Safari.Model
 			 */
 
 
-		}
+        }
 	}
 }

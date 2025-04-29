@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Assertions.Must;
 using UnityEngine.SocialPlatforms;
 
 namespace Safari.View.Animals
@@ -22,7 +23,7 @@ namespace Safari.View.Animals
         public const float defaultSpeed = 10;
 
         public MovementBehavior behavior { get; private set; }
-        
+
         protected NavMeshAgent agent;
         protected MovementCommand? currentlyExecuting;
 
@@ -55,15 +56,7 @@ namespace Safari.View.Animals
                     break;
 
                 case WanderingMovementCommand wanderingMovementCommand:
-
-                    if (NavMeshUtils.RandomPointOnNavMesh(out Vector3 point))
-                    {
-                        agent.SetDestination(point);
-                    }
-                    else
-                    {
-                        Debug.Log("Could not find valid position on NavMesh");
-                    }
+                    HandleWandering(wanderingMovementCommand);
                     break;
 
             }
@@ -72,6 +65,27 @@ namespace Safari.View.Animals
         protected virtual void OnCurrentMovementCancelled(object sender, EventArgs e)
         {
             agent.ResetPath();
+        }
+
+        private void HandleWandering(WanderingMovementCommand command)
+        {
+            if (command.Followed != null && command.Followed.Extra is Vector3 target)
+            {
+                Debug.Log("Let's follow another wandering");
+                agent.SetDestination(target);
+                command.Extra = target;
+                return;
+            }
+
+            if (NavMeshUtils.RandomPointOnNavMesh(out Vector3 point))
+            {
+                agent.SetDestination(point);
+                command.Extra = point;
+            }
+            else
+            {
+                Debug.Log("Could not find valid position on NavMesh");
+            }
         }
 
         private void OnMovementCancelled(object sender, EventArgs e)
