@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static PlasticPipe.PlasticProtocol.Messages.NegotiationCommand;
 
 namespace Safari.Model.Animals.State
 {

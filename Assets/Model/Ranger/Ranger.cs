@@ -20,7 +20,7 @@ namespace Safari.Model.Rangers
 
         public Ranger() 
         {
-            Movement = new MovementBehavior(this);
+            Movement = new MovementBehavior(this, Vector3.zero);
             Position = Vector3.zero;
             state = new Wandering(this);
             state.OnEnter();
