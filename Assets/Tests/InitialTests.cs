@@ -5,6 +5,7 @@ using UnityEngine.TestTools;
 using Safari.Model.Animals;
 using Safari.Model.Rangers;
 using Safari.Model.GameSpeed;
+using Safari.Model;
 using System.Runtime.CompilerServices;
 using System.ComponentModel.Design;
 
@@ -57,7 +58,7 @@ public class InitialTests
     {
         bool addedEventCalled = false;
         
-        RangerCollection collection = new RangerCollection();
+        RangerCollection collection = new RangerCollection(new MoneyManager(),new GameSpeedManager());
         collection.Added += ((sender, args) => addedEventCalled = true);
 
 
@@ -72,7 +73,7 @@ public class InitialTests
     public void RemovingRangerFromCollectionTest()
     {
         bool removedEventCalled = false;
-        RangerCollection collection = new RangerCollection();
+        RangerCollection collection = new RangerCollection(new MoneyManager(), new GameSpeedManager());
         collection.Removed += ((sender, args) => removedEventCalled = true);
 
         Ranger ranger = new Ranger();

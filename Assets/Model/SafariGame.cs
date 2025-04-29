@@ -64,7 +64,7 @@ namespace Safari.Model
             AnimalCreationManager = new AnimalCreationManager(Animals, pathfinding, Map, MoneyManager);
             Construction = new ConstructionManager(map, MoneyManager);
             GameSpeedManager = new GameSpeedManager();
-            Rangers = new RangerCollection();
+            Rangers = new RangerCollection(MoneyManager,GameSpeedManager);
             Jeeps = new JeepCollection();
 		}
 
