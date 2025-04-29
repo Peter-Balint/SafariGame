@@ -9,8 +9,12 @@ namespace Safari.Model
     {
         int CurrentBalance;
         int TicketPrice;
-        double VisitDesire; // between 0-1, used as a chance of spawning
-        AnimalCollection AnimalCollection;
+        private double VisitDesire; // between 0-1, used as a chance of spawning
+        private double diversityFactor;
+        private double maxTicketPrice;
+        private double parkSizeFactor;
+
+		AnimalCollection AnimalCollection;
        
         public MoneyManager()
         {
@@ -58,8 +62,22 @@ namespace Safari.Model
 		    return VisitDesire;
 	    }
 
+        public double ReadDiversity()
+        {
+            return diversityFactor;
+        }
+		public double ReadParkSize()
+		{
+			return parkSizeFactor;
+		}
 
-	    public void RaiseTicketPrice()
+		public double ReadMaxTicketPirce()
+		{
+			return maxTicketPrice;
+		}
+
+
+		public void RaiseTicketPrice()
         {
             TicketPrice++;
             CalculateVisitDesire();
@@ -96,33 +114,33 @@ namespace Safari.Model
 
             
             //Checking diversity 
-            double DiversityFactor = 0.1;
+            diversityFactor = 0.1;
 
-            if (lionCount > 0) DiversityFactor += 0.1;
-            if (wolfCount > 0) DiversityFactor += 0.1;
-            if (camelCount > 0) DiversityFactor += 0.1;
-            if (sheepCount > 0) DiversityFactor += 0.1;
-            if (lionCount > 0 && lionRatio > 0.4 && lionRatio < 0.6) DiversityFactor += 0.3;
-            if (camelCount > 0 && camelRatio > 0.4 && camelRatio < 0.6) DiversityFactor += 0.3;
+            if (lionCount > 0) diversityFactor += 0.1;
+            if (wolfCount > 0) diversityFactor += 0.1;
+            if (camelCount > 0) diversityFactor += 0.1;
+            if (sheepCount > 0) diversityFactor += 0.1;
+            if (lionCount > 0 && lionRatio > 0.4 && lionRatio < 0.6) diversityFactor += 0.3;
+            if (camelCount > 0 && camelRatio > 0.4 && camelRatio < 0.6) diversityFactor += 0.3;
 
-			DiversityFactor = Math.Max(0.1, DiversityFactor);
-			DiversityFactor = Math.Min(1, DiversityFactor);
-            Debug.Log("diversity: " + DiversityFactor);
+			diversityFactor = Math.Max(0.1, diversityFactor);
+			diversityFactor = Math.Min(1, diversityFactor);
+            Debug.Log("diversity: " + diversityFactor);
 
 			//Checking Animal Count
-			double ParkSizeFactor = 1;
-            if (AnimalCount > 0 && AnimalCount < 10) ParkSizeFactor = (double)AnimalCount / 10;
-            if (AnimalCount > 9 && AnimalCount < 20) ParkSizeFactor = (double)AnimalCount / 20;
-			if (AnimalCount > 19 && AnimalCount < 50) ParkSizeFactor = (double)AnimalCount / 50;
-            if (AnimalCount > 49 && AnimalCount < 150) ParkSizeFactor = (double)AnimalCount / 150;
-            if (AnimalCount > 149) ParkSizeFactor = 1;
-            ParkSizeFactor = Math.Sqrt(ParkSizeFactor);
-            Debug.Log("Parksizefactor: " + ParkSizeFactor);
-            ParkSizeFactor = Math.Max(0.1, ParkSizeFactor);
+			parkSizeFactor = 1;
+            if (AnimalCount > 0 && AnimalCount < 10) parkSizeFactor = (double)AnimalCount / 10;
+            if (AnimalCount > 9 && AnimalCount < 20) parkSizeFactor = (double)AnimalCount / 20;
+			if (AnimalCount > 19 && AnimalCount < 50) parkSizeFactor = (double)AnimalCount / 50;
+            if (AnimalCount > 49 && AnimalCount < 150) parkSizeFactor = (double)AnimalCount / 150;
+            if (AnimalCount > 149) parkSizeFactor = 1;
+            parkSizeFactor = Math.Sqrt(parkSizeFactor);
+            Debug.Log("Parksizefactor: " + parkSizeFactor);
+            parkSizeFactor = Math.Max(0.1, parkSizeFactor);
 
 
             //ticketprice
-            double maxTicketPrice = 10 + AnimalCount / 2.0;
+            maxTicketPrice = 10 + AnimalCount / 2.0;
             double maxTicketPriceFactor = 1.0;
             Debug.Log("maxticketprice: " + maxTicketPrice);
             Debug.Log("maxticketprice: " +maxTicketPriceFactor);
@@ -138,7 +156,7 @@ namespace Safari.Model
             }
 
 
-            VisitDesire = 1 * DiversityFactor * ParkSizeFactor * maxTicketPriceFactor;
+            VisitDesire = 1 * diversityFactor * parkSizeFactor * maxTicketPriceFactor;
             VisitDesire = Math.Min(1, VisitDesire);
 
 			Debug.Log("VisitDesire:" + VisitDesire);

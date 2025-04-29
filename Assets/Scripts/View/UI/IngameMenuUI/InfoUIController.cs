@@ -19,8 +19,11 @@ namespace Safari.View.UI
 		public TMP_Text AnimalCounter;
         public TMP_Text MoneyCounter;
         public TMP_Text HappinessCounter;
-        
-        void Start()
+        public TMP_Text Diverstiy;
+        public TMP_Text ParkSize;
+		public TMP_Text MaxTicket;
+
+		void Start()
         {
             animalCollection = SafariGame.Instance.Animals;
 			moneyManager = SafariGame.Instance.MoneyManager;
@@ -31,6 +34,11 @@ namespace Safari.View.UI
             AnimalCounter.text = animalCollection.Animals.Count.ToString();
 			MoneyCounter.text = moneyManager.ReadBalance().ToString();
             HappinessCounter.text = ((int)(moneyManager.ReadVisitDesire()*100))+" %".ToString();
+            Diverstiy.text = Math.Round((moneyManager.ReadDiversity() * 100), 1).ToString() + "%";
+            ParkSize.text = Math.Round((moneyManager.ReadParkSize() * 100), 1).ToString() + "%";
+            MaxTicket.text = Math.Round(moneyManager.ReadMaxTicketPirce(), 1).ToString() + "$";
+
+            
 
 		}
 
