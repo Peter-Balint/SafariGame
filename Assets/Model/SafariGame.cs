@@ -70,7 +70,7 @@ namespace Safari.Model
 
         public static void StartGame(GameDifficulty gameDifficulty)
         {
-            instance = new SafariGame(MapGenerator.GenerateMap(40, 40), gameDifficulty);
+            instance = new SafariGame(MapGenerator.GenerateMap(30, 30), gameDifficulty);
         }
     }
 }
