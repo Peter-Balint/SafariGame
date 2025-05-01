@@ -571,6 +571,89 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3177232016284936980, guid: ae958a8eabd8f6b4ab30be28596d5bde, type: 3}
   m_PrefabInstance: {fileID: 4401395391024741485}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1076412465 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8068535125417746736, guid: 14d2c2fb37d59804da8115390583d4ea, type: 3}
+  m_PrefabInstance: {fileID: 8107432950480305018}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1076412467 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5425049068809019322, guid: 14d2c2fb37d59804da8115390583d4ea, type: 3}
+  m_PrefabInstance: {fileID: 8107432950480305018}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076412465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172a277324b896746bf5b55bd9efa6ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1076412468 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3478488038522304198, guid: 14d2c2fb37d59804da8115390583d4ea, type: 3}
+  m_PrefabInstance: {fileID: 8107432950480305018}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076412465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1076412471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076412465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1076412468}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1076412467}
+        m_TargetAssemblyTypeName: Safari.View.Minimap.MinimapNavigator, View
+        m_MethodName: Onclicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1106734327 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
@@ -1297,6 +1380,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1473654757817095262, guid: bfb057ce152120449a04ef5087e44886, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2839006992599330128, guid: bfb057ce152120449a04ef5087e44886, type: 3}
       propertyPath: m_Name
       value: MinimapCamera
@@ -1730,10 +1817,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 734516188}
     m_Modifications:
+    - target: {fileID: 2125884907193662619, guid: 14d2c2fb37d59804da8115390583d4ea, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2125884907193662619, guid: 14d2c2fb37d59804da8115390583d4ea, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3478488038522304198, guid: 14d2c2fb37d59804da8115390583d4ea, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5424326345964685067, guid: 14d2c2fb37d59804da8115390583d4ea, type: 3}
       propertyPath: m_Name
       value: MinimapBorder
       objectReference: {fileID: 0}
+    - target: {fileID: 5425049068809019322, guid: 14d2c2fb37d59804da8115390583d4ea, type: 3}
+      propertyPath: MainCamera
+      value: 
+      objectReference: {fileID: 655287125}
     - target: {fileID: 7959810079637355655, guid: 14d2c2fb37d59804da8115390583d4ea, type: 3}
       propertyPath: m_Pivot.x
       value: 1
@@ -1814,10 +1917,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2125884907193662619, guid: 14d2c2fb37d59804da8115390583d4ea, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8068535125417746736, guid: 14d2c2fb37d59804da8115390583d4ea, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1076412471}
   m_SourcePrefab: {fileID: 100100000, guid: 14d2c2fb37d59804da8115390583d4ea, type: 3}
 --- !u!1001 &8380858044857541966
 PrefabInstance:
