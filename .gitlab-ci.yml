@@ -1,3 +1,5 @@
+default:
+  tags: [unity]
 stages:
   - build_and_test
   - deploy
