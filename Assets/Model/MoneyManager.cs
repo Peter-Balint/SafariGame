@@ -81,8 +81,8 @@ namespace Safari.Model
 			int lionCount = AnimalCollection.Animals.Count(a => a is Lion);
 			int camelCount = AnimalCollection.Animals.Count(a => a is Camel);
 			int sheepCount = AnimalCollection.Animals.Count(a => a is Sheep);
-            Debug.Log("VisitDesireDATA---------------------------------");
-            Debug.Log("Animal count: " + AnimalCollection.Animals.Count);
+            /*Debug.Log("VisitDesireDATA---------------------------------");
+            Debug.Log("Animal count: " + AnimalCollection.Animals.Count);*/
 
 
 
@@ -107,7 +107,7 @@ namespace Safari.Model
 
 			DiversityFactor = Math.Max(0.1, DiversityFactor);
 			DiversityFactor = Math.Min(1, DiversityFactor);
-            Debug.Log("diversity: " + DiversityFactor);
+           /* Debug.Log("diversity: " + DiversityFactor);*/
 
             //Checking Animal Count
             double ParkSizeFactor = 1;
@@ -117,15 +117,15 @@ namespace Safari.Model
             if (AnimalCount > 49 && AnimalCount < 150) ParkSizeFactor = (double)AnimalCount / 150;
             if (AnimalCount > 149) ParkSizeFactor = 1;
             ParkSizeFactor = Math.Sqrt(ParkSizeFactor);
-            Debug.Log("Parksizefactor: " + ParkSizeFactor);
+          /*  Debug.Log("Parksizefactor: " + ParkSizeFactor);*/
             ParkSizeFactor = Math.Max(0.1, ParkSizeFactor);
 
 
             //ticketprice
             double maxTicketPrice = 10 + AnimalCount / 2.0;
             double maxTicketPriceFactor = 1.0;
-            Debug.Log("maxticketprice: " + maxTicketPrice);
-            Debug.Log("maxticketprice: " + maxTicketPriceFactor);
+         /*   Debug.Log("maxticketprice: " + maxTicketPrice);*/
+         /*   Debug.Log("maxticketprice: " + maxTicketPriceFactor);*/
             if (TicketPrice>maxTicketPrice)
             {
                 maxTicketPriceFactor = 0.2;
@@ -141,8 +141,8 @@ namespace Safari.Model
             VisitDesire = 1 * DiversityFactor * ParkSizeFactor * maxTicketPriceFactor;
             VisitDesire = Math.Min(1, VisitDesire);
 
-            Debug.Log("VisitDesire:" + VisitDesire);
-            Debug.Log("---------------------------------");
+        /*    Debug.Log("VisitDesire:" + VisitDesire);
+            Debug.Log("---------------------------------");*/
 
 
 

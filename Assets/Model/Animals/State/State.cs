@@ -19,6 +19,8 @@ namespace Safari.Model.Animals.State
 
         protected Animal owner;
 
+        protected virtual bool DisableThirst => false;
+
         private bool transitioned = false;
 
         private Queue<Action> actionQueue = new Queue<Action>();
@@ -106,10 +108,14 @@ namespace Safari.Model.Animals.State
 
         private void CalculateHydrationPercent(double elapsedTimeAdjusted)
         {
+            if (DisableThirst)
+            {
+                return;
+            }
             if (hydrationPercent > 0)
             {
                 // simply thirsty
-                hydrationPercent -= elapsedTimeAdjusted / (owner.Metadata.TimeTillThirsty * 60);
+                hydrationPercent -= (elapsedTimeAdjusted / (owner.Metadata.TimeTillThirsty * 60)) * 100;
                 if (hydrationPercent < 0)
                 {
                     hydrationPercent = 0;
@@ -118,7 +124,7 @@ namespace Safari.Model.Animals.State
             else
             {
                 // DEHYDRATING!!!
-                hydrationPercent -= elapsedTimeAdjusted / (owner.Metadata.TimeTillDehydration * 60);
+                hydrationPercent -= (elapsedTimeAdjusted / (owner.Metadata.TimeTillDehydration * 60)) * 100;
             }
         }
     }

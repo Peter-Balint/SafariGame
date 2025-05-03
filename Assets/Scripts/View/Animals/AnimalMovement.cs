@@ -20,7 +20,7 @@ namespace Safari.View.Animals
     public class AnimalMovement : MonoBehaviour
     {
         public float cellSize = 30f;
-        public const float defaultSpeed = 10;
+        public float defaultSpeed = 0.1f;
 
         public MovementBehavior behavior { get; private set; }
 

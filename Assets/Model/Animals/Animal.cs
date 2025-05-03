@@ -45,7 +45,7 @@ namespace Safari.Model.Animals
         {
             Movement = new MovementBehavior(this, wordPos);
             age = 0;
-            State = new State.Resting(this, 0, 0, 0);
+            State = new State.Resting(this, 100, 0, 0);
             State.OnEnter();
             Pathfinding = pathfinding;
             metadata = new AnimalMetadata();
@@ -57,13 +57,12 @@ namespace Safari.Model.Animals
         {
             Movement = new MovementBehavior(this, wordPos);
             age = 0;
-            State = new State.Resting(this, 0, 0, 0);
+            State = new State.Resting(this, 100, 0, 0);
             State.OnEnter();
             Pathfinding = pathfinding;
             this.metadata = metadata;
             Group = group;
             group?.AddAnimal(this);
-
         }
 
         internal void SetState(State.State state)
