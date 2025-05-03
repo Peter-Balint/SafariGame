@@ -17,10 +17,15 @@ namespace Safari.Model.Jeep
 
         }
 
-        public Jeep(Vector3 vec3)
-        {
-            Movement = new MovementBehavior(this, Position);
-            Position = vec3;
-        }
-    }
+		public Jeep(Vector3 vec3)
+		{
+			Position = vec3;
+			Movement = new MovementBehavior(this, Position);
+		}
+
+
+
+
+
+	}
 }

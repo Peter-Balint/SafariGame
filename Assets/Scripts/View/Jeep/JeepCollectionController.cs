@@ -14,7 +14,7 @@ namespace Safari.View
 {
     public class JeepCollectionController : MonoBehaviour
     {
-
+		private const int JeepPrice = 15;
 		private List<JeepDisplay> displayers;
 		public JeepDisplay JeepDisplayPrefab;
         private JeepCollection jeepCollection;
@@ -27,12 +27,15 @@ namespace Safari.View
 		
 		public MapDisplay mapDisplayPrefab;
 		
-		Map map;
+		private Map map;
+
+		private MoneyManager moneyManager;
 
 		void Start()
         {
 			map = SafariGame.Instance.Map;
-			
+			moneyManager = SafariGame.Instance.MoneyManager;
+
 			displayers = new List<JeepDisplay>();
 			jeepCollection = SafariGame.Instance.Jeeps;
 			jeepCollection.Added += OnJeepAdded;
@@ -56,8 +59,12 @@ namespace Safari.View
 				}
 			}
 			Debug.Log(entranceWorldPos);
-	
-			jeepCollection.Add(new Jeep(entranceWorldPos));
+            if (!moneyManager.CanBuy(JeepPrice))
+            {
+				return;
+            }
+			moneyManager.AddToBalance(-JeepPrice);
+            jeepCollection.Add(new Jeep(entranceWorldPos));
 			Debug.Log("Jeep Bought");
 			
 		}
