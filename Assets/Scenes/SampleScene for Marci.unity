@@ -1985,9 +1985,37 @@ PrefabInstance:
       propertyPath: m_HorizontalAlignment
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 343933008605738221, guid: f6ca9bd1d320130408216bd4f48c5915, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 343933008605738221, guid: f6ca9bd1d320130408216bd4f48c5915, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 343933008605738221, guid: f6ca9bd1d320130408216bd4f48c5915, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -269
+      objectReference: {fileID: 0}
     - target: {fileID: 1133219712971890833, guid: f6ca9bd1d320130408216bd4f48c5915, type: 3}
       propertyPath: m_Name
       value: GameOver
+      objectReference: {fileID: 0}
+    - target: {fileID: 2333825862537172233, guid: f6ca9bd1d320130408216bd4f48c5915, type: 3}
+      propertyPath: m_text
+      value: Resume
+      objectReference: {fileID: 0}
+    - target: {fileID: 2333825862537172233, guid: f6ca9bd1d320130408216bd4f48c5915, type: 3}
+      propertyPath: m_fontSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2333825862537172233, guid: f6ca9bd1d320130408216bd4f48c5915, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2333825862537172233, guid: f6ca9bd1d320130408216bd4f48c5915, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3311836389594595312, guid: f6ca9bd1d320130408216bd4f48c5915, type: 3}
       propertyPath: m_SizeDelta.x
