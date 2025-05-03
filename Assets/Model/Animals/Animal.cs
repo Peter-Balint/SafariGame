@@ -19,21 +19,7 @@ namespace Safari.Model.Animals
 
         public State.State State { get; private set; }
 
-        public Tuple<float, float> RestingInterval { get; private set; }
-
-        public int ThirstLimit { get; private set; }
-
-        public int CriticalThirstLimit { get; private set; }
-
-        public int DrinkingRate { get; private set; }
-
-        public int HungerLimit { get; private set; }
-
-        public int CriticalHungerLimit { get; private set; }
-
-        public int EatingRate { get; private set; }
-
-        public AnimalMetadata AnimalMetadata { get { return metadata; } }
+        public AnimalMetadata Metadata { get { return metadata; } }
 
         public Group Group { get; set; }
 
@@ -59,13 +45,6 @@ namespace Safari.Model.Animals
         {
             Movement = new MovementBehavior(this, wordPos);
             age = 0;
-            ThirstLimit = 10000;
-            CriticalThirstLimit = ThirstLimit * 2;
-            DrinkingRate = 2500;
-            HungerLimit = 30000;
-            CriticalHungerLimit = HungerLimit * 4;
-            EatingRate = 8000;
-            RestingInterval = new Tuple<float, float>(0.05f * 600, 0.1f * 600);
             State = new State.Resting(this, 0, 0, 0);
             State.OnEnter();
             Pathfinding = pathfinding;
@@ -78,13 +57,6 @@ namespace Safari.Model.Animals
         {
             Movement = new MovementBehavior(this, wordPos);
             age = 0;
-            ThirstLimit = 10000;
-            CriticalThirstLimit = ThirstLimit * 2;
-            DrinkingRate = 2500;
-            HungerLimit = 30000;
-            CriticalHungerLimit = HungerLimit * 4;
-            EatingRate = 4000;
-            RestingInterval = new Tuple<float, float>(0.05f * 600, 0.1f * 600);
             State = new State.Resting(this, 0, 0, 0);
             State.OnEnter();
             Pathfinding = pathfinding;
@@ -123,7 +95,7 @@ namespace Safari.Model.Animals
 
         public void Kill()
         {
-            InterruptState(new Dead(this, State.Thirst, State.Hunger));
+            InterruptState(new Dead(this, State.HydrationPercent, State.Hunger));
         }
 
         public abstract State.State HandleFoodFinding();

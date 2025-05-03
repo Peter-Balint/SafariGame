@@ -9,9 +9,9 @@ namespace Safari.Model.Animals.State
 {
     public class Reuniting : State
     {
-        private Func<float, float ,State> nextState;
+        private Func<double, float ,State> nextState;
 
-        public Reuniting(Animal owner, float thirst, float hunger, Func<float, float, State> nextState) : base(owner, thirst, hunger)
+        public Reuniting(Animal owner, double hydrationPercent, float hunger, Func<double, float, State> nextState) : base(owner, hydrationPercent, hunger)
         {
             this.nextState = nextState;
         }
@@ -26,7 +26,7 @@ namespace Safari.Model.Animals.State
 
         private void OnCommandFinished(object sender, EventArgs e)
         {
-            TransitionTo(nextState(thirst, hunger));
+            TransitionTo(nextState(hydrationPercent, hunger));
         }
     }
 }

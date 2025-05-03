@@ -14,7 +14,7 @@ namespace Safari.Model.Animals.State
 
         private IPrey prey;
 
-        public ChasingPrey(Animal owner, float thirst, float hunger, FollowPreyMovementCommand command, IPrey prey) : base(owner, thirst, hunger)
+        public ChasingPrey(Animal owner, double hydrationPercent, float hunger, FollowPreyMovementCommand command, IPrey prey) : base(owner, hydrationPercent, hunger)
         {
             this.command = command;
             this.prey = prey;
@@ -34,7 +34,7 @@ namespace Safari.Model.Animals.State
             command.Finished -= OnChasingFinished;
             command.ReportFinished();
             prey.OnEscaped();
-            TransitionTo(new FailedHunting(this.owner, thirst, hunger));
+            TransitionTo(new FailedHunting(this.owner, hydrationPercent, hunger));
         }
 
         private void OnChasingFinished(object sender, EventArgs e)
@@ -43,7 +43,7 @@ namespace Safari.Model.Animals.State
             (sender as FollowPreyMovementCommand).Extra = null;
             prey.Kill();
             Debug.Log($"{owner.GetType().Name} killed {prey.GetType().Name}");
-            TransitionTo(new PredatorEating(owner, thirst, hunger));
+            TransitionTo(new PredatorEating(owner, hydrationPercent, hunger));
         }
 
         public override void OnExit()

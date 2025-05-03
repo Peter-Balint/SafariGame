@@ -7,7 +7,7 @@ namespace Safari.Model.Animals.State
 {
     public class Drinking : State
     {
-        public Drinking(Animal owner, float thirst, float hunger) : base(owner, thirst, hunger)
+        public Drinking(Animal owner, double hydrationPercent, float hunger) : base(owner, hydrationPercent, hunger)
         {
         }
 
@@ -18,24 +18,24 @@ namespace Safari.Model.Animals.State
             if (!owner.Pathfinding.IsDrinkingPlace(owner.Movement.Location))
             {
                 Debug.Log($"{owner.GetType().Name} is no longer near a drinking place.");
-                if (thirst > owner.ThirstLimit)
+                if (hydrationPercent < owner.Metadata.StillThirstyPercent)
                 {
-                    TransitionTo(new SearchingWater(owner, thirst, hunger));
+                    TransitionTo(new SearchingWater(owner, hydrationPercent, hunger));
                 }
                 else
                 {
-                    TransitionTo(new Wandering(owner, thirst, hunger));
+                    TransitionTo(new Wandering(owner, hydrationPercent, hunger));
                 }
                 return;
             }
 
-            thirst -= deltaTime * owner.DrinkingRate * speedFactor;
+            /*thirst += deltaTime * owner.DrinkingRate * speedFactor;*/
 
-            if (thirst <= 0)
+            if (hydrationPercent >= 100)
             {
-                thirst = 0;
+                hydrationPercent = 100;
                 Debug.Log($"{owner.GetType().Name} is fully hydrated and will start wandering.");
-                TransitionTo(new Wandering(owner, thirst, hunger));
+                TransitionTo(new Wandering(owner, hydrationPercent, hunger));
             }
         }
     }

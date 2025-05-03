@@ -11,7 +11,7 @@ namespace Safari.Model.Animals.State
     {
         private MovementCommand key;
 
-        public WaitingForOthers(Animal owner, float thirst, float hunger, MovementCommand key) : base(owner, thirst, hunger)
+        public WaitingForOthers(Animal owner, double hydrationPercent, float hunger, MovementCommand key) : base(owner, hydrationPercent, hunger)
         {
             this.key = key;
         }
@@ -39,7 +39,7 @@ namespace Safari.Model.Animals.State
             }
             if (allFinished)
             {
-               TransitionTo(new Wandering(owner, thirst, hunger));
+               TransitionTo(new Wandering(owner, hydrationPercent, hunger));
             }
         }
     }

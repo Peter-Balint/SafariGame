@@ -13,7 +13,7 @@ namespace Safari.Model.Animals.State
 
         private float restingDuration;
 
-        public FailedHunting(Animal owner, float thirst, float hunger) : base(owner, thirst, hunger)
+        public FailedHunting(Animal owner, double hydrationPercent, float hunger) : base(owner, hydrationPercent, hunger)
         {
         }
 
@@ -23,17 +23,17 @@ namespace Safari.Model.Animals.State
 
             owner.Movement.AbortMovement();
 
-            restingDuration = UnityEngine.Random.Range(owner.RestingInterval.Item1, owner.RestingInterval.Item2);
-            Debug.Log($"{owner.GetType().Name} failed to catch the prey. Resting for {restingDuration} seconds");
+            restingDuration = UnityEngine.Random.Range(owner.Metadata.RestingTimeMin, owner.Metadata.RestingTimeMax);
+            Debug.Log($"{owner.GetType().Name} failed to catch the prey. Resting for {restingDuration} minutes");
         }
 
         public override void Update(float deltaTime, int speedFactor)
         {
             base.Update(deltaTime, speedFactor);
-            restingSince += deltaTime * speedFactor;
+            restingSince += deltaTime * speedFactor / 60;
             if (restingSince > restingDuration)
             {
-                TransitionTo(new Wandering(owner, thirst, hunger));
+                TransitionTo(new Wandering(owner, hydrationPercent, hunger));
             }
         }
     }
