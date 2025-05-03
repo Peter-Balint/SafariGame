@@ -16,7 +16,7 @@ namespace Safari.Model.Animals.State
         private MovementCommand? key;
 
 
-        public Wandering(Animal owner, double hydrationPercent, float hunger) : base(owner, hydrationPercent, hunger)
+        public Wandering(Animal owner, double hydrationPercent, double saturationPercent) : base(owner, hydrationPercent, saturationPercent)
         {
         }
 
@@ -49,7 +49,7 @@ namespace Safari.Model.Animals.State
         private void OnWanderingFinished(object sender, EventArgs e)
         {
             Debug.Log("Wandering finished");
-            TransitionTo(new WaitingForOthers(owner, hydrationPercent, hunger, key));
+            TransitionTo(new WaitingForOthers(owner, hydrationPercent, saturationPercent, key));
         }
 
         private Animal? AlreadyWandering()

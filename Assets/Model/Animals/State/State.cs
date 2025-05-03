@@ -11,15 +11,17 @@ namespace Safari.Model.Animals.State
     {
         public double HydrationPercent => hydrationPercent;
 
-        public float Hunger => hunger;
+        public double SaturationPercent => saturationPercent;
 
         protected double hydrationPercent;
 
-        protected float hunger;
+        protected double saturationPercent;
 
         protected Animal owner;
 
         protected virtual bool DisableThirst => false;
+
+        protected virtual bool DisableHunger => false;
 
         private bool transitioned = false;
 
@@ -34,24 +36,24 @@ namespace Safari.Model.Animals.State
                 action();
             }
             CalculateHydrationPercent(elapsedTimeAdjusted);
-            hunger += speedFactor;
+            CalculateSaturationPercent(elapsedTimeAdjusted);
             if (hydrationPercent < -100)
             {
                 Debug.Log($"{owner.GetType().Name} died of dehydration");
-                TransitionTo(new Dead(owner, hydrationPercent, hunger));
+                TransitionTo(new Dead(owner, hydrationPercent, saturationPercent));
             }
-            /*if (hunger > owner.CriticalHungerLimit)
+            if (saturationPercent < -100)
             {
                 Debug.Log($"{owner.GetType().Name} has starved to death");
-                TransitionTo(new Dead(owner, thirst, hunger));
-            }*/
+                TransitionTo(new Dead(owner, hydrationPercent, saturationPercent));
+            }
         }
 
-        protected State(Animal owner, double hydrationPercent, float hunger)
+        protected State(Animal owner, double hydrationPercent, double saturationPercent)
         {
             this.owner = owner;
             this.hydrationPercent = hydrationPercent;
-            this.hunger = hunger;
+            this.saturationPercent = saturationPercent;
 
         }
 
@@ -88,17 +90,17 @@ namespace Safari.Model.Animals.State
             if (hydrationPercent < owner.Metadata.ThirstyPercent)
             {
                 Debug.Log($"{owner.GetType().Name} is thirsty");
-                TransitionTo(new SearchingWater(owner, hydrationPercent, hunger));
+                TransitionTo(new SearchingWater(owner, hydrationPercent, saturationPercent));
             }
         }
 
         protected void AllowSearchingFood()
         {
-            /*if (hunger > owner.HungerLimit)
+            if (saturationPercent < owner.Metadata.HungryPercent)
             {
                 Debug.Log($"{owner.GetType().Name} is hungry");
                 TransitionTo(owner.HandleFoodFinding());
-            }*/
+            }
         }
 
         protected virtual void NextUpdate(Action action)
@@ -114,7 +116,6 @@ namespace Safari.Model.Animals.State
             }
             if (hydrationPercent > 0)
             {
-                // simply thirsty
                 hydrationPercent -= (elapsedTimeAdjusted / (owner.Metadata.TimeTillThirsty * 60)) * 100;
                 if (hydrationPercent < 0)
                 {
@@ -123,8 +124,27 @@ namespace Safari.Model.Animals.State
             }
             else
             {
-                // DEHYDRATING!!!
                 hydrationPercent -= (elapsedTimeAdjusted / (owner.Metadata.TimeTillDehydration * 60)) * 100;
+            }
+        }
+
+        private void CalculateSaturationPercent(double elapsedTimeAdjusted)
+        {
+            if (DisableHunger)
+            {
+                return;
+            }
+            if (saturationPercent > 0)
+            {
+                saturationPercent  -= (elapsedTimeAdjusted / (owner.Metadata.TimeTillHungry * 60)) * 100;
+                if (saturationPercent  < 0)
+                {
+                    saturationPercent  = 0;
+                }
+            }
+            else
+            {
+                saturationPercent  -= (elapsedTimeAdjusted / (owner.Metadata.TimeTillStarvation * 60)) * 100;
             }
         }
     }

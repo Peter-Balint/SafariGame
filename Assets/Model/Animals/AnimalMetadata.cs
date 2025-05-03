@@ -16,7 +16,7 @@ namespace Safari.Model.Animals
         /// Minutes
         /// </summary>
         [Tooltip("Minutes until the animal becomes hungry.")]
-        public int TimeTillHungry = 5 * 60;
+        public int TimeTillHungry = 1 * 60;
 
         /// <summary>
         /// Minutes
@@ -75,10 +75,24 @@ namespace Safari.Model.Animals
 
         /// <summary>
         /// 0-100
+        /// At what saturation percent the animal will start to look for food
+        /// </summary>
+        [Tooltip("At what saturation percent (0-100) the animal will start to look for food.")]
+        public int HungryPercent = 10;
+
+        /// <summary>
+        /// 0-100
         /// At what hydration percent the animal will search for another water source, if no longer near water
         /// </summary>
         [Tooltip("At what hydration percent (0-100) the animal will search for another water source if no longer near water.")]
         public int StillThirstyPercent = 30;
+
+        /// <summary>
+        /// 0-100
+        /// At what saturation percent the animal will search for food source, if no longer near food source
+        /// </summary>
+        [Tooltip("At what saturation percent the animal will search for food source, if no longer near food source")]
+        public int StillHungryPercent = 30;
 
         public static AnimalMetadata Default => new AnimalMetadata();
     }

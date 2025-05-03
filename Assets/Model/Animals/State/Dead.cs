@@ -2,7 +2,7 @@
 {
     public class Dead : State
     {
-        public Dead(Animal owner, double hydrationPercent, float hunger) : base(owner, hydrationPercent, hunger)
+        public Dead(Animal owner, double hydrationPercent, double saturationPercent) : base(owner, hydrationPercent, saturationPercent)
         {
         }
 

@@ -24,6 +24,7 @@ namespace Safari.View.Animals
                 UnityEngine.Debug.Log($"Clicked on {animal.GetType().Name}");
                 UnityEngine.Debug.Log($"Current state:  {animal.State.GetType().Name}");
                 UnityEngine.Debug.Log($"Hydration percent:  {animal.State.HydrationPercent}");
+                UnityEngine.Debug.Log($"Saturation percent:  {animal.State.SaturationPercent}");
 
             }
         }

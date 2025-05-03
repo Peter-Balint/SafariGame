@@ -45,7 +45,7 @@ namespace Safari.Model.Animals
         {
             Movement = new MovementBehavior(this, wordPos);
             age = 0;
-            State = new State.Resting(this, 100, 0, 0);
+            State = new State.Resting(this, 100, 100, 0);
             State.OnEnter();
             Pathfinding = pathfinding;
             metadata = new AnimalMetadata();
@@ -57,7 +57,7 @@ namespace Safari.Model.Animals
         {
             Movement = new MovementBehavior(this, wordPos);
             age = 0;
-            State = new State.Resting(this, 100, 0, 0);
+            State = new State.Resting(this, 100, 100, 0);
             State.OnEnter();
             Pathfinding = pathfinding;
             this.metadata = metadata;
@@ -94,7 +94,7 @@ namespace Safari.Model.Animals
 
         public void Kill()
         {
-            InterruptState(new Dead(this, State.HydrationPercent, State.Hunger));
+            InterruptState(new Dead(this, State.HydrationPercent, State.SaturationPercent));
         }
 
         public abstract State.State HandleFoodFinding();

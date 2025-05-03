@@ -13,7 +13,7 @@ namespace Safari.Model.Animals.State
 
         private float restingDuration;
 
-        public FailedHunting(Animal owner, double hydrationPercent, float hunger) : base(owner, hydrationPercent, hunger)
+        public FailedHunting(Animal owner, double hydrationPercent, double saturationPercent) : base(owner, hydrationPercent, saturationPercent)
         {
         }
 
@@ -33,7 +33,7 @@ namespace Safari.Model.Animals.State
             restingSince += deltaTime * speedFactor / 60;
             if (restingSince > restingDuration)
             {
-                TransitionTo(new Wandering(owner, hydrationPercent, hunger));
+                TransitionTo(new Wandering(owner, hydrationPercent, saturationPercent));
             }
         }
     }

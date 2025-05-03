@@ -14,7 +14,7 @@ namespace Safari.Model.Animals
 
         public override State.State HandleFoodFinding()
         {
-            return new StalkingPrey(this, State.HydrationPercent, State.Hunger);
+            return new StalkingPrey(this, State.HydrationPercent, State.SaturationPercent);
         }
     }
 }

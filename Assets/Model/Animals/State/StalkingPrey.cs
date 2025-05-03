@@ -22,7 +22,7 @@ namespace Safari.Model.Animals.State
 
         private IPrey? prey;
 
-        public StalkingPrey(Animal owner, double hydrationPercent, float hunger) : base(owner, hydrationPercent, hunger)
+        public StalkingPrey(Animal owner, double hydrationPercent, double saturationPercent) : base(owner, hydrationPercent, saturationPercent)
         {
         }
 
@@ -49,7 +49,7 @@ namespace Safari.Model.Animals.State
                     TransitionTo(new ChasingPrey(
                         owner,
                         hydrationPercent,
-                        hunger,
+                        saturationPercent,
                         command,
                         a.Prey));
                     break;
@@ -61,7 +61,7 @@ namespace Safari.Model.Animals.State
                     // for Unity to get the control back
                     // Also throws a stack overflow because re-searching for a prey is basically an infinite cycle
                     // So we wait till next update 
-                    TransitionToNextUpdate(new StalkingPrey(owner, hydrationPercent, hunger));
+                    TransitionToNextUpdate(new StalkingPrey(owner, hydrationPercent, saturationPercent));
                     break;
 
                 default:
