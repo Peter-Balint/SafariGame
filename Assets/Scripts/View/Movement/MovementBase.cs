@@ -14,7 +14,7 @@ using UnityEngine.AI;
 
 namespace Safari.View.Movement
 {
-    public class MovementBase: MonoBehaviour
+    public abstract class MovementBase: MonoBehaviour
     {
         public float cellSize = 30f;
         public const float defaultSpeed = 10;

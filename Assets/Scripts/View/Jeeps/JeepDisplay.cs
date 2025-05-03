@@ -1,3 +1,4 @@
+using Safari.Model;
 using Safari.Model.GameSpeed;
 using Safari.Model.Jeeps;
 using Safari.Model.Map;
@@ -11,36 +12,19 @@ using UnityEngine.AI;
 
 namespace Safari.View.Jeeps
 {
+    [RequireComponent(typeof(NavMeshAgent))]
+    [RequireComponent(typeof(JeepMovement))]
     public class JeepDisplay : MonoBehaviour
     {
-
-
         public Jeep? Jeep;
 
-        public GameObject JeepPrefab;
-		private GameObject? displayed;
-
-		private Dictionary<GridPosition, Vector3> gridPositionMapping;
 		public void Init(Jeep jeep, Dictionary<GridPosition, Vector3> gridPosMapping)
 		{
-			gridPositionMapping = gridPosMapping;
-			Trace.Assert(displayed == null);
-			DisplayJeep(jeep);
-		}
+            Jeep = jeep;
+            NavMeshAgent agent = GetComponent<NavMeshAgent>();
+            GetComponent<JeepMovement>().Init(jeep.Movement, agent, gridPosMapping, SafariGame.Instance.GameSpeedManager);
+        }
 
-		private void DisplayJeep(Jeep jeep)
-        {
-			this.Jeep = jeep;
-
-			if (JeepPrefab == null) { return; }
-			displayed = Instantiate(JeepPrefab, transform, false);
-
-			
-			
-			
-
-			
-		}
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {

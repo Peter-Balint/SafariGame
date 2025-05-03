@@ -755,6 +755,10 @@ PrefabInstance:
       propertyPath: mapDisplayPrefab
       value: 
       objectReference: {fileID: 18910928}
+    - target: {fileID: 7901420357667994615, guid: 05be8037c37223c4e9ce6b84b660cc26, type: 3}
+      propertyPath: JeepDisplayPrefab
+      value: 
+      objectReference: {fileID: 7838519310730800446, guid: 61042a0c329ebd246803c9ae69dcb064, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Safari.View.Jeeps
 {
-    public class JeepMovement: MovementBase
+    public class JeepMovement : MovementBase
     {
     }
 }
