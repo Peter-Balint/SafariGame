@@ -14,7 +14,7 @@ namespace Safari.View.Rangers
     public class RangerMovement : MonoBehaviour
     {
         public float cellSize = 30f;
-        public const float defaultSpeed = 10;
+        public float defaultSpeed = 0.1f;
 
         public MovementBehavior behavior { get; private set; }
         private NavMeshAgent agent;
