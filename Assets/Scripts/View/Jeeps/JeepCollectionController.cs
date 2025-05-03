@@ -1,6 +1,6 @@
 using Safari.Model;
 using Safari.Model.GameSpeed;
-using Safari.Model.Jeep;
+using Safari.Model.Jeeps;
 using Safari.Model.Map;
 using Safari.Model.Rangers;
 using Safari.View.Animals;
@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Safari.View.World.Map.MapDisplay;
 
-namespace Safari.View
+namespace Safari.View.Jeeps
 {
     public class JeepCollectionController : MonoBehaviour
     {

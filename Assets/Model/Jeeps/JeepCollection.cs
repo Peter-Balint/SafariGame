@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
-namespace Safari.Model.Jeep
+namespace Safari.Model.Jeeps
 {
     public class JeepCollection
     {

@@ -3,29 +3,17 @@ using Safari.Model.Movement;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Safari.Model.Jeep
+namespace Safari.Model.Jeeps
 {
     public class Jeep : IMoving
     {
         public Vector3 Position { get; set; }
         public MovementBehavior Movement;
 
-        public Jeep()
-        {
-            Movement = new MovementBehavior(this, Position);
-            Position = new Vector3(8, 0, 137); // it should be enterance tile
-
-        }
-
 		public Jeep(Vector3 vec3)
 		{
 			Position = vec3;
 			Movement = new MovementBehavior(this, Position);
 		}
-
-
-
-
-
 	}
 }

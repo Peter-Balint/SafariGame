@@ -1,5 +1,5 @@
 using Safari.Model.GameSpeed;
-using Safari.Model.Jeep;
+using Safari.Model.Jeeps;
 using Safari.Model.Map;
 using Safari.Model.Rangers;
 using Safari.View.Rangers;
@@ -9,7 +9,7 @@ using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Safari.View
+namespace Safari.View.Jeeps
 {
     public class JeepDisplay : MonoBehaviour
     {

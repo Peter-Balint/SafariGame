@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Safari.Model.Jeep;
+using Safari.Model.Jeeps;
 
 namespace Safari.Model
 {
