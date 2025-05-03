@@ -25,6 +25,7 @@ namespace Safari.View.UI
 
 		public TMP_Text GameOverMsg;
 		public DifficultySettings difficultySettings;
+		public Button ContinueButton;
 		DifficultySettings.DifficultyData settings;
 
 
@@ -84,6 +85,11 @@ namespace Safari.View.UI
 			SceneManager.LoadScene("MainMenu");
 		}
 
+		public void OnContinue()
+		{
+			GameOverPanel.SetActive(false);
+
+		}
 		private void CheckWinConditions()
 		{
 			
@@ -134,7 +140,11 @@ namespace Safari.View.UI
 			color.a = 0.6f;
 			panelImage.color = color;
 			GameOverMsg.text = "You Won!";
+			if (ContinueButton != null)
+				ContinueButton.gameObject.SetActive(true);
 		}
+
+	
 
 
 
