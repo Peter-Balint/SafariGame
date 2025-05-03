@@ -12,9 +12,11 @@ namespace Safari.View.UI
         public Button SlowButton;
         public Button MediumButton;
         public Button FastButton;
+        
 
 
-        MoneyManager moneyManager;
+		MoneyManager moneyManager;
+        
         int VisitorSpawnedSec = 0;
 
         public TMP_Text Clock;
@@ -27,9 +29,13 @@ namespace Safari.View.UI
         {
             manager = SafariGame.Instance.GameSpeedManager;
             moneyManager = SafariGame.Instance.MoneyManager;
+            
+
             SlowButton.onClick.AddListener(() => manager.CurrentSpeed = GameSpeed.Slow);
             MediumButton.onClick.AddListener(() => manager.CurrentSpeed = GameSpeed.Medium);
             FastButton.onClick.AddListener(() => manager.CurrentSpeed = GameSpeed.Fast);
+
+			
 
             Clock.text = manager.Time.ToString("MM/dd/yyyy HH:mm");
 
@@ -37,6 +43,7 @@ namespace Safari.View.UI
 
 
 		}
+
 
 		void Update()
         {
@@ -48,8 +55,9 @@ namespace Safari.View.UI
             }
 		
 
-
+          
 			manager.AddTime(Time.deltaTime);
+          
             Clock.text = manager.Time.ToString("MM/dd/yyyy HH:mm");
             
            
@@ -65,6 +73,11 @@ namespace Safari.View.UI
 				moneyManager.AddToBalance(moneyManager.ReadTicketPrice());
 			}
 		}
+
+ 
+
+
+	
 
 
 

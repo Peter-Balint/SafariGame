@@ -43,7 +43,7 @@ namespace Safari.Model
 
         public MoneyManager MoneyManager { get; }
 
-        public AnimalCreationManager AnimalCreationManager { get; }
+		public AnimalCreationManager AnimalCreationManager { get; }
 
         public AnimalCollection Animals { get;  }
 

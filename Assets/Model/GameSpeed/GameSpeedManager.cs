@@ -8,12 +8,15 @@ namespace Safari.Model.GameSpeed
     {
         public GameSpeed CurrentSpeed { get; set; }
         public DateTime Time { get; set; }
+		public bool IsTimeRunning { get { return IsTimeRunning; } }
 
-        private const int minutesInDay = 24 * 60;
+		private const int minutesInDay = 24 * 60;
         public double minutesToday;
      
 
         public event EventHandler DayPassed;
+
+		private bool isTimeRunning = true;
 
 
 
@@ -63,6 +66,16 @@ namespace Safari.Model.GameSpeed
 
             
         }
+
+		public void StopTime()
+		{
+			isTimeRunning = false;
+		}
+
+		public void ResumeTime()
+		{
+			isTimeRunning = true;
+		}
 
 
 	}
