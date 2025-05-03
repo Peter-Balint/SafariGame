@@ -2281,9 +2281,33 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1597260189}
     - target: {fileID: 6399670068849751780, guid: 3d6edc847dc47ce4bb5e73fc39ab50ed, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6399670068849751780, guid: 3d6edc847dc47ce4bb5e73fc39ab50ed, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6399670068849751780, guid: 3d6edc847dc47ce4bb5e73fc39ab50ed, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1422484699}
+    - target: {fileID: 6399670068849751780, guid: 3d6edc847dc47ce4bb5e73fc39ab50ed, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6399670068849751780, guid: 3d6edc847dc47ce4bb5e73fc39ab50ed, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnJeepBuy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6399670068849751780, guid: 3d6edc847dc47ce4bb5e73fc39ab50ed, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Safari.View.JeepCollectionController, View
+      objectReference: {fileID: 0}
+    - target: {fileID: 6399670068849751780, guid: 3d6edc847dc47ce4bb5e73fc39ab50ed, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6482965580910879396, guid: 3d6edc847dc47ce4bb5e73fc39ab50ed, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
