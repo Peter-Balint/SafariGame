@@ -9,6 +9,8 @@ namespace Safari.Model.Jeeps
 {
     public class Jeep : IMoving
     {
+        public const int Capacity = 4;
+
         public event EventHandler? StateChanged;
 
         public Vector3 Position { get; set; }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Safari.Model.Assets;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Safari.Model.Jeeps.State
 {
     public class Returning : State
     {
-        public Returning(Jeep owner) : base(owner)
+        public Returning(Jeep owner, VisitorManager visitorManager) : base(owner, visitorManager)
         {
         }
     }

@@ -11,6 +11,8 @@ namespace Safari.Model.Assets
 {
     public class VisitorManager
     {
+        public int VisitorsWaiting { get; private set; }
+
         private int visitorSpawnedSec = 0;
 
         private readonly MoneyManager moneyManager;
@@ -33,6 +35,19 @@ namespace Safari.Model.Assets
             }
         }
 
+        internal int TakeVisitors(int capacity)
+        {
+            if (VisitorsWaiting >= capacity)
+            {
+                VisitorsWaiting -= capacity;
+                return capacity;
+            }
+
+            int temp = VisitorsWaiting;
+            VisitorsWaiting = 0;
+            return temp;
+        }
+
         private void VisitorSpawn()
         {
             double random = UnityEngine.Random.Range(0, 9);
@@ -40,8 +55,10 @@ namespace Safari.Model.Assets
 
             if (moneyManager.ReadVisitDesire() > random)
             {
+                VisitorsWaiting++;
                 moneyManager.AddToBalance(moneyManager.ReadTicketPrice());
             }
         }
+
     }
 }

@@ -5,12 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Safari.Model.Assets;
 
 namespace Safari.Model.Jeeps.State
 {
     public abstract class State
     {
         protected Jeep owner;
+
+        protected VisitorManager visitorManager;
 
         private bool transitioned = false;
 
@@ -25,10 +28,10 @@ namespace Safari.Model.Jeeps.State
             }
         }
 
-        protected State(Jeep owner)
+        protected State(Jeep owner, VisitorManager visitorManager)
         {
             this.owner = owner;
-
+            this.visitorManager = visitorManager;
         }
 
         public virtual void OnEnter()
