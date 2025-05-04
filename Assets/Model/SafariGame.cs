@@ -12,11 +12,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Safari.Model.Jeeps;
+using Safari.Model.Assets;
 
 namespace Safari.Model
 {
     public class SafariGame
     {
+    
         private static SafariGame? instance;
 
         public static bool IsGameStarted => instance != null;
@@ -39,18 +41,21 @@ namespace Safari.Model
 
         public Map.Map Map { get; }
 
-        public ConstructionManager Construction { get;  }
+        public ConstructionManager Construction { get; }
 
         public MoneyManager MoneyManager { get; }
 
         public AnimalCreationManager AnimalCreationManager { get; }
 
-        public AnimalCollection Animals { get;  }
+        public AnimalCollection Animals { get; }
 
-        public RangerCollection Rangers{ get; }
-        public JeepCollection Jeeps{ get; }
+        public RangerCollection Rangers { get; }
 
-		private PathfindingHelper pathfinding;
+        public JeepCollection Jeeps { get; }
+
+        public VisitorManager Visitors { get; }
+
+        private PathfindingHelper pathfinding;
 
         public GameSpeedManager GameSpeedManager { get; }
 
@@ -66,7 +71,8 @@ namespace Safari.Model
             GameSpeedManager = new GameSpeedManager();
             Rangers = new RangerCollection();
             Jeeps = new JeepCollection();
-		}
+            Visitors = new VisitorManager(MoneyManager, GameSpeedManager);
+        }
 
         public static void StartGame(GameDifficulty gameDifficulty)
         {
