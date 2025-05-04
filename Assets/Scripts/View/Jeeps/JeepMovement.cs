@@ -9,5 +9,6 @@ namespace Safari.View.Jeeps
 {
     public class JeepMovement : MovementBase
     {
+
     }
 }
