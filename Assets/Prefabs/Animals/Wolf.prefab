@@ -1065,6 +1065,7 @@ GameObject:
   - component: {fileID: -693222469266901137}
   - component: {fileID: -7225317119573681284}
   - component: {fileID: -1324166367146928027}
+  - component: {fileID: 4921257083470492650}
   m_Layer: 0
   m_Name: Wolf
   m_TagString: Animal
@@ -1149,6 +1150,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellSize: 30
+--- !u!114 &4921257083470492650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8746254400259720641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11887e2b67f93ea45978f6c108bbad11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8782196822256951860
 GameObject:
   m_ObjectHideFlags: 0

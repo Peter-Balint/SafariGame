@@ -52,12 +52,13 @@ namespace Safari.View.Animals
             var animalMovement = displayed.GetComponent<AnimalMovement>();
             var navMeshAgent = this.GetComponent<NavMeshAgent>();
             animalMovement.Init(animal.Movement, navMeshAgent, gridPositionMapping, gameSpeedManager);
+            displayed.GetComponent<StateReporter>().Init(animal);
         }
         
 
         void Start()
         {
-            
+
         }
 
         public void Update()
