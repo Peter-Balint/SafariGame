@@ -64,7 +64,7 @@ namespace Safari.View.Jeeps
 				return;
             }
 			moneyManager.AddToBalance(-JeepPrice);
-            jeepCollection.Add(new Jeep(entranceWorldPos));
+            jeepCollection.CreateNewJeep(entranceWorldPos);
 			Debug.Log("Jeep Bought");
 			
 		}

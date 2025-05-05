@@ -70,8 +70,8 @@ namespace Safari.Model
             Construction = new ConstructionManager(map, MoneyManager);
             GameSpeedManager = new GameSpeedManager();
             Rangers = new RangerCollection();
-            Jeeps = new JeepCollection();
             Visitors = new VisitorManager(MoneyManager, GameSpeedManager);
+            Jeeps = new JeepCollection(Visitors, pathfinding);
         }
 
         public static void StartGame(GameDifficulty gameDifficulty)

@@ -34,7 +34,7 @@ namespace Safari.View.Jeeps
         // Update is called once per frame
         void Update()
         {
-        
+            Jeep?.ModelUpdate(Time.deltaTime, SafariGame.Instance.GameSpeedManager.CurrentSpeedToNum());
         }
 
 

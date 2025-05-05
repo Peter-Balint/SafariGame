@@ -13,8 +13,6 @@ namespace Safari.Model.Jeeps.State
     {
         protected Jeep owner;
 
-        protected VisitorManager visitorManager;
-
         private bool transitioned = false;
 
         private Queue<Action> actionQueue = new Queue<Action>();
@@ -28,10 +26,9 @@ namespace Safari.Model.Jeeps.State
             }
         }
 
-        protected State(Jeep owner, VisitorManager visitorManager)
+        protected State(Jeep owner)
         {
             this.owner = owner;
-            this.visitorManager = visitorManager;
         }
 
         public virtual void OnEnter()

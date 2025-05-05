@@ -9,7 +9,7 @@ namespace Safari.Model.Jeeps.State
 {
     public class Returning : State
     {
-        public Returning(Jeep owner, VisitorManager visitorManager) : base(owner, visitorManager)
+        public Returning(Jeep owner) : base(owner)
         {
         }
     }

@@ -17,7 +17,7 @@ namespace Safari.View.Movement
     public abstract class MovementBase: MonoBehaviour
     {
         public float cellSize = 30f;
-        public const float defaultSpeed = 10;
+        public float defaultSpeed = 10;
 
         public MovementBehavior behavior { get; private set; }
 

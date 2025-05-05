@@ -1955,7 +1955,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
       propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
       propertyPath: MapChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -1998,6 +1998,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 765875413}
     - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
+      propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.data[4].m_Target
+      value: 
+      objectReference: {fileID: 296625796}
+    - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
       propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -2014,6 +2018,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
+      propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.data[4].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
       propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnMapInitialized
       objectReference: {fileID: 0}
@@ -2027,6 +2035,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
       propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: InjectGridPositionMappingData
+      objectReference: {fileID: 0}
+    - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
+      propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
       value: InjectGridPositionMappingData
       objectReference: {fileID: 0}
     - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
@@ -2050,6 +2062,10 @@ PrefabInstance:
       value: Safari.View.Rangers.RangerCollectionController, View
       objectReference: {fileID: 0}
     - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
+      propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
+      value: Safari.View.Jeeps.JeepCollectionController, View
+      objectReference: {fileID: 0}
+    - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
       propertyPath: MapChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
@@ -2067,6 +2083,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
       propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
+      propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8580134897230846579, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}

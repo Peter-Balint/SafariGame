@@ -9,17 +9,17 @@ namespace Safari.Model.Jeeps.State
 {
     public class Idling : State
     {
-        public Idling(Jeep owner, VisitorManager visitorManager) : base(owner, visitorManager)
+        public Idling(Jeep owner) : base(owner)
         {
         }
 
         public override void Update(float deltaTime, int speedFactor)
         {
             base.Update(deltaTime, speedFactor);
-            if (visitorManager.VisitorsWaiting > 0)
+            if (owner.VisitorManager.VisitorsWaiting > 0)
             {
-                int visitors = visitorManager.TakeVisitors(Jeep.Capacity);
-                TransitionTo(new Travelling(owner, visitorManager, visitors));
+                int visitors = owner.VisitorManager.TakeVisitors(Jeep.Capacity);
+                TransitionTo(new Travelling(owner, visitors));
             }
         }
     }
