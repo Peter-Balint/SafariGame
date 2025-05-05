@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5204878687620041072}
   - component: {fileID: 8729512215094270302}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RangerIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
