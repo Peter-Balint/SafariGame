@@ -1150,6 +1150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellSize: 30
+  miniMapIcon: {fileID: 485383583331496129, guid: e02a39f240b10f3438da818bc5405c80, type: 3}
 --- !u!114 &4921257083470492650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1162,7 +1163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11887e2b67f93ea45978f6c108bbad11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  miniMapIcon: {fileID: 485383583331496129, guid: e02a39f240b10f3438da818bc5405c80, type: 3}
 --- !u!1 &8782196822256951860
 GameObject:
   m_ObjectHideFlags: 0
