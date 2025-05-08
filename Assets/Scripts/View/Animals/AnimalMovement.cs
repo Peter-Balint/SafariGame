@@ -31,6 +31,8 @@ namespace Safari.View.Animals
 
         private GameSpeedManager gameSpeedManager;
 
+        public GameObject miniMapIcon;
+
         public void Init(MovementBehavior behavior, NavMeshAgent agent, Dictionary<GridPosition, Vector3> mapping, GameSpeedManager gameSpeedManager)
         {
             this.behavior = behavior;
@@ -136,6 +138,11 @@ namespace Safari.View.Animals
                 var fieldDisplay = other.gameObject.GetComponent<FieldDisplay>();
                 behavior.ReportLocation(fieldDisplay.Position);
             }
+        }
+
+        protected void Start()
+        {
+            Instantiate(miniMapIcon, transform, false);
         }
 
         protected virtual void Update()

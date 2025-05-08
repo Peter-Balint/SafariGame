@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9099099296081717086}
@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellSize: 30
+  miniMapIcon: {fileID: 869746569028187325, guid: e712ed1dc3b31e448883acb1d70bb804, type: 3}
 --- !u!1001 &8776609558996467893
 PrefabInstance:
   m_ObjectHideFlags: 0
