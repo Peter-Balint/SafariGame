@@ -179,6 +179,8 @@ MonoBehaviour:
   Diverstiy: {fileID: 3143163582169515529}
   ParkSize: {fileID: 892130764836463393}
   MaxTicket: {fileID: 8590598738733804848}
+  AnimalSpecies: {fileID: 4976424885427553268}
+  AnimalState: {fileID: 9049152059981842027}
 --- !u!1 &840453243239070534
 GameObject:
   m_ObjectHideFlags: 0
@@ -1633,6 +1635,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 918794372751df843b1ad7a88e25be2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4976424885427553268 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2276314631759109787, guid: 5f2f50ea6408bcb4ca0bf37bb3fbe124, type: 3}
+  m_PrefabInstance: {fileID: 6528187604952964463}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9049152059981842027 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2814120654555716356, guid: 5f2f50ea6408bcb4ca0bf37bb3fbe124, type: 3}
+  m_PrefabInstance: {fileID: 6528187604952964463}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &9090845184672562038 stripped

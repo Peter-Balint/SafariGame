@@ -13,6 +13,7 @@ namespace Safari.View.UI
     {
         private AnimalCollection animalCollection;
 		private MoneyManager moneyManager;
+        private Animal currentAnimal;
 
 
 
@@ -22,6 +23,8 @@ namespace Safari.View.UI
         public TMP_Text Diverstiy;
         public TMP_Text ParkSize;
 		public TMP_Text MaxTicket;
+		public TMP_Text AnimalSpecies;
+		public TMP_Text AnimalState;
 
 		void Start()
         {
@@ -37,10 +40,23 @@ namespace Safari.View.UI
             Diverstiy.text = Math.Round((moneyManager.ReadDiversity() * 100), 1).ToString() + "%";
             ParkSize.text = Math.Round((moneyManager.ReadParkSize() * 100), 1).ToString() + "%";
             MaxTicket.text = Math.Round(moneyManager.ReadMaxTicketPirce(), 1).ToString() + "$";
+            if(currentAnimal != null)
+            {
+				AnimalState.text = currentAnimal.State.GetType().Name;
+				AnimalSpecies.text = currentAnimal.GetType().Name;
+			}
 
             
 
 		}
+
+   
+		
+
+        public void GetCurrentAnimal(Animal animal)
+        {
+            currentAnimal = animal;
+        }
 
     }
 }

@@ -1,10 +1,12 @@
 ﻿using Safari.Model.Animals;
+using Safari.View.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Networking.PlayerConnection;
 
 namespace Safari.View.Animals
 {
@@ -12,13 +14,30 @@ namespace Safari.View.Animals
     {
         private Animal animal;
 
-        public string State;
-        public string AnimalType;
+        private string state;
+        private string species;
+        private Canvas canvas;
+        private InfoUIController infoUIController;
 
-        public void Init(Animal animal)
+		
+
+		void Start()
+        {
+			
+		}
+
+	
+
+
+		public void Init(Animal animal)
         {
             this.animal = animal;
-        }
+			if (infoUIController == null)
+			{
+				infoUIController = FindFirstObjectByType<InfoUIController>();
+			}
+
+		}
 
    
 
@@ -26,10 +45,11 @@ namespace Safari.View.Animals
         {
             if (animal != null)
             {
-                State = animal.State.GetType().Name;
-                AnimalType = animal.State.GetType().Name;
-                UnityEngine.Debug.Log($"Clicked on {animal.GetType().Name}");
-                UnityEngine.Debug.Log($"Current state:  {animal.State.GetType().Name}");
+                state = animal.State.GetType().Name;
+                species = animal.GetType().Name;
+                infoUIController.GetCurrentAnimal(animal);
+               // UnityEngine.Debug.Log($"Clicked on {animal.GetType().Name}");
+               // UnityEngine.Debug.Log($"Current state:  {animal.State.GetType().Name}");
 
             }
         }
