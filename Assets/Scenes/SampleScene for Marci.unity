@@ -1572,6 +1572,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -153
       objectReference: {fileID: 0}
+    - target: {fileID: 4976424885427553268, guid: ae958a8eabd8f6b4ab30be28596d5bde, type: 3}
+      propertyPath: m_text
+      value: type
+      objectReference: {fileID: 0}
+    - target: {fileID: 4976424885427553268, guid: ae958a8eabd8f6b4ab30be28596d5bde, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4976424885427553268, guid: ae958a8eabd8f6b4ab30be28596d5bde, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
+      objectReference: {fileID: 0}
     - target: {fileID: 5049624170926251133, guid: ae958a8eabd8f6b4ab30be28596d5bde, type: 3}
       propertyPath: m_SizeDelta.x
       value: 300
@@ -1586,11 +1598,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5876047436608737009, guid: ae958a8eabd8f6b4ab30be28596d5bde, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955484041177244106, guid: ae958a8eabd8f6b4ab30be28596d5bde, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 173
       objectReference: {fileID: 0}
     - target: {fileID: 6664557447739719783, guid: ae958a8eabd8f6b4ab30be28596d5bde, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -120
+      value: -126
       objectReference: {fileID: 0}
     - target: {fileID: 6664557447739719783, guid: ae958a8eabd8f6b4ab30be28596d5bde, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1672,9 +1688,25 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 8212213155009564812, guid: ae958a8eabd8f6b4ab30be28596d5bde, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 232
+      objectReference: {fileID: 0}
     - target: {fileID: 8882758943904122452, guid: ae958a8eabd8f6b4ab30be28596d5bde, type: 3}
       propertyPath: m_Name
       value: AnimalsIcon
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049152059981842027, guid: ae958a8eabd8f6b4ab30be28596d5bde, type: 3}
+      propertyPath: m_text
+      value: state
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049152059981842027, guid: ae958a8eabd8f6b4ab30be28596d5bde, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049152059981842027, guid: ae958a8eabd8f6b4ab30be28596d5bde, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
       objectReference: {fileID: 0}
     - target: {fileID: 9090845184672562038, guid: ae958a8eabd8f6b4ab30be28596d5bde, type: 3}
       propertyPath: m_SizeDelta.x
