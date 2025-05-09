@@ -6,6 +6,7 @@ using Safari.Model;
 using Safari.View.World.Map;
 using Safari.Model.GameSpeed;
 using System;
+using UnityEngine.SocialPlatforms;
 
 
 namespace Safari.View.Rangers
@@ -22,6 +23,7 @@ namespace Safari.View.Rangers
         public Dictionary<GridPosition, Vector3> GridPositionMapping { get { return gridPositionMapping; } }
 
         private GameSpeedManager gameSpeedManager;
+        private MoneyManager moneyManager;
 
         [SerializeField]
         private int rangerSalary;
@@ -32,14 +34,14 @@ namespace Safari.View.Rangers
         {
             rangerCollection = SafariGame.Instance.Rangers;
             gameSpeedManager = SafariGame.Instance.GameSpeedManager;
+            moneyManager = SafariGame.Instance.MoneyManager;
 
             displayers = new List<RangerDisplay>();
 
             rangerCollection.Added += OnRangerAdded;
             rangerCollection.Removed += OnRangerRemoved;
 
-            gameSpeedManager.DayPassed += (sender,args) => {  };    //when moneymanager is made
-                                                                    //change to month also, misread the task
+            gameSpeedManager.DayPassed += (sender,args) => { moneyManager.AddToBalance(-rangerSalary * displayers.Count); };    
         }
 
         public void InjectGridPositionMappingData(MapDisplay.MapInitializedEventArgs args)

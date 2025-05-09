@@ -15,7 +15,6 @@ namespace Safari.Model.Rangers
 
         private State state;
 
-        [SerializeField]
         private float shoootingRange = 90;
 
         public Ranger() 
