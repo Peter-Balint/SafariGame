@@ -51,6 +51,11 @@ namespace Safari.Model.Pathfinding
             return RandomDFS(location, t => IsExit(t.Item1));
         }
 
+        public GridMovementCommand? FindEntrance(GridPosition location)
+        {
+            return BFS(location, t => t.Item1.Equals(map.EntranceCoords), true, true);
+        }
+
         public bool IsDrinkingPlace(GridPosition pos)
         {
             return AdjacentCells(pos).Any(t => (map.FieldAt(t.Item1) is Water));
@@ -66,27 +71,7 @@ namespace Safari.Model.Pathfinding
             return map.FieldAt(pos) is Exit;
         }
 
-        public void FindEnterenceAndExit()
-        {
-            for (int i = 0; i < map.SizeX; ++i)
-            {
-                for (int j = 0; j < map.SizeZ; ++j)
-                {
-                    if (map.Fields[i, j] is Entrance)
-                    {
-                        map.EntranceCoords = new GridPosition(i, j);
-
-                    }
-                    if (map.Fields[i, j] is Exit)
-                    {
-                        map.ExitCoords = new GridPosition(i, j);
-
-                    }
-                }
-            }
-        }
-
-        private GridMovementCommand? BFS(GridPosition start, Func<Tuple<GridPosition, Offset>, bool> predicate)
+        private GridMovementCommand? BFS(GridPosition start, Func<Tuple<GridPosition, Offset>, bool> predicate, bool forbidDiagonal, bool onlyRoad)
         {
             Queue<GridPosition> q = new Queue<GridPosition>();
             q.Enqueue(start);
@@ -96,7 +81,7 @@ namespace Safari.Model.Pathfinding
             while (q.Count > 0)
             {
                 GridPosition currentVertex = q.Dequeue();
-                foreach (var neighbor in WalkableAdjacentCells(currentVertex))
+                foreach (var neighbor in WalkableAdjacentCells(currentVertex, forbidDiagonal, onlyRoad))
                 {
                     if (visited.Contains(neighbor.Item1))
                     {
@@ -111,6 +96,11 @@ namespace Safari.Model.Pathfinding
                 }
             }
             return null;
+        }
+
+        private GridMovementCommand? BFS(GridPosition start, Func<Tuple<GridPosition, Offset>, bool> predicate)
+        {
+            return BFS(start, predicate, false, false);
         }
 
         private List<GridMovementCommand>? RandomDFS(GridPosition start, Func<Tuple<GridPosition, Offset>, bool> predicate)
