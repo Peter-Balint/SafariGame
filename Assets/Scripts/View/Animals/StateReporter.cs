@@ -12,15 +12,22 @@ namespace Safari.View.Animals
     {
         private Animal animal;
 
+        public string State;
+        public string AnimalType;
+
         public void Init(Animal animal)
         {
             this.animal = animal;
         }
 
+   
+
         private void OnMouseDown()
         {
             if (animal != null)
             {
+                State = animal.State.GetType().Name;
+                AnimalType = animal.State.GetType().Name;
                 UnityEngine.Debug.Log($"Clicked on {animal.GetType().Name}");
                 UnityEngine.Debug.Log($"Current state:  {animal.State.GetType().Name}");
 
