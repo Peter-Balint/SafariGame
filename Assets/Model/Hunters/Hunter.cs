@@ -46,6 +46,11 @@ namespace Safari.Model.Hunters
             state.Update(target);
         }
 
+        public void Kill()
+        {
+            SetState(new Dead(this));
+        }
+
         public bool CheckInShootingDistance(Vector3 rangerVector, Vector3 targetVector)
         {
             return (rangerVector - targetVector).sqrMagnitude <= shoootingRange * shoootingRange;

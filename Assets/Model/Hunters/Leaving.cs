@@ -11,6 +11,7 @@ namespace Safari.Model.Hunters
         public override void OnEnter()
         {
             GridMovementCommand movementCommand = new GridMovementCommand(map.ExitCoords);
+            movementCommand.Finished += (sender, args) => owner.Kill();
             owner.Movement.ExecuteMovement(movementCommand);
         }
     }
