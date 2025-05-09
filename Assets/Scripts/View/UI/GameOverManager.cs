@@ -12,34 +12,23 @@ namespace Safari.View.UI
 {
     public class GameOverManager : MonoBehaviour
     {
-		private AnimalCollection animalCollection;
-		private MoneyManager moneyManager;
-		private GameSpeedManager speedManager;
+	
 		private Image panelImage;
-		private bool hasWon = false;
-		private double winTimerInGameMinutes = 0;
+		private GameOverLogic gameOverLogic;
 
 		public GameObject GameOverPanel;
-		//public event EventHandler Bankruptcy;
-		//public event EventHandler Extinction;
-
 		public TMP_Text GameOverMsg;
 		public DifficultySettings difficultySettings;
 		public Button ContinueButton;
+		
 		DifficultySettings.DifficultyData settings;
-
-
 
 
 		void Start()
 		{
-			animalCollection = SafariGame.Instance.Animals;
-			moneyManager = SafariGame.Instance.MoneyManager;
-			speedManager = SafariGame.Instance.GameSpeedManager;
-
 			settings = difficultySettings.GetSettings(SafariGame.Difficulty);
 
-
+			gameOverLogic = new GameOverLogic(settings.winMinutesRequired, settings.animalWinThreshold, settings.moneyWinThreshold);
 
 			if (GameOverPanel != null)
 			{
@@ -48,36 +37,23 @@ namespace Safari.View.UI
 		}
 		void Update()
 		{
-			CheckGameOverByBankruptcy();
-			CheckGameOverByExtinction();
-			CheckWinConditions();
-
-
-		}
-
-		public bool CheckGameOverByBankruptcy()
-		{
-			if(moneyManager.ReadBalance() <= 0)
+			if (gameOverLogic.HasWon) return;
+			if(gameOverLogic.CheckGameOverByBankruptcy())
 			{
-				
 				GameOverPanel.SetActive(true);
 				GameOverMsg.text = "Bankruptcy";
-				return true;
-
 			}
-			return false;
-		}
-
-		public bool CheckGameOverByExtinction()
-		{
-			if (animalCollection.Animals.Count <= 0)
+			if(gameOverLogic.CheckGameOverByExtinction())
 			{
 				GameOverPanel.SetActive(true);
 				GameOverMsg.text = "Extinction";
-				
-				return true;
 			}
-			return false;
+			if (gameOverLogic.CheckWinConditions(Time.deltaTime))
+			{
+				TriggerWin();
+			}
+
+
 		}
 
 		public void ReturnToMainMenu()
@@ -90,49 +66,6 @@ namespace Safari.View.UI
 			GameOverPanel.SetActive(false);
 
 		}
-		private void CheckWinConditions()
-		{
-			
-			if (hasWon) return;
-
-			if (WinningCriteriaAnimals() && WinningCriteriaMoney())
-			{
-				winTimerInGameMinutes += speedManager.CurrentSpeedToNum() * Time.deltaTime * 10;
-				if (winTimerInGameMinutes >= settings.winMinutesRequired)
-				{
-					TriggerWin();
-					hasWon = true;
-				}
-			}
-			else {
-				
-				winTimerInGameMinutes = 0;
-			}
-		}
-
-		private bool WinningCriteriaAnimals()
-		{
-			if(animalCollection.Animals.Count >= settings.animalWinThreshold) 
-			{
-				return true;
-			}
-			return false;
-		}
-
-		private bool WinningCriteriaMoney()
-		{
-			if (moneyManager.ReadBalance() >= settings.moneyWinThreshold) 
-			{
-				return true;
-			}
-			return false;
-		}
-
-		private bool WinningCriteriaVisitors()
-		{
-			throw new NotImplementedException();
-		}
-
 		private void TriggerWin()
 		{
 			GameOverPanel.SetActive(true);
@@ -143,6 +76,8 @@ namespace Safari.View.UI
 			if (ContinueButton != null)
 				ContinueButton.gameObject.SetActive(true);
 		}
+
+		
 
 	
 
