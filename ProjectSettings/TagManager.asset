@@ -8,6 +8,7 @@ TagManager:
   - Animal
   - Ranger
   - Prey
+  - Hunter
   layers:
   - Default
   - TransparentFX

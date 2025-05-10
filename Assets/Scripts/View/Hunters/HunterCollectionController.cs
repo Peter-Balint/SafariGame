@@ -16,7 +16,7 @@ namespace Safari.View.Hunters
 
         private HunterCollection hunterCollection;
 
-        public HunterDisplay RangerDisplayPrefab;
+        public HunterDisplay HunterDisplayPrefab;
 
         private Dictionary<GridPosition, Vector3> gridPositionMapping;
         public Dictionary<GridPosition, Vector3> GridPositionMapping { get { return gridPositionMapping; } }
@@ -43,14 +43,10 @@ namespace Safari.View.Hunters
             }
         }
 
-        public void OnRangerBuy()
-        {
-            hunterCollection.Add(new Hunter());
-        }
 
         private void OnHunterAdded(object sender, Hunter hunter)
         {
-            HunterDisplay display = Instantiate(RangerDisplayPrefab, hunter.Position,
+            HunterDisplay display = Instantiate(HunterDisplayPrefab, hunter.Position,
                 Quaternion.identity,
                 new InstantiateParameters()
                 {
