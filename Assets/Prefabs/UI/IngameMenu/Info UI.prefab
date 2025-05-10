@@ -1563,11 +1563,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2644144656344819225, guid: 5f2f50ea6408bcb4ca0bf37bb3fbe124, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 2644144656344819225, guid: 5f2f50ea6408bcb4ca0bf37bb3fbe124, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 2644144656344819225, guid: 5f2f50ea6408bcb4ca0bf37bb3fbe124, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1599,11 +1599,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2644144656344819225, guid: 5f2f50ea6408bcb4ca0bf37bb3fbe124, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -31
       objectReference: {fileID: 0}
     - target: {fileID: 2644144656344819225, guid: 5f2f50ea6408bcb4ca0bf37bb3fbe124, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -53
       objectReference: {fileID: 0}
     - target: {fileID: 2644144656344819225, guid: 5f2f50ea6408bcb4ca0bf37bb3fbe124, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1617,6 +1617,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5998948083920341012, guid: 5f2f50ea6408bcb4ca0bf37bb3fbe124, type: 3}
+      propertyPath: infoPanel
+      value: 
+      objectReference: {fileID: 5876047436608737009}
     - target: {fileID: 6014558105677811500, guid: 5f2f50ea6408bcb4ca0bf37bb3fbe124, type: 3}
       propertyPath: m_Name
       value: AnimalState
@@ -1648,6 +1652,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &5876047436608737009 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 798018990591759262, guid: 5f2f50ea6408bcb4ca0bf37bb3fbe124, type: 3}
+  m_PrefabInstance: {fileID: 6528187604952964463}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &9049152059981842027 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2814120654555716356, guid: 5f2f50ea6408bcb4ca0bf37bb3fbe124, type: 3}
