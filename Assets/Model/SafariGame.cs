@@ -69,14 +69,14 @@ namespace Safari.Model
             AnimalCreationManager = new AnimalCreationManager(Animals, pathfinding, Map, MoneyManager);
             Construction = new ConstructionManager(map, MoneyManager);
             GameSpeedManager = new GameSpeedManager();
-            Rangers = new RangerCollection();
+            Rangers = new RangerCollection(MoneyManager, GameSpeedManager);
             Visitors = new VisitorManager(MoneyManager, GameSpeedManager);
             Jeeps = new JeepCollection(Visitors, pathfinding);
         }
 
         public static void StartGame(GameDifficulty gameDifficulty)
         {
-            instance = new SafariGame(MapGenerator.GenerateMap(20, 20), gameDifficulty);
+            instance = new SafariGame(MapGenerator.GenerateMap(30, 30), gameDifficulty);
         }
     }
 }

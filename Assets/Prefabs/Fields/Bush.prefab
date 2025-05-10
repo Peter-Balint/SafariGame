@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7845566139041438063}
   - component: {fileID: -2080613684359048154}
   - component: {fileID: 5588166052430913086}
+  - component: {fileID: 4004070643726396063}
   m_Layer: 3
   m_Name: Bush
   m_TagString: Untagged
@@ -147,6 +148,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 30, y: 1.2, z: 30}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4004070643726396063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6416436759581583982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b14be4fe5a84e74d9aa2f4655c12081, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  miniMapIcon: {fileID: 88340770669415193, guid: 872e6b5519d14934897956da695d06c6, type: 3}
 --- !u!1001 &1684726397509375766
 PrefabInstance:
   m_ObjectHideFlags: 0

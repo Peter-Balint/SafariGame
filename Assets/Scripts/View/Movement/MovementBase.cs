@@ -19,6 +19,8 @@ namespace Safari.View.Movement
         public float cellSize = 30f;
         public float defaultSpeed = 10;
 
+        public GameObject miniMapIcon;
+
         public MovementBehavior behavior { get; private set; }
 
         protected NavMeshAgent agent;
@@ -59,6 +61,10 @@ namespace Safari.View.Movement
             agent.ResetPath();
         }
 
+        protected void Start()
+        {
+            Instantiate(miniMapIcon, transform, false);
+        }
 
         private void OnMovementCancelled(object sender, EventArgs e)
         {
