@@ -29,3 +29,5 @@ MonoBehaviour:
     Prefab: {fileID: 4382731622514113100, guid: 4ef8babf96717a84a9c89389d0823574, type: 3}
   - FieldTypeName: Exit
     Prefab: {fileID: 3257113715147129449, guid: c10ab8e3a6bfd3f489d8ac212a8554b8, type: 3}
+  - FieldTypeName: Entrance
+    Prefab: {fileID: 3257113715147129449, guid: c10ab8e3a6bfd3f489d8ac212a8554b8, type: 3}

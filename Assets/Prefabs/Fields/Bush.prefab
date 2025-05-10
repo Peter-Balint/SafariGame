@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -2080613684359048154}
   - component: {fileID: 5588166052430913086}
   - component: {fileID: 4004070643726396063}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bush
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,6 +169,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7964964720172746369}
     m_Modifications:
+    - target: {fileID: 719262810357044200, guid: b71b0f8d2f881c743a85228f3030d1cb, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2734492028559244920, guid: b71b0f8d2f881c743a85228f3030d1cb, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6239969156481072347, guid: b71b0f8d2f881c743a85228f3030d1cb, type: 3}
       propertyPath: m_LocalScale.x
       value: 40
@@ -224,6 +232,10 @@ PrefabInstance:
     - target: {fileID: 6239969156481229051, guid: b71b0f8d2f881c743a85228f3030d1cb, type: 3}
       propertyPath: m_Name
       value: Bush_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239969156481229051, guid: b71b0f8d2f881c743a85228f3030d1cb, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
