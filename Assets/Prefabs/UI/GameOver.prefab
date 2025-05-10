@@ -50,9 +50,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameOverPanel: {fileID: 6707777863811423791}
-  GameOverMsg: {fileID: 0}
-  difficultySettings: {fileID: 0}
-  ContinueButton: {fileID: 0}
+  GameOverMsg: {fileID: 319489864264839636}
+  difficultySettings: {fileID: 11400000, guid: 047d1f5af3fd03b43b0fc5c395ab0766, type: 2}
+  ContinueButton: {fileID: 5466368358765422362}
 --- !u!1 &3653986671500232490
 GameObject:
   m_ObjectHideFlags: 0
