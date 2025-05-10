@@ -429,6 +429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellSize: 30
+  miniMapIcon: {fileID: 485383583331496129, guid: e02a39f240b10f3438da818bc5405c80, type: 3}
 --- !u!114 &2734679492376175754
 MonoBehaviour:
   m_ObjectHideFlags: 0
