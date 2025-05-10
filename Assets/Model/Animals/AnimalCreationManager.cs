@@ -37,13 +37,13 @@ namespace Safari.Model.Animals
             }
             
             Animal animal = animalFactory.CreateAnimal(position, pathfinding);
-			if (moneyManager.CanBuy(animal.AnimalMetadata.Price))
+			if (moneyManager.CanBuy(animal.Metadata.Price))
 			{
 				Debug.Log(moneyManager.ReadBalance());
                 animal.Group = FindOrCreateGroup(animal);
                 animal.Group.AddAnimal(animal);
                 animals.AddAnimal(animal);
-				moneyManager.AddToBalance(-animal.AnimalMetadata.Price);
+				moneyManager.AddToBalance(-animal.Metadata.Price);
 				Debug.Log(moneyManager.ReadBalance());
 			}
 			
