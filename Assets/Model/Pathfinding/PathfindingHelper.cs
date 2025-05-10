@@ -149,11 +149,28 @@ namespace Safari.Model.Pathfinding
 
             while (!current.Equals(start))
             {
-                path.Add(new GridMovementCommand(current));
-                current = parent[current];
+                GridPosition next = parent[current];
+                if (path.Count > 0)
+                {
+                    GridPosition previous = path[path.Count - 1].TargetCell;
+                    if (IsJunction(previous, next))
+                    {
+                        path.Add(new GridMovementCommand(current));
+                    }
+                }
+                else
+                {
+                    path.Add(new GridMovementCommand(current));
+                }
+                current = next;
             }
             path.Reverse();
             return path;
+        }
+
+        private bool IsJunction(GridPosition previous, GridPosition next)
+        {
+            return previous.X != next.X && previous.Z != next.Z;
         }
 
         private List<Tuple<GridPosition, Offset>> AdjacentCells(GridPosition pos, bool forbidDiagonal)
