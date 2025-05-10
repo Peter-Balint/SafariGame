@@ -355,6 +355,9 @@ GameObject:
   - component: {fileID: 8919360001948920959}
   - component: {fileID: 4520868988956890773}
   - component: {fileID: 4520868988956890772}
+  - component: {fileID: 869628747737552580}
+  - component: {fileID: 7838519310730800446}
+  - component: {fileID: 6743840146598979587}
   m_Layer: 0
   m_Name: Jeep
   m_TagString: Untagged
@@ -437,6 +440,54 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.95, y: 1.9, z: 3.57}
   m_Center: {x: 0, y: 0.95, z: -0.05}
+--- !u!195 &869628747737552580
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5592546541105110636}
+  m_Enabled: 1
+  m_AgentTypeID: -1372625422
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 8
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &7838519310730800446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5592546541105110636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c48110c62b222e438709c9926e8b021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6743840146598979587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5592546541105110636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1848ee647fca9e44f9d32c1d45c04d5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellSize: 30
+  defaultSpeed: 10
 --- !u!1 &6638821756401453347
 GameObject:
   m_ObjectHideFlags: 0

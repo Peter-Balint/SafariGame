@@ -40,34 +40,11 @@ namespace Safari.View.UI
 
 		void Update()
         {
-            if((int)manager.minutesToday % 10 == 0 && VisitorSpawnedSec != (int)manager.minutesToday)
-            {
-                moneyManager.CalculateVisitDesire();
-                VisitorSpawn();
-                VisitorSpawnedSec = (int)manager.minutesToday;
-            }
-		
-
-
-			manager.AddTime(Time.deltaTime);
+            // Not the best place to put this, might refactor if we find a better place
+            SafariGame.Instance.Visitors.Update();
+            manager.AddTime(Time.deltaTime);
             Clock.text = manager.Time.ToString("MM/dd/yyyy HH:mm");
-            
-           
         }
-
-		private void VisitorSpawn()
-		{
-			double random = r.Next(0, 10);
-			random *= 0.1;
-
-			if (moneyManager.ReadVisitDesire() > random)
-			{
-				moneyManager.AddToBalance(moneyManager.ReadTicketPrice());
-			}
-		}
-
-
-
 	}
 
 }
