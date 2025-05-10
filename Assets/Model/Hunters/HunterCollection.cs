@@ -1,7 +1,8 @@
-
+#nullable enable
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using Safari.Model.GameSpeed;
 
 namespace Safari.Model.Hunters
 {
@@ -13,9 +14,13 @@ namespace Safari.Model.Hunters
         public event EventHandler<Hunter>? Added;
         public event EventHandler<Hunter>? Removed;
 
-        public HunterCollection()
+        private GameSpeedManager gameSpeedManager;
+
+        public HunterCollection(GameSpeedManager gameSpeedManager)
         {
             hunters = new List<Hunter>();
+            this.gameSpeedManager = gameSpeedManager;
+            gameSpeedManager.DayPassed += SpawnHunter;
         }
 
         public void Add(Hunter hunter)
@@ -37,6 +42,10 @@ namespace Safari.Model.Hunters
             {
                 Remove(hunter);
             }
+        }
+        private void SpawnHunter(object sender, EventArgs e)
+        {
+            Add(new Hunter());
         }
     }
 }

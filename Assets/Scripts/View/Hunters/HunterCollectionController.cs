@@ -2,10 +2,8 @@ using Safari.Model.GameSpeed;
 using Safari.Model.Map;
 using Safari.Model;
 using Safari.Model.Hunters;
-using Safari.View.Hunters;
 using Safari.View.World.Map;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
 
 namespace Safari.View.Hunters
@@ -68,5 +66,7 @@ namespace Safari.View.Hunters
                 }
             }
         }
+
+        
     }
 }
