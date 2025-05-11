@@ -654,6 +654,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1081055546 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -8118120217657228257, guid: d3caf33fe961eec428c18893e8879865, type: 3}
+  m_PrefabInstance: {fileID: 1207818883}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fd0e24155779e74bb177e20e082d18d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1106734327 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
@@ -689,6 +700,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8118120217657228257, guid: d3caf33fe961eec428c18893e8879865, type: 3}
+      propertyPath: animalCollectionController
+      value: 
+      objectReference: {fileID: 2116212420}
     - target: {fileID: 2257044912494016411, guid: d3caf33fe961eec428c18893e8879865, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2383,7 +2398,7 @@ PrefabInstance:
     - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
       propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1081055546}
     - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
       propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -2446,7 +2461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
       propertyPath: MapInitialized.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
-      value: Safari.View.Rangers.RangerCollectionController, View
+      value: Safari.View.Hunters.HunterCollectionController, View
       objectReference: {fileID: 0}
     - target: {fileID: 4406027566444333302, guid: 9d984448c57391d418a9945fabbd2e56, type: 3}
       propertyPath: MapChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName

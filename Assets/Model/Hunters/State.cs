@@ -39,9 +39,10 @@ namespace Safari.Model.Hunters
         public virtual void Update()
         {
         }
-        public virtual void Update(GridPosition target)
+
+        public virtual void OnTargetChanged()
         {
-            throw new NotImplementedException("called from wrong state");
+
         }
     }
 }

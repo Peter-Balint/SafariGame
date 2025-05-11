@@ -10,9 +10,22 @@ namespace Safari.Model.Hunters
 
         public override void OnEnter()
         {
+            owner.Target = map.ExitCoords;
             GridMovementCommand movementCommand = new GridMovementCommand(map.ExitCoords);
-            movementCommand.Finished += (sender, args) => owner.Kill();
             owner.Movement.ExecuteMovement(movementCommand);
+        }
+
+        public override void Update()
+        {
+            if (owner.Movement.Location.X == owner.Target.X && owner.Movement.Location.Z == owner.Target.Z)
+            {
+                OnTargetReached();
+            }
+        }
+
+        private void OnTargetReached()
+        {
+            owner.Kill();
         }
     }
 }

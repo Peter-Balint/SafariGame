@@ -67,7 +67,7 @@ namespace Safari.Model
             Construction = new ConstructionManager(map, MoneyManager);
             GameSpeedManager = new GameSpeedManager();
             Rangers = new RangerCollection();
-            Hunters = new HunterCollection(GameSpeedManager);
+            Hunters = new HunterCollection();
             Jeeps = new JeepCollection();
 		}
 

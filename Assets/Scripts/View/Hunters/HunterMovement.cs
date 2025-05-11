@@ -110,7 +110,6 @@ namespace Safari.View.Hunters
             if (currentlyExecuting != null && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance && (!agent.hasPath || agent.velocity.sqrMagnitude == 0f))
             {
                 agent.ResetPath();
-                currentlyExecuting.ReportFinished();
             }
             agent.speed = defaultSpeed * gameSpeedManager.CurrentSpeedToNum();
         }

@@ -5,6 +5,8 @@ using Safari.Model.Hunters;
 using Safari.View.World.Map;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using Safari.View.Animals;
 
 namespace Safari.View.Hunters
 {
@@ -19,17 +21,25 @@ namespace Safari.View.Hunters
         private Dictionary<GridPosition, Vector3> gridPositionMapping;
         public Dictionary<GridPosition, Vector3> GridPositionMapping { get { return gridPositionMapping; } }
 
+        private Map map;
+
         private GameSpeedManager gameSpeedManager;
+
+        [SerializeField]
+        private AnimalCollectionController animalCollectionController;
 
         void Start()
         {
             hunterCollection = SafariGame.Instance.Hunters;
             gameSpeedManager = SafariGame.Instance.GameSpeedManager;
+            map = SafariGame.Instance.Map;
 
             displayers = new List<HunterDisplay>();
 
             hunterCollection.Added += OnHunterAdded;
             hunterCollection.Removed += OnHunterRemoved;
+
+            gameSpeedManager.DayPassed += SpawnHunter;
         }
 
         public void InjectGridPositionMappingData(MapDisplay.MapInitializedEventArgs args)
@@ -51,7 +61,7 @@ namespace Safari.View.Hunters
                     parent = transform,
                     worldSpace = false
                 });
-            display.Init(hunter, gridPositionMapping, gameSpeedManager);
+            display.Init(hunter, gridPositionMapping, gameSpeedManager,animalCollectionController);
             displayers.Add(display);
         }
         private void OnHunterRemoved(object sender, Hunter hunter)
@@ -66,7 +76,12 @@ namespace Safari.View.Hunters
                 }
             }
         }
-
+        private void SpawnHunter(object sender, EventArgs args)
+        {
+            Hunter hunter = new Hunter();
+            hunter.Position = gridPositionMapping[new GridPosition(map.EntranceCoords.X+1,map.EntranceCoords.Z+1)];
+            hunterCollection.Add(hunter);
+        }
         
     }
 }

@@ -13,6 +13,17 @@ namespace Safari.Model.Hunters
 
         public event EventHandler? Died;
 
+        private GridPosition target;
+        public GridPosition Target
+        {
+            get { return target; }
+            set
+            {
+                target = value;
+                state.OnTargetChanged();
+            }
+        }
+
         private State state;
 
         [SerializeField]
@@ -39,21 +50,17 @@ namespace Safari.Model.Hunters
 
         public void ModelUpdate()
         {
-
-        }
-        public void ModelUpdate(GridPosition target)
-        {
-            state.Update(target);
+            state.Update();
         }
 
         public void Kill()
         {
             SetState(new Dead(this));
         }
-
-        public bool CheckInShootingDistance(Vector3 rangerVector, Vector3 targetVector)
+        
+        public bool CheckInShootingDistance(Vector3 hunterVector, Vector3 targetVector)
         {
-            return (rangerVector - targetVector).sqrMagnitude <= shoootingRange * shoootingRange;
+            return (hunterVector - targetVector).sqrMagnitude <= shoootingRange * shoootingRange;
         }
     }
 }

@@ -68,3 +68,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HunterPrefab: {fileID: 1325882876467754, guid: 62c58042e530049a9aea2a0d32d16034, type: 3}
+  animalCollectionController: {fileID: 0}
