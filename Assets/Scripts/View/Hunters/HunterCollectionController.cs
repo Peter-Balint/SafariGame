@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Safari.View.Animals;
+using Safari.View.Rangers;
 
 namespace Safari.View.Hunters
 {
@@ -27,6 +28,10 @@ namespace Safari.View.Hunters
 
         [SerializeField]
         private AnimalCollectionController animalCollectionController;
+        [SerializeField]
+        private JeepCollectionController jeepCollectionController;
+        [SerializeField]
+        RangerCollectionController rangerCollectionController;
 
         void Start()
         {
@@ -61,7 +66,7 @@ namespace Safari.View.Hunters
                     parent = transform,
                     worldSpace = false
                 });
-            display.Init(hunter, gridPositionMapping, gameSpeedManager,animalCollectionController);
+            display.Init(hunter, gridPositionMapping, gameSpeedManager,animalCollectionController,jeepCollectionController,rangerCollectionController);
             displayers.Add(display);
         }
         private void OnHunterRemoved(object sender, Hunter hunter)
@@ -81,7 +86,7 @@ namespace Safari.View.Hunters
             if (animalCollectionController.Displayers.Count != 0)
             {
                 Hunter hunter = new Hunter();
-                hunter.Position = gridPositionMapping[new GridPosition(map.EntranceCoords.X + 1, map.EntranceCoords.Z + 1)];
+                hunter.Position = gridPositionMapping[new GridPosition(14,17)];
                 hunterCollection.Add(hunter);
             }
         }

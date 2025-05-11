@@ -53,8 +53,7 @@ namespace Safari.View.Hunters
             switch (movementCommand)
             {
                 case GridMovementCommand gm:
-                    var target = gridPositionMapping[gm.TargetCell];
-                    //target += new Vector3(gm.TargetOffset.DeltaX, 0, gm.TargetOffset.DeltaZ) * 15;
+                    var target = gridPositionMapping[gm.TargetCell]; 
                     agent.SetDestination(target);
                     break;
 
@@ -109,8 +108,9 @@ namespace Safari.View.Hunters
         {
             if (currentlyExecuting != null && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance && (!agent.hasPath || agent.velocity.sqrMagnitude == 0f))
             {
-                agent.ResetPath();
+                //agent.ResetPath();
             }
+            Debug.Log(agent.pathStatus.ToString());
             agent.speed = defaultSpeed * gameSpeedManager.CurrentSpeedToNum();
         }
     }

@@ -9,12 +9,19 @@ using UnityEngine.AI;
 using Safari.View.Animals;
 using Safari.Model.Animals;
 using System;
+using Safari.View.Rangers;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 namespace Safari.View.Hunters
 {
     public class HunterDisplay : MonoBehaviour
     {
         public Hunter? Hunter;
+
+        [SerializeField]
+        private int revealDistance;
+        private float closestRevealerSqr = float.MaxValue;
+        private bool visible = true;
 
         private bool killed = false;
 
@@ -26,17 +33,24 @@ namespace Safari.View.Hunters
         private Dictionary<GridPosition, Vector3> gridPositionMapping;
 
         private AnimalCollectionController animalCollectionController;
+        private JeepCollectionController jeepCollectionController;
+        private RangerCollectionController rangerCollectionController;
 
         private AnimalDisplay? targetDisplay;
         private string targetName;
 
+        private GameObject deadAnimalPrefab;
+
         [SerializeField]
         private DeadAnimalPrefabMapping deadAnimalMapping;
 
-        public void Init(Hunter hunter, Dictionary<GridPosition, Vector3> gridPosMapping, GameSpeedManager gameSpeedManager, AnimalCollectionController animalCollectionController)
+        public void Init(Hunter hunter, Dictionary<GridPosition, Vector3> gridPosMapping, GameSpeedManager gameSpeedManager,
+                        AnimalCollectionController animalCollectionController, JeepCollectionController jeepCollectionController, RangerCollectionController rangerCollectionController)
         {
             gridPositionMapping = gridPosMapping;
             this.animalCollectionController = animalCollectionController;
+            this.jeepCollectionController = jeepCollectionController;
+            this.rangerCollectionController = rangerCollectionController;
 
             Trace.Assert(displayed == null);
 
@@ -89,9 +103,30 @@ namespace Safari.View.Hunters
         private void InstantiateCorpse(object sender, EventArgs args)
         {
             GameObject deadAnimalPrefab = deadAnimalMapping.mappingDictionary[targetName];
-            Instantiate(deadAnimalPrefab,transform,false);
+            deadAnimalPrefab = Instantiate(deadAnimalPrefab,transform,false);
+            if (!visible)
+                    {
+                        deadAnimalPrefab.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
+                    }
         }
 
+        private void SetToVisible()
+        {
+            gameObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
+            if(deadAnimalPrefab != null)
+            {
+                deadAnimalPrefab.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
+            }
+            
+        }
+        private void SetToInvisible()
+        {
+            gameObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
+            if (deadAnimalPrefab != null)
+            {
+                deadAnimalPrefab.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
+            }
+        }
 
         private void Update()
         {
@@ -103,12 +138,40 @@ namespace Safari.View.Hunters
                 {
                     killed = true;
                     targetDisplay.AnimalModel.Kill();
-                    targetDisplay = null;
+                    targetDisplay = null;                 
                 }
             }
             else
             {
                 Hunter.ModelUpdate();
+            }
+
+            float distanceSqr = 0;
+            foreach (RangerDisplay rangerDisplay in rangerCollectionController.displayers)
+            {
+                distanceSqr = (rangerDisplay.transform.position - transform.position).sqrMagnitude;
+                if (distanceSqr < closestRevealerSqr)
+                {
+                    closestRevealerSqr = distanceSqr;
+                }
+            }
+            foreach (JeepDisplay jeepDisplay in jeepCollectionController.Displayers)
+            {
+                distanceSqr = (jeepDisplay.transform.position - transform.position).sqrMagnitude;
+                if (distanceSqr < closestRevealerSqr)
+                {
+                    closestRevealerSqr = distanceSqr;
+                }
+            }
+            if (closestRevealerSqr <= revealDistance * revealDistance && !visible)
+            {
+                SetToVisible();
+                visible = true;
+            }
+            else if (visible)
+            {
+                SetToInvisible();
+                visible = false;
             }
         }
     }

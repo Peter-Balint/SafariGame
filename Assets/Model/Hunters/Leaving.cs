@@ -19,7 +19,7 @@ namespace Safari.Model.Hunters
 
         public override void Update()
         {
-            if (owner.Movement.Location.X == owner.Target.X && owner.Movement.Location.Z == owner.Target.Z)
+            if (owner.Movement.Location.X == map.ExitCoords.X && owner.Movement.Location.Z == map.ExitCoords.Z)
             {
                 OnTargetReached();
             }

@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3179680699176757046, guid: 1a52d34ce8083c44ab0bd7c4ca7aa0c3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4415167786139673237, guid: 1a52d34ce8083c44ab0bd7c4ca7aa0c3, type: 3}
       propertyPath: m_Name
       value: DeadCamel

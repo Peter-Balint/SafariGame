@@ -701,9 +701,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8118120217657228257, guid: d3caf33fe961eec428c18893e8879865, type: 3}
+      propertyPath: jeepCollectionController
+      value: 
+      objectReference: {fileID: 1951728271}
+    - target: {fileID: -8118120217657228257, guid: d3caf33fe961eec428c18893e8879865, type: 3}
       propertyPath: animalCollectionController
       value: 
       objectReference: {fileID: 2116212420}
+    - target: {fileID: -8118120217657228257, guid: d3caf33fe961eec428c18893e8879865, type: 3}
+      propertyPath: rangerCollectionController
+      value: 
+      objectReference: {fileID: 765875413}
     - target: {fileID: 2257044912494016411, guid: d3caf33fe961eec428c18893e8879865, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -13,7 +13,7 @@ namespace Safari.View.Rangers
 {
     public class RangerCollectionController : MonoBehaviour
     {
-        private List<RangerDisplay> displayers;
+        public List<RangerDisplay> displayers {  get; private set; }
 
         private RangerCollection rangerCollection;
 
@@ -60,6 +60,7 @@ namespace Safari.View.Rangers
 
         private void OnRangerAdded(object sender, Ranger ranger)
         {
+            ranger.Position = gridPositionMapping[new GridPosition(14,17)];
             RangerDisplay display = Instantiate(RangerDisplayPrefab, ranger.Position,
                 Quaternion.identity,
                 new InstantiateParameters()
