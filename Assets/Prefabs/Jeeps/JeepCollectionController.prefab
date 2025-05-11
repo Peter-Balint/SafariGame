@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63e0dfd1268e24742a7cfc5338549b45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JeepDisplayPrefab: {fileID: 84268627180137938, guid: 5a851540aab7d374e97d7fd4ee92fb50, type: 3}
+  JeepDisplayPrefab: {fileID: 7838519310730800446, guid: 61042a0c329ebd246803c9ae69dcb064, type: 3}
   mapDisplayPrefab: {fileID: 0}

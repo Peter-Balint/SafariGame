@@ -383,23 +383,23 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 586
-      height: 701
-    m_Scale: {x: 0.30520833, y: 0.30520836}
-    m_Translation: {x: 293, y: 350.50003}
+      width: 505
+      height: 495
+    m_Scale: {x: 0.26302084, y: 0.26302084}
+    m_Translation: {x: 252.49998, y: 247.5}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -960
-      y: -1148.3959
-      width: 1920
-      height: 2296.7917
+      x: -959.9999
+      y: -940.99005
+      width: 1919.9999
+      height: 1881.9801
     m_MinimalGUI: 1
-  m_defaultScale: 0.30520833
-  m_LastWindowPixelSize: {x: 586, y: 722}
+  m_defaultScale: 0.26302084
+  m_LastWindowPixelSize: {x: 505, y: 516}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -967,9 +967,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 1019, y: 900.5, z: 0}
+    m_Target: {x: 789.2036, y: 1049.4692, z: -41.676643}
     speed: 2
-    m_Value: {x: 960, y: 1030, z: 0}
+    m_Value: {x: 1019, y: 900.5, z: 0}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1015,17 +1015,17 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.08240644, y: 0.0014948829, z: -0.00012357398, w: 0.99659854}
+    m_Target: {x: 0, y: 0, z: 0, w: 1}
     speed: 2
-    m_Value: {x: -0.43218374, y: 0.5008331, z: -0.31890246, w: -0.67873925}
+    m_Value: {x: -0.08240645, y: -0.001494883, z: 0.00012357398, w: -0.9965986}
   m_Size:
-    m_Target: 1053.0531
+    m_Target: 475.62494
     speed: 2
-    m_Value: 502.49377
+    m_Value: 1053.0531
   m_Ortho:
     m_Target: 1
     speed: 2
-    m_Value: 0
+    m_Value: 1
   m_CameraSettings:
     m_Speed: 1.0005001
     m_SpeedNormalized: 0.50000006
@@ -1121,7 +1121,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 238}
     m_SelectedIDs: cab70000
     m_LastClickedID: 47050
-    m_ExpandedIDs: 0000000080bd000082bd000084bd000086bd0000
+    m_ExpandedIDs: 000000004eb8000050b8000052b8000054b80000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1150,7 +1150,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000080bd000082bd000084bd000086bd0000
+    m_ExpandedIDs: 000000004eb8000050b8000052b8000054b80000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
