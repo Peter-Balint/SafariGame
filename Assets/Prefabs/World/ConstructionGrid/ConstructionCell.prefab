@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5164627222892339426}
   - component: {fileID: 7154087447927072964}
   - component: {fileID: 2061724431206246162}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Content
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6547541418106265948}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ConstructionCell
   m_TagString: Untagged
   m_Icon: {fileID: 0}

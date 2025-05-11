@@ -26,6 +26,8 @@ namespace Safari.View.Rangers
 
         public event EventHandler OnClick;
 
+        public GameObject miniMapIcon;
+
         public void Init(MovementBehavior behavior, NavMeshAgent agent, Dictionary<GridPosition, Vector3> mapping, GameSpeedManager gameSpeedManager)
         {
             this.behavior = behavior;
@@ -106,6 +108,10 @@ namespace Safari.View.Rangers
             OnClick?.Invoke(this, EventArgs.Empty);
         }
 
+        private void Start()
+        {
+            Instantiate(miniMapIcon, transform, false);
+        }
         private void Update()
         {
             if (currentlyExecuting != null && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance && (!agent.hasPath || agent.velocity.sqrMagnitude == 0f))

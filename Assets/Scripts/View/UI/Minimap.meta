@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/UI/Exit.prefab.meta
+guid: bc391f4938a13c844be8a7487b6c59b7
+PrefabImporter:
+========
+guid: 54b75189addb1fd419613ace83df4f28
+folderAsset: yes
+DefaultImporter:
+>>>>>>>> feat/minimap:Assets/Scripts/View/UI/Minimap.meta
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

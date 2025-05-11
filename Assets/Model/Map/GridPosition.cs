@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Safari.Model.Map
 {
-    public struct GridPosition
+    public struct GridPosition : IEquatable<GridPosition>
     {
         public int X;
 
@@ -16,6 +16,11 @@ namespace Safari.Model.Map
         {
             X = x;
             Z = z;
+        }
+
+        public bool Equals(GridPosition other)
+        {
+            return X == other.X && Z == other.Z;
         }
     }
 }

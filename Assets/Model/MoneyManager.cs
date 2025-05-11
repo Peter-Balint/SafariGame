@@ -99,9 +99,7 @@ namespace Safari.Model
 			int lionCount = AnimalCollection.Animals.Count(a => a is Lion);
 			int camelCount = AnimalCollection.Animals.Count(a => a is Camel);
 			int sheepCount = AnimalCollection.Animals.Count(a => a is Sheep);
-           // Debug.Log("VisitDesireDATA---------------------------------");
-           // Debug.Log("Animal count: "+AnimalCollection.Animals.Count);
-
+      
 
 
             double predatorCount = wolfCount + lionCount;
@@ -125,7 +123,7 @@ namespace Safari.Model
 
 			diversityFactor = Math.Max(0.1, diversityFactor);
 			diversityFactor = Math.Min(1, diversityFactor);
-            //Debug.Log("diversity: " + diversityFactor);
+          
 
 			//Checking Animal Count
 			parkSizeFactor = 1;
@@ -135,15 +133,14 @@ namespace Safari.Model
             if (AnimalCount > 49 && AnimalCount < 150) parkSizeFactor = (double)AnimalCount / 150;
             if (AnimalCount > 149) parkSizeFactor = 1;
             parkSizeFactor = Math.Sqrt(parkSizeFactor);
-            //Debug.Log("Parksizefactor: " + parkSizeFactor);
+           
             parkSizeFactor = Math.Max(0.1, parkSizeFactor);
 
 
-            //ticketprice
+     
             maxTicketPrice = 10 + AnimalCount / 2.0;
             double maxTicketPriceFactor = 1.0;
-          //  Debug.Log("maxticketprice: " + maxTicketPrice);
-          //  Debug.Log("maxticketprice: " +maxTicketPriceFactor);
+   
 			if (TicketPrice>maxTicketPrice)
             {
                 maxTicketPriceFactor = 0.2;
@@ -159,29 +156,10 @@ namespace Safari.Model
             VisitDesire = 1 * diversityFactor * parkSizeFactor * maxTicketPriceFactor;
             VisitDesire = Math.Min(1, VisitDesire);
 
-			//Debug.Log("VisitDesire:" + VisitDesire);
-			//Debug.Log("---------------------------------");
 
 
 
 
-            /* NOTES about this function::
-			 * 
-			 *   This function may need to be modified multiple times for the right gameplay-balance
-			 * ----------------------------
-			 *   diversity factor is a number between 0 and 1
-			 *   
-			 *   the baseline of the diversity factor is ~0.1, if there is only one type of each animal
-			 *   if the diversity is between 40-60% between the two species, visit desire is not reduced
-			 *  ---------------------------------------
-			 *  
-			 *   ParkSizeFactor is a number between 0 and 1,
-			 *   as the park grows, so does the number of animals the player should have to get a factor closer to 1
-			 *   the baseline here is also at 0.1
-			 *   
-			 * 
-			 * 
-			 */
 
 
         }

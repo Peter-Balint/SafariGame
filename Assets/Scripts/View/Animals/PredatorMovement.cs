@@ -110,6 +110,7 @@ namespace Safari.View.Animals
 
         private void Start()
         {
+            base.Start();
             rb = GetComponent<Rigidbody>();
         }
     }
