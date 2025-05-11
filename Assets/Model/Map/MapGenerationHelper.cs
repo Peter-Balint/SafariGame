@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 
@@ -10,25 +11,33 @@ namespace Safari.Model
 {
     public class MapGenerationHelper
     {
-		public static List<GridPosition> GenerateRandomPath(GridPosition start, GridPosition end, int sizeX, int sizeY)
+		
+		
+		public static List<GridPosition> GenerateRandomPath(GridPosition start, GridPosition end, int sizeX, int sizeY, System.Random rnd)
 		{
 			List<GridPosition> finalPath = new List<GridPosition>();
 			bool[,] visited = new bool[sizeY, sizeX];
+			
 
-			bool found = DFS(start, end, sizeX, sizeY, visited, finalPath);
+			bool found = DFS(start, end, sizeX, sizeY, visited, finalPath, rnd);
 			return found ? finalPath : new List<GridPosition>();
 		}
 
-		private static bool DFS(GridPosition current, GridPosition end, int sizeX, int sizeY, bool[,] visited, List<GridPosition> path)
+		private static bool DFS(GridPosition current, GridPosition end, int sizeX, int sizeY, bool[,] visited, List<GridPosition> path, System.Random rnd)
 		{
 			if (!IsInBounds(current, sizeX, sizeY) || visited[current.Z, current.X])
 				return false;
 
+			if(current.X == 17 && current.Z == 14)
+			{
+				return false;
+			}
 			visited[current.Z, current.X] = true;
 			path.Add(current);
 
 			if (current.Equals(end))
 				return true;
+
 
 
 			int dx = end.X - current.X;
@@ -40,24 +49,16 @@ namespace Safari.Model
 			if (dz != 0)
 				directions.Add(new GridPosition(current.X, current.Z + Math.Sign(dz)));
 
-			//List<GridPosition> directions = new List<GridPosition>
-			//{
-			//	new GridPosition(current.X + 1, current.Z),
-			//	new GridPosition(current.X - 1, current.Z),
-			//	new GridPosition(current.X, current.Z + 1),
-			//	new GridPosition(current.X, current.Z - 1)
-			//};
-
-			// Shuffle directions randomly
+	
 			for (int i = directions.Count - 1; i > 0; i--)
 			{
-				int j = UnityEngine.Random.Range(0, i + 1);
+				int j = rnd.Next(0, i + 1); ////// felsõ korlát ugyanaz e?
 				(directions[i], directions[j]) = (directions[j], directions[i]);
 			}
 
 			foreach (var dir in directions)
 			{
-				if (DFS(dir, end, sizeX, sizeY, visited, path))
+				if (DFS(dir, end, sizeX, sizeY, visited, path, rnd))
 					return true;
 			}
 
@@ -88,10 +89,10 @@ namespace Safari.Model
 
 					if (roll < 0.4f)
 						grid[y, x] = new Grass(BuildingMetadata.Default());
-					if (roll < 0.2f)
-						grid[y, x] = new Map.Tree(BuildingMetadata.Default());
-					if (roll < 0.3f)
+					if (roll < 0.06f)
 						grid[y, x] = new Bush(BuildingMetadata.Default());
+					if (roll < 0.05f)
+						grid[y, x] = new Map.Tree(BuildingMetadata.Default());
 				}
 			}
 		}
@@ -111,7 +112,7 @@ namespace Safari.Model
 						continue;
 
 					// 10% chance to place a water tile
-					if (UnityEngine.Random.value < 0.05f)
+					if (UnityEngine.Random.value < 0.025f)
 					{
 						grid[z, x] = new Water(BuildingMetadata.Default());
 
@@ -149,6 +150,43 @@ namespace Safari.Model
 			{
 				grid[z, x] = new Water(BuildingMetadata.Default());
 			}
+		}
+
+		public static void GenerateTerrain(Field[,] grid, System.Random rng,float scale = 0.1f)
+		{
+			int sizeZ = grid.GetLength(0);
+			int sizeX = grid.GetLength(1);
+			
+			
+
+			float offsetX = (float)rng.NextDouble() * 100f;
+			float offsetZ = (float)rng.NextDouble() * 100f;
+			for (int z = 0; z < sizeZ; z++)
+			{
+				for (int x = 0; x < sizeX; x++)
+				{
+					Field current = grid[z, x];
+
+					// Ne írjuk felül az utakat, bejáratot, kijáratot
+					if (current is Road || current is Entrance || current is Exit)
+						continue;
+
+					float noiseValue = Mathf.PerlinNoise(x * scale + offsetX, z * scale + offsetZ);
+
+					if (noiseValue < 0.2f)
+						grid[z, x] = new Grass(BuildingMetadata.Default()); //20%
+					else if (noiseValue < 0.25f)
+						grid[z, x] = new Water(BuildingMetadata.Default()); //5%
+					else if (noiseValue < 0.3f)
+						grid[z, x] = new Bush(BuildingMetadata.Default()); // 5%
+					else if (noiseValue < 0.35f)
+						grid[z, x] = new Map.Tree(BuildingMetadata.Default()); //5%
+					else
+						continue;
+				}
+			}
+
+			grid[17, 14] = new Ground();
 		}
 
 		private static bool IsInBounds(GridPosition pos, int width, int height)

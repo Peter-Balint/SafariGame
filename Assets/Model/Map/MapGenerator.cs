@@ -4,12 +4,15 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static UnityEngine.Rendering.RayTracingAccelerationStructure;
+using UnityEngine;
 
 namespace Safari.Model.Map
 {
     public static class MapGenerator
     {
-        public static Map GenerateMap(int sizeX, int sizeY)
+
+		public static Map GenerateMap(int sizeX, int sizeY)
         {
             Trace.Assert(sizeX > 3);
             Trace.Assert(sizeY > 3);
@@ -21,6 +24,9 @@ namespace Safari.Model.Map
 
 			
 
+			int seed = 42; // <-- választható seed
+			System.Random rng = new System.Random(seed);
+
 
 			for (int x = 0; x < sizeX; x++)
             {
@@ -30,7 +36,7 @@ namespace Safari.Model.Map
                 }
             }
 
-			List<GridPosition> path = MapGenerationHelper.GenerateRandomPath(entrance, exit, sizeX, sizeY);
+			List<GridPosition> path = MapGenerationHelper.GenerateRandomPath(entrance, exit, sizeX, sizeY,rng);
 			foreach (var pos in path)
 			{
 			
@@ -38,20 +44,15 @@ namespace Safari.Model.Map
 			
 			}
 
-			MapGenerationHelper.FillWithNature(grid);
-			MapGenerationHelper.AddWaterPatches(grid);
-			//for (int i = 0; i < 5; i++)
-			//{
-			//    for (global::System.Int32 j = 0; j < 5; j++)
-			//    {
-			//        grid[j +2 , i+2] = new Water(BuildingMetadata.Default());
-			//    }
-			//}
-			//grid[0, 1] = new Entrance();
-			//grid[sizeY - 1, sizeX - 2] = new Exit();
+			//MapGenerationHelper.FillWithNature(grid);
+			//MapGenerationHelper.AddWaterPatches(grid);
+			MapGenerationHelper.GenerateTerrain(grid,rng, 0.5f);
+
+		   //grid[0, 1] = new Entrance();
+		   //grid[sizeY - 1, sizeX - 2] = new Exit();
 			grid[entrance.X, entrance.Z] = new Entrance();
 			grid[exit.X, exit.Z] = new Exit();
-			return new Map(grid, entrance, exit);
+			return new Map(grid, new GridPosition(entrance.Z,entrance.X), new GridPosition(exit.Z, exit.X));
         }
     }
 }
