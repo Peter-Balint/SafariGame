@@ -14,11 +14,11 @@ namespace Safari.Model.Animals.State
 
         private float restingDuration = -1;
 
-        public Resting(Animal owner, float thirst, float hunger) : base(owner, thirst, hunger)
+        public Resting(Animal owner, double hydrationPercent, double saturationPercent) : base(owner, hydrationPercent, saturationPercent)
         {
         }
 
-        public Resting(Animal owner, float thirst, float hunger, float duration) : base(owner, thirst, hunger)
+        public Resting(Animal owner, double hydrationPercent, double saturationPercent, float duration) : base(owner, hydrationPercent, saturationPercent)
         {
             restingDuration = duration;
         }
@@ -30,27 +30,27 @@ namespace Safari.Model.Animals.State
             if (owner.Group?.Animals?.Count > 1)
             {
                 Debug.Log("Reuniting");
-                TransitionTo(new Reuniting(owner, thirst, hunger, (t, h) => new Resting(owner, t, h)));
+                TransitionTo(new Reuniting(owner, hydrationPercent, saturationPercent, (t, h) => new Resting(owner, t, h)));
                 return;
             }
 
             owner.Movement.AbortMovement();
             if (restingDuration < 0)
             {
-                restingDuration = UnityEngine.Random.Range(owner.RestingInterval.Item1, owner.RestingInterval.Item2);
+                restingDuration = UnityEngine.Random.Range(owner.Metadata.RestingTimeMin, owner.Metadata.RestingTimeMax);
             }
-            Debug.Log($"Resting for {restingDuration} seconds");
+            Debug.Log($"Resting for {restingDuration} minutes");
         }
 
         public override void Update(float deltaTime, int speedFactor)
         {
             base.Update(deltaTime, speedFactor);
-            restingSince += deltaTime * speedFactor;
+            restingSince += deltaTime * speedFactor / 60;
             AllowSearchingWater();
             AllowSearchingFood();
             if (restingSince > restingDuration)
             {
-                TransitionTo(new Wandering(owner, thirst, hunger));
+                TransitionTo(new Wandering(owner, hydrationPercent, saturationPercent));
             }
         }
     }

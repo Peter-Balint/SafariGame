@@ -9,35 +9,42 @@ namespace Safari.Model.Animals.State
 {
     public class Eating : State
     {
-        public Eating(Animal owner, float thirst, float hunger) : base(owner, thirst, hunger)
+        protected override bool DisableHunger => true;
+
+        public Eating(Animal owner, double hydrationPercent, double saturationPercent) : base(owner, hydrationPercent, saturationPercent)
         {
         }
 
         public override void Update(float deltaTime, int speedFactor)
         {
             base.Update(deltaTime, speedFactor);
+            double elapsedTimeAdjusted = (double)deltaTime * speedFactor;
 
             if (!owner.Pathfinding.IsFeedingSite(owner.Movement.Location))
             {
                 Debug.Log($"{owner.GetType().Name} is no longer near a feeding site.");
-                if (hunger > owner.HungerLimit)
+                if (saturationPercent < owner.Metadata.StillHungryPercent)
                 {
-                    TransitionTo(new SearchingFeedingSite(owner, thirst, hunger));
+                    TransitionTo(new SearchingFeedingSite(owner, hydrationPercent, saturationPercent));
                 }
                 else
                 {
-                    TransitionTo(new Wandering(owner, thirst, hunger));
+                    TransitionTo(new Wandering(owner, hydrationPercent, saturationPercent));
                 }
                 return;
             }
 
-            hunger -= deltaTime * owner.EatingRate * speedFactor;
-
-            if (hunger <= 0)
+            if (saturationPercent < 0)
             {
-                hunger = 0;
+                saturationPercent = 0;
+            }
+            saturationPercent += (elapsedTimeAdjusted / (owner.Metadata.TimeTillFullySaturated * 60)) * 100;
+
+            if (saturationPercent >= 100)
+            {
+                saturationPercent = 100;
                 Debug.Log($"{owner.GetType().Name} is no longer hungry and will rest now.");
-                TransitionTo(new Resting(owner, thirst, hunger));
+                TransitionTo(new Resting(owner, hydrationPercent, saturationPercent));
             }
         }
     }
