@@ -765,6 +765,7 @@ GameObject:
   - component: {fileID: 5319351934950401255}
   - component: {fileID: -3878701616678649392}
   - component: {fileID: 8225330397049598308}
+  - component: {fileID: -3878701616678649392}
   m_Layer: 0
   m_Name: Camel
   m_TagString: Prey
