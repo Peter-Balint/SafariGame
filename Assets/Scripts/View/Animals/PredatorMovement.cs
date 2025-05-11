@@ -31,9 +31,13 @@ namespace Safari.View.Animals
                     fc.ReportPreyNotFound();
                     return;
                 }
-                Trace.Assert(target.parent.TryGetComponent<AnimalDisplay>(out var animalDisplay), "Target prey is malformed: parent doesn't have AnimalDisplay");
+                AnimalDisplay? animalDisplay = null;
+                Trace.Assert(target.parent.TryGetComponent<AnimalDisplay>(out animalDisplay), "Target prey is malformed: parent doesn't have AnimalDisplay");
                 Trace.Assert(animalDisplay.AnimalModel is IPrey, "Target prey doesn't implement IPrey interface");
-                fc.Extra = new Tuple<Transform, Animal>(target, animalDisplay.AnimalModel!);
+                if (animalDisplay != null && animalDisplay.AnimalModel != null)
+                {
+                    fc.Extra = new Tuple<Transform, Animal>(target, animalDisplay.AnimalModel);
+                }
                 return;
             }
             base.HandleMovement(command);

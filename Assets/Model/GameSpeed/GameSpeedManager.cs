@@ -11,61 +11,64 @@ namespace Safari.Model.GameSpeed
 
         private const int minutesInDay = 24 * 60;
         public double minutesToday;
-     
+
 
         public event EventHandler DayPassed;
 
 
 
 
-		public GameSpeedManager() 
+        public GameSpeedManager()
         {
             CurrentSpeed = GameSpeed.Slow;
             Time = DateTime.Now;
-            minutesToday = Time.Minute + Time.Hour*60;
-            
-       
-		}
+            minutesToday = Time.Minute + Time.Hour * 60;
+
+
+        }
 
         public int CurrentSpeedToNum() //the actual meaning behind the enum
         {
             switch (CurrentSpeed)
             {
+                // 1 IRL second = 1 game minute
                 case GameSpeed.Slow:
                     {
-                        return 1;
+                        return 60;
                     }
+                // 1 IRL second = 1 game hour
                 case GameSpeed.Medium:
                     {
-                        return 3;
+                        return 60 * 60;
                     }
+                // 1 IRL second = 1 game day
                 case GameSpeed.Fast:
                     {
-                        return 10;
+                        return 24 * 60 * 60;
                     }
             }
             throw new System.Exception("Invalid game speed");
         }
         public void AddTime(float delta)
         {
-            double minutesInFrame = CurrentSpeedToNum() * delta * 10;
+            double secondsInFrame = CurrentSpeedToNum() * delta;
 
-            Time = Time.AddMinutes(minutesInFrame);
-            minutesToday += minutesInFrame;
+            Time = Time.AddSeconds(secondsInFrame);
+            minutesToday += secondsInFrame / 60;
 
-            if(minutesToday > minutesInDay)
+            if (minutesToday > minutesInDay)
             {
                 DayPassed?.Invoke(this, new EventArgs());
                 minutesToday -= minutesInDay;
             }
 
-       
 
-            
+
+
         }
 
 
-	}
+    }
 
     public enum GameSpeed { Slow, Medium, Fast } //might rename later
 
