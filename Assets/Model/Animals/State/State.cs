@@ -13,9 +13,14 @@ namespace Safari.Model.Animals.State
 
         public double SaturationPercent => saturationPercent;
 
+        public double Age => age;
+
         protected double hydrationPercent;
 
         protected double saturationPercent;
+
+        // Unit: days
+        protected double age;
 
         protected Animal owner;
 
@@ -35,16 +40,24 @@ namespace Safari.Model.Animals.State
                 var action = actionQueue.Dequeue();
                 action();
             }
+            age += elapsedTimeAdjusted / (60 * 60 * 24);
             CalculateHydrationPercent(elapsedTimeAdjusted);
             CalculateSaturationPercent(elapsedTimeAdjusted);
             if (hydrationPercent < -100)
             {
                 Debug.Log($"{owner.GetType().Name} died of dehydration");
                 TransitionTo(new Dead(owner, hydrationPercent, saturationPercent));
+                return;
             }
             if (saturationPercent < -100)
             {
                 Debug.Log($"{owner.GetType().Name} has starved to death");
+                TransitionTo(new Dead(owner, hydrationPercent, saturationPercent));
+                return;
+            }
+            if (age > owner.Metadata.LifeSpan)
+            {
+                Debug.Log($"{owner.GetType().Name} has died of old age");
                 TransitionTo(new Dead(owner, hydrationPercent, saturationPercent));
             }
         }
@@ -136,15 +149,17 @@ namespace Safari.Model.Animals.State
             }
             if (saturationPercent > 0)
             {
-                saturationPercent  -= (elapsedTimeAdjusted / (owner.Metadata.TimeTillHungry * 60)) * 100;
-                if (saturationPercent  < 0)
+                double ageFactor = (age / owner.Metadata.LifeSpan) * (owner.Metadata.TimeTillHungry / 4);
+                saturationPercent -= (elapsedTimeAdjusted / ((owner.Metadata.TimeTillHungry - ageFactor) * 60)) * 100;
+                if (saturationPercent < 0)
                 {
-                    saturationPercent  = 0;
+                    saturationPercent = 0;
                 }
             }
             else
             {
-                saturationPercent  -= (elapsedTimeAdjusted / (owner.Metadata.TimeTillStarvation * 60)) * 100;
+                double ageFactor = (age / owner.Metadata.LifeSpan) * (owner.Metadata.TimeTillStarvation / 4);
+                saturationPercent -= (elapsedTimeAdjusted / ((owner.Metadata.TimeTillStarvation - ageFactor) * 60)) * 100;
             }
         }
     }
