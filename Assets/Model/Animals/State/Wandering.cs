@@ -16,7 +16,7 @@ namespace Safari.Model.Animals.State
         private MovementCommand? key;
 
 
-        public Wandering(Animal owner, double hydrationPercent, double saturationPercent) : base(owner, hydrationPercent, saturationPercent)
+        public Wandering(Animal owner, double hydrationPercent, double saturationPercent, double breedingCooldown) : base(owner, hydrationPercent, saturationPercent, breedingCooldown)
         {
         }
 
@@ -44,12 +44,13 @@ namespace Safari.Model.Animals.State
             base.Update(deltaTime, speedFactor);
             AllowSearchingWater();
             AllowSearchingFood();
+            AllowSearchingMate();
         }
 
         private void OnWanderingFinished(object sender, EventArgs e)
         {
             Debug.Log("Wandering finished");
-            TransitionTo(new WaitingForOthers(owner, hydrationPercent, saturationPercent, key));
+            TransitionTo(new WaitingForOthers(owner, hydrationPercent, saturationPercent, breedingCooldown, key));
         }
 
         private Animal? AlreadyWandering()

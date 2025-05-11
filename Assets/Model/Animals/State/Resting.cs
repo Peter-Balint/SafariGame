@@ -14,11 +14,11 @@ namespace Safari.Model.Animals.State
 
         private float restingDuration = -1;
 
-        public Resting(Animal owner, double hydrationPercent, double saturationPercent) : base(owner, hydrationPercent, saturationPercent)
+        public Resting(Animal owner, double hydrationPercent, double saturationPercent, double breedingCooldown) : base(owner, hydrationPercent, saturationPercent, breedingCooldown)
         {
         }
 
-        public Resting(Animal owner, double hydrationPercent, double saturationPercent, float duration) : base(owner, hydrationPercent, saturationPercent)
+        public Resting(Animal owner, double hydrationPercent, double saturationPercent, double breedingCooldown, float duration) : base(owner, hydrationPercent, saturationPercent, breedingCooldown)
         {
             restingDuration = duration;
         }
@@ -30,7 +30,7 @@ namespace Safari.Model.Animals.State
             if (owner.Group?.Animals?.Count > 1)
             {
                 Debug.Log("Reuniting");
-                TransitionTo(new Reuniting(owner, hydrationPercent, saturationPercent, (t, h) => new Resting(owner, t, h)));
+                TransitionTo(new Reuniting(owner, hydrationPercent, saturationPercent, breedingCooldown, (t, h, b) => new Resting(owner, t, h, b)));
                 return;
             }
 
@@ -48,9 +48,10 @@ namespace Safari.Model.Animals.State
             restingSince += deltaTime * speedFactor / 60;
             AllowSearchingWater();
             AllowSearchingFood();
+            AllowSearchingMate();
             if (restingSince > restingDuration)
             {
-                TransitionTo(new Wandering(owner, hydrationPercent, saturationPercent));
+                TransitionTo(new Wandering(owner, hydrationPercent, saturationPercent, breedingCooldown));
             }
         }
     }

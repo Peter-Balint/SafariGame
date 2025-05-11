@@ -22,15 +22,10 @@ namespace Safari.Model.Animals
         public AnimalMetadata Metadata { get { return metadata; } }
 
         public Group Group { get; set; }
+        
+        public Gender gender { get; }
 
         protected AnimalMetadata metadata;
-
-        protected int age;
-        protected bool isAdult;
-        protected Gender gender;
-
-        //for setting from the editor, arbitrary numbers for now
-        public const int lifeSpan = 50000;
 
         public event EventHandler? Died;
         public event EventHandler? StateChanged;
@@ -38,30 +33,24 @@ namespace Safari.Model.Animals
         protected Animal(PathfindingHelper pathfinding, Group group, Vector3 wordPos)
         {
             Movement = new MovementBehavior(this, wordPos);
-            age = 0;
             State = new State.Resting(this, 100, 100, 0);
             State.OnEnter();
             Pathfinding = pathfinding;
             metadata = new AnimalMetadata();
             Group = group;
             group?.AddAnimal(this);
-
-            // Assign gender randomly using Unity's Random
             gender = (Gender)UnityEngine.Random.Range(0, 2);
         }
 
         protected Animal(PathfindingHelper pathfinding, AnimalMetadata metadata, Group group, Vector3 wordPos)
         {
             Movement = new MovementBehavior(this, wordPos);
-            age = 0;
             State = new State.Resting(this, 100, 100, 0);
             State.OnEnter();
             Pathfinding = pathfinding;
             this.metadata = metadata;
             Group = group;
             group?.AddAnimal(this);
-
-            // Assign gender randomly using Unity's Random
             gender = (Gender)UnityEngine.Random.Range(0, 2);
         }
 
@@ -94,16 +83,12 @@ namespace Safari.Model.Animals
 
         public void Kill()
         {
-            InterruptState(new Dead(this, State.HydrationPercent, State.SaturationPercent));
+            InterruptState(new Dead(this, State.HydrationPercent, State.SaturationPercent, State.BreedingCooldown));
         }
 
         public abstract State.State HandleFoodFinding();
     }
 
-    public enum AnimalState
-    {
-        Resting, Wandering, Hungry, Thirsty
-    }
     public enum Gender
     {
         Female, Male

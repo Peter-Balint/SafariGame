@@ -106,6 +106,13 @@ namespace Safari.Model.Animals
         [Tooltip("The maximum age (in days) at which the animal can breed.")]
         public int MaxBreedingAge = 6 * 365; 
 
+        [Tooltip("Breeding cooldown in minutes for male animals.")]
+        public double MaleBreedingCooldown = 60 * 24; 
+
+        [Tooltip("Breeding cooldown in seconds for female animals.")]
+        public double FemaleBreedingCooldown = 30 * 60 * 24; 
+
+
         public static AnimalMetadata Default => new AnimalMetadata();
     }
 }

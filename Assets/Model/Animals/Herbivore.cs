@@ -13,19 +13,19 @@ namespace Safari.Model.Animals
 
         public override State.State HandleFoodFinding()
         {
-            return new SearchingFeedingSite(this, State.HydrationPercent, State.SaturationPercent);
+            return new SearchingFeedingSite(this, State.HydrationPercent, State.SaturationPercent, State.BreedingCooldown);
         }
 
         public void OnChased(Chaser chaser)
         {
             // interrupt the current state and start fleeing
-            InterruptState(new Fleeing(this, State.HydrationPercent, State.SaturationPercent, chaser));
+            InterruptState(new Fleeing(this, State.HydrationPercent, State.SaturationPercent, State.BreedingCooldown, chaser));
         }
 
         public void OnEscaped()
         {
             Debug.Log($"{GetType().Name} escaped from the predator");
-            InterruptState(new Resting(this, State.HydrationPercent, State.SaturationPercent));
+            InterruptState(new Resting(this, State.HydrationPercent, State.SaturationPercent, State.BreedingCooldown));
         }
     }
 }
