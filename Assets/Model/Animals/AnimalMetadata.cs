@@ -94,6 +94,18 @@ namespace Safari.Model.Animals
         [Tooltip("At what saturation percent the animal will search for food source, if no longer near food source")]
         public int StillHungryPercent = 30;
 
+        /// <summary>
+        /// Days
+        /// </summary>
+        [Tooltip("The minimum age (in days) at which the animal can start breeding.")]
+        public int MinBreedingAge = 2 * 365; 
+
+        /// <summary>
+        /// Days
+        /// </summary>
+        [Tooltip("The maximum age (in days) at which the animal can breed.")]
+        public int MaxBreedingAge = 6 * 365; 
+
         public static AnimalMetadata Default => new AnimalMetadata();
     }
 }

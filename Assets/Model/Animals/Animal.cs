@@ -32,14 +32,8 @@ namespace Safari.Model.Animals
         //for setting from the editor, arbitrary numbers for now
         public const int lifeSpan = 50000;
 
-        //animals should move in a group: an easy solution would be to designate a leader
-        //the animals with that leader have a bias to move towards them while in wandering state
-        //if leader is null this animal has no leader / is a leader
-        //public Animal? leader; //could be put in a child class to make sure it is of the same type
-
         public event EventHandler? Died;
         public event EventHandler? StateChanged;
-
 
         protected Animal(PathfindingHelper pathfinding, Group group, Vector3 wordPos)
         {
@@ -51,6 +45,9 @@ namespace Safari.Model.Animals
             metadata = new AnimalMetadata();
             Group = group;
             group?.AddAnimal(this);
+
+            // Assign gender randomly using Unity's Random
+            gender = (Gender)UnityEngine.Random.Range(0, 2);
         }
 
         protected Animal(PathfindingHelper pathfinding, AnimalMetadata metadata, Group group, Vector3 wordPos)
@@ -63,6 +60,9 @@ namespace Safari.Model.Animals
             this.metadata = metadata;
             Group = group;
             group?.AddAnimal(this);
+
+            // Assign gender randomly using Unity's Random
+            gender = (Gender)UnityEngine.Random.Range(0, 2);
         }
 
         internal void SetState(State.State state)
@@ -102,9 +102,6 @@ namespace Safari.Model.Animals
 
     public enum AnimalState
     {
-        //states for pathfinding: resting should stay in place for a while
-        //wandering should aim for a relatively random position
-        //hungry and thirst should look for the closest food/water source
         Resting, Wandering, Hungry, Thirsty
     }
     public enum Gender
