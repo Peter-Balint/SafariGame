@@ -10,7 +10,7 @@ namespace Safari.Model.Animals.State
     {
         private Chaser chaser;
 
-        public Fleeing(Animal owner, float thirst, float hunger, Chaser chaser) : base(owner, thirst, hunger)
+        public Fleeing(Animal owner, double hydrationPercent, double saturationPercent, Chaser chaser) : base(owner, hydrationPercent, saturationPercent)
         {
             this.chaser = chaser;
         }

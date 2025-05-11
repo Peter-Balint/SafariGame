@@ -345,6 +345,7 @@ GameObject:
   - component: {fileID: -351494891055116845}
   - component: {fileID: 1917720771184246255}
   - component: {fileID: 2734679492376175754}
+  - component: {fileID: -3224394132591446251}
   m_Layer: 0
   m_Name: Lion
   m_TagString: Animal
@@ -429,8 +430,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellSize: 30
+  defaultSpeed: 0.3
   miniMapIcon: {fileID: 485383583331496129, guid: e02a39f240b10f3438da818bc5405c80, type: 3}
---- !u!114 &2734679492376175754
+--- !u!114 &-3224394132591446251
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
