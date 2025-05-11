@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 774b9e5f8b321314c8584f8f992c1986, type: 3}
+  m_Name: DeadAnimalPrefabMapping
+  m_EditorClassIdentifier: 
+  mappings:
+  - AnimalTypeName: wolf
+    Prefab: {fileID: 2004716076266344624, guid: f4ccb788dcc5cb647be4664e0afa5f70, type: 3}
+  - AnimalTypeName: camel
+    Prefab: {fileID: 7497670381543437924, guid: 5ca4d023023052740b9bce1039079e03, type: 3}
+  - AnimalTypeName: sheep
+    Prefab: {fileID: 2155603169816521152, guid: 524dc6d384504d04e9a8f0fdea302814, type: 3}
+  - AnimalTypeName: lion
+    Prefab: {fileID: 2390275874915426097, guid: fea9f4d01111b9e4c9c0df962fd977bc, type: 3}

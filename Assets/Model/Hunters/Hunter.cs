@@ -12,6 +12,7 @@ namespace Safari.Model.Hunters
         public MovementBehavior Movement;
 
         public event EventHandler? Died;
+        public event EventHandler? EnteredLeaving;
 
         private GridPosition target;
         public GridPosition Target
@@ -45,6 +46,10 @@ namespace Safari.Model.Hunters
             if (this.state is Dead)
             {
                 Died?.Invoke(this, EventArgs.Empty);
+            }
+            else if(this.state is Leaving)
+            {
+                EnteredLeaving?.Invoke(this, EventArgs.Empty);
             }
         }
 

@@ -17,7 +17,6 @@ namespace Safari.Model.Hunters
             if (!(targetField is Water) && map.IsValidPosition(owner.Target))
             {
                 GridMovementCommand movementCommand = new GridMovementCommand(owner.Target);
-                //movementCommand.Finished += OnTargetReached;
                 owner.Movement.ExecuteMovement(movementCommand);
                 Debug.Log($"Targeting animal at {owner.Target.X},{owner.Target.Z}");
             }

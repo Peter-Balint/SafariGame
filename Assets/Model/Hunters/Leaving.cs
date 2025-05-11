@@ -1,5 +1,7 @@
 using Safari.Model.Movement;
+using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using static UnityEngine.GraphicsBuffer;
 
 namespace Safari.Model.Hunters

@@ -78,9 +78,12 @@ namespace Safari.View.Hunters
         }
         private void SpawnHunter(object sender, EventArgs args)
         {
-            Hunter hunter = new Hunter();
-            hunter.Position = gridPositionMapping[new GridPosition(map.EntranceCoords.X+1,map.EntranceCoords.Z+1)];
-            hunterCollection.Add(hunter);
+            if (animalCollectionController.Displayers.Count != 0)
+            {
+                Hunter hunter = new Hunter();
+                hunter.Position = gridPositionMapping[new GridPosition(map.EntranceCoords.X + 1, map.EntranceCoords.Z + 1)];
+                hunterCollection.Add(hunter);
+            }
         }
         
     }
