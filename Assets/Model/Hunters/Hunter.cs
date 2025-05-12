@@ -26,6 +26,7 @@ namespace Safari.Model.Hunters
         }
 
         private State state;
+        public State State { get { return state; } }
 
         private float shoootingRange = 90;
 

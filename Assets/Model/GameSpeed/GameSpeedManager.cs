@@ -58,7 +58,7 @@ namespace Safari.Model.GameSpeed
             {
                 case GameSpeed.Slow:
                     {
-                        return 60;
+                        return 1;
                     }
                 // 1 IRL second = 1 game minute
                 case GameSpeed.Medium:
