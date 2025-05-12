@@ -76,6 +76,10 @@ namespace Safari.Model
             Jeeps = new JeepCollection(Visitors, pathfinding);
         }
 
+        /// <summary>
+        /// An instance of the game is created based on diffculty
+        /// </summary>
+        /// <param name="gameDifficulty"></param> 
         public static void StartGame(GameDifficulty gameDifficulty)
         {
             instance = new SafariGame(MapGenerator.GenerateMap(30, 30), gameDifficulty);

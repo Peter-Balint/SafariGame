@@ -22,6 +22,7 @@ namespace Safari.Model
             TicketPrice = 10;
             VisitDesire = 0;
         }
+
 		public MoneyManager(AnimalCollection animals)
 		{
 			CurrentBalance = 200;
@@ -35,18 +36,27 @@ namespace Safari.Model
 
 
 
-
+        /// <summary>
+        /// All money transactions carried out with this function. 
+        /// </summary>
+        /// <param name="cost"></param>
 		public void AddToBalance(int cost)
         {
             if (CurrentBalance + cost < 0) return;
 
             CurrentBalance += cost;
         } 
+        /// <summary>
+        /// Checks the balance before all transaction
+        /// </summary>
+        /// <param name="itemPrice"></param>
+        /// <returns></returns>
         public bool CanBuy(int itemPrice)
         {
             if (itemPrice > CurrentBalance) return false;
             return true;
         }
+
 
         public int ReadBalance()
         {
@@ -76,13 +86,17 @@ namespace Safari.Model
 			return maxTicketPrice;
 		}
 
-
+        /// <summary>
+        /// After raising the ticketprice, the visitdesire needs to be re-calculated accordingly
+        /// </summary>
 		public void RaiseTicketPrice()
         {
             TicketPrice++;
             CalculateVisitDesire();
         }
-
+		/// <summary>
+		/// After lowering the ticketprice, the visitdesire needs to be re-calculated accordingly
+		/// </summary>
 		public void LowerTicketPrice()
 		{
             if(TicketPrice < 2 ) return;
@@ -90,7 +104,12 @@ namespace Safari.Model
 			CalculateVisitDesire();
 
 		}
-
+        /// <summary>
+        /// This function adjusts visit-desire (a number between 0.1-1) based on 
+        /// - the diversity of animals, 
+        /// - the number of animals relative to the next "milestone number" 
+        /// - and the price of the ticket
+        /// </summary>
 		public void CalculateVisitDesire()
         {
             int AnimalCount = AnimalCollection.Animals.Count;
@@ -137,7 +156,7 @@ namespace Safari.Model
             parkSizeFactor = Math.Max(0.1, parkSizeFactor);
 
 
-     
+            //Checking ticket price
             maxTicketPrice = 10 + AnimalCount / 2.0;
             double maxTicketPriceFactor = 1.0;
    
@@ -155,12 +174,6 @@ namespace Safari.Model
 
             VisitDesire = 1 * diversityFactor * parkSizeFactor * maxTicketPriceFactor;
             VisitDesire = Math.Min(1, VisitDesire);
-
-
-
-
-
-
 
         }
 	}

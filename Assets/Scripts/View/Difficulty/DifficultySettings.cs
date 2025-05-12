@@ -4,6 +4,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DifficultySettings", menuName = "Game/Difficulty Settings")]
 public class DifficultySettings : ScriptableObject
 {
+	/// <summary>
+	/// The difficulty levels have individual tresholds, they can be adjusted through this scriptible object.
+	/// </summary>
 	[System.Serializable]
 	public class DifficultyData
 	{

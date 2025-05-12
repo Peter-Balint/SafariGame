@@ -13,6 +13,8 @@ namespace Safari.Model.Assets
     {
         public int VisitorsWaiting { get; private set; }
 
+        public int ActualVisitors {  get; private set; }
+
         private int visitorSpawnedSec = 0;
 
         private readonly MoneyManager moneyManager;
@@ -24,7 +26,9 @@ namespace Safari.Model.Assets
             this.moneyManager = moneyManager;
             this.speedManager = speedManager;
         }
-
+        /// <summary>
+        /// in every 10th game-minute there is a chance of a visitor spawning 
+        /// </summary>
         public void Update()
         {
             if ((int)speedManager.minutesToday % 10 == 0 && visitorSpawnedSec != (int)speedManager.minutesToday)
@@ -35,11 +39,18 @@ namespace Safari.Model.Assets
             }
         }
 
+        /// <summary>
+        /// Subtracts the visitors from the waiting line, and counts them for checking win conditions.
+        /// </summary>
+        /// <param name="capacity"></param>
+        /// <returns></returns>
+
         internal int TakeVisitors(int capacity)
         {
             if (VisitorsWaiting >= capacity)
             {
                 VisitorsWaiting -= capacity;
+                ActualVisitors += capacity;
                 return capacity;
             }
 
@@ -47,7 +58,11 @@ namespace Safari.Model.Assets
             VisitorsWaiting = 0;
             return temp;
         }
-
+        /// <summary>
+        /// Spawns a visitor if the random roll is lower than the visit desire chance.
+        /// Spawned visitors already paid for their tickets.
+        /// They have to wait until there is free jeep-capacity.
+        /// </summary>
         private void VisitorSpawn()
         {
             double random = UnityEngine.Random.Range(0, 9);

@@ -28,7 +28,7 @@ namespace Safari.View.UI
 		{
 			settings = difficultySettings.GetSettings(SafariGame.Difficulty);
 
-			gameOverLogic = new GameOverLogic(settings.winMinutesRequired, settings.animalWinThreshold, settings.moneyWinThreshold);
+			gameOverLogic = new GameOverLogic(settings.winMinutesRequired, settings.animalWinThreshold, settings.moneyWinThreshold, settings.visitorWinThreshold);
 
 			if (GameOverPanel != null)
 			{
