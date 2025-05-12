@@ -90,7 +90,20 @@ namespace Safari.View.Jeeps
 			displayers.Add(display);
 		}
 
+		/// <summary>
+		/// Initializes the grid position to world position mapping based on the map's displayers.
+		/// </summary>
+		/// <param name="args">Event arguments containing the displayers used to build the mapping.</param>
+		public void InjectGridPositionMappingData(MapDisplay.MapInitializedEventArgs args)
+		{
+			gridPositionMapping = new Dictionary<GridPosition, Vector3>();
+			foreach (var item in args.Displayers)
+			{
+				gridPositionMapping.Add(item.Value.Position, item.Key);
+			}
+		}
 
-	
+
+
     }
 }
