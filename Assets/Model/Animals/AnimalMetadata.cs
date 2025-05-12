@@ -110,7 +110,7 @@ namespace Safari.Model.Animals
         /// Minutes
         /// </summary>
         [Tooltip("Breeding cooldown in minutes for male animals.")]
-        public double MaleBreedingCooldown = 60 * 24*;
+        public double MaleBreedingCooldown = 24 * 60;
 
         /// <summary>
         /// Minutes
