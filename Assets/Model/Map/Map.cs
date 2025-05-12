@@ -27,7 +27,7 @@ namespace Safari.Model.Map
             ExitCoords = exitCoords;
         }
 
-        internal void ChangeFieldAt(GridPosition position, Field newField)
+        public void ChangeFieldAt(GridPosition position, Field newField)
         {
             if (position.X <0 || position.Z < 0 || position.X >= grid.GetLength(1) || position.Z >= grid.GetLength(0))
             {

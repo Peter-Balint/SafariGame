@@ -24,6 +24,9 @@ namespace Safari.View.UI.Construction
         private ShopListingController? activeListing;
 
         private bool inBuildingMode = false;
+        private bool inDemolishingMode = false;
+
+        private Map map;
 
         [SerializeField]
         private ConstructionGridController gridController;
@@ -71,6 +74,7 @@ namespace Safari.View.UI.Construction
 
                 listing.Clicked.AddListener(() => OnShopListingClick(listing));
             }
+            map = SafariGame.Instance.Map;
         }
 
         private void SetScrollViewWidth(float listingWidth)
@@ -117,6 +121,21 @@ namespace Safari.View.UI.Construction
             gridController.Click.RemoveListener(OnGridClick);
         }
 
+        private void StartDemolishing()//not done!
+        {
+            if (inBuildingMode)
+            {
+                StopBuilding();
+            }
+            if (inDemolishingMode)
+            {
+                return;
+            }
+            inBuildingMode = true;
+            gridController.Open();
+            gridController.Click.AddListener(OnDemolish);
+        }
+
         private void OnGridClick(GridPosition position)
         {
             if (activeListing?.ShopItem == null)
@@ -124,6 +143,11 @@ namespace Safari.View.UI.Construction
                 return;
             }
             SafariGame.Instance.Construction.BuildAt(activeListing.ShopItem.CreateField(), position);
+        }
+
+        private void OnDemolish(GridPosition position)
+        {
+            map.ChangeFieldAt(position, new Ground());
         }
     }
 }
