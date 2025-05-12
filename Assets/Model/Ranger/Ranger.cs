@@ -15,7 +15,6 @@ namespace Safari.Model.Rangers
 
         private State state;
 
-        [SerializeField]
         private float shoootingRange = 90;
 
         public Ranger() 
@@ -46,6 +45,10 @@ namespace Safari.Model.Rangers
             state.Update(target);
         }
 
+        public void Kill()
+        {
+            SetState(new Dead(this));
+        }
         public bool CheckInShootingDistance(Vector3 rangerVector, Vector3 targetVector)
         {
             return (rangerVector-targetVector).sqrMagnitude <= shoootingRange*shoootingRange;
