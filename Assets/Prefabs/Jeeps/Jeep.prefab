@@ -488,6 +488,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellSize: 30
   defaultSpeed: 10
+  miniMapIcon: {fileID: 2367439705021254347, guid: eae39c38ed69cd948812f5ad56ff8071, type: 3}
 --- !u!1 &6638821756401453347
 GameObject:
   m_ObjectHideFlags: 0

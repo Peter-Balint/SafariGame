@@ -5,6 +5,7 @@ using Safari.Model.Map;
 using Safari.Model.Pathfinding;
 using Safari.Model.Rangers;
 using Safari.Model.GameSpeed;
+using Safari.Model.Hunters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,7 +53,7 @@ namespace Safari.Model
         public RangerCollection Rangers { get; }
 
         public JeepCollection Jeeps { get; }
-
+        public HunterCollection Hunters { get; }
         public VisitorManager Visitors { get; }
 
         private PathfindingHelper pathfinding;
@@ -69,7 +70,8 @@ namespace Safari.Model
             AnimalCreationManager = new AnimalCreationManager(Animals, pathfinding, Map, MoneyManager);
             Construction = new ConstructionManager(map, MoneyManager);
             GameSpeedManager = new GameSpeedManager();
-            Rangers = new RangerCollection(MoneyManager, GameSpeedManager);
+            Hunters = new HunterCollection();
+            Rangers = new RangerCollection();
             Visitors = new VisitorManager(MoneyManager, GameSpeedManager);
             Jeeps = new JeepCollection(Visitors, pathfinding);
         }
