@@ -57,8 +57,8 @@ public class InitialTests
     public void AddingRangerToCollectionTest()
     {
         bool addedEventCalled = false;
-
-        RangerCollection collection = new RangerCollection(new MoneyManager(), new GameSpeedManager());
+        
+        RangerCollection collection = new RangerCollection();
         collection.Added += ((sender, args) => addedEventCalled = true);
 
 
@@ -73,7 +73,7 @@ public class InitialTests
     public void RemovingRangerFromCollectionTest()
     {
         bool removedEventCalled = false;
-        RangerCollection collection = new RangerCollection(new MoneyManager(), new GameSpeedManager());
+        RangerCollection collection = new RangerCollection();
         collection.Removed += ((sender, args) => removedEventCalled = true);
 
         Ranger ranger = new Ranger();

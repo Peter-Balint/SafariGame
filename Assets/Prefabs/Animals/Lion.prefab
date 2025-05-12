@@ -345,6 +345,8 @@ GameObject:
   - component: {fileID: -351494891055116845}
   - component: {fileID: 1917720771184246255}
   - component: {fileID: -3224394132591446251}
+  - component: {fileID: 2734679492376175754}
+  - component: {fileID: -3224394132591446251}
   m_Layer: 0
   m_Name: Lion
   m_TagString: Animal

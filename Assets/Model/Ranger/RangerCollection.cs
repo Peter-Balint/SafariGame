@@ -14,15 +14,9 @@ namespace Safari.Model.Rangers
         public event EventHandler<Ranger>? Added;
         public event EventHandler<Ranger>? Removed;
 
-        private MoneyManager moneyManager;
-        private GameSpeedManager gameSpeedManager;
-
-        public RangerCollection(MoneyManager moneyManager, GameSpeedManager gameSpeedManager)
+        public RangerCollection()
         {
             rangers = new List<Ranger>();
-            this.moneyManager = moneyManager;
-            this.gameSpeedManager = gameSpeedManager;
-            this.gameSpeedManager.DayPassed += PaySalary;
         }
 
         public void Add(Ranger ranger)
@@ -44,11 +38,6 @@ namespace Safari.Model.Rangers
             {
                 Remove(ranger);
             }
-        }
-
-        private void PaySalary(object sender, EventArgs e)
-        {
-            moneyManager.AddToBalance(-5 * rangers.Count);
         }
     }
 }
