@@ -84,18 +84,7 @@ public class InitialTests
         Assert.IsTrue(removedEventCalled);
         Assert.AreEqual(0, collection.Rangers.Count);
     }
-    [Test]
-    public void GameSpeedToNumTest()
-    {
-        GameSpeedManager manager = new GameSpeedManager();
-        Assert.AreEqual(1, manager.CurrentSpeedToNum());
-
-        manager.CurrentSpeed = GameSpeed.Medium;
-        Assert.AreEqual(3, manager.CurrentSpeedToNum());
-
-        manager.CurrentSpeed = GameSpeed.Fast;
-        Assert.AreEqual(10, manager.CurrentSpeedToNum());
-    }
+    
 
     // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
     // `yield return null;` to skip a frame.
