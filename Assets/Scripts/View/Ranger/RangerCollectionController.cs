@@ -12,7 +12,7 @@ namespace Safari.View.Rangers
 {
     public class RangerCollectionController : MonoBehaviour
     {
-        private List<RangerDisplay> displayers;
+        public List<RangerDisplay> displayers {  get; private set; }
 
         private RangerCollection rangerCollection;
 
@@ -22,6 +22,8 @@ namespace Safari.View.Rangers
         public Dictionary<GridPosition, Vector3> GridPositionMapping { get { return gridPositionMapping; } }
 
         private GameSpeedManager gameSpeedManager;
+        private MoneyManager moneyManager;
+        private Map map;
 
         [SerializeField]
         private int rangerSalary;
@@ -32,14 +34,15 @@ namespace Safari.View.Rangers
         {
             rangerCollection = SafariGame.Instance.Rangers;
             gameSpeedManager = SafariGame.Instance.GameSpeedManager;
+            moneyManager = SafariGame.Instance.MoneyManager;
+            map = SafariGame.Instance.Map;
 
             displayers = new List<RangerDisplay>();
 
             rangerCollection.Added += OnRangerAdded;
             rangerCollection.Removed += OnRangerRemoved;
 
-            gameSpeedManager.DayPassed += (sender,args) => {  };    //when moneymanager is made
-                                                                    //change to month also, misread the task
+            gameSpeedManager.DayPassed += (sender,args) => { moneyManager.AddToBalance(-rangerSalary * displayers.Count); };    
         }
 
         public void InjectGridPositionMappingData(MapDisplay.MapInitializedEventArgs args)
@@ -53,11 +56,14 @@ namespace Safari.View.Rangers
 
         public void OnRangerBuy() 
         {
-            rangerCollection.Add(new Ranger());
+            Ranger ranger = new Ranger();
+            ranger.Position = gridPositionMapping[new GridPosition(map.EntranceCoords.X, map.EntranceCoords.Z + 1)];
+            rangerCollection.Add(ranger);
         }
 
         private void OnRangerAdded(object sender, Ranger ranger)
         {
+            //ranger.Position = gridPositionMapping[new GridPosition(14,17)];
             RangerDisplay display = Instantiate(RangerDisplayPrefab, ranger.Position,
                 Quaternion.identity,
                 new InstantiateParameters()

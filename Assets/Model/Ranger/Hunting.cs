@@ -15,6 +15,7 @@ namespace Safari.Model.Rangers
             Field targetField = map.FieldAt(target);
             if (!(targetField is Water) && map.IsValidPosition(target)) 
             {
+                owner.Movement.CurrentCommand?.Cancel();
                 GridMovementCommand movementCommand = new GridMovementCommand(target);
                 owner.Movement.ExecuteMovement(movementCommand);
             }
