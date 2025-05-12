@@ -22,7 +22,7 @@ public class InitialTests
     public void AddingAnimalToCollectionTest()
     {
         bool addedEventCalled = false;
-        Animal animal = new Wolf(null, new Group(), Vector3.zero);
+        Animal animal = new Wolf(null, new Group(), null, Vector3.zero);
         AnimalCollection collection = new AnimalCollection(null);
         collection.Added += ((sender, args) => addedEventCalled = true);
 
@@ -63,7 +63,7 @@ public class InitialTests
 
 
         Assert.AreEqual(0, collection.Rangers.Count);
-        
+
         collection.Add(new Ranger());
         Assert.AreEqual(1, collection.Rangers.Count);
 

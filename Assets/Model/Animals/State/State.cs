@@ -13,6 +13,8 @@ namespace Safari.Model.Animals.State
 
         public double SaturationPercent => saturationPercent;
 
+        public double BreedingCooldown => breedingCooldown;
+
         public double Age => age;
 
         protected double hydrationPercent;
@@ -28,6 +30,9 @@ namespace Safari.Model.Animals.State
 
         protected virtual bool DisableHunger => false;
 
+        // minutes
+        protected double breedingCooldown = 0;
+
         private bool transitioned = false;
 
         private Queue<Action> actionQueue = new Queue<Action>();
@@ -41,33 +46,43 @@ namespace Safari.Model.Animals.State
                 action();
             }
             age += elapsedTimeAdjusted / (60 * 60 * 24);
+            breedingCooldown -= elapsedTimeAdjusted / 60;
+            if (breedingCooldown < 0)
+            {
+                breedingCooldown = 0;
+            }
             CalculateHydrationPercent(elapsedTimeAdjusted);
             CalculateSaturationPercent(elapsedTimeAdjusted);
             if (hydrationPercent < -100)
             {
                 Debug.Log($"{owner.GetType().Name} died of dehydration");
-                TransitionTo(new Dead(owner, hydrationPercent, saturationPercent));
+                TransitionTo(new Dead(owner, hydrationPercent, saturationPercent, breedingCooldown));
                 return;
             }
             if (saturationPercent < -100)
             {
                 Debug.Log($"{owner.GetType().Name} has starved to death");
-                TransitionTo(new Dead(owner, hydrationPercent, saturationPercent));
+                TransitionTo(new Dead(owner, hydrationPercent, saturationPercent, breedingCooldown));
                 return;
             }
             if (age > owner.Metadata.LifeSpan)
             {
                 Debug.Log($"{owner.GetType().Name} has died of old age");
-                TransitionTo(new Dead(owner, hydrationPercent, saturationPercent));
+                TransitionTo(new Dead(owner, hydrationPercent, saturationPercent, breedingCooldown));
+            }
+            if (age > owner.Metadata.LifeSpan)
+            {
+                Debug.Log($"{owner.GetType().Name} has died of old age");
+                TransitionTo(new Dead(owner, hydrationPercent, saturationPercent, breedingCooldown));
             }
         }
 
-        protected State(Animal owner, double hydrationPercent, double saturationPercent)
+        protected State(Animal owner, double hydrationPercent, double saturationPercent, double breedingCooldown)
         {
             this.owner = owner;
             this.hydrationPercent = hydrationPercent;
             this.saturationPercent = saturationPercent;
-
+            this.breedingCooldown = breedingCooldown;
         }
 
         public virtual void OnEnter()
@@ -81,6 +96,30 @@ namespace Safari.Model.Animals.State
 
         public virtual void OnInterrupted()
         {
+        }
+
+        public bool CanMate()
+        {
+            if (!TransitionToMateAllowed())
+            {
+                return false;
+            }
+
+            if (age < owner.Metadata.MinBreedingAge || age > owner.Metadata.MaxBreedingAge)
+            {
+                return false;
+            }
+
+            if (saturationPercent <= 50 || hydrationPercent <= 50)
+            {
+                return false;
+            }
+            return breedingCooldown <= 0;
+        }
+
+        public virtual bool TransitionToMateAllowed()
+        {
+            return false;
         }
 
         protected void TransitionTo(State newState)
@@ -103,7 +142,7 @@ namespace Safari.Model.Animals.State
             if (hydrationPercent < owner.Metadata.ThirstyPercent)
             {
                 Debug.Log($"{owner.GetType().Name} is thirsty");
-                TransitionTo(new SearchingWater(owner, hydrationPercent, saturationPercent));
+                TransitionTo(new SearchingWater(owner, hydrationPercent, saturationPercent, breedingCooldown));
             }
         }
 
@@ -114,6 +153,32 @@ namespace Safari.Model.Animals.State
                 Debug.Log($"{owner.GetType().Name} is hungry");
                 TransitionTo(owner.HandleFoodFinding());
             }
+        }
+
+        protected void AllowSearchingMate()
+        {
+            if (owner.gender == Gender.Female)
+            {
+                return;
+            }
+
+            if (!CanMate())
+            {
+                return;
+            }
+
+            if(UnityEngine.Random.Range(0, 100) >= 40)
+            {
+                return;
+            }
+            Func<double, double, double, State> nextState = ReturnToIfCantFindMate();
+
+            TransitionTo(new SearchingMate(owner, hydrationPercent, saturationPercent, breedingCooldown, nextState));
+        }
+
+        protected virtual Func<double, double, double, State> ReturnToIfCantFindMate()
+        {
+            throw new Exception("Can't transition to Mating from this state");
         }
 
         protected virtual void NextUpdate(Action action)

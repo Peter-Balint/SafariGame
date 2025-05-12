@@ -14,23 +14,30 @@ namespace Safari.Model.Animals.State
 
         private float restingDuration = -1;
 
-        public Resting(Animal owner, double hydrationPercent, double saturationPercent) : base(owner, hydrationPercent, saturationPercent)
+        private bool reunite = true;
+
+        public Resting(Animal owner, double hydrationPercent, double saturationPercent, double breedingCooldown) : base(owner, hydrationPercent, saturationPercent, breedingCooldown)
         {
         }
 
-        public Resting(Animal owner, double hydrationPercent, double saturationPercent, float duration) : base(owner, hydrationPercent, saturationPercent)
+        public Resting(Animal owner, double hydrationPercent, double saturationPercent, double breedingCooldown, float duration) : base(owner, hydrationPercent, saturationPercent, breedingCooldown)
         {
             restingDuration = duration;
+        }
+
+        public Resting(Animal owner, double hydrationPercent, double saturationPercent, double breedingCooldown, bool reunite) : base(owner, hydrationPercent, saturationPercent, breedingCooldown)
+        {
+            this.reunite = reunite;
         }
 
         public override void OnEnter()
         {
             base.OnEnter();
 
-            if (owner.Group?.Animals?.Count > 1)
+            if (owner.Group?.Animals?.Count > 1 && reunite)
             {
                 Debug.Log("Reuniting");
-                TransitionTo(new Reuniting(owner, hydrationPercent, saturationPercent, (t, h) => new Resting(owner, t, h)));
+                TransitionTo(new Reuniting(owner, hydrationPercent, saturationPercent, breedingCooldown, (t, h, b) => new Resting(owner, t, h, b, false)));
                 return;
             }
 
@@ -48,10 +55,21 @@ namespace Safari.Model.Animals.State
             restingSince += deltaTime * speedFactor / 60;
             AllowSearchingWater();
             AllowSearchingFood();
+            AllowSearchingMate();
             if (restingSince > restingDuration)
             {
-                TransitionTo(new Wandering(owner, hydrationPercent, saturationPercent));
+                TransitionTo(new Wandering(owner, hydrationPercent, saturationPercent, breedingCooldown));
             }
+        }
+
+        public override bool TransitionToMateAllowed()
+        {
+            return true;
+        }
+
+        protected override Func<double, double, double, State> ReturnToIfCantFindMate()
+        {
+            return (h, s, b) => new Resting(owner, h, s, b, restingDuration - restingSince);
         }
     }
 }

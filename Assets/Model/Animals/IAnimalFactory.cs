@@ -8,6 +8,6 @@ namespace Safari.Model.Animals
 {
     public interface IAnimalFactory
     {
-        Animal CreateAnimal(Vector3 location, PathfindingHelper pathfinding);
+        Animal CreateAnimal(Vector3 location, PathfindingHelper pathfinding, AnimalCollection collection);
     }
 }
