@@ -87,7 +87,7 @@ namespace Safari.View.Hunters
             if (animalCollectionController.Displayers.Count != 0)
             {
                 Hunter hunter = new Hunter();
-                hunter.Position = gridPositionMapping[new GridPosition(14,17)];
+                hunter.Position = gridPositionMapping[new GridPosition(map.EntranceCoords.X,map.EntranceCoords.Z+1)];
                 hunterCollection.Add(hunter);
             }
         }

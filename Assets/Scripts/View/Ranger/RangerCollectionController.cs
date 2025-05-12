@@ -6,7 +6,6 @@ using Safari.Model;
 using Safari.View.World.Map;
 using Safari.Model.GameSpeed;
 using System;
-using UnityEngine.SocialPlatforms;
 
 
 namespace Safari.View.Rangers
@@ -24,6 +23,7 @@ namespace Safari.View.Rangers
 
         private GameSpeedManager gameSpeedManager;
         private MoneyManager moneyManager;
+        private Map map;
 
         [SerializeField]
         private int rangerSalary;
@@ -35,6 +35,7 @@ namespace Safari.View.Rangers
             rangerCollection = SafariGame.Instance.Rangers;
             gameSpeedManager = SafariGame.Instance.GameSpeedManager;
             moneyManager = SafariGame.Instance.MoneyManager;
+            map = SafariGame.Instance.Map;
 
             displayers = new List<RangerDisplay>();
 
@@ -55,12 +56,14 @@ namespace Safari.View.Rangers
 
         public void OnRangerBuy() 
         {
-            rangerCollection.Add(new Ranger());
+            Ranger ranger = new Ranger();
+            ranger.Position = gridPositionMapping[new GridPosition(map.EntranceCoords.X, map.EntranceCoords.Z + 1)];
+            rangerCollection.Add(ranger);
         }
 
         private void OnRangerAdded(object sender, Ranger ranger)
         {
-            ranger.Position = gridPositionMapping[new GridPosition(14,17)];
+            //ranger.Position = gridPositionMapping[new GridPosition(14,17)];
             RangerDisplay display = Instantiate(RangerDisplayPrefab, ranger.Position,
                 Quaternion.identity,
                 new InstantiateParameters()
