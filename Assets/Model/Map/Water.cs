@@ -14,6 +14,11 @@ namespace Safari.Model.Map
         {
         }
 
+        public Water(): this(BuildingMetadata.Default())
+        {
+            
+        }
+
         public override bool CanPlaceHere(Field field)
         {
             return false;
