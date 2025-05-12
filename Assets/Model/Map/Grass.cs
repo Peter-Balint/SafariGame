@@ -11,5 +11,9 @@ namespace Safari.Model.Map
         public Grass(BuildingMetadata metadata) : base(metadata)
         {
         }
+
+        public Grass() : this(BuildingMetadata.Default())
+        {
+        }
     }
 }
