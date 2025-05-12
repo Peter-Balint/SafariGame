@@ -67,6 +67,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c8ee095276d64e46bfa44fa5e7c1903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  revealDistance: 120
+  revealDistance: 150
   HunterPrefab: {fileID: 1325882876467754, guid: 62c58042e530049a9aea2a0d32d16034, type: 3}
   deadAnimalMapping: {fileID: 11400000, guid: ed0163de7cbf8524ca66c9200b1d6732, type: 2}

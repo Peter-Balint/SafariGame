@@ -168,6 +168,18 @@ namespace Safari.View.Hunters
                 if (distanceSqr < closestRevealerSqr)
                 {
                     closestRevealerSqr = distanceSqr;
+                    if(Hunter.CheckInShootingDistance(transform.position, rangerDisplay.transform.position))
+                    {
+                        float rnd = UnityEngine.Random.value;
+                        if(rnd < 0.5)
+                        {
+                            Hunter.Kill();
+                        }
+                        else
+                        {
+                            rangerDisplay.Ranger.Kill();
+                        }
+                    }
                 }
             }
             foreach (JeepDisplay jeepDisplay in jeepCollectionController.Displayers)
