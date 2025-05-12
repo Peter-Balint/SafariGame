@@ -1066,7 +1066,6 @@ GameObject:
   - component: {fileID: -7225317119573681284}
   - component: {fileID: -1324166367146928027}
   - component: {fileID: 4921257083470492650}
-  - component: {fileID: -8598213418107849081}
   m_Layer: 0
   m_Name: Wolf
   m_TagString: Animal
@@ -1151,7 +1150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellSize: 30
-  defaultSpeed: 0.3
+  defaultSpeed: 9.9
   miniMapIcon: {fileID: 485383583331496129, guid: e02a39f240b10f3438da818bc5405c80, type: 3}
 --- !u!114 &4921257083470492650
 MonoBehaviour:

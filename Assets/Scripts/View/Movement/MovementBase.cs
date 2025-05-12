@@ -119,7 +119,7 @@ namespace Safari.View.Movement
         protected virtual void Update()
         {
             CheckMovementFinished();
-            agent.speed = defaultSpeed * gameSpeedManager.CurrentSpeedToNum();
+            agent.speed = defaultSpeed * gameSpeedManager.CurrentSpeedToMovementSpeed();
         }
 
         protected virtual void CheckMovementFinished()

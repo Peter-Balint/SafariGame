@@ -764,7 +764,6 @@ GameObject:
   - component: {fileID: 7782659460419126097}
   - component: {fileID: 5319351934950401255}
   - component: {fileID: 8225330397049598308}
-  - component: {fileID: -3878701616678649392}
   m_Layer: 0
   m_Name: Camel
   m_TagString: Prey
@@ -849,8 +848,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellSize: 30
+  defaultSpeed: 9
   miniMapIcon: {fileID: 6211145031021273509, guid: 8dd1165aa15194c48aca9d9995bbe633, type: 3}
-  defaultSpeed: 0.25
   escapeTriggerDistance: 3
   fleeDistance: 60
   predictionTime: 1.5

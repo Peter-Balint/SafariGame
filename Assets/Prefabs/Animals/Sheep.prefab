@@ -578,7 +578,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellSize: 30
-  defaultSpeed: 0.25
+  defaultSpeed: 9
   miniMapIcon: {fileID: 6211145031021273509, guid: 8dd1165aa15194c48aca9d9995bbe633, type: 3}
   escapeTriggerDistance: 3
   fleeDistance: 100

@@ -27,21 +27,22 @@ namespace Safari.Model.GameSpeed
 
         }
 
+        // Affects: visitor spawn, money, animal vitals, breeding
         public int CurrentSpeedToNum() //the actual meaning behind the enum
         {
             switch (CurrentSpeed)
             {
-                // 1 IRL second = 10 game second
+                // 1 IRL second = 30 game second
                 case GameSpeed.Slow:
                     {
-                        return 10;
+                        return 30;
                     }
-                // 1 IRL second = 1 game minute
+                // 1 IRL second = 3 game minute
                 case GameSpeed.Medium:
                     {
-                        return 1 * 60;
+                        return 3 * 60;
                     }
-                // 1 IRL second = 30 game minute
+                // 1 IRL second = 1 game hour
                 case GameSpeed.Fast:
                     {
                         return 30 * 60;
@@ -49,6 +50,30 @@ namespace Safari.Model.GameSpeed
             }
             throw new System.Exception("Invalid game speed");
         }
+
+        // Affects: only movement speed
+        public int CurrentSpeedToMovementSpeed() 
+        {
+            switch (CurrentSpeed)
+            {
+                case GameSpeed.Slow:
+                    {
+                        return 1;
+                    }
+                // 1 IRL second = 1 game minute
+                case GameSpeed.Medium:
+                    {
+                        return 2;
+                    }
+                // 1 IRL second = 30 game minute
+                case GameSpeed.Fast:
+                    {
+                        return 6;
+                    }
+            }
+            throw new System.Exception("Invalid game speed");
+        }
+
         public void AddTime(float delta)
         {
             double secondsInFrame = CurrentSpeedToNum() * delta;

@@ -14,6 +14,8 @@ namespace Safari.Model.Animals.State
 
         private float restingDuration = -1;
 
+        private bool reunite = true;
+
         public Resting(Animal owner, double hydrationPercent, double saturationPercent, double breedingCooldown) : base(owner, hydrationPercent, saturationPercent, breedingCooldown)
         {
         }
@@ -23,14 +25,19 @@ namespace Safari.Model.Animals.State
             restingDuration = duration;
         }
 
+        public Resting(Animal owner, double hydrationPercent, double saturationPercent, double breedingCooldown, bool reunite) : base(owner, hydrationPercent, saturationPercent, breedingCooldown)
+        {
+            this.reunite = reunite;
+        }
+
         public override void OnEnter()
         {
             base.OnEnter();
 
-            if (owner.Group?.Animals?.Count > 1)
+            if (owner.Group?.Animals?.Count > 1 && reunite)
             {
                 Debug.Log("Reuniting");
-                TransitionTo(new Reuniting(owner, hydrationPercent, saturationPercent, breedingCooldown, (t, h, b) => new Resting(owner, t, h, b)));
+                TransitionTo(new Reuniting(owner, hydrationPercent, saturationPercent, breedingCooldown, (t, h, b) => new Resting(owner, t, h, b, false)));
                 return;
             }
 
@@ -62,7 +69,7 @@ namespace Safari.Model.Animals.State
 
         protected override Func<double, double, double, State> ReturnToIfCantFindMate()
         {
-            return (h, s, b) => new Resting(owner, h, s, b);
+            return (h, s, b) => new Resting(owner, h, s, b, restingDuration - restingSince);
         }
     }
 }
