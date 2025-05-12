@@ -10,7 +10,7 @@ namespace Safari.Model.Animals.State
 {
     public class SearchingFeedingSite : State
     {
-        public SearchingFeedingSite(Animal owner, double hydrationPercent, double saturationPercent) : base(owner, hydrationPercent, saturationPercent)
+        public SearchingFeedingSite(Animal owner, double hydrationPercent, double saturationPercent, double breedingCooldown) : base(owner, hydrationPercent, saturationPercent, breedingCooldown)
         {
         }
 
@@ -36,7 +36,7 @@ namespace Safari.Model.Animals.State
         private void OnFoundFeedingSite(object sender, EventArgs e)
         {
             Debug.Log($"{owner.GetType().Name} reached the feeding site");
-            TransitionTo(new Eating(owner, hydrationPercent, saturationPercent));
+            TransitionTo(new Eating(owner, hydrationPercent, saturationPercent, breedingCooldown));
         }
     }
 }

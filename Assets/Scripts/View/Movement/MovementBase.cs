@@ -89,7 +89,7 @@ namespace Safari.View.Movement
             HandleMovement(movementCommand);
         }
 
-        private void OnMovementFinished(object sender, EventArgs e)
+        protected virtual void OnMovementFinished(object sender, EventArgs e)
         {
             if (sender == currentlyExecuting)
             {
@@ -119,7 +119,7 @@ namespace Safari.View.Movement
         protected virtual void Update()
         {
             CheckMovementFinished();
-            agent.speed = defaultSpeed * gameSpeedManager.CurrentSpeedToNum();
+            agent.speed = defaultSpeed * gameSpeedManager.CurrentSpeedToMovementSpeed();
         }
 
         protected virtual void CheckMovementFinished()
