@@ -20,11 +20,19 @@ namespace Safari.View.Animals
 {
     public class AnimalMovement : MovementBase
     {
+        private MovementBehavior? target;
+
         protected override void HandleMovement(MovementCommand command)
         {
-            if (command is WanderingMovementCommand wanderingMovementCommand)
+            switch (command)
             {
-                HandleWandering(wanderingMovementCommand);
+                case WanderingMovementCommand wandering:
+                    HandleWandering(wandering);
+                    break;
+
+                case ApproachMovementCommand approach:
+                    HandleApproach(approach);
+                    break;
             }
             base.HandleMovement(command);
         }
@@ -48,6 +56,38 @@ namespace Safari.View.Animals
             {
                 Debug.Log("Could not find valid position on NavMesh");
             }
+        }
+
+        private void HandleApproach(ApproachMovementCommand approach)
+        {
+            target = approach.Target;
+        }
+
+        protected override void OnCurrentMovementCancelled(object sender, EventArgs e)
+        {
+            if (currentlyExecuting is ApproachMovementCommand a && a.Target == target)
+            {
+                target = null;
+            }
+            base.OnCurrentMovementCancelled(sender, e);
+        }
+
+        protected override void OnMovementFinished(object sender, EventArgs e)
+        {
+            if (currentlyExecuting is ApproachMovementCommand a && a.Target == target)
+            {
+                target = null;
+            }
+            base.OnMovementFinished(sender, e);
+        }
+
+        protected override void Update()
+        {
+            if (target != null)
+            {
+                agent.SetDestination(target.WordPos);
+            }
+            base.Update();
         }
     }
 }

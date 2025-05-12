@@ -494,7 +494,6 @@ GameObject:
   - component: {fileID: -118297292067946752}
   - component: {fileID: -7892494390648752772}
   - component: {fileID: -2467671354408523944}
-  - component: {fileID: 1537283769448101487}
   m_Layer: 0
   m_Name: Sheep
   m_TagString: Prey
@@ -547,7 +546,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5586085484601577161}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 20
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}

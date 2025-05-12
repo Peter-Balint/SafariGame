@@ -8,9 +8,9 @@ namespace Safari.Model.Animals
 {
     public abstract class Predator : Animal
     {
-        public Predator(PathfindingHelper pathfinding, Group group, Vector3 wordPos) : base(pathfinding, group, wordPos) { }
+        public Predator(PathfindingHelper pathfinding, Group group, AnimalCollection collection, Vector3 wordPos) : base(pathfinding, group, collection, wordPos) { }
 
-        public Predator(PathfindingHelper pathfinding, AnimalMetadata metadata, Group group, Vector3 wordPos) : base(pathfinding, metadata, group, wordPos) { }
+        public Predator(PathfindingHelper pathfinding, AnimalMetadata metadata, Group group, AnimalCollection collection, Vector3 wordPos) : base(pathfinding, metadata, group, collection, wordPos) { }
 
         public override State.State HandleFoodFinding()
         {

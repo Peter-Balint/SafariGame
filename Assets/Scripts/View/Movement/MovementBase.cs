@@ -89,7 +89,7 @@ namespace Safari.View.Movement
             HandleMovement(movementCommand);
         }
 
-        private void OnMovementFinished(object sender, EventArgs e)
+        protected virtual void OnMovementFinished(object sender, EventArgs e)
         {
             if (sender == currentlyExecuting)
             {

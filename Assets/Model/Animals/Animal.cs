@@ -17,6 +17,8 @@ namespace Safari.Model.Animals
 
         public PathfindingHelper Pathfinding { get; }
 
+        public AnimalCollection AnimalCollection { get; } 
+
         public State.State State { get; private set; }
 
         public AnimalMetadata Metadata { get { return metadata; } }
@@ -30,28 +32,30 @@ namespace Safari.Model.Animals
         public event EventHandler? Died;
         public event EventHandler? StateChanged;
 
-        protected Animal(PathfindingHelper pathfinding, Group group, Vector3 wordPos)
+        protected Animal(PathfindingHelper pathfinding, Group group, AnimalCollection collection, Vector3 wordPos)
         {
             Movement = new MovementBehavior(this, wordPos);
-            State = new State.Resting(this, 100, 100, 0);
-            State.OnEnter();
-            Pathfinding = pathfinding;
+            AnimalCollection = collection;
             metadata = new AnimalMetadata();
+            Pathfinding = pathfinding;
             Group = group;
             group?.AddAnimal(this);
             gender = (Gender)UnityEngine.Random.Range(0, 2);
+            State = new State.Resting(this, 100, 100, 0);
+            State.OnEnter();
         }
 
-        protected Animal(PathfindingHelper pathfinding, AnimalMetadata metadata, Group group, Vector3 wordPos)
+        protected Animal(PathfindingHelper pathfinding, AnimalMetadata metadata, Group group, AnimalCollection collection, Vector3 wordPos)
         {
             Movement = new MovementBehavior(this, wordPos);
-            State = new State.Resting(this, 100, 100, 0);
-            State.OnEnter();
-            Pathfinding = pathfinding;
+            AnimalCollection = collection;
             this.metadata = metadata;
+            Pathfinding = pathfinding;
             Group = group;
             group?.AddAnimal(this);
             gender = (Gender)UnityEngine.Random.Range(0, 2);
+            State = new State.Resting(this, 100, 100, 0);
+            State.OnEnter();
         }
 
         internal void SetState(State.State state)
@@ -86,7 +90,19 @@ namespace Safari.Model.Animals
             InterruptState(new Dead(this, State.HydrationPercent, State.SaturationPercent, State.BreedingCooldown));
         }
 
+        public void OnApproachedByMate(Animal mate)
+        {
+            if (!State.TransitionToMateAllowed())
+            {
+                return;
+            }
+            InterruptState(new Mating(this, State.HydrationPercent, State.SaturationPercent, State.BreedingCooldown, mate));
+        }
+
         public abstract State.State HandleFoodFinding();
+
+        public abstract Animal OffspringFactory();
+
     }
 
     public enum Gender

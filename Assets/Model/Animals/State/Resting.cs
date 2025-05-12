@@ -54,5 +54,15 @@ namespace Safari.Model.Animals.State
                 TransitionTo(new Wandering(owner, hydrationPercent, saturationPercent, breedingCooldown));
             }
         }
+
+        public override bool TransitionToMateAllowed()
+        {
+            return true;
+        }
+
+        protected override Func<double, double, double, State> ReturnToIfCantFindMate()
+        {
+            return (h, s, b) => new Resting(owner, h, s, b);
+        }
     }
 }

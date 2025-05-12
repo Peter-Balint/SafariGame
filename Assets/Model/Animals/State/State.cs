@@ -30,6 +30,7 @@ namespace Safari.Model.Animals.State
 
         protected virtual bool DisableHunger => false;
 
+        // minutes
         protected double breedingCooldown = 0;
 
         private bool transitioned = false;
@@ -45,7 +46,7 @@ namespace Safari.Model.Animals.State
                 action();
             }
             age += elapsedTimeAdjusted / (60 * 60 * 24);
-            breedingCooldown -= elapsedTimeAdjusted;
+            breedingCooldown -= elapsedTimeAdjusted / 60;
             if (breedingCooldown < 0)
             {
                 breedingCooldown = 0;
@@ -92,8 +93,13 @@ namespace Safari.Model.Animals.State
         {
         }
 
-        public virtual bool CanMate()
+        public bool CanMate()
         {
+            if (!TransitionToMateAllowed())
+            {
+                return false;
+            }
+
             if (age < owner.Metadata.MinBreedingAge || age > owner.Metadata.MaxBreedingAge)
             {
                 return false;
@@ -104,6 +110,11 @@ namespace Safari.Model.Animals.State
                 return false;
             }
             return breedingCooldown <= 0;
+        }
+
+        public virtual bool TransitionToMateAllowed()
+        {
+            return false;
         }
 
         protected void TransitionTo(State newState)
@@ -155,8 +166,14 @@ namespace Safari.Model.Animals.State
             {
                 return;
             }
+            Func<double, double, double, State> nextState = ReturnToIfCantFindMate();
 
-            TransitionTo(new SearchingMate(owner, hydrationPercent, saturationPercent, breedingCooldown));
+            TransitionTo(new SearchingMate(owner, hydrationPercent, saturationPercent, breedingCooldown, nextState));
+        }
+
+        protected virtual Func<double, double, double, State> ReturnToIfCantFindMate()
+        {
+            throw new Exception("Can't transition to Mating from this state");
         }
 
         protected virtual void NextUpdate(Action action)

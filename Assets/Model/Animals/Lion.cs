@@ -6,11 +6,16 @@ namespace Safari.Model.Animals
 {
     public class Lion : Predator
     {
-        public Lion(PathfindingHelper pathfinding, Group group, Vector3 wordPos) : base(pathfinding, group, wordPos)
+        public Lion(PathfindingHelper pathfinding, Group group, AnimalCollection collection, Vector3 wordPos) : base(pathfinding, group, collection, wordPos)
         {
         }
-        public Lion(PathfindingHelper pathfinding, AnimalMetadata metadata, Group group, Vector3 wordPos) : base(pathfinding, metadata, group, wordPos)
+        public Lion(PathfindingHelper pathfinding, AnimalMetadata metadata, Group group, AnimalCollection collection, Vector3 wordPos) : base(pathfinding, metadata, group, collection, wordPos)
         {
+        }
+
+        public override Animal OffspringFactory()
+        {
+            return new Lion(Pathfinding, Metadata, Group, AnimalCollection, Movement.WordPos);
         }
     }
 }

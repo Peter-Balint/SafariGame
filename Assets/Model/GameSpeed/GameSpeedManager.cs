@@ -31,20 +31,20 @@ namespace Safari.Model.GameSpeed
         {
             switch (CurrentSpeed)
             {
-                // 1 IRL second = 1 game minute
+                // 1 IRL second = 10 game second
                 case GameSpeed.Slow:
                     {
-                        return 60;
+                        return 10;
                     }
-                // 1 IRL second = 1 game hour
+                // 1 IRL second = 1 game minute
                 case GameSpeed.Medium:
                     {
-                        return 60 * 60;
+                        return 1 * 60;
                     }
-                // 1 IRL second = 1 game day
+                // 1 IRL second = 30 game minute
                 case GameSpeed.Fast:
                     {
-                        return 24 * 60 * 60;
+                        return 30 * 60;
                     }
             }
             throw new System.Exception("Invalid game speed");
