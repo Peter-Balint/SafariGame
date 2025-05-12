@@ -73,7 +73,7 @@ namespace Safari.Model.Animals.State
             if (age > owner.Metadata.LifeSpan)
             {
                 Debug.Log($"{owner.GetType().Name} has died of old age");
-                TransitionTo(new Dead(owner, hydrationPercent, saturationPercent));
+                TransitionTo(new Dead(owner, hydrationPercent, saturationPercent, breedingCooldown));
             }
         }
 
