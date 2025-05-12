@@ -7,35 +7,41 @@ namespace Safari.Model.Animals.State
 {
     public class Drinking : State
     {
-        public Drinking(Animal owner, float thirst, float hunger) : base(owner, thirst, hunger)
+        protected override bool DisableThirst => true;
+
+        public Drinking(Animal owner, double hydrationPercent, double saturationPercent) : base(owner, hydrationPercent, saturationPercent)
         {
         }
 
         public override void Update(float deltaTime, int speedFactor)
         {
+            double elapsedTimeAdjusted = (double)deltaTime * speedFactor;
             base.Update(deltaTime, speedFactor);
 
             if (!owner.Pathfinding.IsDrinkingPlace(owner.Movement.Location))
             {
                 Debug.Log($"{owner.GetType().Name} is no longer near a drinking place.");
-                if (thirst > owner.ThirstLimit)
+                if (hydrationPercent < owner.Metadata.StillThirstyPercent)
                 {
-                    TransitionTo(new SearchingWater(owner, thirst, hunger));
+                    TransitionTo(new SearchingWater(owner, hydrationPercent, saturationPercent));
                 }
                 else
                 {
-                    TransitionTo(new Wandering(owner, thirst, hunger));
+                    TransitionTo(new Wandering(owner, hydrationPercent, saturationPercent));
                 }
                 return;
             }
-
-            thirst -= deltaTime * owner.DrinkingRate * speedFactor;
-
-            if (thirst <= 0)
+            if (hydrationPercent < 0)
             {
-                thirst = 0;
+                hydrationPercent = 0;
+            }
+            hydrationPercent += (elapsedTimeAdjusted / (owner.Metadata.TimeTillFullyHydrated * 60)) * 100;
+
+            if (hydrationPercent >= 100)
+            {
+                hydrationPercent = 100;
                 Debug.Log($"{owner.GetType().Name} is fully hydrated and will start wandering.");
-                TransitionTo(new Wandering(owner, thirst, hunger));
+                TransitionTo(new Wandering(owner, hydrationPercent, saturationPercent));
             }
         }
     }

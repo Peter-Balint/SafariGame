@@ -8,6 +8,7 @@ using UnityEngine;
 using System;
 using Safari.View.Animals;
 using Safari.View.Rangers;
+using Safari.View.Jeeps;
 
 namespace Safari.View.Hunters
 {

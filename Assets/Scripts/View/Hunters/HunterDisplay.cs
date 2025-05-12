@@ -11,6 +11,7 @@ using Safari.Model.Animals;
 using System;
 using Safari.View.Rangers;
 using static UnityEditor.Experimental.GraphView.GraphView;
+using Safari.View.Jeeps;
 
 namespace Safari.View.Hunters
 {
