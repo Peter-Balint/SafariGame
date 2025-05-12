@@ -58,6 +58,19 @@ namespace Safari.Model.Animals
             State.OnEnter();
         }
 
+        protected Animal(PathfindingHelper pathfinding, AnimalMetadata metadata, Group group, AnimalCollection collection, MovementBehavior movementBehavior, Vector3 wordPos)
+        {
+            Movement = movementBehavior;
+            AnimalCollection = collection;
+            this.metadata = metadata;
+            Pathfinding = pathfinding;
+            Group = group;
+            group?.AddAnimal(this);
+            gender = (Gender)UnityEngine.Random.Range(0, 2);
+            State = new State.Resting(this, 100, 100, 0);
+            State.OnEnter();
+        }
+
         internal void SetState(State.State state)
         {
             State.OnExit();
