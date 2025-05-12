@@ -11,6 +11,7 @@ namespace Safari.Model.Jeeps
     public class JeepCollection
     {
         private List<Jeep> jeeps;
+		public List<Jeep> Jeeps {  get { return jeeps; } }
         private readonly VisitorManager visitorManager;
         private readonly PathfindingHelper pathfindingHelper;
 
