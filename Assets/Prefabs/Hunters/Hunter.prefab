@@ -629,7 +629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellSize: 30
-  miniMapIcon: {fileID: 3873508503104498809, guid: 396fe266fe247de46a54844a37e2e290, type: 3}
+  MiniMapIcon: {fileID: 3873508503104498809, guid: 396fe266fe247de46a54844a37e2e290, type: 3}
 --- !u!1 &1383669514560298
 GameObject:
   m_ObjectHideFlags: 0

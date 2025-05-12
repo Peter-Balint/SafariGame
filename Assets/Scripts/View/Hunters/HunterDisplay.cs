@@ -21,12 +21,14 @@ namespace Safari.View.Hunters
         [SerializeField]
         private int revealDistance;
         private float closestRevealerSqr = float.MaxValue;
-        private bool visible = true;
+        private bool visible = false;
 
         private bool killed = false;
 
         public GameObject HunterPrefab;
         private GameObject? displayed;
+        private SkinnedMeshRenderer hunterMesh;
+        private HunterMovement hunterMovement;
 
         private GameSpeedManager gameSpeedManager;
 
@@ -40,6 +42,7 @@ namespace Safari.View.Hunters
         private string targetName;
 
         private GameObject deadAnimalPrefab;
+        private SkinnedMeshRenderer deadAnimalMesh;
 
         [SerializeField]
         private DeadAnimalPrefabMapping deadAnimalMapping;
@@ -67,8 +70,15 @@ namespace Safari.View.Hunters
             displayed = Instantiate(HunterPrefab, transform, false);
 
             this.gameSpeedManager = gameSpeedManager;
-            var hunterMovement = displayed.GetComponent<HunterMovement>();
+            hunterMovement = displayed.GetComponent<HunterMovement>();
+
+            hunterMovement.MiniMapIcon.SetActive(false);
+
             var navMeshAgent = this.GetComponent<NavMeshAgent>();
+
+            hunterMesh = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+            hunterMesh.enabled = false;
+
             hunterMovement.Init(hunter.Movement, navMeshAgent, gridPositionMapping, gameSpeedManager);
         }
 
@@ -76,7 +86,9 @@ namespace Safari.View.Hunters
         {
             int targetIndex = (int)Mathf.Floor(UnityEngine.Random.value * animalCollectionController.Displayers.Count);
             targetDisplay = animalCollectionController.Displayers[targetIndex];
+
             hunter.SetState(new Hunting(hunter));
+
             hunter.Target = targetDisplay.AnimalModel.Movement.Location;
             targetDisplay.AnimalModel.Movement.GridPositionChanged += (s, pos) => hunter.Target = pos;
             targetName = GetTargetName(targetDisplay.AnimalModel);
@@ -102,30 +114,32 @@ namespace Safari.View.Hunters
 
         private void InstantiateCorpse(object sender, EventArgs args)
         {
-            GameObject deadAnimalPrefab = deadAnimalMapping.mappingDictionary[targetName];
+            deadAnimalPrefab = deadAnimalMapping.mappingDictionary[targetName];
             deadAnimalPrefab = Instantiate(deadAnimalPrefab,transform,false);
             if (!visible)
                     {
-                        deadAnimalPrefab.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
+                        deadAnimalMesh = deadAnimalPrefab.GetComponentInChildren<SkinnedMeshRenderer>();
+                        deadAnimalMesh.enabled = false;
                     }
         }
 
         private void SetToVisible()
         {
-            gameObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
-            if(deadAnimalPrefab != null)
+            hunterMesh.enabled = true;
+            if(deadAnimalMesh != null)
             {
-                deadAnimalPrefab.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
+                deadAnimalMesh.enabled = true;
             }
-            
+            hunterMovement.MiniMapIcon.SetActive(true);
         }
         private void SetToInvisible()
         {
-            gameObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
-            if (deadAnimalPrefab != null)
+            hunterMesh.enabled = false;
+            if (deadAnimalMesh != null)
             {
-                deadAnimalPrefab.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
+                deadAnimalMesh.enabled = false;
             }
+            hunterMovement.MiniMapIcon.SetActive(false);
         }
 
         private void Update()
@@ -147,6 +161,7 @@ namespace Safari.View.Hunters
             }
 
             float distanceSqr = 0;
+            closestRevealerSqr = float.MaxValue;
             foreach (RangerDisplay rangerDisplay in rangerCollectionController.displayers)
             {
                 distanceSqr = (rangerDisplay.transform.position - transform.position).sqrMagnitude;
@@ -168,7 +183,7 @@ namespace Safari.View.Hunters
                 SetToVisible();
                 visible = true;
             }
-            else if (visible)
+            else if (closestRevealerSqr > revealDistance * revealDistance && visible)
             {
                 SetToInvisible();
                 visible = false;

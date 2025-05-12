@@ -24,7 +24,7 @@ namespace Safari.Model.Hunters
 
         public override void Update()
         {
-            if(owner.Movement.Location.X == owner.Target.X && owner.Movement.Location.Z == owner.Target.Z)
+            if(Math.Abs(owner.Movement.Location.X-owner.Target.X) <=1 && Math.Abs(owner.Movement.Location.Z - owner.Target.Z) <= 1)
             {
                 OnTargetReached();
             }

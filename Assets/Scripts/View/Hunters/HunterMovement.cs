@@ -24,7 +24,7 @@ namespace Safari.View.Hunters
 
         private MovementCommand? currentlyExecuting;
 
-        public GameObject miniMapIcon;
+        public GameObject MiniMapIcon;
 
         public void Init(MovementBehavior behavior, NavMeshAgent agent, Dictionary<GridPosition, Vector3> mapping, GameSpeedManager gameSpeedManager)
         {
@@ -101,7 +101,7 @@ namespace Safari.View.Hunters
 
         private void Start()
         {
-            Instantiate(miniMapIcon, transform, false);
+            MiniMapIcon = Instantiate(MiniMapIcon, transform, false);
         }
 
         private void Update()
