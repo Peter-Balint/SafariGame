@@ -14,6 +14,7 @@ namespace Safari.Model.Rangers
         public event EventHandler? Died;
 
         private State state;
+        public State State { get { return state; } }
 
         private float shoootingRange = 90;
 
