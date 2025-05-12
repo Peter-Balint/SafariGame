@@ -10,21 +10,21 @@ public class GameOverTests
     [Test]
     public void WinTest()
     {
-        GameOverLogic logic = new GameOverLogic(0,0,0,0);
+        GameOverLogic logic = new GameOverLogic(0,0,0);
 
         Assert.True(logic.CheckWinConditions(0));
     }
     [Test]
     public void NotWinTest()
     {
-        GameOverLogic logic = new GameOverLogic(1, 1, 1,1);
+        GameOverLogic logic = new GameOverLogic(1, 1, 1);
 
         Assert.False(logic.CheckWinConditions(0));
     }
     [Test]
     public void NotLoseTest()
     {
-        GameOverLogic logic = new GameOverLogic(1, 1, 1, 1);
+        GameOverLogic logic = new GameOverLogic(1, 1, 1);
 
         Assert.False(logic.CheckGameOverByExtinction());
 
@@ -41,7 +41,7 @@ public class GameOverTests
     [Test]
     public void LoseByBankruptcyTest()
     {
-        GameOverLogic logic = new GameOverLogic(1, 1, 1, 1);
+        GameOverLogic logic = new GameOverLogic(1, 1, 1);
 
         SafariGame.Instance.MoneyManager.AddToBalance(-SafariGame.Instance.MoneyManager.ReadBalance());
 
