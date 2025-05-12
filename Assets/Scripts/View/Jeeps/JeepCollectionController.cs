@@ -9,8 +9,6 @@ using Safari.View.World.Map;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using static PlasticPipe.PlasticProtocol.Messages.Serialization.ItemHandlerMessagesSerialization;
-using static Safari.View.World.Map.MapDisplay;
 
 namespace Safari.View.Jeeps
 {
