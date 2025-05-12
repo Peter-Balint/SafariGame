@@ -22,6 +22,7 @@ namespace Safari.View.Rangers
         public Dictionary<GridPosition, Vector3> GridPositionMapping { get { return gridPositionMapping; } }
 
         private GameSpeedManager gameSpeedManager;
+        private Map map;
 
         [SerializeField]
         private int rangerSalary;
@@ -32,6 +33,7 @@ namespace Safari.View.Rangers
         {
             rangerCollection = SafariGame.Instance.Rangers;
             gameSpeedManager = SafariGame.Instance.GameSpeedManager;
+            map = SafariGame.Instance.Map;
 
             displayers = new List<RangerDisplay>();
 
@@ -53,7 +55,9 @@ namespace Safari.View.Rangers
 
         public void OnRangerBuy() 
         {
-            rangerCollection.Add(new Ranger());
+            Ranger ranger = new Ranger();
+            ranger.Position = gridPositionMapping[new GridPosition(map.EntranceCoords.X, map.EntranceCoords.Z + 1)];
+            rangerCollection.Add(ranger);
         }
 
         private void OnRangerAdded(object sender, Ranger ranger)
