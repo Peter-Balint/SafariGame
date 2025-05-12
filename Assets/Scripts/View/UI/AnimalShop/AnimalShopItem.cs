@@ -12,6 +12,6 @@ namespace Safari.View.UI.Animals
 
         public AnimalMetadata Metadata;
 
-        public abstract Animal CreateAnimal(Vector3 Position, PathfindingHelper pathfinding);
+        public abstract Animal CreateAnimal(Vector3 Position, PathfindingHelper pathfinding, AnimalCollection collection);
     }
 }

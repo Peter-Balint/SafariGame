@@ -9,9 +9,9 @@ namespace Safari.View.UI.Animals
     [CreateAssetMenu(fileName = "SheepShopItem", menuName = "Configurations/SheepShopItem")]
     public class SheepShopItem : AnimalShopItem
     {
-        public override Animal CreateAnimal(Vector3 Position, PathfindingHelper pathfinding)
+        public override Animal CreateAnimal(Vector3 Position, PathfindingHelper pathfinding, AnimalCollection collection)
         {
-            Sheep sheep = new Sheep(pathfinding, Metadata, null, Position);
+            Sheep sheep = new Sheep(pathfinding, Metadata, null, collection, Position);
             return sheep;
         }
     }

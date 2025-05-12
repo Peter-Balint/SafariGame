@@ -11,7 +11,7 @@ namespace Safari.Model.Animals.State
     {
         protected override bool DisableHunger => true;
 
-        public PredatorEating(Animal owner, double hydrationPercent, double saturationPercent) : base(owner, hydrationPercent, saturationPercent)
+        public PredatorEating(Animal owner, double hydrationPercent, double saturationPercent, double breedingCooldown) : base(owner, hydrationPercent, saturationPercent, breedingCooldown)
         {
         }
 
@@ -30,7 +30,7 @@ namespace Safari.Model.Animals.State
             {
                 saturationPercent = 100;
                 Debug.Log($"{owner.GetType().Name} is no longer hungry and will rest now.");
-                TransitionTo(new Resting(owner, hydrationPercent, saturationPercent));
+                TransitionTo(new Resting(owner, hydrationPercent, saturationPercent, breedingCooldown));
             }
         }
     }
