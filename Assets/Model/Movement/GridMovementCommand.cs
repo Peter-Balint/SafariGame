@@ -14,23 +14,6 @@ namespace Safari.Model.Movement
         {
             public static Offset Zero { get; internal set; } = new Offset(0, 0);
 
-            public static Offset TopLeftCorner { get; internal set; } = new Offset(-1, -1);
-
-            public static Offset TopRightCorner { get; internal set; } = new Offset(1, -1);
-
-            public static Offset BottomLeftCorner { get; internal set; } = new Offset(-1, 1);
-
-            public static Offset BottomRightCorner { get; internal set; } = new Offset(1, 1);
-
-            public static Offset TopSide(float x) => new Offset(x, -1);
-
-            public static Offset LeftSide(float z) => new Offset(-1, z);
-
-            public static Offset RightSide(float z) => new Offset(1, z);
-
-            public static Offset BottomSide(float x) => new Offset(x, 1);
-
-
             public float DeltaX { get; private set; }
 
             public float DeltaZ { get; private set; }

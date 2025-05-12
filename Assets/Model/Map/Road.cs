@@ -14,6 +14,10 @@ namespace Safari.Model.Map
         {
         }
 
+        public Road() : this(BuildingMetadata.Default())
+        {
+        }
+
         public override bool CanPlaceHere(Field field)
         {
             return false;
