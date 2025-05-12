@@ -8,9 +8,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 8699181e6abf1bb46909e286be23e50c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene Adosz.unity
     guid: 1c85cb91f85cffb46ab2294455cffe33
+  - enabled: 1
+    path: Assets/Scenes/Production.unity
+    guid: 86149628d6fb9264aaad9b78ed6f4aa9
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
