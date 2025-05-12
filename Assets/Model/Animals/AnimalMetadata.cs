@@ -98,7 +98,7 @@ namespace Safari.Model.Animals
         /// Days
         /// </summary>
         [Tooltip("The minimum age (in days) at which the animal can start breeding.")]
-        public int MinBreedingAge =/* 2 * 365*/0; 
+        public int MinBreedingAge = 2 * 365; 
 
         /// <summary>
         /// Days
@@ -110,13 +110,13 @@ namespace Safari.Model.Animals
         /// Minutes
         /// </summary>
         [Tooltip("Breeding cooldown in minutes for male animals.")]
-        public double MaleBreedingCooldown = /*60 * 24*/2;
+        public double MaleBreedingCooldown = 60 * 24*;
 
         /// <summary>
         /// Minutes
         /// </summary>
         [Tooltip("Breeding cooldown in seconds for female animals.")]
-        public double FemaleBreedingCooldown = /*30 * 60 * 24*/2;
+        public double FemaleBreedingCooldown = 30 * 60 * 24;
 
         public static AnimalMetadata Default => new AnimalMetadata();
     }
