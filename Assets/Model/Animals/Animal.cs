@@ -17,52 +17,45 @@ namespace Safari.Model.Animals
 
         public PathfindingHelper Pathfinding { get; }
 
+        public AnimalCollection AnimalCollection { get; } 
+
         public State.State State { get; private set; }
 
         public AnimalMetadata Metadata { get { return metadata; } }
 
         public Group Group { get; set; }
+        
+        public Gender gender { get; }
 
         protected AnimalMetadata metadata;
-
-        protected int age;
-        protected bool isAdult;
-        protected Gender gender;
-
-        //for setting from the editor, arbitrary numbers for now
-        public const int lifeSpan = 50000;
-
-        //animals should move in a group: an easy solution would be to designate a leader
-        //the animals with that leader have a bias to move towards them while in wandering state
-        //if leader is null this animal has no leader / is a leader
-        //public Animal? leader; //could be put in a child class to make sure it is of the same type
 
         public event EventHandler? Died;
         public event EventHandler? StateChanged;
 
-
-        protected Animal(PathfindingHelper pathfinding, Group group, Vector3 wordPos)
+        protected Animal(PathfindingHelper pathfinding, Group group, AnimalCollection collection, Vector3 wordPos)
         {
             Movement = new MovementBehavior(this, wordPos);
-            age = 0;
-            State = new State.Resting(this, 100, 100, 0);
-            State.OnEnter();
-            Pathfinding = pathfinding;
+            AnimalCollection = collection;
             metadata = new AnimalMetadata();
+            Pathfinding = pathfinding;
             Group = group;
             group?.AddAnimal(this);
+            gender = (Gender)UnityEngine.Random.Range(0, 2);
+            State = new State.Resting(this, 100, 100, 0);
+            State.OnEnter();
         }
 
-        protected Animal(PathfindingHelper pathfinding, AnimalMetadata metadata, Group group, Vector3 wordPos)
+        protected Animal(PathfindingHelper pathfinding, AnimalMetadata metadata, Group group, AnimalCollection collection, Vector3 wordPos)
         {
             Movement = new MovementBehavior(this, wordPos);
-            age = 0;
-            State = new State.Resting(this, 100, 100, 0);
-            State.OnEnter();
-            Pathfinding = pathfinding;
+            AnimalCollection = collection;
             this.metadata = metadata;
+            Pathfinding = pathfinding;
             Group = group;
             group?.AddAnimal(this);
+            gender = (Gender)UnityEngine.Random.Range(0, 2);
+            State = new State.Resting(this, 100, 100, 0);
+            State.OnEnter();
         }
 
         internal void SetState(State.State state)
@@ -94,19 +87,24 @@ namespace Safari.Model.Animals
 
         public void Kill()
         {
-            InterruptState(new Dead(this, State.HydrationPercent, State.SaturationPercent));
+            InterruptState(new Dead(this, State.HydrationPercent, State.SaturationPercent, State.BreedingCooldown));
+        }
+
+        public void OnApproachedByMate(Animal mate)
+        {
+            if (!State.TransitionToMateAllowed())
+            {
+                return;
+            }
+            InterruptState(new Mating(this, State.HydrationPercent, State.SaturationPercent, State.BreedingCooldown, mate));
         }
 
         public abstract State.State HandleFoodFinding();
+
+        public abstract Animal OffspringFactory();
+
     }
 
-    public enum AnimalState
-    {
-        //states for pathfinding: resting should stay in place for a while
-        //wandering should aim for a relatively random position
-        //hungry and thirst should look for the closest food/water source
-        Resting, Wandering, Hungry, Thirsty
-    }
     public enum Gender
     {
         Female, Male

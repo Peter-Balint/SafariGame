@@ -344,6 +344,7 @@ GameObject:
   - component: {fileID: 4709798817736645212}
   - component: {fileID: -351494891055116845}
   - component: {fileID: 1917720771184246255}
+  - component: {fileID: -3224394132591446251}
   - component: {fileID: 2734679492376175754}
   - component: {fileID: -3224394132591446251}
   m_Layer: 0
@@ -398,7 +399,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5089681828925618224}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 20
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -430,7 +431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellSize: 30
-  defaultSpeed: 0.3
+  defaultSpeed: 10.8
   miniMapIcon: {fileID: 485383583331496129, guid: e02a39f240b10f3438da818bc5405c80, type: 3}
 --- !u!114 &-3224394132591446251
 MonoBehaviour:

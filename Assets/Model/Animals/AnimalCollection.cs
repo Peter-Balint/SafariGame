@@ -20,20 +20,20 @@ namespace Safari.Model.Animals
         public ReadOnlyCollection<Animal> Animals => animals.AsReadOnly();
 
         private PathfindingHelper pathfinding;
-        public PathfindingHelper Pathfinding {  get { return pathfinding; } }
+        public PathfindingHelper Pathfinding { get { return pathfinding; } }
 
         public AnimalCollection(PathfindingHelper pathfinding)
         {
             animals = new List<Animal>();
-            
+
             this.pathfinding = pathfinding;
-            TestSpawn();
+            //TestSpawn();
         }
 
         public void TestSpawn()
         {
-            Wolf wolf = new Wolf(pathfinding,new Group(), new UnityEngine.Vector3(0, 0, 100));
-            Camel camel = new Camel(pathfinding, new Group(), new UnityEngine.Vector3(10, 0, 100));
+            Wolf wolf = new Wolf(pathfinding, new Group(), this, new UnityEngine.Vector3(0, 0, 100));
+            Camel camel = new Camel(pathfinding, new Group(), this, new UnityEngine.Vector3(10, 0, 100));
             AddAnimal(wolf);
             AddAnimal(camel);
         }

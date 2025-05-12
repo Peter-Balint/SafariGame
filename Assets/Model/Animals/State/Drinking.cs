@@ -9,7 +9,7 @@ namespace Safari.Model.Animals.State
     {
         protected override bool DisableThirst => true;
 
-        public Drinking(Animal owner, double hydrationPercent, double saturationPercent) : base(owner, hydrationPercent, saturationPercent)
+        public Drinking(Animal owner, double hydrationPercent, double saturationPercent, double breedingCooldown) : base(owner, hydrationPercent, saturationPercent, breedingCooldown)
         {
         }
 
@@ -23,11 +23,11 @@ namespace Safari.Model.Animals.State
                 Debug.Log($"{owner.GetType().Name} is no longer near a drinking place.");
                 if (hydrationPercent < owner.Metadata.StillThirstyPercent)
                 {
-                    TransitionTo(new SearchingWater(owner, hydrationPercent, saturationPercent));
+                    TransitionTo(new SearchingWater(owner, hydrationPercent, saturationPercent, breedingCooldown));
                 }
                 else
                 {
-                    TransitionTo(new Wandering(owner, hydrationPercent, saturationPercent));
+                    TransitionTo(new Wandering(owner, hydrationPercent, saturationPercent, breedingCooldown));
                 }
                 return;
             }
@@ -41,7 +41,7 @@ namespace Safari.Model.Animals.State
             {
                 hydrationPercent = 100;
                 Debug.Log($"{owner.GetType().Name} is fully hydrated and will start wandering.");
-                TransitionTo(new Wandering(owner, hydrationPercent, saturationPercent));
+                TransitionTo(new Wandering(owner, hydrationPercent, saturationPercent, breedingCooldown));
             }
         }
     }

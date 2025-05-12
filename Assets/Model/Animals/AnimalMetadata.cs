@@ -16,7 +16,7 @@ namespace Safari.Model.Animals
         /// Minutes
         /// </summary>
         [Tooltip("Minutes until the animal becomes hungry.")]
-        public int TimeTillHungry = 1 * 60;
+        public int TimeTillHungry = 4 * 60;
 
         /// <summary>
         /// Minutes
@@ -93,6 +93,30 @@ namespace Safari.Model.Animals
         /// </summary>
         [Tooltip("At what saturation percent the animal will search for food source, if no longer near food source")]
         public int StillHungryPercent = 30;
+
+        /// <summary>
+        /// Days
+        /// </summary>
+        [Tooltip("The minimum age (in days) at which the animal can start breeding.")]
+        public int MinBreedingAge = 2 * 365; 
+
+        /// <summary>
+        /// Days
+        /// </summary>
+        [Tooltip("The maximum age (in days) at which the animal can breed.")]
+        public int MaxBreedingAge = 6 * 365; 
+
+        /// <summary>
+        /// Minutes
+        /// </summary>
+        [Tooltip("Breeding cooldown in minutes for male animals.")]
+        public double MaleBreedingCooldown = 60 * 24*;
+
+        /// <summary>
+        /// Minutes
+        /// </summary>
+        [Tooltip("Breeding cooldown in seconds for female animals.")]
+        public double FemaleBreedingCooldown = 30 * 60 * 24;
 
         public static AnimalMetadata Default => new AnimalMetadata();
     }
