@@ -11,8 +11,16 @@ namespace Safari.Model
 {
     public class MapGenerationHelper
     {
-		
-		
+
+		/// <summary>
+		/// This function generates a random road-path between the entrance and the exit, using DFS.
+		/// </summary>
+		/// <param name="start"></param> the grid position of the entrance
+		/// <param name="end"></param> the grid position of the exit
+		/// <param name="sizeX"></param> map dimension x
+		/// <param name="sizeY"></param> map dimension y
+		/// <param name="rnd"></param> the random generated from the given seed
+		/// <returns></returns>
 		public static List<GridPosition> GenerateRandomPath(GridPosition start, GridPosition end, int sizeX, int sizeY, System.Random rnd)
 		{
 			List<GridPosition> finalPath = new List<GridPosition>();
@@ -23,6 +31,17 @@ namespace Safari.Model
 			return found ? finalPath : new List<GridPosition>();
 		}
 
+		/// <summary>
+		/// A DFS algorithm, which only chooses from the two directions that point toward the exit. 
+		/// </summary>
+		/// <param name="current"></param>  the grid position of the entrance 
+		/// <param name="end"></param>  the grid position of the exit
+		/// <param name="sizeX"></param> map dimension x
+		/// <param name="sizeY"></param> map dimension y
+		/// <param name="visited"></param>
+		/// <param name="path"></param> the final path is list of gridpositions taken as parameter 
+		/// <param name="rnd"></param> the random generated from the given seed
+		/// <returns></returns>
 		private static bool DFS(GridPosition current, GridPosition end, int sizeX, int sizeY, bool[,] visited, List<GridPosition> path, System.Random rnd)
 		{
 			if (!IsInBounds(current, sizeX, sizeY) || visited[current.Z, current.X])
@@ -52,7 +71,7 @@ namespace Safari.Model
 	
 			for (int i = directions.Count - 1; i > 0; i--)
 			{
-				int j = rnd.Next(0, i + 1); ////// felsõ korlát ugyanaz e?
+				int j = rnd.Next(0, i + 1); 
 				(directions[i], directions[j]) = (directions[j], directions[i]);
 			}
 
@@ -62,96 +81,18 @@ namespace Safari.Model
 					return true;
 			}
 
-			// Backtrack
+			
 			path.RemoveAt(path.Count - 1);
 			return false;
 
-
-
-
-
 		}
-
-		public static void FillWithNature(Field[,] grid)
-		{
-			int sizeY = grid.GetLength(0);
-			int sizeX = grid.GetLength(1);
-
-			for (int y = 0; y < sizeY; y++)
-			{
-				for (int x = 0; x < sizeX; x++)
-				{
-					Field field = grid[y, x];
-					if (field is Road || field is Entrance || field is Exit)
-						continue;
-
-					float roll = UnityEngine.Random.value;
-
-					if (roll < 0.4f)
-						grid[y, x] = new Grass(BuildingMetadata.Default());
-					if (roll < 0.06f)
-						grid[y, x] = new Bush(BuildingMetadata.Default());
-					if (roll < 0.05f)
-						grid[y, x] = new Map.Tree(BuildingMetadata.Default());
-				}
-			}
-		}
-
-		public static void AddWaterPatches(Field[,] grid)
-		{
-			int sizeZ = grid.GetLength(0);
-			int sizeX = grid.GetLength(1);
-
-			for (int z = 0; z < sizeZ; z++)
-			{
-				for (int x = 0; x < sizeX; x++)
-				{
-					Field current = grid[z, x];
-
-					if (current is Road || current is Entrance || current is Exit)
-						continue;
-
-					// 10% chance to place a water tile
-					if (UnityEngine.Random.value < 0.025f)
-					{
-						grid[z, x] = new Water(BuildingMetadata.Default());
-
-						// Check all 8 neighbors
-						for (int dz = -1; dz <= 1; dz++)
-						{
-							for (int dx = -1; dx <= 1; dx++)
-							{
-								if (dx == 0 && dz == 0)
-									continue;
-
-								TryMakeWater(grid, x + dx, z + dz);
-							}
-						}
-					}
-				}
-			}
-		}
-
-		private static void TryMakeWater(Field[,] grid, int x, int z)
-		{
-			int sizeZ = grid.GetLength(0);
-			int sizeX = grid.GetLength(1);
-
-			if (x < 0 || x >= sizeX || z < 0 || z >= sizeZ)
-				return;
-
-			Field neighbor = grid[z, x];
-
-			if (neighbor is Road || neighbor is Entrance || neighbor is Exit)
-				return;
-
-			// 50% chance to convert neighbor to water
-			if (UnityEngine.Random.value < 0.3f)
-			{
-				grid[z, x] = new Water(BuildingMetadata.Default());
-			}
-		}
-
+		/// <summary>
+		/// Generates all the grass, bushes, trees, and water in the park using the random seed and Perlin noise.
+		/// Roads are not affected.
+		/// </summary>
+		/// <param name="grid"></param> the map's grid, 
+		/// <param name="rng"></param> the random seed,
+		/// <param name="scale"></param> scale for adjusting the perlin noise algorithm
 		public static void GenerateTerrain(Field[,] grid, System.Random rng,float scale = 0.1f)
 		{
 			int sizeZ = grid.GetLength(0);
@@ -189,10 +130,105 @@ namespace Safari.Model
 			grid[17, 14] = new Ground();
 		}
 
+
+		/// <summary>
+		/// Helper function for DFS
+		/// </summary>
+		/// <param name="pos"></param> the grid positon to check
+		/// <param name="width"></param> the width of the map
+		/// <param name="height"></param> the height of the map
+		/// <returns></returns>
 		private static bool IsInBounds(GridPosition pos, int width, int height)
 		{
 			return pos.X >= 0 && pos.X < width && pos.Z >= 0 && pos.Z < height;
 		}
+
+		/// <summary>
+		/// These are extra functions for an other mapgeneration logic.
+		/// </summary>
+		/// <param name="grid"></param>
+		/// <param name="x"></param>
+		/// <param name="z"></param>
+		//public static void FillWithNature(Field[,] grid)
+		//{
+		//	int sizeY = grid.GetLength(0);
+		//	int sizeX = grid.GetLength(1);
+
+		//	for (int y = 0; y < sizeY; y++)
+		//	{
+		//		for (int x = 0; x < sizeX; x++)
+		//		{
+		//			Field field = grid[y, x];
+		//			if (field is Road || field is Entrance || field is Exit)
+		//				continue;
+
+		//			float roll = UnityEngine.Random.value;
+
+		//			if (roll < 0.4f)
+		//				grid[y, x] = new Grass(BuildingMetadata.Default());
+		//			if (roll < 0.06f)
+		//				grid[y, x] = new Bush(BuildingMetadata.Default());
+		//			if (roll < 0.05f)
+		//				grid[y, x] = new Map.Tree(BuildingMetadata.Default());
+		//		}
+		//	}
+		//}
+
+		//public static void AddWaterPatches(Field[,] grid)
+		//{
+		//	int sizeZ = grid.GetLength(0);
+		//	int sizeX = grid.GetLength(1);
+
+		//	for (int z = 0; z < sizeZ; z++)
+		//	{
+		//		for (int x = 0; x < sizeX; x++)
+		//		{
+		//			Field current = grid[z, x];
+
+		//			if (current is Road || current is Entrance || current is Exit)
+		//				continue;
+
+		//			// 10% chance to place a water tile
+		//			if (UnityEngine.Random.value < 0.025f)
+		//			{
+		//				grid[z, x] = new Water(BuildingMetadata.Default());
+
+		//				// Check all 8 neighbors
+		//				for (int dz = -1; dz <= 1; dz++)
+		//				{
+		//					for (int dx = -1; dx <= 1; dx++)
+		//					{
+		//						if (dx == 0 && dz == 0)
+		//							continue;
+
+		//						TryMakeWater(grid, x + dx, z + dz);
+		//					}
+		//				}
+		//			}
+		//		}
+		//	}
+		//}
+
+		//private static void TryMakeWater(Field[,] grid, int x, int z)
+		//{
+		//	int sizeZ = grid.GetLength(0);
+		//	int sizeX = grid.GetLength(1);
+
+		//	if (x < 0 || x >= sizeX || z < 0 || z >= sizeZ)
+		//		return;
+
+		//	Field neighbor = grid[z, x];
+
+		//	if (neighbor is Road || neighbor is Entrance || neighbor is Exit)
+		//		return;
+
+		//	// 50% chance to convert neighbor to water
+		//	if (UnityEngine.Random.value < 0.3f)
+		//	{
+		//		grid[z, x] = new Water(BuildingMetadata.Default());
+		//	}
+		//}
+
 
 
 	}

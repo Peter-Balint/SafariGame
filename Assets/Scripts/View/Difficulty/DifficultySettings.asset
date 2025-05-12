@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficultyLevels:
   - difficulty: 0
-    startingMoney: 200000
-    moneyWinThreshold: 400
-    animalWinThreshold: 5
-    visitorWinThreshold: 30
+    startingMoney: 200
+    moneyWinThreshold: 600
+    animalWinThreshold: 10
+    visitorWinThreshold: 10
     winMinutesRequired: 60
   - difficulty: 1
     startingMoney: 100

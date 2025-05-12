@@ -11,7 +11,12 @@ namespace Safari.Model.Map
 {
     public static class MapGenerator
     {
-
+		/// <summary>
+		/// This function generates a map, first, all the fields are simple ground, than based on the seed a road is generated, finally the other terrain features are created.
+		/// </summary>
+		/// <param name="sizeX"></param> map size x
+		/// <param name="sizeY"></param> map size y
+		/// <returns></returns>
 		public static Map GenerateMap(int sizeX, int sizeY)
         {
             Trace.Assert(sizeX > 3);
@@ -48,8 +53,6 @@ namespace Safari.Model.Map
 			//MapGenerationHelper.AddWaterPatches(grid);
 			MapGenerationHelper.GenerateTerrain(grid,rng, 0.5f);
 
-		   //grid[0, 1] = new Entrance();
-		   //grid[sizeY - 1, sizeX - 2] = new Exit();
 			grid[entrance.X, entrance.Z] = new Entrance();
 			grid[exit.X, exit.Z] = new Exit();
 			return new Map(grid, new GridPosition(entrance.Z,entrance.X), new GridPosition(exit.Z, exit.X));

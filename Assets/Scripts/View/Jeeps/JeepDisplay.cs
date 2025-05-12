@@ -18,6 +18,11 @@ namespace Safari.View.Jeeps
     {
         public Jeep? Jeep;
 
+		/// <summary>
+		/// Initializes the Jeep display with the given Jeep data and sets up its movement using the NavMesh agent and grid position mapping.
+		/// </summary>
+		/// <param name="jeep">The Jeep data to associate with this display.</param>
+		/// <param name="gridPosMapping">A mapping from grid positions to world positions for movement calculations.</param>
 		public void Init(Jeep jeep, Dictionary<GridPosition, Vector3> gridPosMapping)
 		{
             Jeep = jeep;
@@ -25,14 +30,11 @@ namespace Safari.View.Jeeps
             GetComponent<JeepMovement>().Init(jeep.Movement, agent, gridPosMapping, SafariGame.Instance.GameSpeedManager);
         }
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
-        {
-        
-        }
 
-        // Update is called once per frame
-        void Update()
+		/// <summary>
+		/// Updates the Jeep's model logic every frame, scaled by the current game speed.
+		/// </summary>
+		void Update()
         {
             Jeep?.ModelUpdate(Time.deltaTime, SafariGame.Instance.GameSpeedManager.CurrentSpeedToNum());
         }
