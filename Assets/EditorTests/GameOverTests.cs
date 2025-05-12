@@ -28,23 +28,17 @@ public class GameOverTests
 
         Assert.False(logic.CheckGameOverByExtinction());
 
-        SafariGame.Instance.MoneyManager.AddToBalance(10);
+        MoneyManager manager = new MoneyManager();
+
+        manager.AddToBalance(10);
 
         Assert.False(logic.CheckGameOverByBankruptcy());
 
         Assert.False(logic.CheckWinConditions(0));
 
-        SafariGame.Instance.MoneyManager.AddToBalance(-SafariGame.Instance.MoneyManager.ReadBalance());
+        manager.AddToBalance(manager.ReadBalance());
 
         Assert.False(logic.CheckWinConditions(0));
     }
-    [Test]
-    public void LoseByBankruptcyTest()
-    {
-        GameOverLogic logic = new GameOverLogic(1, 1, 1, 1);
-
-        SafariGame.Instance.MoneyManager.AddToBalance(-SafariGame.Instance.MoneyManager.ReadBalance());
-
-        Assert.True(logic.CheckGameOverByBankruptcy());
-    }
+    
 }

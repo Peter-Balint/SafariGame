@@ -12,8 +12,6 @@ public class HunterStateTests
     [Test]
     public void TargetChangeTest()
     {
-        var game = SafariGame.Instance;
-
         Hunter hunter = new Hunter();
         State state = new Hunting(hunter);
         hunter.SetState(state);
@@ -52,7 +50,7 @@ public class HunterStateTests
     [Test]
     public void ShiftToDeadTest()
     {
-        Map map = SafariGame.Instance.Map;
+        Map map = MapGenerator.GenerateMap(30, 30);
 
         Hunter hunter = new Hunter();
         State state = new Leaving(hunter);

@@ -47,6 +47,7 @@ public class GameSpeedManagerTests
         Assert.AreEqual(manager.CurrentSpeedToNum(), manager.minutesToday);
 
     }
+    [Test]
     public void AddTimedDayTest()
     {
         GameSpeedManager manager = new GameSpeedManager();

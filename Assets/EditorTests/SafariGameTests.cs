@@ -22,16 +22,13 @@ public class SafariGameTests
         Assert.IsNotNull(game.MoneyManager);
         Assert.IsNotNull(game.AnimalCreationManager);
         Assert.IsNotNull(game.Visitors);
-    }
 
-    [Test]
-    public void SingletonTest()
-    {
-        var game1 = SafariGame.Instance;
         var game2 = SafariGame.Instance;
 
-        Assert.True(game1==game2);
+        Assert.True(game == game2);
 
         Assert.True(SafariGame.IsGameStarted);
     }
+
+    
 }
