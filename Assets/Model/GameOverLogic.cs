@@ -38,7 +38,7 @@ namespace Safari.Model
 
 			if (WinningCriteriaAnimals() && WinningCriteriaMoney())
 			{
-				winTimerInGameMinutes += speedManager.CurrentSpeedToNum() * deltaTime * 10;
+				winTimerInGameMinutes += speedManager.CurrentSpeedToNum()/60 * deltaTime;
 				if (winTimerInGameMinutes >= winMinutesRequired)
 				{
 					HasWon = true;

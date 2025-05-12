@@ -15,8 +15,8 @@ MonoBehaviour:
   difficultyLevels:
   - difficulty: 0
     startingMoney: 200000
-    moneyWinThreshold: 10
-    animalWinThreshold: 1
+    moneyWinThreshold: 400
+    animalWinThreshold: 5
     visitorWinThreshold: 30
     winMinutesRequired: 60
   - difficulty: 1
