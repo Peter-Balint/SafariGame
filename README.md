@@ -6,3 +6,5 @@ Running the game requires an install of Unity, as it is not published as of this
 Architecture follows the model-view distinction, with Unity's MonoBehaviours serving as view classes. Unit tests are made via the Unity Test Framework (based on NUnit), code coverage available as part of the test runner. It is recommended to change the report's output location in the analysis settings.
 
 Originally hosted on a private GitLab server.
+
+Project is finished, and further work on it is unlikely other than fixes or cleaning up.
